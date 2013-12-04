@@ -8,7 +8,6 @@ use wcf\data\DatabaseObject;
  * @author	Simon Nußbaumer
  * @copyright	2013 Thurnax.com
  * @package	com.thurnax.wcf.tour
- * @subpackage	data.tour.point
  * @category	Community Framework (commercial)
  */
 class TourPoint extends DatabaseObject {
