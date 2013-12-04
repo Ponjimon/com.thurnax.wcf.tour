@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package name="com.thurnax.wcf.tour" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/package.xsd">
+	<packageinformation>
+		<packagename>Einführungstour</packagename>
+		<packagedescription>Dieses Plugin ermöglicht es neu registrierten Benutzern eine kleine Einführung in die Funktionen der Website zu geben.</packagedescription>
+		<version>0.1.0</version>
+		<date>2013-11-25</date>
+	</packageinformation>
+
+	<authorinformation>
+		<author>Thurnax.com</author>
+		<authorurl>http://www.thurnax.com</authorurl>
+	</authorinformation>
+
+	<requiredpackages>
+		<requiredpackage minversion="2.0.0 RC 1">com.woltlab.wcf</requiredpackage>
+	</requiredpackages>
+
+	<instructions type="install">
+		<instruction type="file">files.tar</instruction>
+		<instruction type="template">templates.tar</instruction>
+		<instruction type="templateListener">templateListener.xml</instruction>
+		<instruction type="eventListener">eventListener.xml</instruction>
+		<instruction type="acpMenu">acpMenu.xml</instruction>
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
+		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+		<instruction type="userOption">userOption.xml</instruction>
+		<instruction type="option">option.xml</instruction>
+		<instruction type="language">lang/*.xml</instruction>
+		<instruction type="sql">install.sql</instruction>
+	</instructions>
+</package>
