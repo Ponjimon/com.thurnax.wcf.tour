@@ -7,7 +7,7 @@
 				<optiontype>boolean</optiontype>
 				<editable>3</editable>
 				<defaultvalue>1</defaultvalue>
-				<options>module_conversation</options>
+				<options>module_tour</options>
 				<permissions>user.tour.enableTour</permissions>
 			</option>
 		</options>
