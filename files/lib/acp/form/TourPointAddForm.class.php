@@ -26,12 +26,12 @@ class TourPointAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\acp\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.user.tour';
+	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.tourPoint.add';
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.tour.canEdit');
+	public $neededPermissions = array('admin.user.canEditTour');
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededModules

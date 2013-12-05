@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="wcf.acp.group">
-		<item name="wcf.acp.group.option.category.admin.tour"><![CDATA[Einführungstour]]></item>
+		<item name="wcf.acp.group.option.category.admin.user.tour"><![CDATA[Einführungstour]]></item>
+		<item name="wcf.acp.group.option.admin.user.canEditTour"><![CDATA[Kann Einführungstour bearbeiten]]></item>
+		
 		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Einführungstour]]></item>
-		<item name="wcf.acp.group.option.admin.tour.canEdit"><![CDATA[Kann Einführungstour bearbeiten]]></item>
 		<item name="wcf.acp.group.option.user.tour.enableTour"><![CDATA[Kann Einführungstour sehen]]></item>
 	</category>
 	
@@ -14,12 +15,17 @@
 		<item name="wcf.acp.menu.link.tour.tourPoint.list"><![CDATA[Tourpunkte auflisten]]></item>
 	</category>
 	
+	<category name="wcf.acp.option">
+		<item name="wcf.acp.option.module_tour"><![CDATA[Einführungstour]]></item>
+	</category>
+	
 	<category name="wcf.acp.tour">
 		<item name="wcf.acp.tour.tourPoint.list"><![CDATA[Tourpunkte]]></item>
 		<item name="wcf.acp.tour.tourPoint.add"><![CDATA[Tourpunkte hinzufügen]]></item>
 		<item name="wcf.acp.tour.tourPoint.edit"><![CDATA[Tourpunkt bearbeiten]]></item>
 		<item name="wcf.tour.tourPoint.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Tourpunkt löschen möchten?]]></item>
 	</category>
+	
 	<category name="wcf.tour">
 		<item name="wcf.tour.tourPoint.data"><![CDATA[Tourpunkt-Informationen]]></item>
 		<item name="wcf.tour.tourPoint.step"><![CDATA[Schritt]]></item>
@@ -27,11 +33,6 @@
 		<item name="wcf.tour.tourPoint.elementName"><![CDATA[DOM-Element]]></item>
 		<item name="wcf.tour.tourPoint.pointText"><![CDATA[Text]]></item>
 		<item name="wcf.tour.tourPoint.position"><![CDATA[Position]]></item>
-	</category>
-	<category name="wcf.tour.tourPoint" />
-	
-	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.module_tour"><![CDATA[Einführungstour]]></item>
 	</category>
 	
 	<category name="wcf.user.option">

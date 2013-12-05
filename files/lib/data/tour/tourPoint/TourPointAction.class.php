@@ -19,15 +19,10 @@ class TourPointAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.tour.canEdit');
-	
-	/**
-	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
-	 */
-	protected $permissionsUpdate = array('admin.tour.canEdit');
+	protected $permissionsDelete = array('admin.user.canEditTour');
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
-	protected $requireACP = array('delete', 'update');
+	protected $requireACP = array('delete');
 }

@@ -4,7 +4,7 @@
   		<categories>
 			<category name="tour">
 				<options>module_tour</options>
-				<permissions>admin.tour.canEdit</permissions>
+				<permissions>admin.user.canEditTour</permissions>
 			</category>
 			<category name="tour.settings">
 				<parent>tour</parent>
