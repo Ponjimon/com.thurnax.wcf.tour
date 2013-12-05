@@ -4,7 +4,7 @@
 		<eventlistener>
 			<eventclassname>wcf\system\template\TemplateEngine</eventclassname>
 			<eventname>beforeDisplay</eventname>
-			<listenerclassname>wcf\system\event\listener\TourListener</listenerclassname>
+			<listenerclassname>wcf\system\event\listener\BeforeDisplayTourListener</listenerclassname>
 		</eventlistener>
 	</import>
 </data>
