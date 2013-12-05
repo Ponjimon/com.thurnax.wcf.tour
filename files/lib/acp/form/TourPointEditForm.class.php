@@ -22,7 +22,7 @@ class TourPointEditForm extends TourPointAddForm {
 	/**
 	 * @see	\wcf\acp\form\ACPForm::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.tour.tourPoint.list';
+	public $activeMenuItem = 'wcf.acp.menu.link.user.tour';
 	
 	/**
 	 * tourPoint id

@@ -6,27 +6,27 @@
 		<version>0.1.0</version>
 		<date>2013-11-25</date>
 	</packageinformation>
-
+	
 	<authorinformation>
 		<author>Thurnax.com</author>
 		<authorurl>http://www.thurnax.com</authorurl>
 	</authorinformation>
-
+	
 	<requiredpackages>
 		<requiredpackage minversion="2.0.0 RC 1">com.woltlab.wcf</requiredpackage>
 	</requiredpackages>
-
+	
 	<instructions type="install">
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
-		<instruction type="templateListener">templateListener.xml</instruction>
-		<instruction type="eventListener">eventListener.xml</instruction>
-		<instruction type="acpMenu">acpMenu.xml</instruction>
-		<instruction type="acpTemplate">acptemplates.tar</instruction>
-		<instruction type="userGroupOption">userGroupOption.xml</instruction>
-		<instruction type="userOption">userOption.xml</instruction>
-		<instruction type="option">option.xml</instruction>
-		<instruction type="language">lang/*.xml</instruction>
 		<instruction type="sql">install.sql</instruction>
+		
+		<instruction type="acpMenu">acpMenu.xml</instruction>
+		<instruction type="eventListener">eventListener.xml</instruction>
+		<instruction type="language">lang/*.xml</instruction>
+		<instruction type="option">option.xml</instruction>
+		<instruction type="templateListener">templateListener.xml</instruction>
+		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 	</instructions>
 </package>

@@ -15,12 +15,12 @@ class TourPointListPage extends SortablePage {
 	/**
 	 * @see	\wcf\acp\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.tour.tourPoint.list';
+	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.tourPoint.list';
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.tour.canEdit');
+	public $neededPermissions = array('admin.user.canEditTour');
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededModules
