@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/userOption.xsd">
+	<import>
+		<options>
+			<option name="showTour">
+				<categoryname>settings.general.appearance</categoryname>
+				<optiontype>boolean</optiontype>
+				<editable>3</editable>
+				<visible>3</visible>
+				<defaultvalue>1</defaultvalue>
+				<options>module_conversation</options>
+				<permissions>user.tour.enableTour</permissions>
+			</option>
+		</options>
+	</import>
+</data>
