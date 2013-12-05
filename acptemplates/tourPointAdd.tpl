@@ -1,4 +1,4 @@
-{include file='header' pageTitle='wcf.acp.tour.tourPoint.add'|concat:$action}
+{include file='header' pageTitle='wcf.acp.tour.tourPoint.'|concat:$action}
 
 <header class="boxHeadline">
 	<h1>{lang}wcf.acp.tour.tourPoint.{$action}{/lang}</h1>
