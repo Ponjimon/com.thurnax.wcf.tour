@@ -1,5 +1,5 @@
 <?php
-namespace wcf\data\tour\tourPoint;
+namespace wcf\data\tour\point;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\system\cache\builder\TourPointCacheBuilder;
@@ -16,7 +16,7 @@ class TourPointEditor extends DatabaseObjectEditor implements IEditableCachedObj
 	/**
 	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
-	protected static $baseClass = 'wcf\data\tour\tourPoint\TourPoint';
+	protected static $baseClass = 'wcf\data\tour\point\TourPoint';
 	
 	/**
 	 * @see	\wcf\data\IEditableCachedObject::resetCache()
