@@ -28,5 +28,6 @@
 		<instruction type="option">option.xml</instruction>
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+		<instruction type="userOption">userOption.xml</instruction>
 	</instructions>
 </package>
