@@ -1,5 +1,5 @@
 <?php
-namespace wcf\data\tour\tourPoint;
+namespace wcf\data\tour\point;
 use wcf\data\DatabaseObject;
 
 /**
@@ -14,7 +14,7 @@ class TourPoint extends DatabaseObject {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
-	protected static $databaseTableName = 'tour_tourPoint';
+	protected static $databaseTableName = 'tour_point';
 	
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName

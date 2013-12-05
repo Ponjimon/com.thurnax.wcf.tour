@@ -1,5 +1,5 @@
 <?php
-namespace wcf\data\tour\tourPoint;
+namespace wcf\data\tour\point;
 use wcf\data\AbstractDatabaseObjectAction;
 
 /**
@@ -14,7 +14,7 @@ class TourPointAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
 	 */
-	protected $className = 'wcf\data\tour\tourPoint\TourPointEditor';
+	protected $className = 'wcf\data\tour\point\TourPointEditor';
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete

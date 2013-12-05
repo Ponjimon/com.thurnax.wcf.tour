@@ -1,7 +1,7 @@
 <?php
 namespace wcf\acp\form;
-use wcf\data\tour\tourPoint\TourPointAction;
-use wcf\data\tour\tourPoint\TourPointEditor;
+use wcf\data\tour\point\TourPointAction;
+use wcf\data\tour\point\TourPointEditor;
 use wcf\data\package\PackageCache;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;

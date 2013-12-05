@@ -1,8 +1,7 @@
 <?php
 namespace wcf\acp\form;
-use wcf\data\tour\tourPoint\TourPoint;
-use wcf\data\tour\tourPoint\TourPointAction;
-use wcf\data\tour\tourPoint\TourPointEditor;
+use wcf\data\tour\point\TourPoint;
+use wcf\data\tour\point\TourPointAction;
 use wcf\data\package\PackageCache;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
@@ -32,7 +31,8 @@ class TourPointEditForm extends TourPointAddForm {
 	
 	/**
 	 * tourPoint object
-	 * @var	\wcf\data\tour\tourPoint\TourPoint
+	 * 
+*@var	\wcf\data\tour\point\TourPoint
 	 */
 	public $tourPointObj = null;
 	

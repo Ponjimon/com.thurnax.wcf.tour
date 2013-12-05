@@ -30,7 +30,7 @@ class TourPointListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
-	public $objectListClassName = 'wcf\data\tour\tourPoint\TourPointList';
+	public $objectListClassName = 'wcf\data\tour\point\TourPointList';
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$defaultSortField

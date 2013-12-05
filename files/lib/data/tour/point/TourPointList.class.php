@@ -1,5 +1,5 @@
 <?php
-namespace wcf\data\tour\tourPoint;
+namespace wcf\data\tour\point;
 use wcf\data\DatabaseObjectList;
 
 /**
@@ -14,5 +14,5 @@ class TourPointList extends DatabaseObjectList {
 	/**
 	 * @see	\wcf\data\DatabaseObjectList::$className
 	 */
-	public $className = 'wcf\data\tour\tourPoint\TourPoint';
+	public $className = 'wcf\data\tour\point\TourPoint';
 }

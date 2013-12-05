@@ -1,6 +1,6 @@
 <?php
 namespace wcf\system\cache\builder;
-use wcf\data\tour\tourPoint\TourPointList;
+use wcf\data\tour\point\TourPointList;
 
 /**
  * Caches tour points
