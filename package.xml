@@ -3,8 +3,8 @@
 	<packageinformation>
 		<packagename>Einführungstour</packagename>
 		<packagedescription>Dieses Plugin ermöglicht es neu registrierten Benutzern eine kleine Einführung in die Funktionen der Website zu geben.</packagedescription>
-		<version>0.1.0</version>
-		<date>2013-11-25</date>
+		<version>0.1.5</version>
+		<date>2013-12-07</date>
 	</packageinformation>
 	
 	<authorinformation>
