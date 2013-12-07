@@ -159,7 +159,7 @@ class TourPointAddForm extends AbstractForm {
 			$tourPointID = $returnValues['returnValues']->tourPointID;
 			I18nHandler::getInstance()->save('pointText', 'wcf.acp.tour.point.pointText'.$tourPointID, 'wcf.acp.tour', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'));
 
-			// update tracking goal description
+			// update tour point text
 			$pointEditor = new TourPointEditor($returnValues['returnValues']);
 			$pointEditor->update(array(
 				'pointText' => 'wcf.acp.tour.point.pointText'.$tourPointID
