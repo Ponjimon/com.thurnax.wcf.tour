@@ -7,12 +7,12 @@
 			<permissions>admin.user.canEditTour</permissions>
 		</acpmenuitem>
 		
-		<acpmenuitem name="wcf.acp.menu.link.user.tour.tourPoint.list">
+		<acpmenuitem name="wcf.acp.menu.link.user.tour.point.list">
 			<controller>wcf\acp\page\TourPointList</controller>
 			<parent>wcf.acp.menu.link.user.tour</parent>
 		</acpmenuitem>
 		
-		<acpmenuitem name="wcf.acp.menu.link.user.tour.tourPoint.add">
+		<acpmenuitem name="wcf.acp.menu.link.user.tour.point.add">
 			<controller>wcf\acp\form\TourPointAdd</controller>
 			<parent>wcf.acp.menu.link.user.tour</parent>
 		</acpmenuitem>

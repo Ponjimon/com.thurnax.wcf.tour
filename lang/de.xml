@@ -10,9 +10,9 @@
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.user.tour"><![CDATA[Einführungstour]]></item>
-		<item name="wcf.acp.menu.link.user.tour.tourPoint.list"><![CDATA[Tourpunkte auflisten]]></item>
-		<item name="wcf.acp.menu.link.user.tour.tourPoint.add"><![CDATA[Tourpunkte hinzufügen]]></item>
-		<item name="wcf.acp.menu.link.tour.tourPoint.list"><![CDATA[Tourpunkte auflisten]]></item>
+		<item name="wcf.acp.menu.link.user.tour.point.list"><![CDATA[Tourpunkte auflisten]]></item>
+		<item name="wcf.acp.menu.link.user.tour.point.add"><![CDATA[Tourpunkte hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.tour.point.list"><![CDATA[Tourpunkte auflisten]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">
@@ -20,19 +20,21 @@
 	</category>
 	
 	<category name="wcf.acp.tour">
-		<item name="wcf.acp.tour.tourPoint.list"><![CDATA[Tourpunkte]]></item>
-		<item name="wcf.acp.tour.tourPoint.add"><![CDATA[Tourpunkte hinzufügen]]></item>
-		<item name="wcf.acp.tour.tourPoint.edit"><![CDATA[Tourpunkt bearbeiten]]></item>
-		<item name="wcf.tour.tourPoint.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Tourpunkt löschen möchten?]]></item>
-	</category>
-	
-	<category name="wcf.tour">
-		<item name="wcf.tour.tourPoint.data"><![CDATA[Tourpunkt-Informationen]]></item>
-		<item name="wcf.tour.tourPoint.step"><![CDATA[Schritt]]></item>
-		<item name="wcf.tour.tourPoint.step.description"><![CDATA[Geben Sie hier die Reihenfolge an, in der dieser Tourpunkt erscheinen soll.]]></item>
-		<item name="wcf.tour.tourPoint.elementName"><![CDATA[DOM-Element]]></item>
-		<item name="wcf.tour.tourPoint.pointText"><![CDATA[Text]]></item>
-		<item name="wcf.tour.tourPoint.position"><![CDATA[Position]]></item>
+		<item name="wcf.acp.tour.point.add"><![CDATA[Tourpunkte hinzufügen]]></item>
+		<item name="wcf.acp.tour.point.data"><![CDATA[Tourpunkt-Informationen]]></item>
+		<item name="wcf.acp.tour.point.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Tourpunkt löschen möchten?]]></item>
+		<item name="wcf.acp.tour.point.edit"><![CDATA[Tourpunkt bearbeiten]]></item>
+		<item name="wcf.acp.tour.point.elementName"><![CDATA[DOM-Element]]></item>
+		<item name="wcf.acp.tour.point.list"><![CDATA[Tourpunkte]]></item>
+		<item name="wcf.acp.tour.point.pointText"><![CDATA[Text]]></item>
+		<item name="wcf.acp.tour.point.position"><![CDATA[Position]]></item>
+		<item name="wcf.acp.tour.point.position.bottom"><![CDATA[Unterhalb]]></item>
+		<item name="wcf.acp.tour.point.position.left"><![CDATA[Links]]></item>
+		<item name="wcf.acp.tour.point.position.right"><![CDATA[Rechts]]></item>
+		<item name="wcf.acp.tour.point.position.top"><![CDATA[Oberhalb]]></item>
+		<item name="wcf.acp.tour.point.step"><![CDATA[Schritt]]></item>
+		<item name="wcf.acp.tour.point.step.description"><![CDATA[Geben Sie hier die Reihenfolge an, in der dieser Tourpunkt erscheinen soll.]]></item>
+		<item name="wcf.acp.tour.point.step.notUnique"><![CDATA[Diese Schritt-Numer wird bereits verwendet.]]></item>
 	</category>
 	
 	<category name="wcf.user.option">
