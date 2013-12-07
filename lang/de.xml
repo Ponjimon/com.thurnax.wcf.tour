@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="wcf.acp.group">
-		<item name="wcf.acp.group.option.category.admin.user.tour"><![CDATA[Einführungstour]]></item>
-		<item name="wcf.acp.group.option.admin.user.canEditTour"><![CDATA[Kann Einführungstour bearbeiten]]></item>
+		<item name="wcf.acp.group.option.category.admin.user.tour"><![CDATA[Tour]]></item>
+		<item name="wcf.acp.group.option.admin.user.canEditTour"><![CDATA[Kann Tour bearbeiten]]></item>
 		
-		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Einführungstour]]></item>
-		<item name="wcf.acp.group.option.user.tour.enableTour"><![CDATA[Kann Einführungstour sehen]]></item>
+		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Tour]]></item>
+		<item name="wcf.acp.group.option.user.tour.enableTour"><![CDATA[Kann Tour sehen]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
-		<item name="wcf.acp.menu.link.user.tour"><![CDATA[Einführungstour]]></item>
+		<item name="wcf.acp.menu.link.user.tour"><![CDATA[Tour]]></item>
 		<item name="wcf.acp.menu.link.user.tour.point.list"><![CDATA[Tourpunkte auflisten]]></item>
 		<item name="wcf.acp.menu.link.user.tour.point.add"><![CDATA[Tourpunkte hinzufügen]]></item>
 		<item name="wcf.acp.menu.link.tour.point.list"><![CDATA[Tourpunkte auflisten]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.module_tour"><![CDATA[Einführungstour]]></item>
+		<item name="wcf.acp.option.module_tour"><![CDATA[Tour]]></item>
 	</category>
 	
 	<category name="wcf.acp.tour">
@@ -38,7 +38,7 @@
 	</category>
 	
 	<category name="wcf.user.option">
-		<item name="wcf.user.option.showTour"><![CDATA[Einführungstour sehen]]></item>
-		<item name="wcf.user.option.showTour.description"><![CDATA[Aktiveren Sie diese Option, um die Einführungstour (nochmal) zu sehen.]]></item>
+		<item name="wcf.user.option.showTour"><![CDATA[Tour sehen]]></item>
+		<item name="wcf.user.option.showTour.description"><![CDATA[Aktiveren Sie diese Option, um die Tour (nochmal) zu sehen.]]></item>
 	</category>
 </language>
