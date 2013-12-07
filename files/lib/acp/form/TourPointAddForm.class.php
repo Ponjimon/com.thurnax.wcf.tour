@@ -1,12 +1,14 @@
 <?php
 namespace wcf\acp\form;
+use wcf\data\package\PackageCache;
+use wcf\data\tour\point\TourPoint;
 use wcf\data\tour\point\TourPointAction;
 use wcf\data\tour\point\TourPointEditor;
-use wcf\data\package\PackageCache;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Shows the tour point add form.
@@ -19,14 +21,9 @@ use wcf\system\WCF;
  */
 class TourPointAddForm extends AbstractForm {
 	/**
-	 * @see	\wcf\page\AbstractPage::$templateName
-	 */
-	public $templateName = 'tourPointAdd';
-	
-	/**
 	 * @see	\wcf\acp\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.tourPoint.add';
+	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.point.add';
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
@@ -39,27 +36,34 @@ class TourPointAddForm extends AbstractForm {
 	public $neededModules = array('MODULE_TOUR');
 	
 	/**
-	 * step value
+	 * step
 	 * @var integer
 	 */
-	public $step = 0;
+	public $step = 1;
+	
 	/**
-	 * elementName value
+	 * element name
 	 * @var	string
 	 */
 	public $elementName = '';
 	
 	/**
-	 * pointText value
+	 * position
+	 * @var	string
+	 */
+	public $position =  'left';
+	
+	/**
+	 * valid positions
+	 * @var	string
+	 */
+	public $validPositions = array('top', 'bottom', 'left', 'right');
+	
+	/**
+	 * point text
 	 * @var	string
 	 */
 	public $pointText = '';
-	
-	/**
-	 * position value
-	 * @var	string
-	 */
-	public $position =  '';
 	
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -67,10 +71,7 @@ class TourPointAddForm extends AbstractForm {
 	public function readParameters() {
 		parent::readParameters();
 		
-		I18nHandler::getInstance()->register('step');
-		I18nHandler::getInstance()->register('elementName');
 		I18nHandler::getInstance()->register('pointText');
-		I18nHandler::getInstance()->register('position');
 	}
 	
 	/**
@@ -80,15 +81,10 @@ class TourPointAddForm extends AbstractForm {
 		parent::readFormParameters();
 		
 		I18nHandler::getInstance()->readValues();
-		
-		if (I18nHandler::getInstance()->isPlainValue('step')) $this->step = I18nHandler::getInstance()->getValue('step');
-		if (I18nHandler::getInstance()->isPlainValue('elementName')) $this->elementName = I18nHandler::getInstance()->getValue('elementName');
-		if (I18nHandler::getInstance()->isPlainValue('pointText')) $this->pointText = I18nHandler::getInstance()->getValue('pointText');
-		if (I18nHandler::getInstance()->isPlainValue('position')) $this->position = I18nHandler::getInstance()->getValue('position');
 		if (isset($_POST['step'])) $this->step = intval($_POST['step']);
 		if (isset($_POST['elementName'])) $this->elementName = $_POST['elementName'];
-		if (isset($_POST['pointText'])) $this->pointText = $_POST['pointText'];
 		if (isset($_POST['position'])) $this->position = $_POST['position'];
+		if (isset($_POST['pointText'])) $this->pointText = StringUtil::trim($_POST['pointText']);
 	}
 	
 	/**
@@ -96,21 +92,49 @@ class TourPointAddForm extends AbstractForm {
 	 */
 	public function validate() {
 		parent::validate();
+		$this->validateStep();
 		
-		// validate elementName
-		if (!I18nHandler::getInstance()->validateValue('elementName')) {
+		// validate point text
+		if (!I18nHandler::getInstance()->validateValue('pointText')) {
+			if (I18nHandler::getInstance()->isPlainValue('pointText')) {
+				throw new UserInputException('pointText');
+			} else {
+				throw new UserInputException('pointText', 'multilingual');
+			}
+		}
+		
+		// validate position
+		if (empty($this->position) || !in_array($this->position, $this->validPositions)) {
+			throw new UserInputException('position');
+		}
+		
+		// validate element name
+		if (empty($this->elementName)) {
 			throw new UserInputException('elementName');
 		}
-		// validate elementName
-		if (!I18nHandler::getInstance()->validateValue('pointText')) {
-			throw new UserInputException('pointText');
+	}
+	
+	/**
+	 * Validates the step
+	 */
+	protected function validateStep() {
+		if (empty($this->step)) {
+			throw new UserInputException('step');
+		} else if ($this->step < 1) {
+			throw new UserInputException('step', 'greaterThan');
+		} else if ($this->step > 8388607) {
+			throw new UserInputException('step', 'lessThan');
 		}
 		
-		if ($this->step < 1) {
-			throw new UserInputException('step', 'greaterThan');
-		}
-		if ($this->step > 8388607) {
-			throw new UserInputException('step', 'lessThan');
+		// check for collusion
+		$sql = "SELECT	*
+			FROM	".TourPoint::getDatabaseTableName()."
+			WHERE	step = ?";
+		$statement = WCF::getDB()->prepareStatement($sql, 1);
+		$statement->execute(array($this->step));
+		
+		if ($statement->fetchArray()) {
+			throw new UserInputException('step', 'notUnique');
 		}
 	}
 	
@@ -120,7 +144,7 @@ class TourPointAddForm extends AbstractForm {
 	public function save() {
 		parent::save();
 		
-		// save warning
+		// save tour point
 		$this->objectAction = new TourPointAction(array(), 'create', array('data' => array(
 			'step' => $this->step,
 			'elementName' => $this->elementName,
@@ -128,50 +152,28 @@ class TourPointAddForm extends AbstractForm {
 			'position' => $this->position
 		)));
 		$this->objectAction->executeAction();
-		$returnValues = $this->objectAction->getReturnValues();
-		$tourPointEditor = new TourPointEditor($returnValues['returnValues']);
-		$tourPointID = $returnValues['returnValues']->tourPointID;
-		
-		$packageID = PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour');
-		if (!I18nHandler::getInstance()->isPlainValue('elementName')) {
-			I18nHandler::getInstance()->save('elementName', 'wcf.tour.tourPoint.elementName'.$tourPointID, 'wcf.tour.tourPoint', $packageID);
-			
-			// update title
-			$tourPointEditor->update(array(
-				'title' => 'wcf.tour.tourPoint.elementName'.$tourPointID
-			));
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('pointText')) {
-			I18nHandler::getInstance()->save('pointText', 'wcf.tour.tourPoint.pointText'.$tourPointID, 'wcf.tour.tourPoint', $packageID);
-			
-			// update title
-			$tourPointEditor->update(array(
-				'pointText' => 'wcf.tour.tourPoint.pointText'.$tourPointID
-			));
-		}
-		if (!I18nHandler::getInstance()->isPlainValue('position')) {
-			I18nHandler::getInstance()->save('position', 'wcf.tour.tourPoint.position'.$tourPointID, 'wcf.tour.tourPoint', $packageID);
-			
-			// update title
-			$tourPointEditor->update(array(
-				'position' => 'wcf.tour.tourPoint.position'.$tourPointID
-			));
-		}
-		
 		$this->saved();
+
+		if (!I18nHandler::getInstance()->isPlainValue('pointText')) {
+			$returnValues = $this->objectAction->getReturnValues();
+			$tourPointID = $returnValues['returnValues']->tourPointID;
+			I18nHandler::getInstance()->save('pointText', 'wcf.acp.tour.point.pointText'.$tourPointID, 'wcf.acp.tour', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'));
+
+			// update tour point text
+			$pointEditor = new TourPointEditor($returnValues['returnValues']);
+			$pointEditor->update(array(
+				'pointText' => 'wcf.acp.tour.point.pointText'.$tourPointID
+			));
+		}
 		
 		// reset values
-		$this->step = 0;
-		$this->elementName = '';
-		$this->pointText = '';
-		$this->position = '';
-		
+		$this->step = 1;
+		$this->elementName = $this->pointText = '';
+		$this->position = 'left';
 		I18nHandler::getInstance()->reset();
 		
 		// show success
-		WCF::getTPL()->assign(array(
-			'success' => true
-		));
+		WCF::getTPL()->assign('success', true);
 	}
 	
 	/**
@@ -181,13 +183,13 @@ class TourPointAddForm extends AbstractForm {
 		parent::assignVariables();
 		
 		I18nHandler::getInstance()->assignVariables();
-		
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'step' => $this->step,
 			'elementName' => $this->elementName,
 			'pointText' => $this->pointText,
-			'position' => $this->position
+			'position' => $this->position,
+			'validPositions' => $this->validPositions
 		));
 	}
 }

@@ -2,7 +2,6 @@
 namespace wcf\acp\form;
 use wcf\data\tour\point\TourPoint;
 use wcf\data\tour\point\TourPointAction;
-use wcf\data\package\PackageCache;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
@@ -24,17 +23,16 @@ class TourPointEditForm extends TourPointAddForm {
 	public $activeMenuItem = 'wcf.acp.menu.link.user.tour';
 	
 	/**
-	 * tourPoint id
+	 * point id
 	 * @var	integer
 	 */
 	public $tourPointID = 0;
 	
 	/**
-	 * tourPoint object
-	 * 
-*@var	\wcf\data\tour\point\TourPoint
+	 * point object
+	 * @var	\wcf\data\tour\point\TourPoint
 	 */
-	public $tourPointObj = null;
+	public $point = null;
 	
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -43,9 +41,18 @@ class TourPointEditForm extends TourPointAddForm {
 		parent::readParameters();
 		
 		if (isset($_REQUEST['id'])) $this->tourPointID = intval($_REQUEST['id']);
-		$this->tourPointObj = new TourPoint($this->tourPointID);
-		if (!$this->tourPointObj->tourPointID) {
+		$this->point = new TourPoint($this->tourPointID);
+		if (!$this->point->tourPointID) {
 			throw new IllegalLinkException();
+		}
+	}
+	
+	/**
+	 * @see	\wcf\acp\form\TourPointAddForm::validateStep()
+	 */
+	protected function validateStep() {
+		if ($this->step != $this->point->step) { // only validate if the value has changed
+			parent::validateStep();
 		}
 	}
 	
@@ -55,41 +62,15 @@ class TourPointEditForm extends TourPointAddForm {
 	public function save() {
 		AbstractForm::save();
 		
-		$packageID = PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour');
-		$this->step = 'wcf.tour.tourPoint.step'.$this->tourPointObj->tourPointID;
-		$this->elementName = 'wcf.tour.tourPoint.elementName'.$this->tourPointObj->tourPointID;
-		$this->pointText = 'wcf.tour.tourPoint.pointText'.$this->tourPointObj->tourPointID;
-		$this->position = 'wcf.tour.tourPoint.position'.$this->tourPointObj->tourPointID;
-		if (I18nHandler::getInstance()->isPlainValue('step')) {
-			I18nHandler::getInstance()->remove($this->step, $packageID);
-			$this->step = I18nHandler::getInstance()->getValue('step');
-		}
-		else {
-			I18nHandler::getInstance()->save('elementName', $this->elementName, 'wcf.tour.tourPoint', $packageID);
-		}
-		if (I18nHandler::getInstance()->isPlainValue('elementName')) {
-			I18nHandler::getInstance()->remove($this->elementName, $packageID);
-			$this->elementName = I18nHandler::getInstance()->getValue('elementName');
-		}
-		else {
-			I18nHandler::getInstance()->save('elementName', $this->elementName, 'wcf.tour.tourPoint', $packageID);
-		}
+		$this->pointText = 'wcf.acp.tour.point.pointText'.$this->point->tourPointID;
 		if (I18nHandler::getInstance()->isPlainValue('pointText')) {
-			I18nHandler::getInstance()->remove($this->pointText, $packageID);
+			I18nHandler::getInstance()->remove($this->pointText);
 			$this->pointText = I18nHandler::getInstance()->getValue('pointText');
-		}
-		else {
-			I18nHandler::getInstance()->save('pointText', $this->pointText, 'wcf.tour.tourPoint', $packageID);
-		}
-		if (I18nHandler::getInstance()->isPlainValue('position')) {
-			I18nHandler::getInstance()->remove($this->position, $packageID);
-			$this->position = I18nHandler::getInstance()->getValue('position');
-		}
-		else {
-			I18nHandler::getInstance()->save('position', $this->position, 'wcf.tour.tourPoint', $packageID);
+		} else {
+			I18nHandler::getInstance()->save('pointText', $this->pointText, 'wcf.acp.tour', $this->point->tourPointID);
 		}
 		
-		// update warning
+		// update tour point
 		$this->objectAction = new TourPointAction(array($this->tourPointID), 'update', array('data' => array(
 			'step' => $this->step,
 			'elementName' => $this->elementName,
@@ -97,13 +78,10 @@ class TourPointEditForm extends TourPointAddForm {
 			'position' => $this->position
 		)));
 		$this->objectAction->executeAction();
-		
 		$this->saved();
 		
 		// show success
-		WCF::getTPL()->assign(array(
-			'success' => true
-		));
+		WCF::getTPL()->assign('success', true);
 	}
 	
 	/**
@@ -113,14 +91,12 @@ class TourPointEditForm extends TourPointAddForm {
 		parent::readData();
 		
 		if (empty($_POST)) {
-			I18nHandler::getInstance()->setOptions('step', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.step'), $this->tourPointObj->step, 'wcf.tour.tourPoint.step\d+');
-			I18nHandler::getInstance()->setOptions('elementName', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'), $this->tourPointObj->elementName, 'wcf.tour.tourPoint.elementName\d+');
-			I18nHandler::getInstance()->setOptions('pointText', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'), $this->tourPointObj->pointText, 'wcf.tour.tourPoint.pointText\d+');			
-			I18nHandler::getInstance()->setOptions('position', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'), $this->tourPointObj->position, 'wcf.tour.tourPoint.position\d+');
-			$this->step = $this->tourPointObj->step;
-			$this->elementName = $this->tourPointObj->elementName;
-			$this->pointText = $this->tourPointObj->pointText;
-			$this->position = $this->tourPointObj->position;
+			I18nHandler::getInstance()->setOptions('pointText', $this->point->tourPointID, $this->point->pointText, 'wcf.acp.tour.point.pointText\d+');			
+			
+			$this->step = $this->point->step;
+			$this->elementName = $this->point->elementName;
+			$this->pointText = $this->point->pointText;
+			$this->position = $this->point->position;
 		}
 	}
 	
@@ -130,10 +106,10 @@ class TourPointEditForm extends TourPointAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		I18nHandler::getInstance()->assignVariables((bool) count($_POST));
-		
+		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 		WCF::getTPL()->assign(array(
 			'tourPointID' => $this->tourPointID,
+			'point' => $this->point,
 			'action' => 'edit'
 		));
 	}
