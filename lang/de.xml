@@ -34,7 +34,7 @@
 		<item name="wcf.acp.tour.point.position.top"><![CDATA[Oberhalb]]></item>
 		<item name="wcf.acp.tour.point.step"><![CDATA[Schritt]]></item>
 		<item name="wcf.acp.tour.point.step.description"><![CDATA[Geben Sie hier die Reihenfolge an, in der dieser Tourpunkt erscheinen soll.]]></item>
-		<item name="wcf.acp.tour.point.step.notUnique"><![CDATA[Diese Schritt-Numer wird bereits verwendet.]]></item>
+		<item name="wcf.acp.tour.point.step.notUnique"><![CDATA[Diese Schritt-Nummer wird bereits verwendet.]]></item>
 	</category>
 	
 	<category name="wcf.user.option">
