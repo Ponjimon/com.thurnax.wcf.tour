@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
+	<category name="wcf.acp.group">
+		<item name="wcf.acp.group.option.category.admin.user.tour"><![CDATA[Tour]]></item>
+		<item name="wcf.acp.group.option.admin.user.canEditTour"><![CDATA[Can edit tour]]></item>
+		
+		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Tour]]></item>
+		<item name="wcf.acp.group.option.user.tour.enableTour"><![CDATA[Can see tour]]></item>
+	</category>
+	
+	<category name="wcf.acp.menu">
+		<item name="wcf.acp.menu.link.user.tour"><![CDATA[Tour]]></item>
+		<item name="wcf.acp.menu.link.user.tour.point.list"><![CDATA[List Tour Points]]></item>
+		<item name="wcf.acp.menu.link.user.tour.point.add"><![CDATA[Add Tour Points]]></item>
+		<item name="wcf.acp.menu.link.tour.point.list"><![CDATA[List Tour Points]]></item>
+	</category>
+	
+	<category name="wcf.acp.option">
+		<item name="wcf.acp.option.module_tour"><![CDATA[Tour]]></item>
+	</category>
+	
+	<category name="wcf.acp.tour">
+		<item name="wcf.acp.tour.point.add"><![CDATA[Add Tour Point]]></item>
+		<item name="wcf.acp.tour.point.data"><![CDATA[Tour Point-Information]]></item>
+		<item name="wcf.acp.tour.point.delete.sure"><![CDATA[Do you really want to delete this Tour Point?]]></item>
+		<item name="wcf.acp.tour.point.edit"><![CDATA[Edit Tour Point]]></item>
+		<item name="wcf.acp.tour.point.elementName"><![CDATA[DOM Element]]></item>
+		<item name="wcf.acp.tour.point.list"><![CDATA[Tour Points]]></item>
+		<item name="wcf.acp.tour.point.pointText"><![CDATA[Text]]></item>
+		<item name="wcf.acp.tour.point.position"><![CDATA[Position]]></item>
+		<item name="wcf.acp.tour.point.position.bottom"><![CDATA[Bottom]]></item>
+		<item name="wcf.acp.tour.point.position.left"><![CDATA[Left]]></item>
+		<item name="wcf.acp.tour.point.position.right"><![CDATA[Right]]></item>
+		<item name="wcf.acp.tour.point.position.top"><![CDATA[Top]]></item>
+		<item name="wcf.acp.tour.point.step"><![CDATA[Step]]></item>
+		<item name="wcf.acp.tour.point.step.description"><![CDATA[Enter the order in which this Tour Point should appear.]]></item>
+		<item name="wcf.acp.tour.point.step.notUnique"><![CDATA[This stepnumber already exists.]]></item>
+	</category>
+	
+	<category name="wcf.user.option">
+		<item name="wcf.user.option.showTour"><![CDATA[Watch Tour]]></item>
+		<item name="wcf.user.option.showTour.description"><![CDATA[Activate this option if you want to watch the Tour (again).]]></item>
+	</category>
+</language>
