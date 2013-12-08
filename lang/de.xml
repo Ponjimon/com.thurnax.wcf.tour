@@ -10,9 +10,10 @@
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.user.tour"><![CDATA[Tour]]></item>
+		<item name="wcf.acp.menu.link.user.tour.list"><![CDATA[Touren auflisten]]></item>
+		<item name="wcf.acp.menu.link.user.tour.add"><![CDATA[Tour hinzufügen]]></item>
 		<item name="wcf.acp.menu.link.user.tour.point.list"><![CDATA[Tourpunkte auflisten]]></item>
 		<item name="wcf.acp.menu.link.user.tour.point.add"><![CDATA[Tourpunkte hinzufügen]]></item>
-		<item name="wcf.acp.menu.link.tour.point.list"><![CDATA[Tourpunkte auflisten]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">

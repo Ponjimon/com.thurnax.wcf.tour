@@ -1,6 +1,6 @@
 <?php
 namespace wcf\system\cache\builder;
-use wcf\data\tour\point\TourPointList;
+use wcf\data\tour\step\TourStepList;
 
 /**
  * Caches tour points
@@ -15,7 +15,7 @@ class TourPointCacheBuilder extends AbstractCacheBuilder {
 	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
 	public function rebuild(array $parameters) {
-		$tourPointList = new TourPointList();
+		$tourPointList = new TourStepList();
 		$tourPointList->sqlOrderBy = 'step ASC';
 		$tourPointList->readObjects();
 		return $tourPointList->getObjects();

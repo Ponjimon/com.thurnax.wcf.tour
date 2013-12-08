@@ -11,7 +11,7 @@ CREATE TABLE wcf1_tour (
 
 DROP TABLE IF EXISTS wcf1_tour_point;
 CREATE TABLE wcf1_tour_point (
-	tourPointID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	tourStepID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	tourID INT(10) NOT NULL,
 	objectTypeID INT(10) NOT NULL,
 	showOrder INT(10) NOT NULL,
@@ -29,7 +29,7 @@ DROP TABLE IF EXISTS wcf1_tour_user;
 CREATE TABLE wcf1_tour_user (
 	tourID INT(10) NOT NULL,
 	userID INT(10) NOT NULL,
-	lastTourPointID INT(10) NOT NULL,
+	lastTourStepID INT(10) NOT NULL,
 	
 	UNIQUE KEY (tourID, userID),
 	KEY (userID),
@@ -41,4 +41,4 @@ ALTER TABLE wcf1_tour ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type
 ALTER TABLE wcf1_tour_point ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 ALTER TABLE wcf1_tour_user ADD FOREIGN KEY (tourID) REFERENCES wcf1_tour (tourID) ON DELETE CASCADE;
 ALTER TABLE wcf1_tour_user ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;
-ALTER TABLE wcf1_tour_user ADD FOREIGN KEY (lastTourPointID) REFERENCES wcf1_tour_point (tourPointID) ON DELETE CASCADE;
+ALTER TABLE wcf1_tour_user ADD FOREIGN KEY (lastTourStepID) REFERENCES wcf1_tour_point (tourStepID) ON DELETE CASCADE;

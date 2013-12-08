@@ -1,9 +1,9 @@
 <?php
 namespace wcf\acp\form;
 use wcf\data\package\PackageCache;
-use wcf\data\tour\point\TourPoint;
-use wcf\data\tour\point\TourPointAction;
-use wcf\data\tour\point\TourPointEditor;
+use wcf\data\tour\step\TourStep;
+use wcf\data\tour\step\TourStepAction;
+use wcf\data\tour\step\TourStepEditor;
 use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -128,7 +128,7 @@ class TourPointAddForm extends AbstractForm {
 		
 		// check for collusion
 		$sql = "SELECT	*
-			FROM	".TourPoint::getDatabaseTableName()."
+			FROM	".TourStep::getDatabaseTableName()."
 			WHERE	step = ?";
 		$statement = WCF::getDB()->prepareStatement($sql, 1);
 		$statement->execute(array($this->step));
@@ -145,7 +145,7 @@ class TourPointAddForm extends AbstractForm {
 		parent::save();
 		
 		// save tour point
-		$this->objectAction = new TourPointAction(array(), 'create', array('data' => array(
+		$this->objectAction = new TourStepAction(array(), 'create', array('data' => array(
 			'step' => $this->step,
 			'elementName' => $this->elementName,
 			'pointText' => $this->pointText,
@@ -160,7 +160,7 @@ class TourPointAddForm extends AbstractForm {
 			I18nHandler::getInstance()->save('pointText', 'wcf.acp.tour.point.pointText'.$tourPointID, 'wcf.acp.tour', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'));
 
 			// update tour point text
-			$pointEditor = new TourPointEditor($returnValues['returnValues']);
+			$pointEditor = new TourStepEditor($returnValues['returnValues']);
 			$pointEditor->update(array(
 				'pointText' => 'wcf.acp.tour.point.pointText'.$tourPointID
 			));

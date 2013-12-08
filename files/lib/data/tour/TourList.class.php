@@ -1,18 +1,18 @@
 <?php
-namespace wcf\data\tour\point;
+namespace wcf\data\tour;
 use wcf\data\DatabaseObjectList;
 
 /**
- * Represents a list of tour points.
- * 
- * @author	Simon Nußbaumer
+ * Represents a list of tours.
+ *
+ * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
  * @package	com.thurnax.wcf.tour
  * @category	Community Framework (commercial)
  */
-class TourPointList extends DatabaseObjectList {
+class TourList extends DatabaseObjectList {
 	/**
 	 * @see	\wcf\data\DatabaseObjectList::$className
 	 */
-	public $className = 'wcf\data\tour\point\TourPoint';
+	public $className = 'wcf\data\tour\Tour';
 }

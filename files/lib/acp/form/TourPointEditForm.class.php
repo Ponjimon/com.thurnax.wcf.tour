@@ -1,7 +1,7 @@
 <?php
 namespace wcf\acp\form;
-use wcf\data\tour\point\TourPoint;
-use wcf\data\tour\point\TourPointAction;
+use wcf\data\tour\step\TourStep;
+use wcf\data\tour\step\TourStepAction;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
@@ -30,7 +30,9 @@ class TourPointEditForm extends TourPointAddForm {
 	
 	/**
 	 * point object
-	 * @var	\wcf\data\tour\point\TourPoint
+	  
+*
+*@var	\wcf\data\tour\step\TourStep
 	 */
 	public $point = null;
 	
@@ -41,7 +43,7 @@ class TourPointEditForm extends TourPointAddForm {
 		parent::readParameters();
 		
 		if (isset($_REQUEST['id'])) $this->tourPointID = intval($_REQUEST['id']);
-		$this->point = new TourPoint($this->tourPointID);
+		$this->point = new TourStep($this->tourPointID);
 		if (!$this->point->tourPointID) {
 			throw new IllegalLinkException();
 		}
@@ -71,7 +73,7 @@ class TourPointEditForm extends TourPointAddForm {
 		}
 		
 		// update tour point
-		$this->objectAction = new TourPointAction(array($this->tourPointID), 'update', array('data' => array(
+		$this->objectAction = new TourStepAction(array($this->tourPointID), 'update', array('data' => array(
 			'step' => $this->step,
 			'elementName' => $this->elementName,
 			'pointText' => $this->pointText,

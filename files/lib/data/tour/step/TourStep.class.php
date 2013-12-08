@@ -1,23 +1,23 @@
 <?php
-namespace wcf\data\tour\point;
+namespace wcf\data\tour\step;
 use wcf\data\DatabaseObject;
 
 /**
- * Represents a tour point.
+ * Represents a tour step.
  * 
  * @author	Simon Nußbaumer
  * @copyright	2013 Thurnax.com
  * @package	com.thurnax.wcf.tour
  * @category	Community Framework (commercial)
  */
-class TourPoint extends DatabaseObject {
+class TourStep extends DatabaseObject {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
-	protected static $databaseTableName = 'tour_point';
+	protected static $databaseTableName = 'tour_step';
 	
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
-	protected static $databaseTableIndexName = 'tourPointID';
+	protected static $databaseTableIndexName = 'tourStepID';
 }

@@ -1,20 +1,20 @@
 <?php
-namespace wcf\data\tour\point;
+namespace wcf\data\tour;
 use wcf\data\AbstractDatabaseObjectAction;
 
 /**
- * Executes tour point.
- * 
- * @author	Simon Nußbaumer
+ * Executes tour-related actions.
+ *
+ * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
  * @package	com.thurnax.wcf.tour
  * @category	Community Framework (commercial)
  */
-class TourPointAction extends AbstractDatabaseObjectAction {
+class TourAction extends AbstractDatabaseObjectAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
 	 */
-	protected $className = 'wcf\data\tour\point\TourPointEditor';
+	protected $className = 'wcf\data\tour\TourEditor';
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
