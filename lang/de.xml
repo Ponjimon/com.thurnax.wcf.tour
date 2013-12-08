@@ -42,7 +42,7 @@
 		<item name="wcf.user.option.showTour.description"><![CDATA[Aktiveren Sie diese Option, um die Tour (nochmal) zu sehen.]]></item>
 	</category>
 	
-	<category name="wcf.tour.point.locales">
+	<category name="wcf.tour.point">
 		<item name="wcf.tour.point.locales.nextBtn"><![CDATA[Weiter]]></item>
 		<item name="wcf.tour.point.locales.prevBtn"><![CDATA[Zurück]]></item>
 		<item name="wcf.tour.point.locales.doneBtn"><![CDATA[Ende]]></item>
