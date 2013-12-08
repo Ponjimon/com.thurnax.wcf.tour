@@ -72,6 +72,7 @@ class TourPointEditForm extends TourPointAddForm {
 		
 		// update tour point
 		$this->objectAction = new TourPointAction(array($this->tourPointID), 'update', array('data' => array(
+			'tourID' => 0, //to be changed in future!
 			'step' => $this->step,
 			'elementName' => $this->elementName,
 			'pointText' => $this->pointText,
@@ -93,6 +94,7 @@ class TourPointEditForm extends TourPointAddForm {
 		if (empty($_POST)) {
 			I18nHandler::getInstance()->setOptions('pointText', $this->point->tourPointID, $this->point->pointText, 'wcf.acp.tour.point.pointText\d+');			
 			
+			$this->tourID = 0; //to be changed in future!
 			$this->step = $this->point->step;
 			$this->elementName = $this->point->elementName;
 			$this->pointText = $this->point->pointText;

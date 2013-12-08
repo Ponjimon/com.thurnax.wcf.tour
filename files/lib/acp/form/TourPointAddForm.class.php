@@ -35,6 +35,10 @@ class TourPointAddForm extends AbstractForm {
 	 */
 	public $neededModules = array('MODULE_TOUR');
 	
+	/** step
+	 * @var integer
+	 */
+	public $tourID = 0; //to be changed in future (?)
 	/**
 	 * step
 	 * @var integer
@@ -146,6 +150,7 @@ class TourPointAddForm extends AbstractForm {
 		
 		// save tour point
 		$this->objectAction = new TourPointAction(array(), 'create', array('data' => array(
+			'tourID' => 0, //to be changed in future!
 			'step' => $this->step,
 			'elementName' => $this->elementName,
 			'pointText' => $this->pointText,
@@ -167,6 +172,7 @@ class TourPointAddForm extends AbstractForm {
 		}
 		
 		// reset values
+		$this->tourID = 0; //to be changed in future!
 		$this->step = 1;
 		$this->elementName = $this->pointText = '';
 		$this->position = 'left';
@@ -185,6 +191,7 @@ class TourPointAddForm extends AbstractForm {
 		I18nHandler::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
+			'tourID' => 0, //to be changed in future!
 			'step' => $this->step,
 			'elementName' => $this->elementName,
 			'pointText' => $this->pointText,
