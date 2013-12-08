@@ -36,7 +36,8 @@
 		<item name="wcf.acp.tour.point.yOffset.description"><![CDATA[Enter the spacing (in pixels) between the Tour Point and the DOM-element along the Y-axis.]]></item>
 		<item name="wcf.acp.tour.point.multipage"><![CDATA[Redirection-URL]]></item>
 		<item name="wcf.acp.tour.point.multipage.description"><![CDATA[Enter a internal URL if the Tour should run over multiple pages. The URL should refer to the Tour's next Point.]]></item><item name="wcf.acp.tour.point.advancedOptions"><![CDATA[Erweiterte Einstellungen]]></item>
-		<item name="wcf.acp.tour.point.advancedOptions.description"><![CDATA[Warning: The following options require knowledge about JavaScript and the API of Hopscotch.]]></item>
+		<item name="wcf.acp.tour.point.advancedOptions"><![CDATA[Advanced Options]]></item>
+		<item name="wcf.acp.tour.point.advancedOptions.description"><![CDATA[Warning: The following options possibly require knowledge about JavaScript and the API of Hopscotch.]]></item>
 		<item name="wcf.acp.tour.point.showPrevButton"><![CDATA["Previous" Button]]></item>
 		<item name="wcf.acp.tour.point.showPrevButton.description"><![CDATA[Check this box if the "Previous" button should be displayed.]]></item>
 		<item name="wcf.acp.tour.point.showNextButton"><![CDATA["Next" Button]]></item>
