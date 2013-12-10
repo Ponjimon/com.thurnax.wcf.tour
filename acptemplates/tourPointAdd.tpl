@@ -49,6 +49,14 @@
 					{if $errorField == 'position'}<small class="innerError">{lang}wcf.global.form.error.empty{/lang}</small>{/if}
 				</dd>
 			</dl>
+			<dl{if $errorField == 'title'} class="formError"{/if}>
+				<dt><label for="title">{lang}wcf.acp.tour.point.title{/lang}</label></dt>
+				<dd>
+					<input type="text" id="title" name="title" cols="40" rows="10">{$i18nPlainValues['title']}</textarea>
+					{if $errorField == 'title'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
+				</dd>
+			</dl>
+			{include file='multipleLanguageInputJavascript' elementIdentifier='pointText' forceSelection=false}
 			
 			<dl{if $errorField == 'pointText'} class="formError"{/if}>
 				<dt><label for="pointText">{lang}wcf.acp.tour.point.pointText{/lang}</label></dt>
@@ -62,6 +70,94 @@
 			{event name='dataFields'}
 		</fieldset>
 		
+		<fieldset>
+			<legend>{lang}wcf.acp.tour.point.advancedOptions{/lang}</legend>
+			<small>{lang}wcf.acp.tour.point.advancedOptions.description{/lang}</small>
+			
+			<dl{if $errorField == 'scrollDuration'} class="formError"{/if}>
+				<dt><label for="scrollDuration">{lang}wcf.acp.tour.point.scrollDuration{/lang}</label></dt>
+				<dd>
+					<input type="number" id="scrollduration" name="scrollDuration" value="{$scrollDuration}" min="0" max="8388607" required="required" class="tiny" />
+					{if $errorField == 'scrollDuration'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
+					<small>{lang}wcf.acp.tour.point.scrollDuration.description{/lang}</small>
+				</dd>
+			</dl>
+			
+			<dl{if $errorField == 'xOffset'} class="formError"{/if}>
+				<dt><label for="xOffset">{lang}wcf.acp.tour.point.xOffset{/lang}</label></dt>
+				<dd>
+					<input type="number" id="xOffset" name="xOffset" value="{$xOffset}" min="0" max="8388607" class="tiny" />
+					{if $errorField == 'xOffset'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
+					<small>{lang}wcf.acp.tour.point.xOffset.description{/lang}</small>
+				</dd>
+			</dl>
+			
+			<dl{if $errorField == 'yOffset'} class="formError"{/if}>
+				<dt><label for="yOffset">{lang}wcf.acp.tour.point.yOffset{/lang}</label></dt>
+				<dd>
+					<input type="number" id="yOffset" name="yOffset" value="{$yOffset}" min="0" max="8388607" class="tiny" />
+					{if $errorField == 'yOffset'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
+					<small>{lang}wcf.acp.tour.point.yOffset.description{/lang}</small>
+				</dd>
+			</dl>
+			<dl{if $errorField == 'multipage'} class="formError"{/if}>
+				<dt><label for="multipage">{lang}wcf.acp.tour.point.multipage{/lang}</label></dt>
+				<dd>
+					<input type="text" id="multipage" name="multipage" value="{$multipage}" autofocus="autofocus" class="long" />
+					{if $errorField == 'multipage'}<small class="innerError">{lang}wcf.global.form.error.empty{/lang}</small>{/if}
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt></dt>
+				<dd>
+					<label><input type="checkbox" name="showPrevButton" id="showPrevButton" value="1"{if $showPrevButton} checked="checked"{/if} /> <span>{lang}wcf.acp.tour.point.showPrevButton{/lang}</span></label>
+					<small>{lang}wcf.acp.tour.point.showPrevButton.description{/lang}</small>
+				</dd>
+			</dl>
+			
+			<dl{if $errorField == 'onPrev'} class="formError"{/if}>
+				<dt><label for="onPrev">{lang}wcf.acp.tour.point.onPrev{/lang}</label></dt>
+				<dd>
+					<textarea id="onPrev" name="onPrev" cols="40" rows="10">{$onPrev}</textarea>
+					{if $errorField == 'onPrev'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt></dt>
+				<dd>
+					<label><input type="checkbox" name="showNextButton" id="showNextButton" value="1"{if $showNextButton} checked="checked"{/if} /> <span>{lang}wcf.acp.tour.point.showPrevButton{/lang}</span></label>
+					<small>{lang}wcf.acp.tour.point.showNextButton.description{/lang}</small>
+				</dd>
+			</dl>
+			
+			<dl{if $errorField == 'onNext'} class="formError"{/if}>
+				<dt><label for="onNext">{lang}wcf.acp.tour.point.onNext{/lang}</label></dt>
+				<dd>
+					<textarea id="onNext" name="onNext" cols="40" rows="10">{$onNext}</textarea>
+					{if $errorField == 'onNext'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
+				</dd>
+			</dl>
+			
+			<dl>
+				<dt></dt>
+				<dd>
+					<label><input type="checkbox" name="showCTAButton" id="showCTAButton" value="1"{if $showCTAButton} checked="checked"{/if} /> <span>{lang}wcf.acp.tour.point.showCTAButton{/lang}</span></label>
+					<small>{lang}wcf.acp.tour.point.showCTAButton.description{/lang}</small>
+				</dd>
+			</dl>
+			
+			<dl{if $errorField == 'onCTA'} class="formError"{/if}>
+				<dt><label for="onCTA">{lang}wcf.acp.tour.point.onCTA{/lang}</label></dt>
+				<dd>
+					<textarea id="onCTA" name="onCTA" cols="40" rows="10">{$onCTA}</textarea>
+					{if $errorField == 'onCTA'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
+				</dd>
+			</dl>
+			
+			{event name='dataFields'}
+		</fieldset>
 		{event name='fieldsets'}
 	</div>
 	

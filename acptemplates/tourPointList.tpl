@@ -35,6 +35,7 @@
 					<th class="columnID{if $sortField == 'pointID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='TourPointList'}pageNo={@$pageNo}&sortField=pointID&sortOrder={if $sortField == 'pointID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
 					<th class="columnDigits{if $sortField == 'step'} active {@$sortOrder}{/if}"><a href="{link controller='TourPointList'}pageNo={@$pageNo}&sortField=step&sortOrder={if $sortField == 'step' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.point.step{/lang}</a></th>
 					<th class="columnText{if $sortField == 'elementName'} active {@$sortOrder}{/if}"><a href="{link controller='TourPointList'}pageNo={@$pageNo}&sortField=elementName&sortOrder={if $sortField == 'elementName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.point.elementName{/lang}</a></th>
+					<th class="columnText{if $sortField == 'title'} active {$@$sortOrder}{/if}"><a href="{link controller='TourPointList'}pageNo={$@pageNo}&sortField=title&sortOrder={if $sortField == 'title' && $sortOder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.point.title{/lang}</a></th>
 					<th class="columnText{if $sortField == 'pointText'} active {@$sortOrder}{/if}"><a href="{link controller='TourPointList'}pageNo={@$pageNo}&sortField=pointText&sortOrder={if $sortField == 'pointText' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.point.pointText{/lang}</a></th>
 					<th class="columnText{if $sortField == 'position'} active {@$sortOrder}{/if}"><a href="{link controller='TourPointList'}pageNo={@$pageNo}&sortField=position&sortOrder={if $sortField == 'position' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.point.position{/lang}</a></th>
 					
@@ -54,6 +55,7 @@
 						<td class="columnID">{@$point->pointID}</td>
 						<td class="columnDigits"><a href="{link controller='TourPointEdit' id=$point->tourPointID}{/link}" title="{lang}wcf.acp.tour.point.edit{/lang}">{#$point->step}</a></td>
 						<td class="columnText">{$point->elementName}</td>
+						<td class="columnText">{$point->title|language|tableWordwrap}</td>
 						<td class="columnText">{$point->pointText|language|tableWordwrap}</td>
 						<td class="columnText">{lang}wcf.acp.tour.point.position.{$point->position}{/lang}</td>
 						
