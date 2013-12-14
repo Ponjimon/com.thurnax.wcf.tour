@@ -10,7 +10,7 @@ use wcf\data\DatabaseObjectEditor;
  * @package	com.thurnax.wcf.tour
  * @category	Community Framework (commercial)
  */
-class TourStepEditor extends DatabaseObjectEditor {
+class TourEditor extends DatabaseObjectEditor {
 	/**
 	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
 	 */

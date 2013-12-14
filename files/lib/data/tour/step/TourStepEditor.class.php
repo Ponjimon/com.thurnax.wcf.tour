@@ -2,7 +2,7 @@
 namespace wcf\data\tour\step;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
-use wcf\system\cache\builder\TourPointCacheBuilder;
+use wcf\system\cache\builder\TourStepCacheBuilder;
 
 /**
  * Provides functions to edit tour steps.
@@ -22,6 +22,6 @@ class TourStepEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 * @see	\wcf\data\IEditableCachedObject::resetCache()
 	 */
 	public static function resetCache() {
-		TourPointCacheBuilder::getInstance()->reset();
+		TourStepCacheBuilder::getInstance()->reset();
 	}
 }

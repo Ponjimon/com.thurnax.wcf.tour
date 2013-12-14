@@ -9,22 +9,22 @@
 		
 		<!-- tour -->
 		<acpmenuitem name="wcf.acp.menu.link.user.tour.list">
-			<controller>wcf\acp\page\TourList</controller>
+			<controller>wcf\acp\page\TourListPage</controller>
 			<parent>wcf.acp.menu.link.user.tour</parent>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.user.tour.add">
-			<controller>wcf\acp\form\TourAdd</controller>
+			<controller>wcf\acp\form\TourAddForm</controller>
 			<parent>wcf.acp.menu.link.user.tour</parent>
 		</acpmenuitem>
 		<!-- /tour -->
 		
-		<!-- @todo tour step -->
-		<acpmenuitem name="wcf.acp.menu.link.user.tour.point.list">
-			<controller>wcf\acp\page\TourPointList</controller>
+		<!-- tour step -->
+		<acpmenuitem name="wcf.acp.menu.link.user.tour.step.list">
+			<controller>wcf\acp\page\TourStepListPage</controller>
 			<parent>wcf.acp.menu.link.user.tour</parent>
 		</acpmenuitem>
-		<acpmenuitem name="wcf.acp.menu.link.user.tour.point.add">
-			<controller>wcf\acp\form\TourPointAdd</controller>
+		<acpmenuitem name="wcf.acp.menu.link.user.tour.step.add">
+			<controller>wcf\acp\form\TourStepAddForm</controller>
 			<parent>wcf.acp.menu.link.user.tour</parent>
 		</acpmenuitem>
 		<!-- /tour step -->

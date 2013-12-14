@@ -1,6 +1,6 @@
 <?php
 namespace wcf\system\event\listener;
-use wcf\system\cache\builder\TourPointCacheBuilder;
+use wcf\system\cache\builder\TourStepCacheBuilder;
 use wcf\system\event\IEventListener;
 use wcf\system\WCF;
 
@@ -17,7 +17,7 @@ class BeforeDisplayTourListener implements IEventListener {
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		$tourPoints = TourPointCacheBuilder::getInstance()->getData();
+		$tourPoints = TourStepCacheBuilder::getInstance()->getData();
 		WCF::getTPL()->assign(array(
 			'tourPoints' => $tourPoints,
 			'tourPointsCount' => count($tourPoints),
