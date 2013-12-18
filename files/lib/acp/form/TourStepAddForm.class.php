@@ -1,11 +1,11 @@
 <?php
 namespace wcf\acp\form;
 use wcf\data\package\PackageCache;
+use wcf\data\tour\step\TourStep;
 use wcf\data\tour\step\TourStepAction;
 use wcf\data\tour\step\TourStepEditor;
 use wcf\data\tour\TourList;
 use wcf\form\AbstractForm;
-use wcf\system\cache\builder\TourStepCacheBuilder;
 use wcf\system\exception\NamedUserException;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
@@ -222,8 +222,9 @@ class TourStepAddForm extends AbstractForm {
 		}
 		
 		// reset values
-		$this->target = $this->stepContent = '';
+		$this->target = $this->stepContent = $this->url = '';
 		$this->placement = 'left';
+		$this->xOffset = $this->yOffset = 0;
 		I18nHandler::getInstance()->reset();
 		
 		// show success
@@ -236,13 +237,15 @@ class TourStepAddForm extends AbstractForm {
 	 * @return	integer
 	 */
 	protected function getShowOrder() {
-		$tourSteps = TourStepCacheBuilder::getInstance()->getData(array('tourID' => $this->tourID));
-		if (count($tourSteps)) {
-			$tourStep = array_pop($tourSteps);
-			return $tourStep->showOrder + 1;
-		}
+		$sql = "SELECT	showOrder
+			FROM	".TourStep::getDatabaseTableName()."
+			WHERE	tourID = ?
+			ORDER BY showOrder DESC";
+		$statement = WCF::getDB()->prepareStatement($sql, 1);
+		$statement->execute(array($this->tourID));
+		$row = $statement->fetchArray();
 		
-		return 1;
+		return ($row ? $row['showOrder'] + 1 : 1);
 	}
 	
 	/**

@@ -29,4 +29,19 @@ class Tour extends DatabaseObject implements IRouteController {
 	public function getTitle() {
 		return WCF::getLanguage()->get($this->tourName);
 	}
+	
+	/**
+	 * Fetches a tour by the tour name
+	 * 
+	 * @param	string	$tourName
+	 * @return	\wcf\data\tour\Tour
+	 */
+	public static function getByName($tourName) {
+		$sql = "SELECT	*
+			FROM	".self::getDatabaseTableName()."
+			WHERE	tourName = ?";
+		$statement = WCF::getDB()->prepareStatement($sql, 1);
+		$statement->execute(array($tourName));
+		return $statement->fetchObject('wcf\data\tour\Tour');
+	}
 }

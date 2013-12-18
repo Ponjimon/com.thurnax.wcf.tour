@@ -98,12 +98,7 @@ class TourAddForm extends AbstractForm {
 		}
 		
 		// check for collusion
-		$sql = "SELECT	*
-			FROM	".Tour::getDatabaseTableName()."
-			WHERE	tourName = ?";
-		$statement = WCF::getDB()->prepareStatement($sql, 1);
-		$statement->execute(array($this->tourName));
-		if ($statement->fetchArray()) {
+		if (Tour::getByName($this->tourName)) {
 			throw new UserInputException('tourName', 'notUnique');
 		}
 	}

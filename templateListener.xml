@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/templatelistener.xsd">
 	<import>
-		<templatelistener name="initTourInclude">
+		<templatelistener name="javascriptTourInclude">
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[{include file='__initTourInclude'}]]></templatecode>
+			<templatecode><![CDATA[<script data-relocate="true" src="{@$__wcf->getPath('wcf')}js/WCF.Tour.js" type="text/javascript"></script>]]></templatecode>
 		</templatelistener>
-		<templatelistener name="initTour">
+		
+		<templatelistener name="javascriptTourInit">
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInit</eventname>

@@ -2,6 +2,9 @@
 namespace wcf\data\tour;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IToggleAction;
+use wcf\system\cache\builder\TourStepCacheBuilder;
+use wcf\system\exception\UserInputException;
+use wcf\system\WCF;
 
 /**
  * Executes tour-related actions.
@@ -48,5 +51,26 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 */
 	public function validateToggle() {
 		parent::validateUpdate();
+	}
+	
+	/**
+	 * Loads the steps for a tour
+	 */
+	public function loadSteps() {
+		$data = TourStepCacheBuilder::getInstance()->getData(array('tourName' => $this->parameters['tourName']));
+		if (!$data) {
+			throw new UserInputException('tourName');
+		}
+		
+		$this->objectIDs = array($data['tour']->tourID);
+		return $data['tourSteps'];
+	}
+	
+	/**
+	 * Validates the 'loadSteps'-action
+	 */
+	public function validateLoadSteps() {
+		$this->readString('tourName');
+		WCF::getSession()->checkPermissions(array('user.tour.enableTour'));
 	}
 }
