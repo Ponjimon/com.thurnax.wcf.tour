@@ -10,9 +10,10 @@
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.user.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.menu.link.user.tour.point.list"><![CDATA[Tourpunkte auflisten]]></item>
-		<item name="wcf.acp.menu.link.user.tour.point.add"><![CDATA[Tourpunkte hinzufügen]]></item>
-		<item name="wcf.acp.menu.link.tour.point.list"><![CDATA[Tourpunkte auflisten]]></item>
+		<item name="wcf.acp.menu.link.user.tour.list"><![CDATA[Touren auflisten]]></item>
+		<item name="wcf.acp.menu.link.user.tour.add"><![CDATA[Tour hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.user.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
+		<item name="wcf.acp.menu.link.user.tour.step.add"><![CDATA[Tourpunkt hinzufügen]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">
@@ -20,61 +21,57 @@
 	</category>
 	
 	<category name="wcf.acp.tour">
-		<item name="wcf.acp.tour.point.add"><![CDATA[Tourpunkte hinzufügen]]></item>
-		<item name="wcf.acp.tour.point.data"><![CDATA[Tourpunkt-Informationen]]></item>
-		<item name="wcf.acp.tour.point.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Tourpunkt löschen möchten?]]></item>
-		<item name="wcf.acp.tour.point.edit"><![CDATA[Tourpunkt bearbeiten]]></item>
-		<item name="wcf.acp.tour.point.elementName"><![CDATA[DOM-Element]]></item>
-		<item name="wcf.acp.tour.point.elementName.description"><![CDATA[Geben Sie hier das DOM-Element ein, bei dem der Tourpunkt angezeigt werden soll.]]></item>
-		<item name="wcf.acp.tour.point.list"><![CDATA[Tourpunkte]]></item>
-		<item name="wcf.acp.tour.point.title"><![CDATA[Titel]]></item>
-		<item name="wcf.acp.tour.point.title.description"><![CDATA[Geben Sie hier einen Titel für den Tourpunkt ein. Dieses Feld ist NICHT erforderlich.]]></item>
-		<item name="wcf.acp.tour.point.scrollDuration"><![CDATA[Scrolldauer]]></item>
-		<item name="wcf.acp.tour.point.scrollDuration.description"><![CDATA[Geben Sie hier die Zeit in Millisekunden ein, in der die Seite zum nächsten Tourpunkt scrollen soll.]]></item>
-		<item name="wcf.acp.tour.point.xOffset"><![CDATA[Y-Offset]]>
-		<item name="wcf.acp.tour.point.yOffset"><![CDATA[Y-Offset]]>
-		<item name="wcf.acp.tour.point.xOffset.description"><![CDATA[Geben Sie hier den Abstand in Pixel ein, die der Tourpunkt entlang der X-Achse vom DOM-Element entfernt sein soll.]]></item>
-		<item name="wcf.acp.tour.point.yOffset.description"><![CDATA[Geben Sie hier den Abstand in Pixel ein, die der Tourpunkt entlang der Y-Achse vom DOM-Element entfernt sein soll.]]></item>
-		<item name="wcf.acp.tour.point.multipage"><![CDATA[Weiterleitungs-URL]]></item>
-		<item name="wcf.acp.tour.point.multipage.description"><![CDATA[Geben Sie hier eine interne URL ein, wenn die Tour über mehrere Seiten gehen soll. Die URL muss auf die Seite zeigen, wo der nächste Tourpunkt geladen werden soll.]]></item><item name="wcf.acp.tour.point.advancedOptions"><![CDATA[Erweiterte Einstellungen]]></item>
-		<item name="wcf.acp.tour.point.advancedOptions"><![CDATA[[Erweiterte Einstellungen]]></item>
-		<item name="wcf.acp.tour.point.advancedOptions.description"><![CDATA[Achtung: Die nachfolgenden Einstellungen erfordern möglicherweise Kenntnisse über JavaScript und die API des Hopscotch-Scripts.]]></item>
-		<item name="wcf.acp.tour.point.showPrevButton"><![CDATA[Zurück-Button]]></item>
-		<item name="wcf.acp.tour.point.showPrevButton.description"><![CDATA[Soll der Zurück-Button angezeigt werden?]]></item>
-		<item name="wcf.acp.tour.point.showNextButton"><![CDATA[Weiter-Button]]></item>
-		<item name="wcf.acp.tour.point.showNextButton.description"><![CDATA[Soll der Weiter-Button angezeigt werden?]]></item>
-		<item name="wcf.acp.tour.point.showCTAButton"><![CDATA[Zusatz-Button]]></item>
-		<item name="wcf.acp.tour.point.showCTAButton.description"><![CDATA[Soll ein Zusatz-Button angezeigt werden? Durch Klick auf den Zusatz-Button wird ein Callback ausgelöst.]]></item>
-		<item name="wcf.acp.tour.point.ctaLabel"><![CDATA[Zusatz-Button-Beschriftung]]></item>
-		<item name="wcf.acp.tour.point.ctaLabel.description"><![CDATA[Geben Sie hier die Beschriftung des Zusatz-Buttons ein.]]></item>
-		<item name="wcf.acp.tour.point.onCTA"><![CDATA[Zusatz-Button-Callback]]></item>
-		<item name="wcf.acp.tour.point.onCTA.description"><![CDATA[Geben Sie hier das gewünschte JavaScript ein, welches durch den Klick auf den Zusatz-Button ausgelöst werden soll.]]></item>
-		<item name="wcf.acp.tour.point.onPrev"><![CDATA[Zurück-Button-Callback]]></item>
-		<item name="wcf.acp.tour.point.onPrev.description"><![CDATA[Geben Sie hier das gewünschte JavaScript ein, welches durch den Klick auf den Zurück-Button ausgelöst werden soll.]]></item>	
-		<item name="wcf.acp.tour.point.onNext"><![CDATA[Weiter-Button-Callback]]></item>
-		<item name="wcf.acp.tour.point.onNext.description"><![CDATA[Geben Sie hier das gewünschte JavaScript ein, welches durch den Klick auf den Weiter-Button ausgelöst werden soll.]]></item>		
-		<item name="wcf.acp.tour.point.pointText"><![CDATA[Text]]></item>
-		<item name="wcf.acp.tour.point.position"><![CDATA[Position]]></item>
-		<item name="wcf.acp.tour.point.position.description"><![CDATA[Geben Sie hier die Position des Tourpunktes an. Wenn der Tourpunkt unterhalb des DOM-Elements erscheinen soll, wählen Sie Unterhalb.]]></item>
-		<item name="wcf.acp.tour.point.position.bottom"><![CDATA[Unterhalb]]></item>
-		<item name="wcf.acp.tour.point.position.left"><![CDATA[Links]]></item>
-		<item name="wcf.acp.tour.point.position.right"><![CDATA[Rechts]]></item>
-		<item name="wcf.acp.tour.point.position.top"><![CDATA[Oberhalb]]></item>
-		<item name="wcf.acp.tour.point.step"><![CDATA[Schritt]]></item>
-		<item name="wcf.acp.tour.point.step.description"><![CDATA[Geben Sie hier die Reihenfolge an, in der dieser Tourpunkt erscheinen soll.]]></item>
-		<item name="wcf.acp.tour.point.step.notUnique"><![CDATA[Diese Schritt-Nummer wird bereits verwendet.]]></item>
+		<item name="wcf.acp.tour"><![CDATA[Tour]]></item>
+		<item name="wcf.acp.tour.add"><![CDATA[Tour hinzufügen]]></item>
+		<item name="wcf.acp.tour.data"><![CDATA[Tour-Informationen]]></item>
+		<item name="wcf.acp.tour.delete.sure"><![CDATA[Möchten Sie wirklich die Tour {$tour->tourName|language} löschen?]]></item>
+		<item name="wcf.acp.tour.description"><![CDATA[Beschreibung]]></item>
+		<item name="wcf.acp.tour.edit"><![CDATA[Tour bearbeiten]]></item>
+		<item name="wcf.acp.tour.list"><![CDATA[Touren auflisten]]></item>
+		<item name="wcf.acp.tour.tourName"><![CDATA[Name der Tour]]></item>
+		<item name="wcf.acp.tour.tourName.description"><![CDATA[Dieser Name wird für die JS-API zum starten der Tour verwendet. Es wird empfolen dieses Feld nicht nachträglich zu ändern.]]></item>
+		<item name="wcf.acp.tour.tourName.error.notUnique"><![CDATA[Dieser Name wird bereits verwendet. Bitte wählen Sie einen anderen.]]></item>
+		<item name="wcf.acp.tour.showPrevButton"><![CDATA[Zurück-Button anzeigen]]></item>
+		
+		<item name="wcf.acp.tour.step.add"><![CDATA[Tourpunkt hinzufügen]]></item>
+		<item name="wcf.acp.tour.step.advancedOptions"><![CDATA[Erweiterte Optionen]]></item>
+		<item name="wcf.acp.tour.step.advancedOptions.description"><![CDATA[Hier können Sie erweiterte Optionen angeben. Diese sind nicht erforderlich.]]></item>
+		<item name="wcf.acp.tour.step.content"><![CDATA[Text]]></item>
+		<item name="wcf.acp.tour.step.data"><![CDATA[Tourpunkt-Informationen]]></item>
+		<item name="wcf.acp.tour.step.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Tourpunkt löschen möchten?]]></item>
+		<item name="wcf.acp.tour.step.edit"><![CDATA[Tourpunkt bearbeiten]]></item>
+		<item name="wcf.acp.tour.step.filter"><![CDATA[Nach Tour filtern]]></item>
+		<item name="wcf.acp.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
+		<item name="wcf.acp.tour.step.noTours"><![CDATA[Bitte <a href="{link controller='TourAdd'}{/link}">erstellen Sie zuerst eine Tour</a>.]]></item>
+		<item name="wcf.acp.tour.step.placement"><![CDATA[Position]]></item>
+		<item name="wcf.acp.tour.step.placement.bottom"><![CDATA[Unterhalb]]></item>
+		<item name="wcf.acp.tour.step.placement.description"><![CDATA[Geben Sie hier die Position des Tourpunktes an. Wenn der Tourpunkt unterhalb des DOM-Elements erscheinen soll, wählen Sie Unterhalb.]]></item>
+		<item name="wcf.acp.tour.step.placement.left"><![CDATA[Links]]></item>
+		<item name="wcf.acp.tour.step.placement.right"><![CDATA[Rechts]]></item>
+		<item name="wcf.acp.tour.step.placement.top"><![CDATA[Oberhalb]]></item>
+		<!--<item name="wcf.acp.tour.step.scrollDuration"><![CDATA[Scrolldauer]]></item>-->
+		<!--<item name="wcf.acp.tour.step.scrollDuration.description"><![CDATA[Geben Sie hier die Zeit in Millisekunden ein, in der die Seite zum nächsten Tourpunkt scrollen soll.]]></item>-->
+		<item name="wcf.acp.tour.step.showOrder"><![CDATA[Reihenfolge]]></item>
+		<item name="wcf.acp.tour.step.target"><![CDATA[DOM-Element]]></item>
+		<item name="wcf.acp.tour.step.target.description"><![CDATA[Geben Sie hier das DOM-Element ein, bei dem der Tourpunkt angezeigt werden soll.]]></item>
+		<item name="wcf.acp.tour.step.title"><![CDATA[Titel]]></item>
+		<item name="wcf.acp.tour.step.title.description"><![CDATA[Geben Sie hier einen Titel für den Tourpunkt ein. Dieses Feld ist nicht erforderlich.]]></item>
+		<item name="wcf.acp.tour.step.title.none"><![CDATA[Kein Titel]]></item>
+		<item name="wcf.acp.tour.step.tour"><![CDATA[Tour]]></item>
+		<item name="wcf.acp.tour.step.tour.description"><![CDATA[Wählen Sie die Tour aus, für die ein Tourpunkt eingefügt werden soll.]]></item>
+		<item name="wcf.acp.tour.step.url"><![CDATA[Weiterleitung]]></item>
+		<item name="wcf.acp.tour.step.url.description"><![CDATA[Geben Sie hier die URL ein, auf die nach diesem Tourpunkt weitergeleitet werden soll.]]></item>
+		<item name="wcf.acp.tour.step.xOffset"><![CDATA[X-Offset]]></item>
+		<item name="wcf.acp.tour.step.xOffset.description"><![CDATA[Geben Sie hier den Abstand in Pixel ein, die der Tourpunkt entlang der X-Achse vom DOM-Element entfernt sein soll.]]></item>
+		<item name="wcf.acp.tour.step.yOffset"><![CDATA[Y-Offset]]></item>
+		<item name="wcf.acp.tour.step.yOffset.description"><![CDATA[Geben Sie hier den Abstand in Pixel ein, die der Tourpunkt entlang der Y-Achse vom DOM-Element entfernt sein soll.]]></item>
 	</category>
 	
-	<category name="wcf.user.option">
-		<item name="wcf.user.option.showTour"><![CDATA[Tour sehen]]></item>
-		<item name="wcf.user.option.showTour.description"><![CDATA[Aktiveren Sie diese Option, um die Tour (nochmal) zu sehen.]]></item>
-	</category>
-	
-	<category name="wcf.tour.point">
-		<item name="wcf.tour.point.locales.nextBtn"><![CDATA[Weiter]]></item>
-		<item name="wcf.tour.point.locales.prevBtn"><![CDATA[Zurück]]></item>
-		<item name="wcf.tour.point.locales.doneBtn"><![CDATA[Ende]]></item>
-		<item name="wcf.tour.point.locales.skipBtn"><![CDATA[Überspringen]]></item>
-		<item name="wcf.tour.point.locales.closeTooltip"><![CDATA[Schließen]]></item>
+	<category name="wcf.tour.step">
+		<item name="wcf.tour.step.locales.nextBtn"><![CDATA[Weiter]]></item>
+		<item name="wcf.tour.step.locales.prevBtn"><![CDATA[Zurück]]></item>
+		<item name="wcf.tour.step.locales.doneBtn"><![CDATA[Ende]]></item>
+		<item name="wcf.tour.step.locales.skipBtn"><![CDATA[Überspringen]]></item>
+		<item name="wcf.tour.step.locales.closeTooltip"><![CDATA[Schließen]]></item>
 	</category>
 </language>

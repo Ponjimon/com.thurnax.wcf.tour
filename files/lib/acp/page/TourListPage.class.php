@@ -3,19 +3,18 @@ namespace wcf\acp\page;
 use wcf\page\SortablePage;
 
 /**
- * Lists available tour points.
- * 
- * @author	Simon Nußbaumer
+ * Lists all tours.
+ *
+ * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
  * @package	com.thurnax.wcf.tour
- * @subpackage	acp.page
  * @category	Community Framework (commercial)
  */
-class TourPointListPage extends SortablePage {
+class TourListPage extends SortablePage {
 	/**
 	 * @see	\wcf\acp\page\AbstractPage::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.point.list';
+	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.list';
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
@@ -30,15 +29,15 @@ class TourPointListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
 	 */
-	public $objectListClassName = 'wcf\data\tour\point\TourPointList';
+	public $objectListClassName = 'wcf\data\tour\TourList';
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$defaultSortField
 	 */
-	public $defaultSortField = 'step';
+	public $defaultSortField = 'tourName';
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$validSortFields
 	 */
-	public $validSortFields = array('tourPointID', 'step', 'elementName', 'pointText', 'position');
+	public $validSortFields = array('tourID', 'tourName', 'description', 'objectTypeID');
 }
