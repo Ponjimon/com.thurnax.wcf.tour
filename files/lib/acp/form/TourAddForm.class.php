@@ -44,13 +44,7 @@ class TourAddForm extends AbstractForm {
 	 * @var	string
 	 */
 	public $description = '';
-	
-	/**
-	 * show previous button
-	 * @var	boolean
-	 */
-	public $showPrevButton = true;
-	
+		
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
@@ -69,7 +63,6 @@ class TourAddForm extends AbstractForm {
 		I18nHandler::getInstance()->readValues();
 		if (isset($_POST['tourName'])) $this->tourName = StringUtil::trim($_POST['tourName']);
 		if (isset($_POST['description'])) $this->description = StringUtil::trim($_POST['description']);
-		$this->showPrevButton = isset($_POST['showPrevButton']);
 	}
 
 	/**
@@ -113,7 +106,6 @@ class TourAddForm extends AbstractForm {
 		$this->objectAction = new TourAction(array(), 'create', array('data' => array(
 			'tourName' => $this->tourName,
 			'description' => $this->description,
-			'showPrevButton' => ($this->showPrevButton ? 1 : 0),
 			'objectTypeID' => 1
 		)));
 		$this->objectAction->executeAction();
@@ -133,7 +125,6 @@ class TourAddForm extends AbstractForm {
 		
 		// reset values
 		$this->tourName = $this->description = '';
-		$this->showPrevButton = true;
 		I18nHandler::getInstance()->reset();
 		
 		// show success
@@ -150,8 +141,7 @@ class TourAddForm extends AbstractForm {
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'tourName' => $this->tourName,
-			'description' => $this->description,
-			'showPrevButton' => $this->showPrevButton
+			'description' => $this->description
 		));
 	}
 }

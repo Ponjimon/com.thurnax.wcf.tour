@@ -83,6 +83,7 @@ class TourStepEditForm extends TourStepAddForm {
 			'content' => $this->stepContent,
 			'xOffset' => $this->xOffset,
 			'yOffset' => $this->yOffset,
+			'showPrevButton' => ($this->showPrevButton ? 1 : 0),
 			'url' => $this->url
 		)));
 		$this->objectAction->executeAction();
@@ -109,6 +110,7 @@ class TourStepEditForm extends TourStepAddForm {
 			$this->stepContent = $this->tourStep->content;
 			$this->xOffset = $this->tourStep->xOffset;
 			$this->yOffset = $this->tourStep->yOffset;
+			$this->showPrevButton = $this->tourStep->showPrevButton;
 			$this->url = $this->tourStep->url;
 		}
 	}

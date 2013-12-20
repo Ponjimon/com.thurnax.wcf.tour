@@ -72,7 +72,6 @@ class TourEditForm extends TourAddForm {
 		$this->objectAction = new TourStepAction(array($this->tourID), 'update', array('data' => array(
 			'tourName' => $this->tourName,
 			'description' => $this->description,
-			'showPrevButton' => $this->showPrevButton
 		)));
 		$this->objectAction->executeAction();
 		$this->saved();
@@ -92,7 +91,6 @@ class TourEditForm extends TourAddForm {
 			
 			$this->tourName = $this->tour->tourName;
 			$this->description = $this->tour->description;
-			$this->showPrevButton = $this->tour->showPrevButton;
 		}
 	}
 	

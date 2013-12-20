@@ -90,6 +90,12 @@ class TourStepAddForm extends AbstractForm {
 	public $yOffset = 0;
 	
 	/**
+	 * show previous button
+	 * @var	boolean
+	 */
+	public $showPrevButton = true;
+	
+	/**
 	 * url to redirect to
 	 * @var	string
 	 */
@@ -125,6 +131,7 @@ class TourStepAddForm extends AbstractForm {
 		if (isset($_POST['stepContent'])) $this->stepContent = StringUtil::trim($_POST['stepContent']);
 		if (isset($_POST['xOffset'])) $this->xOffset = intval($_POST['xOffset']);
 		if (isset($_POST['yOffset'])) $this->xOffset = intval($_POST['yOffset']);
+		$this->showPrevButton = isset($_POST['showPrevButton']);
 		if (isset($_POST['url'])) $this->url = $_POST['url'];
 	}
 	
@@ -194,6 +201,7 @@ class TourStepAddForm extends AbstractForm {
 			'content' => $this->stepContent,
 			'xOffset' => $this->xOffset,
 			'yOffset' => $this->yOffset,
+			'showPrevButton' => ($this->showPrevButton ? 1 : 0),
 			'url' => $this->url
 		)));
 		$this->objectAction->executeAction();
@@ -225,6 +233,7 @@ class TourStepAddForm extends AbstractForm {
 		$this->target = $this->stepContent = $this->url = '';
 		$this->placement = 'left';
 		$this->xOffset = $this->yOffset = 0;
+		$this->showPrevButton = true;
 		I18nHandler::getInstance()->reset();
 		
 		// show success
@@ -265,6 +274,7 @@ class TourStepAddForm extends AbstractForm {
 			'validPlacements' => $this->validPlacements,
 			'xOffset' => $this->xOffset,
 			'yOffset' => $this->yOffset,
+			'showPrevButton' => $this->showPrevButton,
 			'url' => $this->url
 		));
 	}

@@ -6,7 +6,6 @@ CREATE TABLE wcf1_tour (
 	tourName VARCHAR(255) NOT NULL,
 	description VARCHAR(255) NOT NULL DEFAULT '',
 	objectTypeID INT(10) NOT NULL,
-	showPrevButton TINYINT(1) NOT NULL DEFAULT 0,
 	
 	UNIQUE KEY (tourName),
 	KEY (objectTypeID)
@@ -24,6 +23,7 @@ CREATE TABLE wcf1_tour_step (
 	content MEDIUMTEXT NOT NULL,
 	xOffset INT(10) NOT NULL DEFAULT 0,
 	yOffset INT(10) NOT NULL DEFAULT 0,
+	showPrevButton TINYINT(1) NOT NULL DEFAULT 1,
 	url VARCHAR(255) NULL DEFAULT NULL,
 	
 	UNIQUE KEY (tourID, showOrder)

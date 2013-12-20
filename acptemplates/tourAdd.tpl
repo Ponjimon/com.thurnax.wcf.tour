@@ -39,11 +39,6 @@
 			</dl>
 			{include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
 			
-			<dl>
-				<dt class="reversed"><label for="showPrevButton">{lang}wcf.acp.tour.showPrevButton{/lang}</label></dt>
-				<dd><input type="checkbox" id="showPrevButton" name="showPrevButton"{if $showPrevButton} checked="checked"{/if} /></dd>
-			</dl>
-			
 			{event name='dataFields'}
 		</fieldset>
 		
