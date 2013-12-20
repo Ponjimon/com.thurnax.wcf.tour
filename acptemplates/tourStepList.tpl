@@ -43,7 +43,7 @@
 						<select id="id" name="id">
 							<option value="">{lang}wcf.global.noSelection{/lang}</option>
 							{foreach from=$tours item=$tour}
-								<option value="{$tour->tourID}"{if $tour->tourID == $tourID} selected="selected"{/if}>{$tour->description|language}</option>
+								<option value="{$tour->tourID}"{if $tour->tourID == $tourID} selected="selected"{/if}>{$tour->visibleName|language}</option>
 							{/foreach}
 						</select>
 					</dd>

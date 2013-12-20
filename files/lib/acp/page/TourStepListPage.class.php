@@ -63,10 +63,10 @@ class TourStepListPage extends SortablePage {
 		
 		// read tours
 		$tourList = new TourList();
-		$tourList->sqlOrderBy = 'tourName';
+		$tourList->sqlOrderBy = 'visibleName ASC';
 		$tourList->readObjects();
 		$this->tours = $tourList->getObjects();
-
+		
 		if (empty($this->tours)) {
 			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.acp.tour.step.noTours'));
 		}
