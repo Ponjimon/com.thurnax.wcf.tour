@@ -15,7 +15,6 @@ use wcf\system\WCF;
  * @package	com.thurnax.wcf.tour
  * @category	Community Framework (commercial)
  */
-/** @noinspection PhpDocMissingThrowsInspection */
 class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
