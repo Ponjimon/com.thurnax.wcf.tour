@@ -33,11 +33,11 @@ class TourStep extends DatabaseObject {
 		$tourStep = array(
 			'target' => $this->target,
 			'placement' => $this->placement,
-			'content' => WCF::getLanguage()->get($this->content)
+			'content' => $this->compileField('content')
 		);
 		
 		// add optional fields
-		if ($this->title) $tourStep['title'] = WCF::getLanguage()->get($this->title);
+		if ($this->title) $tourStep['title'] = $this->compileField('title');
 		if ($this->xOffset) $tourStep['xOffset'] = $this->xOffset;
 		if ($this->yOffset) $tourStep['yOffset'] = $this->yOffset;
 		if (!$tour->showPrevButton && $this->showOrder > 1) $tourStep['showPrevButton'] = false;
@@ -48,5 +48,20 @@ class TourStep extends DatabaseObject {
 		}
 		
 		return $tourStep;
+	}
+
+	/**
+	 * Compiles a field
+	 * 
+	 * @param	string	$field
+	 * @return	string
+	 */
+	protected function compileField($field) {
+		if (WCF::getLanguage()->isDynamicItem($this->$field)) {
+			return WCF::getLanguage()->getDynamicVariable($this->$field);
+		} else {
+			$compiledString = WCF::getTPL()->getCompiler()->compileString('tourStep'.ucfirst($this->$field).$this->tourStepID, WCF::getLanguage()->get($this->$field));
+			return WCF::getTPL()->fetchString($compiledString['template']);
+		}
 	}
 }
