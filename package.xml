@@ -3,8 +3,8 @@
 	<packageinformation>
 		<packagename>Einführungstour</packagename>
 		<packagedescription>Dieses Plugin ermöglicht es neu registrierten Benutzern eine kleine Einführung in die Funktionen der Website zu geben.</packagedescription>
-		<version>0.1.7</version>
-		<date>2013-12-08</date>
+		<version>0.5.0</version>
+		<date>2013-12-21</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -30,15 +30,5 @@
 		<instruction type="option">option.xml</instruction>
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
-	</instructions>
-	
-	<instructions type="update" fromversion="0.1.5">
-		<instruction type="file">files.tar</instruction>
-		<instruction type="language">lang/*.xml</instruction>
-	</instructions>
-	
-	<instructions type="update" fromversion="0.1.6">
-		<instruction type="template">templates.tar</instruction>
-		<instruction type="language">lang/*.xml</instruction>
 	</instructions>
 </package>
