@@ -107,6 +107,11 @@
 				</dd>
 			</dl>
 			
+			<dl>
+				<dt class="reversed"><label for="showPrevButton">{lang}wcf.acp.tour.step.showPrevButton{/lang}</label></dt>
+				<dd><input type="checkbox" id="showPrevButton" name="showPrevButton"{if $showPrevButton} checked="checked"{/if} /></dd>
+			</dl>
+			
 			<dl{if $errorField == 'url'} class="formError"{/if}>
 				<dt><label for="yOffset">{lang}wcf.acp.tour.step.url{/lang}</label></dt>
 				<dd>

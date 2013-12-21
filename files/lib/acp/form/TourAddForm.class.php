@@ -32,7 +32,7 @@ class TourAddForm extends AbstractForm {
 	 * @see	\wcf\page\AbstractPage::$neededModules
 	 */
 	public $neededModules = array('MODULE_TOUR');
-
+	
 	/**
 	 * tour name
 	 * @var	string
@@ -44,12 +44,6 @@ class TourAddForm extends AbstractForm {
 	 * @var	string
 	 */
 	public $visibleName = '';
-	
-	/**
-	 * show previous button
-	 * @var	boolean
-	 */
-	public $showPrevButton = true;
 	
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -69,9 +63,8 @@ class TourAddForm extends AbstractForm {
 		I18nHandler::getInstance()->readValues();
 		if (isset($_POST['tourName'])) $this->tourName = StringUtil::trim($_POST['tourName']);
 		if (isset($_POST['visibleName'])) $this->visibleName = StringUtil::trim($_POST['visibleName']);
-		$this->showPrevButton = isset($_POST['showPrevButton']);
 	}
-
+	
 	/**
 	 * @see	\wcf\form\IForm::validate()
 	 */
@@ -79,7 +72,7 @@ class TourAddForm extends AbstractForm {
 		parent::validate();
 		$this->validateTourName();
 		
-		// validate description
+		// validate visible name
 		if (!I18nHandler::getInstance()->validateValue('visibleName')) {
 			if (I18nHandler::getInstance()->isPlainValue('visibleName')) {
 				throw new UserInputException('visibleName');
@@ -88,7 +81,7 @@ class TourAddForm extends AbstractForm {
 			}
 		}
 	}
-
+	
 	/**
 	 * Validates the tour name
 	 */
@@ -113,7 +106,6 @@ class TourAddForm extends AbstractForm {
 		$this->objectAction = new TourAction(array(), 'create', array('data' => array(
 			'tourName' => $this->tourName,
 			'visibleName' => $this->visibleName,
-			'showPrevButton' => ($this->showPrevButton ? 1 : 0),
 			'objectTypeID' => 1
 		)));
 		$this->objectAction->executeAction();
@@ -133,7 +125,6 @@ class TourAddForm extends AbstractForm {
 		
 		// reset values
 		$this->tourName = $this->visibleName = '';
-		$this->showPrevButton = true;
 		I18nHandler::getInstance()->reset();
 		
 		// show success
@@ -150,8 +141,7 @@ class TourAddForm extends AbstractForm {
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'tourName' => $this->tourName,
-			'visibleName' => $this->visibleName,
-			'showPrevButton' => $this->showPrevButton
+			'visibleName' => $this->visibleName
 		));
 	}
 }
