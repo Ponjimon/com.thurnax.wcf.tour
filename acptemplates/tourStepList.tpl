@@ -3,12 +3,21 @@
 <header class="boxHeadline">
 	<h1>{lang}wcf.acp.tour.step.list{/lang}</h1>
 	
-	<script data-relocate="true">
+	{if $objects|count}<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
 			new WCF.Action.Delete('wcf\\data\\tour\\step\\TourStepAction', $('.jsTourStepRow'));
 			new WCF.Action.Toggle('wcf\\data\\tour\\step\\TourStepAction', $('.jsTourStepRow'));
-
+			new WCF.Sortable.List('tourStepList', 'wcf\\data\\tour\\step\\TourStepAction', {$startIndex}, { 
+				items: 'tr:not(.sortableNoSorting)', 
+				toleranceElement: '> *',
+				update: function() {
+					$('.jsTourStepRow .columnID').each(function(i) {
+						$(this).html(WCF.String.formatNumeric(i + {$startIndex}));
+					});
+				}
+			}, true);
+			
 			var options = { };
 			{if $pages > 1}
 				options.refreshPage = true;
@@ -16,48 +25,36 @@
 			{else}
 				options.emptyMessage = '{lang}wcf.global.noItems{/lang}';
 			{/if}
-			new WCF.Table.EmptyTableHandler($('#tourStepListTableContainer'), 'jsTourStepRow', options);
+			new WCF.Table.EmptyTableHandler($('#tourStepList'), 'jsTourStepRow', options);
 		});
 		//]]>
-	</script>
+	</script>{/if}
 </header>
 
-<div class="contentNavigation">
-	{pages print=true assign=pagesLinks controller="TourStepList" link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
-	
-	<nav>
-		<ul>
+{if !$tourID}
+	<div class="container containerPadding marginTop">
+		<fieldset><legend>{lang}wcf.acp.tour.step.filter{/lang}</legend>
+			{foreach from=$tours item=$tour}
+				<dl>
+					<dt>{$tour->tourName}</dt>
+					<dd><a href="{link controller='TourStepList' object=$tour}{/link}">{$tour->visibleName|language}</a></dd>
+				</dl>
+			{/foreach}
+		</fieldset>
+	</div>
+{elseif $objects|count}
+	<div class="contentNavigation">
+		{pages print=true assign=pagesLinks controller="TourStepList" object=$tours[$tourID] link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+		
+		<nav>
+			<ul>
 				<li><a href="{if $tourID}{link controller='TourStepAdd' object=$tours[$tourID]}{/link}{else}{link controller='TourStepAdd'}{/link}{/if}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
 				{event name='contentNavigationButtonsTop'}
-		</ul>
-	</nav>
-</div>
-
-{if $objects|count}
-	<form method="get" action="{link controller='TourStepList'}{/link}">
-		<div class="container containerPadding marginTop">
-			<fieldset><legend>{lang}wcf.acp.tour.step.filter{/lang}</legend>
-				<dl>
-					<dt><label for="id">{lang}wcf.acp.tour{/lang}</label></dt>
-					<dd>
-						<select id="id" name="id">
-							<option value="">{lang}wcf.global.noSelection{/lang}</option>
-							{foreach from=$tours item=$tour}
-								<option value="{$tour->tourID}"{if $tour->tourID == $tourID} selected="selected"{/if}>{$tour->description|language}</option>
-							{/foreach}
-						</select>
-					</dd>
-				</dl>
-			</fieldset>
-		</div>
-		
-		<div class="formSubmit">
-			<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
-			{@SID_INPUT_TAG}
-		</div>
-	</form>
+			</ul>
+		</nav>
+	</div>
 	
-	<div id="tourStepListTableContainer" class="tabularBox tabularBoxTitle marginTop">
+	<div id="tourStepList" class="tabularBox tabularBoxTitle marginTop sortableListContainer">
 		<header>
 			<h2>{lang}wcf.acp.tour.step.list{/lang} <span class="badge badgeInverse">{#$items}</span></h2>
 		</header>
@@ -75,9 +72,9 @@
 				</tr>
 			</thead>
 			
-			<tbody>
+			<tbody class="sortableList simpleSortableList" data-object-id="0">
 				{foreach from=$objects item=tourStep}
-					<tr class="jsTourStepRow">
+					<tr class="jsTourStepRow sortableNode" data-object-id="{@$tourStep->tourStepID}">
 						<td class="columnIcon">
 							<span class="icon icon16 icon-check{if $tourStep->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if $tourStep->isDisabled}enable{else}disable{/if}{/lang}" data-object-id="{$tourStep->tourStepID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}"></span>
 							<a href="{link controller='TourStepEdit' id=$tourStep->tourStepID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
@@ -98,15 +95,8 @@
 		</table>
 	</div>
 	
-	<div class="contentNavigation">
-		{@$pagesLinks}
-		
-		<nav>
-			<ul>
-				<li><a href="{if $tourID}{link controller='TourStepAdd' object=$tours[$tourID]}{/link}{else}{link controller='TourStepAdd'}{/link}{/if}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
-				{event name='contentNavigationButtonsBottom'}
-			</ul>
-		</nav>
+	<div class="formSubmit">
+		<button data-type="submit">{lang}wcf.global.button.saveSorting{/lang}</button>
 	</div>
 {else}
 	<p class="info">{lang}wcf.global.noItems{/lang}</p>

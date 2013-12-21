@@ -60,18 +60,18 @@ class TourEditForm extends TourAddForm {
 	public function save() {
 		AbstractForm::save();
 		
-		if (I18nHandler::getInstance()->isPlainValue('description')) {
-			I18nHandler::getInstance()->remove($this->description);
-			$this->description = I18nHandler::getInstance()->getValue('description');
+		if (I18nHandler::getInstance()->isPlainValue('visibleName')) {
+			I18nHandler::getInstance()->remove($this->visibleName);
+			$this->visibleName = I18nHandler::getInstance()->getValue('visibleName');
 		} else {
-			I18nHandler::getInstance()->save('description', $this->description, 'wcf.acp.tour', $this->tour->tourID);
-			$this->description = 'wcf.acp.tour.description'.$this->tour->tourID;
+			I18nHandler::getInstance()->save('visibleName', $this->visibleName, 'wcf.acp.tour', $this->tour->tourID);
+			$this->visibleName = 'wcf.acp.tour.visibleName'.$this->tour->tourID;
 		}
 		
 		// update tour
 		$this->objectAction = new TourStepAction(array($this->tourID), 'update', array('data' => array(
 			'tourName' => $this->tourName,
-			'description' => $this->description,
+			'visibleName' => $this->visibleName,
 		)));
 		$this->objectAction->executeAction();
 		$this->saved();
@@ -87,10 +87,10 @@ class TourEditForm extends TourAddForm {
 		parent::readData();
 		
 		if (empty($_POST)) {
-			I18nHandler::getInstance()->setOptions('description', $this->tour->tourID, $this->tour->description, 'wcf.acp.tour.description\d+');
+			I18nHandler::getInstance()->setOptions('visibleName', $this->tour->tourID, $this->tour->visibleName, 'wcf.acp.tour.visibleName\d+');
 			
 			$this->tourName = $this->tour->tourName;
-			$this->description = $this->tour->description;
+			$this->visibleName = $this->tour->visibleName;
 		}
 	}
 	

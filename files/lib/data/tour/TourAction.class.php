@@ -4,6 +4,7 @@ use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IToggleAction;
 use wcf\system\cache\builder\TourStepCacheBuilder;
 use wcf\system\exception\UserInputException;
+use wcf\system\tour\TourHandler;
 use wcf\system\WCF;
 
 /**
@@ -19,7 +20,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$className
 	 */
 	protected $className = 'wcf\data\tour\TourEditor';
-
+	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
@@ -34,7 +35,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
 	protected $requireACP = array('update', 'delete');
-
+	
 	/**
 	 * @see	\wcf\data\IToggleAction::toggle()
 	 */
@@ -55,22 +56,37 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	
 	/**
 	 * Loads the steps for a tour
+	 * 
+	 * @return        array<mixed>
 	 */
-	public function loadSteps() {
+	public function loadTour() {
+		TourHandler::getInstance()->startTour($this->parameters['tourName']);
 		$data = TourStepCacheBuilder::getInstance()->getData(array('tourName' => $this->parameters['tourName']));
-		if (!$data) {
-			throw new UserInputException('tourName');
-		}
 		
 		$this->objectIDs = array($data['tour']->tourID);
-		return $data['tourSteps'];
+		return array('tourName' => $this->parameters['tourName'], 'steps' => $data['tourSteps']);
 	}
 	
 	/**
-	 * Validates the 'loadSteps'-action
+	 * Validates the 'loadTour'-action
 	 */
-	public function validateLoadSteps() {
+	public function validateLoadTour() {
 		$this->readString('tourName');
+		WCF::getSession()->checkPermissions(array('user.tour.enableTour'));
+	}
+
+	/**
+	 * Marks a tour as ended
+	 */
+	public function endTour() {
+		$tour = $this->getSingleObject();
+		TourHandler::getInstance()->endTour($tour->tourName);
+	}
+	
+	/**
+	 * Validates the 'endTour'-action
+	 */
+	public function validateEndTour() {
 		WCF::getSession()->checkPermissions(array('user.tour.enableTour'));
 	}
 }

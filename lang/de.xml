@@ -25,14 +25,14 @@
 		<item name="wcf.acp.tour.add"><![CDATA[Tour hinzufügen]]></item>
 		<item name="wcf.acp.tour.data"><![CDATA[Tour-Informationen]]></item>
 		<item name="wcf.acp.tour.delete.sure"><![CDATA[Möchten Sie wirklich die Tour {$tour->tourName|language} löschen?]]></item>
-		<item name="wcf.acp.tour.description"><![CDATA[Beschreibung]]></item>
 		<item name="wcf.acp.tour.edit"><![CDATA[Tour bearbeiten]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Touren auflisten]]></item>
 		<!--<item name="wcf.acp.tour.scrollDuration"><![CDATA[Scrolldauer]]></item>-->
 		<!--<item name="wcf.acp.tour.scrollDuration.description"><![CDATA[Geben Sie hier die Zeit in Millisekunden ein, in der die Seite zum nächsten Tourpunkt scrollen soll.]]></item>-->
-		<item name="wcf.acp.tour.tourName"><![CDATA[Name der Tour]]></item>
+		<item name="wcf.acp.tour.tourName"><![CDATA[Bezeichner]]></item>
 		<item name="wcf.acp.tour.tourName.description"><![CDATA[Dieser Name wird für die JS-API zum starten der Tour verwendet. Es wird empfolen dieses Feld nicht nachträglich zu ändern.]]></item>
 		<item name="wcf.acp.tour.tourName.error.notUnique"><![CDATA[Dieser Name wird bereits verwendet. Bitte wählen Sie einen anderen.]]></item>
+		<item name="wcf.acp.tour.visibleName"><![CDATA[Anzeigename]]></item>
 		
 		<item name="wcf.acp.tour.step.add"><![CDATA[Tourpunkt hinzufügen]]></item>
 		<item name="wcf.acp.tour.step.advancedOptions"><![CDATA[Erweiterte Optionen]]></item>
@@ -46,7 +46,7 @@
 		<item name="wcf.acp.tour.step.noTours"><![CDATA[Bitte <a href="{link controller='TourAdd'}{/link}">erstellen Sie zuerst eine Tour</a>.]]></item>
 		<item name="wcf.acp.tour.step.placement"><![CDATA[Position]]></item>
 		<item name="wcf.acp.tour.step.placement.bottom"><![CDATA[Unterhalb]]></item>
-		<item name="wcf.acp.tour.step.placement.description"><![CDATA[Geben Sie hier die Position des Tourpunktes an. Wenn der Tourpunkt unterhalb des DOM-Elements erscheinen soll, wählen Sie Unterhalb.]]></item>
+		<item name="wcf.acp.tour.step.placement.description"><![CDATA[Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an.]]></item>
 		<item name="wcf.acp.tour.step.placement.left"><![CDATA[Links]]></item>
 		<item name="wcf.acp.tour.step.placement.right"><![CDATA[Rechts]]></item>
 		<item name="wcf.acp.tour.step.placement.top"><![CDATA[Oberhalb]]></item>

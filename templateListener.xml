@@ -5,7 +5,7 @@
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[<script data-relocate="true" src="{@$__wcf->getPath('wcf')}js/WCF.Tour.js" type="text/javascript"></script>]]></templatecode>
+			<templatecode><![CDATA[{if $__wcf->getTourHandler()->isEnabled()}<script data-relocate="true" src="{@$__wcf->getPath('wcf')}js/WCF.Tour.js" type="text/javascript"></script>{/if}]]></templatecode>
 		</templatelistener>
 		
 		<templatelistener name="javascriptTourInit">
@@ -13,6 +13,19 @@
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInit</eventname>
 			<templatecode><![CDATA[{include file='__initTour'}]]></templatecode>
+		</templatelistener>
+		
+		<templatelistener name="javascriptTourLanguageImport">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptLanguageImport</eventname>
+			<templatecode><![CDATA[{if $__wcf->getTourHandler()->isEnabled()},
+	'wcf.tour.step.locales.nextBtn': '{lang}wcf.tour.step.locales.nextBtn{/lang}',
+	'wcf.tour.step.locales.prevBtn': '{lang}wcf.tour.step.locales.prevBtn{/lang}',
+	'wcf.tour.step.locales.doneBtn': '{lang}wcf.tour.step.locales.doneBtn{/lang}',
+	'wcf.tour.step.locales.skipBtn': '{lang}wcf.tour.step.locales.skipBtn{/lang}',
+	'wcf.tour.step.locales.closeTooltip': '{lang}wcf.tour.step.locales.closeTooltip{/lang}'
+{/if}]]></templatecode>
 		</templatelistener>
 	</import>
 </data>		

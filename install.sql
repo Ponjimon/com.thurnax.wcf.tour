@@ -4,7 +4,7 @@ CREATE TABLE wcf1_tour (
 	tourID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	isDisabled TINYINT(1) NOT NULL DEFAULT 0,
 	tourName VARCHAR(255) NOT NULL,
-	description VARCHAR(255) NOT NULL DEFAULT '',
+	visibleName VARCHAR(255) NOT NULL DEFAULT '',
 	objectTypeID INT(10) NOT NULL,
 	
 	UNIQUE KEY (tourName),
@@ -26,20 +26,9 @@ CREATE TABLE wcf1_tour_step (
 	showPrevButton TINYINT(1) NOT NULL DEFAULT 1,
 	url VARCHAR(255) NULL DEFAULT NULL,
 	
-	UNIQUE KEY (tourID, showOrder)
-);
-
-DROP TABLE IF EXISTS wcf1_tour_user;
-CREATE TABLE wcf1_tour_user (
-	tourID INT(10) NOT NULL,
-	userID INT(10) NOT NULL,
-	
-	UNIQUE KEY (tourID, userID),
-	KEY (userID),
+	KEY (tourID)
 );
 
 /* foreign keys */
 ALTER TABLE wcf1_tour ADD FOREIGN KEY (objectTypeID) REFERENCES wcf1_object_type (objectTypeID) ON DELETE CASCADE;
 ALTER TABLE wcf1_tour_step ADD FOREIGN KEY (tourID) REFERENCES wcf1_tour (tourID) ON DELETE CASCADE;
-ALTER TABLE wcf1_tour_user ADD FOREIGN KEY (tourID) REFERENCES wcf1_tour (tourID) ON DELETE CASCADE;
-ALTER TABLE wcf1_tour_user ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;

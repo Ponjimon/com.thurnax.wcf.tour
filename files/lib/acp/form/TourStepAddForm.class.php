@@ -141,9 +141,9 @@ class TourStepAddForm extends AbstractForm {
 	public function readData() {
 		parent::readData();
 		
-		// read available tours
+		// read tours
 		$tourList = new TourList();
-		$tourList->sqlOrderBy = 'tourName';
+		$tourList->sqlOrderBy = 'visibleName ASC';
 		$tourList->readObjects();
 		$this->tours = $tourList->getObjects();
 		
@@ -210,17 +210,17 @@ class TourStepAddForm extends AbstractForm {
 		// save I18n-values
 		$packageID = PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour');
 		$returnValues = $this->objectAction->getReturnValues();
-		$tourPointID = $returnValues['returnValues']->tourPointID;
+		$tourStepID = $returnValues['returnValues']->tourStepID;
 		$updateData = array();
 		
 		if (!I18nHandler::getInstance()->isPlainValue('title')) {
-			I18nHandler::getInstance()->save('title', 'wcf.acp.tour.step.title'.$tourPointID, 'wcf.acp.tour', $packageID);
-			$updateData['title'] = 'wcf.acp.tour.step.title'.$tourPointID;
+			I18nHandler::getInstance()->save('title', 'wcf.acp.tour.step.title'.$tourStepID, 'wcf.acp.tour', $packageID);
+			$updateData['title'] = 'wcf.acp.tour.step.title'.$tourStepID;
 		}
 		
 		if (!I18nHandler::getInstance()->isPlainValue('stepContent')) {
-			I18nHandler::getInstance()->save('stepContent', 'wcf.acp.tour.step.content'.$tourPointID, 'wcf.acp.tour', $packageID);
-			$updateData['content'] = 'wcf.acp.tour.step.content'.$tourPointID;
+			I18nHandler::getInstance()->save('stepContent', 'wcf.acp.tour.step.content'.$tourStepID, 'wcf.acp.tour', $packageID);
+			$updateData['content'] = 'wcf.acp.tour.step.content'.$tourStepID;
 		}
 		
 		// update tour step
