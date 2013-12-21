@@ -26,7 +26,7 @@ CREATE TABLE wcf1_tour_step (
 	yOffset INT(10) NOT NULL DEFAULT 0,
 	url VARCHAR(255) NULL DEFAULT NULL,
 	
-	UNIQUE KEY (tourID, showOrder)
+	KEY (tourID)
 );
 
 /* foreign keys */
