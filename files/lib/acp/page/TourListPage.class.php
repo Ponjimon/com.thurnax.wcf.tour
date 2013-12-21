@@ -39,5 +39,5 @@ class TourListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$validSortFields
 	 */
-	public $validSortFields = array('tourID', 'tourName', 'description', 'objectTypeID');
+	public $validSortFields = array('tourID', 'tourName', 'visibleName', 'objectTypeID');
 }

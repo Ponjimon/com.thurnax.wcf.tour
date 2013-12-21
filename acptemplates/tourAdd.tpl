@@ -21,23 +21,23 @@
 		<fieldset>
 			<legend>{lang}wcf.acp.tour.data{/lang}</legend>
 			
+			<dl{if $errorField == 'visibleName'} class="formError"{/if}>
+				<dt><label for="visibleName">{lang}wcf.acp.tour.visibleName{/lang}</label></dt>
+				<dd>
+					<input type="text" id="visibleName" name="visibleName" value="{$i18nPlainValues['visibleName']}" required="required" class="long" />
+					{if $errorField == 'visibleName'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
+				</dd>
+			</dl>
+			{include file='multipleLanguageInputJavascript' elementIdentifier='visibleName' forceSelection=false}
+			
 			<dl{if $errorField == 'tourName'} class="formError"{/if}>
 				<dt><label for="tourName">{lang}wcf.acp.tour.tourName{/lang}</label></dt>
 				<dd>
-					<input type="text" id="tourName" name="tourName" value="{$tourName}" autofocus="autofocus" required="required" class="long" />
+					<input type="text" id="tourName" name="tourName" value="{$tourName}" required="required" class="long" />
 					{if $errorField == 'tourName'}<small class="innerError">{if $errorType == 'notUnique'}{lang}wcf.acp.tour.tourName.error.notUnique{/lang}{else}{lang}wcf.global.form.error.{@$errorType}{/lang}{/if}</small>{/if}
 					<small>{lang}wcf.acp.tour.tourName.description{/lang}</small>
 				</dd>
 			</dl>
-			
-			<dl{if $errorField == 'description'} class="formError"{/if}>
-				<dt><label for="description">{lang}wcf.acp.tour.description{/lang}</label></dt>
-				<dd>
-					<input type="text" id="description" name="description" value="{$i18nPlainValues['description']}" required="required" class="long" />
-					{if $errorField == 'description'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
-				</dd>
-			</dl>
-			{include file='multipleLanguageInputJavascript' elementIdentifier='description' forceSelection=false}
 			
 			<dl>
 				<dt class="reversed"><label for="showPrevButton">{lang}wcf.acp.tour.showPrevButton{/lang}</label></dt>

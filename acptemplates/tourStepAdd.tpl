@@ -26,7 +26,7 @@
 				<dd>
 					<select id="tourID" name="tourID">
 						{foreach from=$tours item=tour}
-							<option value="{$tour->tourID}"{if $tourID == $tour->tourID} selected="selected"{/if}>{$tour->description|language}</option>
+							<option value="{$tour->tourID}"{if $tourID == $tour->tourID} selected="selected"{/if}>{$tour->visibleName|language}</option>
 						{/foreach}
 					</select>
 					<small>{lang}wcf.acp.tour.step.tour.description{/lang}</small>

@@ -134,9 +134,9 @@ class TourStepAddForm extends AbstractForm {
 	public function readData() {
 		parent::readData();
 		
-		// read available tours
+		// read tours
 		$tourList = new TourList();
-		$tourList->sqlOrderBy = 'tourName';
+		$tourList->sqlOrderBy = 'visibleName ASC';
 		$tourList->readObjects();
 		$this->tours = $tourList->getObjects();
 		

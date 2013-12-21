@@ -40,10 +40,10 @@ class TourAddForm extends AbstractForm {
 	public $tourName = '';
 	
 	/**
-	 * description
+	 * visibleName
 	 * @var	string
 	 */
-	public $description = '';
+	public $visibleName = '';
 	
 	/**
 	 * show previous button
@@ -57,7 +57,7 @@ class TourAddForm extends AbstractForm {
 	public function readParameters() {
 		parent::readParameters();
 		
-		I18nHandler::getInstance()->register('description');
+		I18nHandler::getInstance()->register('visibleName');
 	}
 	
 	/**
@@ -68,7 +68,7 @@ class TourAddForm extends AbstractForm {
 		
 		I18nHandler::getInstance()->readValues();
 		if (isset($_POST['tourName'])) $this->tourName = StringUtil::trim($_POST['tourName']);
-		if (isset($_POST['description'])) $this->description = StringUtil::trim($_POST['description']);
+		if (isset($_POST['visibleName'])) $this->visibleName = StringUtil::trim($_POST['visibleName']);
 		$this->showPrevButton = isset($_POST['showPrevButton']);
 	}
 
@@ -80,11 +80,11 @@ class TourAddForm extends AbstractForm {
 		$this->validateTourName();
 		
 		// validate description
-		if (!I18nHandler::getInstance()->validateValue('description')) {
-			if (I18nHandler::getInstance()->isPlainValue('description')) {
-				throw new UserInputException('description');
+		if (!I18nHandler::getInstance()->validateValue('visibleName')) {
+			if (I18nHandler::getInstance()->isPlainValue('visibleName')) {
+				throw new UserInputException('visibleName');
 			} else {
-				throw new UserInputException('description', 'multilingual');
+				throw new UserInputException('visibleName', 'multilingual');
 			}
 		}
 	}
@@ -112,27 +112,27 @@ class TourAddForm extends AbstractForm {
 		// save tour point
 		$this->objectAction = new TourAction(array(), 'create', array('data' => array(
 			'tourName' => $this->tourName,
-			'description' => $this->description,
+			'visibleName' => $this->visibleName,
 			'showPrevButton' => ($this->showPrevButton ? 1 : 0),
 			'objectTypeID' => 1
 		)));
 		$this->objectAction->executeAction();
 		$this->saved();
 		
-		if (!I18nHandler::getInstance()->isPlainValue('description')) {
+		if (!I18nHandler::getInstance()->isPlainValue('visibleName')) {
 			$returnValues = $this->objectAction->getReturnValues();
 			$tourID = $returnValues['returnValues']->tourID;
-			I18nHandler::getInstance()->save('description', 'wcf.acp.tour.description'.$tourID, 'wcf.acp.tour', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'));
+			I18nHandler::getInstance()->save('visibleName', 'wcf.acp.tour.visibleName'.$tourID, 'wcf.acp.tour', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'));
 			
 			// update tour description
 			$tourEditor = new TourEditor($returnValues['returnValues']);
 			$tourEditor->update(array(
-				'description' => 'wcf.acp.tour.description'.$tourID
+				'visibleName' => 'wcf.acp.tour.visibleName'.$tourID
 			));
 		}
 		
 		// reset values
-		$this->tourName = $this->description = '';
+		$this->tourName = $this->visibleName = '';
 		$this->showPrevButton = true;
 		I18nHandler::getInstance()->reset();
 		
@@ -150,7 +150,7 @@ class TourAddForm extends AbstractForm {
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'tourName' => $this->tourName,
-			'description' => $this->description,
+			'visibleName' => $this->visibleName,
 			'showPrevButton' => $this->showPrevButton
 		));
 	}
