@@ -10,7 +10,6 @@ use wcf\system\WCF;
  * 
  * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
 class TourStepListPage extends SortablePage {
@@ -65,14 +64,11 @@ class TourStepListPage extends SortablePage {
 	 * @see	\wcf\page\IPage::readData()
 	 */
 	public function readData() {
-		parent::readData();
-		
 		// read tours
 		$tourList = new TourList();
 		$tourList->sqlOrderBy = 'visibleName ASC';
 		$tourList->readObjects();
 		$this->tours = $tourList->getObjects();
-		
 		if (empty($this->tours)) {
 			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.acp.tour.step.noTours'));
 		}
@@ -81,6 +77,8 @@ class TourStepListPage extends SortablePage {
 		if (isset($_REQUEST['id']) && isset($this->tours[intval($_REQUEST['id'])])) {
 			$this->tourID = intval($_REQUEST['id']);
 		}
+		
+		parent::readData();
 	}
 	
 	/**

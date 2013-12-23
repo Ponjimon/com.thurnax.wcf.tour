@@ -16,9 +16,22 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 	 */
 	public function rebuild(array $parameters) {
 		return array(
+			'firstSite' => $this->fetchFirstSiteTrigger(),
 			'specificSite' => $this->fetchSpecificSiteTrigger(),
 			'manual' => $this->fetchManualTriggers()
 		);
+	}
+	
+	/**
+	 * Fetches tours using the first site trigger
+	 *
+	 * @return	array<string>
+	 */
+	protected function fetchFirstSiteTrigger() {
+		$tourList = new TourList();
+		$tourList->getConditionBuilder()->add('tourTrigger = ?', array('firstSite'));
+		$tourList->readObjects();
+		return $tourList->getObjects();
 	}
 	
 	/**
