@@ -25,7 +25,7 @@
 		<item name="wcf.acp.tour.add"><![CDATA[Tour hinzufügen]]></item>
 		<item name="wcf.acp.tour.className"><![CDATA[PHP-Klassenname]]></item>
 		<item name="wcf.acp.tour.className.description"><![CDATA[Geben Sie den PHP-Klassennamen der gewünschten Seite ein.]]></item>
-		<item name="wcf.acp.tour.className.error.invalid"><![CDATA[Diese PHP-Klasse existiert nicht oder erbt nicht von 'wcf\page\IPage'.]]></item>
+		<item name="wcf.acp.tour.className.error.invalid"><![CDATA[Diese PHP-Klasse existiert nicht oder erbt nicht von 'wcf\page\AbstractPage'.]]></item>
 		<item name="wcf.acp.tour.data"><![CDATA[Tour-Informationen]]></item>
 		<item name="wcf.acp.tour.delete.sure"><![CDATA[Möchten Sie wirklich die Tour {$tour->tourName|language} löschen?]]></item>
 		<item name="wcf.acp.tour.edit"><![CDATA[Tour bearbeiten]]></item>

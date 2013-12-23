@@ -1,7 +1,7 @@
 <?php
 namespace wcf\system\tour;
 use wcf\data\tour\Tour;
-use wcf\system\cache\builder\TourCacheBuilder;
+use wcf\system\cache\builder\TourTriggerCacheBuilder;
 use wcf\system\SingletonFactory;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
@@ -44,7 +44,7 @@ class TourHandler extends SingletonFactory {
 			}
 			
 			// get available tours
-			foreach (TourCacheBuilder::getInstance()->getData() as $tourName => $tour) {
+			foreach (TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual') as $tourName => $tour) {
 				if (!in_array($tour->tourID, $this->cache['takenTours'])) {
 					$this->cache['availableTours'][$tour->tourID] = $tourName;
 				}

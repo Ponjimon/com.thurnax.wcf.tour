@@ -2,7 +2,7 @@
 namespace wcf\data\tour;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IToggleAction;
-use wcf\system\cache\builder\TourCacheBuilder;
+use wcf\system\cache\builder\TourTriggerCacheBuilder;
 use wcf\system\cache\builder\TourStepCacheBuilder;
 use wcf\system\exception\UserInputException;
 use wcf\system\tour\TourHandler;
@@ -80,7 +80,8 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * @return        array<mixed>
 	 */
 	public function loadTourByName() {
-		$this->setObjects(array(TourCacheBuilder::getInstance()->getData(array(), $this->parameters['tourName'])));
+		$cache = TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual');
+		$this->setObjects(array($cache[$this->parameters['tourName']]));
 		$this->objectIDs = array($this->objects[0]->tourID); // @todo Remove after merging #1606 (https://github.com/WoltLab/WCF/pull/1606)
 		return $this->loadTour();
 	}
