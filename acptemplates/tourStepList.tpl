@@ -6,11 +6,11 @@
 
 {if $tourID}
 	<div class="contentNavigation">
-		{pages print=true assign=pagesLinks controller="TourStepList" object=$tours[$tourID] link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
+		{pages print=true assign=pagesLinks controller="TourStepList" id=$tourID link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 		
 		<nav>
 			<ul>
-				<li><a href="{link controller='TourStepAdd' object=$tours[$tourID]}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
+				<li><a href="{link controller='TourStepAdd' id=$tourID}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
 				{event name='contentNavigationButtons'}
 			</ul>
 		</nav>
@@ -105,7 +105,7 @@
 		<fieldset><legend>{lang}wcf.acp.tour.step.filter{/lang}</legend>
 			{foreach from=$tours item=$tour}
 				<dl>
-					<dd><a href="{link controller='TourStepList' object=$tour}{/link}">{$tour->visibleName|language}</a></dd>
+					<dd><a href="{link controller='TourStepList' id=$tour->tourID}{/link}">{$tour->visibleName|language}</a></dd>
 				</dl>
 			{/foreach}
 		</fieldset>
