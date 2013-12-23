@@ -44,7 +44,7 @@
 				<tr>
 					<th class="columnID{if $sortField == 'tourID'} active {@$sortOrder}{/if}" colspan="2"><a href="{link controller='TourList'}pageNo={@$pageNo}&sortField=tourID&sortOrder={if $sortField == 'tourID' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.global.objectID{/lang}</a></th>
 					<th class="columnText{if $sortField == 'visibleName'} active {@$sortOrder}{/if}"><a href="{link controller='TourList'}pageNo={@$pageNo}&sortField=visibleName&sortOrder={if $sortField == 'visibleName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.visibleName{/lang}</a></th>
-					<th class="columnText{if $sortField == 'tourName'} active {@$sortOrder}{/if}"><a href="{link controller='TourList'}pageNo={@$pageNo}&sortField=tourName&sortOrder={if $sortField == 'tourName' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.tourName{/lang}</a></th>
+					<th class="columnText{if $sortField == 'tourTrigger'} active {@$sortOrder}{/if}"><a href="{link controller='TourList'}pageNo={@$pageNo}&sortField=tourTrigger&sortOrder={if $sortField == 'tourTrigger' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.tourTrigger{/lang}</a></th>
 					
 					{event name='columnHeads'}
 				</tr>
@@ -61,8 +61,8 @@
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$tour->tourID}</td>
-						<td class="columnText">{$tour->visibleName|language|tableWordwrap}</td>
-						<td class="columnText"><a href="{link controller='TourEdit' object=$tour}{/link}">{$tour->tourName}</a></td>
+						<td class="columnText"><a href="{link controller='TourEdit' object=$tour}{/link}">{$tour->visibleName|language|tableWordwrap}</a></td>
+						<td class="columnText">{lang}wcf.acp.tour.tourTrigger.{$tour->tourTrigger}{/lang}</td>
 						
 						{event name='columns'}
 					</tr>

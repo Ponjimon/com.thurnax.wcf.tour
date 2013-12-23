@@ -12,6 +12,7 @@ use wcf\system\WCF;
  *
  * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
 class TourEditForm extends TourAddForm {
@@ -70,8 +71,10 @@ class TourEditForm extends TourAddForm {
 		
 		// update tour
 		$this->objectAction = new TourStepAction(array($this->tourID), 'update', array('data' => array(
-			'tourName' => $this->tourName,
 			'visibleName' => $this->visibleName,
+			'tourTrigger' => $this->tourTrigger,
+			'className' => ($this->className ?: null),
+			'tourName' => ($this->tourName ?: null)
 		)));
 		$this->objectAction->executeAction();
 		$this->saved();
@@ -89,8 +92,10 @@ class TourEditForm extends TourAddForm {
 		if (empty($_POST)) {
 			I18nHandler::getInstance()->setOptions('visibleName', $this->tour->tourID, $this->tour->visibleName, 'wcf.acp.tour.visibleName\d+');
 			
-			$this->tourName = $this->tour->tourName;
 			$this->visibleName = $this->tour->visibleName;
+			$this->tourTrigger = $this->tour->tourTrigger;
+			$this->className = $this->tour->className;
+			$this->tourName = $this->tour->tourName;
 		}
 	}
 	

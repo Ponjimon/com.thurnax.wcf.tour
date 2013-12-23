@@ -9,8 +9,8 @@ use wcf\system\WCF;
  *
  * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
- * @category	Community Framework (commercial)
  */
 class Tour extends DatabaseObject implements IRouteController {
 	/**

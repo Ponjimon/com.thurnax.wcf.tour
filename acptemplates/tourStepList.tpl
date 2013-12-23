@@ -105,7 +105,6 @@
 		<fieldset><legend>{lang}wcf.acp.tour.step.filter{/lang}</legend>
 			{foreach from=$tours item=$tour}
 				<dl>
-					<dt>{$tour->tourName}</dt>
 					<dd><a href="{link controller='TourStepList' object=$tour}{/link}">{$tour->visibleName|language}</a></dd>
 				</dl>
 			{/foreach}

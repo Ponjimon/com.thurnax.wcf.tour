@@ -23,15 +23,26 @@
 	<category name="wcf.acp.tour">
 		<item name="wcf.acp.tour"><![CDATA[Tour]]></item>
 		<item name="wcf.acp.tour.add"><![CDATA[Tour hinzufügen]]></item>
+		<item name="wcf.acp.tour.className"><![CDATA[PHP-Klassenname]]></item>
+		<item name="wcf.acp.tour.className.description"><![CDATA[Geben Sie den PHP-Klassennamen der gewünschten Seite ein.]]></item>
+		<item name="wcf.acp.tour.className.error.invalid"><![CDATA[Diese PHP-Klasse existiert nicht oder erbt nicht von 'wcf\page\IPage'.]]></item>
 		<item name="wcf.acp.tour.data"><![CDATA[Tour-Informationen]]></item>
 		<item name="wcf.acp.tour.delete.sure"><![CDATA[Möchten Sie wirklich die Tour {$tour->tourName|language} löschen?]]></item>
 		<item name="wcf.acp.tour.edit"><![CDATA[Tour bearbeiten]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Touren auflisten]]></item>
+		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript-Code]]></item>
 		<!--<item name="wcf.acp.tour.scrollDuration"><![CDATA[Scrolldauer]]></item>-->
 		<!--<item name="wcf.acp.tour.scrollDuration.description"><![CDATA[Geben Sie hier die Zeit in Millisekunden ein, in der die Seite zum nächsten Tourpunkt scrollen soll.]]></item>-->
 		<item name="wcf.acp.tour.tourName"><![CDATA[Bezeichner]]></item>
 		<item name="wcf.acp.tour.tourName.description"><![CDATA[Dieser Name wird für die JS-API zum starten der Tour verwendet. Es wird empfolen dieses Feld nicht nachträglich zu ändern.]]></item>
 		<item name="wcf.acp.tour.tourName.error.notUnique"><![CDATA[Dieser Name wird bereits verwendet. Bitte wählen Sie einen anderen.]]></item>
+		<item name="wcf.acp.tour.tourTrigger"><![CDATA[Auslöser]]></item>
+		<item name="wcf.acp.tour.tourTrigger.firstSite"><![CDATA[Nach der Registrierung]]></item>
+		<item name="wcf.acp.tour.tourTrigger.firstSite.description"><![CDATA[Verwenden Sie diesen Auslöser um die allgemeine Funktionsweise der Webseite zu erklären.]]></item>
+		<item name="wcf.acp.tour.tourTrigger.specificSite"><![CDATA[Beim Aufruf einer Seite]]></item>
+		<item name="wcf.acp.tour.tourTrigger.specificSite.description"><![CDATA[Verwenden Sie diesen Auslöser um die Funktionsweise einer bestimmten Seite zu erklären.]]></item>
+		<item name="wcf.acp.tour.tourTrigger.manual"><![CDATA[Durch die JavaScript-API]]></item>
+		<item name="wcf.acp.tour.tourTrigger.manual.description"><![CDATA[Verwenden Sie diesen Auslöser um die Tour manuell zu starten.]]></item>
 		<item name="wcf.acp.tour.visibleName"><![CDATA[Anzeigename]]></item>
 		
 		<item name="wcf.acp.tour.step.add"><![CDATA[Tourpunkt hinzufügen]]></item>
@@ -43,7 +54,7 @@
 		<item name="wcf.acp.tour.step.edit"><![CDATA[Tourpunkt bearbeiten]]></item>
 		<item name="wcf.acp.tour.step.filter"><![CDATA[Nach Tour filtern]]></item>
 		<item name="wcf.acp.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
-		<item name="wcf.acp.tour.step.noTours"><![CDATA[Bitte <a href="{link controller='TourAdd'}{/link}">erstellen Sie zuerst eine Tour</a>.]]></item>
+		<item name="wcf.acp.tour.step.noTours"><![CDATA[Bevor Sie Tourpunkte anzeigen und erstellen können, <a href="{link controller='TourAdd'}{/link}">müssen Sie eine Tour errstellen</a>.]]></item>
 		<item name="wcf.acp.tour.step.placement"><![CDATA[Position]]></item>
 		<item name="wcf.acp.tour.step.placement.bottom"><![CDATA[Unterhalb]]></item>
 		<item name="wcf.acp.tour.step.placement.description"><![CDATA[Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an.]]></item>

@@ -6,10 +6,10 @@ use wcf\system\WCF;
 /**
  * Represents a tour step.
  * 
- * @author	Simon Nußbaumer
+ * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
- * @category	Community Framework (commercial)
  */
 class TourStep extends DatabaseObject {
 	/**

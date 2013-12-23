@@ -5,7 +5,7 @@
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[{if $__wcf->getTourHandler()->isEnabled()}<script data-relocate="true" src="{@$__wcf->getPath('wcf')}js/WCF.Tour.js" type="text/javascript"></script>{/if}]]></templatecode>
+			<templatecode><![CDATA[{if $__wcf->getTourHandler()->isEnabled()}<script data-relocate="true" src="{@$__wcf->getPath('wcf')}js/WCF.Tour{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}" type="text/javascript"></script>{/if}]]></templatecode>
 		</templatelistener>
 		
 		<templatelistener name="javascriptTourInit">
