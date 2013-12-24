@@ -2,7 +2,9 @@
 
 <header class="boxHeadline">
 	<h1>{lang}wcf.acp.tour.step.list{/lang}</h1>
-	{if $tourID}<h2>{$tours[$tourID]->visibleName|language}</h2>{/if}
+	{if $tourID}
+		<h2><a href="{link controller='TourEdit' id=$tourID}{/link}">{$tours[$tourID]->visibleName|language}</a></h2>
+	{/if}
 </header>
 
 {if $tourID}
@@ -11,7 +13,7 @@
 		
 		<nav>
 			<ul>
-				<li><a href="{link controller='TourStepAdd' id=$tourID}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
+				<li><a href="{link controller='TourStepAdd'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
 				{event name='contentNavigationButtonsTop'}
 			</ul>
 		</nav>
@@ -105,7 +107,7 @@
 			
 			<nav>
 				<ul>
-					<li><a href="{link controller='TourStepAdd' id=$tourID}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
+					<li><a href="{link controller='TourStepAdd'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
 					{event name='contentNavigationButtonsBottom'}
 				</ul>
 			</nav>

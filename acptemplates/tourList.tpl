@@ -55,13 +55,13 @@
 					<tr class="jsTourRow">
 						<td class="columnIcon">
 							<span class="icon icon16 icon-check{if $tour->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if $tour->isDisabled}enable{else}disable{/if}{/lang}" data-object-id="{$tour->tourID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}"></span>
-							<a href="{link controller='TourEdit' object=$tour}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
+							<a href="{link controller='TourEdit' id=$tour->tourID}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 							<span class="icon icon16 icon-remove jsDeleteButton jsTooltip pointer" title="{lang}wcf.global.button.delete{/lang}" data-object-id="{@$tour->tourID}" data-confirm-message="{lang}wcf.acp.tour.delete.sure{/lang}"></span>
 							
 							{event name='rowButtons'}
 						</td>
 						<td class="columnID">{@$tour->tourID}</td>
-						<td class="columnText"><a href="{link controller='TourEdit' object=$tour}{/link}">{$tour->visibleName|language|tableWordwrap}</a></td>
+						<td class="columnText"><a href="{link controller='TourEdit' id=$tour->tourID}{/link}">{$tour->visibleName|language|tableWordwrap}</a></td>
 						<td class="columnText">{lang}wcf.acp.tour.tourTrigger.{$tour->tourTrigger}{/lang}</td>
 						
 						{event name='columns'}

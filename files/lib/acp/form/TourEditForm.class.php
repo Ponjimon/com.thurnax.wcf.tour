@@ -1,7 +1,7 @@
 <?php
 namespace wcf\acp\form;
 use wcf\data\tour\Tour;
-use wcf\data\tour\step\TourStepAction;
+use wcf\data\tour\TourAction;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
@@ -70,7 +70,7 @@ class TourEditForm extends TourAddForm {
 		}
 		
 		// update tour
-		$this->objectAction = new TourStepAction(array($this->tourID), 'update', array('data' => array(
+		$this->objectAction = new TourAction(array($this->tourID), 'update', array('data' => array(
 			'visibleName' => $this->visibleName,
 			'tourTrigger' => $this->tourTrigger,
 			'className' => ($this->className ?: null),
