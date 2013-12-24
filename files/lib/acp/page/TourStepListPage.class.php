@@ -2,6 +2,7 @@
 namespace wcf\acp\page;
 use wcf\data\tour\TourList;
 use wcf\page\SortablePage;
+use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\NamedUserException;
 use wcf\system\WCF;
 
@@ -100,7 +101,8 @@ class TourStepListPage extends SortablePage {
 		
 		WCF::getTPL()->assign(array(
 			'tourID' => $this->tourID,
-			'tours' => $this->tours
+			'tours' => $this->tours,
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour.step'))
 		));
 	}
 }

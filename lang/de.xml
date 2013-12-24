@@ -78,6 +78,14 @@
 		<item name="wcf.acp.tour.step.yOffset.description"><![CDATA[Geben Sie hier den Abstand in Pixel ein, die der Tourpunkt entlang der Y-Achse vom DOM-Element entfernt sein soll.]]></item>
 	</category>
 	
+	<category name="wcf.clipboard">
+		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.delete"><![CDATA[Löschen ({#$count})]]></item>
+		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.delete.confirmMessage"><![CDATA[Wollen Sie {if $count == 1}einen Tourpunkt{else}{#$count} Tourpunkte{/if} wirklich löschen?]]></item>
+		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.disable"><![CDATA[Deaktivieren ({#$count})]]></item>
+		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.enable"><![CDATA[Aktivieren ({#$count})]]></item>
+		<item name="wcf.clipboard.label.com.thurnax.wcf.tour.step.marked"><![CDATA[{if $count == 1}Ein Tourpunkt{else}{#$count} Tourpunkte{/if} markiert]]></item>
+	</category>
+	
 	<category name="wcf.tour.step">
 		<item name="wcf.tour.step.locales.nextBtn"><![CDATA[Weiter]]></item>
 		<item name="wcf.tour.step.locales.prevBtn"><![CDATA[Zurück]]></item>

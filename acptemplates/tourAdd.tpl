@@ -3,60 +3,11 @@
 <header class="boxHeadline">
 	<h1>{lang}wcf.acp.tour.{$action}{/lang}</h1>
 	
+	<script data-relocate="true" src="{@$__wcf->getPath('wcf')}acp/js/WCF.ACP.Tour{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
-			/**
-			 * Handler for the tour add and edit form
-			 * 
-			 * @author	Magnus Kühn
-			 * @copyright	2013 Thurnax.com
-			 * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
-			 * @package	com.thurnax.wcf.tour
-			 * @todo Create file WCF.ACP.Tour?
-			 */
-			WCF.ACP.TourAdd = Class.extend({
-				/**
-				 * Initializes the form
-				 */
-				init: function() {
-					this._radioChanged();
-					
-					// bind events
-					$('input[name="tourTrigger"]').change($.proxy(this._radioChanged, this));
-					$('#tourName').keyup($.proxy(this._tourNameChanged, this));
-				},
-				
-				/**
-				 * Event listener for the tour trigger radios
-				 *
-				 * @param	jQuery.Event	event
-				 */
-				_radioChanged: function(event) {
-					$('#classNameContainer, #tourNameContainer, #manualCodeContainer').addClass('disabled');
-					switch ($('input[name="tourTrigger"]:checked').val()) {
-						case 'firstSite':
-							$('#className, #tourName').disable();
-							break;
-						case 'specificSite':
-							$('#classNameContainer').removeClass('disabled');
-							$('#className').enable().focus();
-							break;
-						case 'manual':
-							$('#tourNameContainer, #manualCodeContainer').removeClass('disabled');
-							$('#tourName').enable().focus();
-					}
-				},
-				
-				/**
-				 * Event listener for the tour name input
-				 */
-				_tourNameChanged: function() {
-					$('#manualCode').val("WCF.Tour.loadTour('"+$('#tourName').val()+"');");
-				}
-			});
-			
-			new WCF.ACP.TourAdd();
+			new WCF.ACP.Tour.TourAdd();
 		});
 		//]]>
 	</script>
