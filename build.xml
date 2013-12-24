@@ -4,21 +4,47 @@
 	<target name="clean" description="Deletes old tar files.">
 		<delete failonerror="false">
 			<fileset dir="" includes="*.tar" />
+			<fileset dir="files/js" includes="*.min.js" />
+			<fileset dir="files/acp/js" includes="*.min.js" />
 		</delete>
-
+		
 		<delete failonerror="false" dir="build" />
 	</target>
-
+	
 	<target name="prepare" depends="clean" description="Prepares the build.">
 		<mkdir dir="build" />
 	</target>
-
-	<target name="pack" depends="prepare" description="Packs the tar files.">
+	
+	<target name="compress" depends="clean" description="Compresses the js files">
+		<!-- Compress WCF.Tour.js -->
+		<echo message="Compressing WCF.Tour.js" />
+		<java jar="yuicompressor/yuicompressor-2.4.8.jar" fork="true">
+			<arg value="files/js/WCF.Tour.js" />
+			<arg value="-o" />
+			<arg value="files/js/WCF.Tour.min.js" />
+			<classpath>
+				<pathelement location="yuicompressor/yuicompressor-2.4.8.jar"/>
+			</classpath>
+		</java>
+		
+		<!-- Compress WCF.ACP.Tour.js -->
+		<echo message="Compressing WCF.Tour.js" />
+		<java jar="yuicompressor/yuicompressor-2.4.8.jar" fork="true">
+			<arg value="files/acp/js/WCF.ACP.Tour.js" />
+			<arg value="-o" />
+			<arg value="files/acp/js/WCF.ACP.Tour.min.js" />
+			<classpath>
+				<pathelement location="yuicompressor/yuicompressor-2.4.8.jar"/>
+			</classpath>
+		</java>
+	</target>
+	
+	<target name="pack" depends="prepare,compress" description="Packs the tar files.">
 		<tar destfile="acptemplates.tar" basedir="acptemplates" />
 		<tar destfile="files.tar" basedir="files" />
 		<tar destfile="templates.tar" basedir="templates" />
 	</target>
-
+	
 	<target name="build" depends="pack" description="Generates the package archive.">
 		<tar destfile="build/com.thurnax.wcf.tour.tar">
 			<tarfileset dir="">
