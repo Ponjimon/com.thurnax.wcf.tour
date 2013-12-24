@@ -2,6 +2,7 @@
 
 <header class="boxHeadline">
 	<h1>{lang}wcf.acp.tour.step.list{/lang}</h1>
+	{if $tourID}<h2>{$tours[$tourID]->visibleName|language}</h2>{/if}
 </header>
 
 {if $tourID}
