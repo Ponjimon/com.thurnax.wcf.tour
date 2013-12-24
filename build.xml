@@ -28,7 +28,7 @@
 		</java>
 		
 		<!-- Compress WCF.ACP.Tour.js -->
-		<echo message="Compressing WCF.Tour.js" />
+		<echo message="Compressing WCF.ACP.Tour.js" />
 		<java jar="yuicompressor/yuicompressor-2.4.8.jar" fork="true">
 			<arg value="files/acp/js/WCF.ACP.Tour.js" />
 			<arg value="-o" />

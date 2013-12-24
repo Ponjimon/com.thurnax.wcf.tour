@@ -2,9 +2,11 @@
 namespace wcf\data\tour;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IToggleAction;
+use wcf\data\tour\step\TourStep;
 use wcf\system\cache\builder\TourTriggerCacheBuilder;
 use wcf\system\cache\builder\TourStepCacheBuilder;
-use wcf\system\exception\UserInputException;
+use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\request\LinkHandler;
 use wcf\system\tour\TourHandler;
 use wcf\system\WCF;
 
@@ -106,5 +108,35 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 */
 	public function validateEndTour() {
 		WCF::getSession()->checkPermissions(array('user.tour.enableTour'));
+	}
+
+	/**
+	 * Moves tour steps to another tour
+	 * 
+	 * @return	string
+	 */
+	public function move() {
+		$targetTour = $this->getSingleObject();
+		$objectTypeID = ClipboardHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour.step');
+		
+		// update tour steps
+		$sql = "UPDATE	".TourStep::getDatabaseTableName()."
+			SET	tourID = ?
+			WHERE	tourStepID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		foreach (ClipboardHandler::getInstance()->getMarkedItems($objectTypeID) as $tourStep) {
+			$statement->execute(array($targetTour->tourID, $tourStep->tourStepID));
+		}
+		
+		// clear clipboard
+		ClipboardHandler::getInstance()->unmarkAll($objectTypeID);
+		return LinkHandler::getInstance()->getLink('TourStepList', array('id' => $targetTour->tourID));
+	}
+
+	/**
+	 * Validates the 'move'-action
+	 */
+	public function validateMove() {
+		WCF::getSession()->checkPermissions($this->permissionsUpdate);
 	}
 }

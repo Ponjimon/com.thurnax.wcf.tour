@@ -26,6 +26,7 @@
 				actionObjects['delete'] = new WCF.Action.Delete('wcf\\data\\tour\\step\\TourStepAction', $('.jsTourStepRow'));
 				WCF.Clipboard.init('wcf\\acp\\page\\TourStepListPage', {@$hasMarkedItems}, { 'com.thurnax.wcf.tour.step': actionObjects });
 				new WCF.ACP.Tour.ClipboardToggle('wcf\\data\\tour\\step\\TourStepAction', $('.jsTourStepRow'), $('.jsToggleButton'), 'com.thurnax.wcf.tour.step');
+				new WCF.ACP.Tour.ClipboardMove('com.thurnax.wcf.tour.step');
 				
 				// setup sorting
 				new WCF.Sortable.List('tourStepList', 'wcf\\data\\tour\\step\\TourStepAction', {$startIndex}, {
@@ -109,6 +110,26 @@
 			</nav>
 			<nav class="jsClipboardEditor" data-types="[ 'com.thurnax.wcf.tour.step' ]"></nav>
 		</div>
+		
+		<div id="tourStepMoveDialog" class="invisible">
+			<fieldset>
+				<dl>
+					<dt>{lang}wcf.acp.tour{/lang}</dt>
+					<dd>
+						<select id="tourStepMoveTarget">
+							{foreach from=$tours item=$tour}
+								<option value="{$tour->tourID}">{$tour->visibleName|language}</option>
+							{/foreach}
+						</select>
+					</dd>
+				</dl>
+			</fieldset>
+			
+			<div class="formSubmit">
+				<button id="tourStepMove" class="buttonPrimary">{lang}wcf.acp.tour.move{/lang}</button>
+				<button id="tourStepMoveCancel">{lang}wcf.global.button.cancel{/lang}</button>
+			</div>
+		</div>
 	{else}
 		<p class="info">{lang}wcf.global.noItems{/lang}</p>
 	{/if}
@@ -123,7 +144,8 @@
 	</div>
 	
 	<div class="container containerPadding marginTop">
-		<fieldset><legend>{lang}wcf.acp.tour.step.filter{/lang}</legend>
+		<fieldset>
+			<legend>{lang}wcf.acp.tour.step.filter{/lang}</legend>
 			{foreach from=$tours item=$tour}
 				<dl>
 					<dd><a href="{link controller='TourStepList' id=$tour->tourID}{/link}">{$tour->visibleName|language}</a></dd>

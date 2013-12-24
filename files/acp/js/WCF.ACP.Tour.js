@@ -122,3 +122,79 @@ WCF.ACP.Tour.ClipboardToggle = WCF.Action.Toggle.extend({
 		WCF.Clipboard.reload();
 	}
 });
+
+/**
+ * Handles the clipboard action 'move'.
+ * 
+ * @param	string		objectType
+ */
+WCF.ACP.Tour.ClipboardMove = Class.extend({
+	/**
+	 * object type used in the clipboard
+	 * @var	string
+	 */
+	_objectType: undefined,
+	
+	/**
+	 * Initializes the clipboard handler
+	 * 
+	 * @param	string		objectType
+	 */
+	init: function(objectType) {
+		this._objectType = objectType;
+		
+		// bind listener
+		$('.jsClipboardEditor').each($.proxy(function(index, container) {
+			var $container = $(container);
+			var $types = eval($container.data('types'));
+			if (WCF.inArray(this._objectType, $types)) {
+				$container.on('clipboardAction', $.proxy(this._execute, this));
+				return false;
+			}
+		}, this));
+	},
+	
+	/**
+	 * Handles clipboard actions.
+	 *
+	 * @param	object		event
+	 * @param	string		type
+	 * @param	string		actionName
+	 * @param	object		parameters
+	 */
+	_execute: function(event, type, actionName, parameters) {
+		if (actionName == this._objectType + '.move') {
+			if (this._didInit === undefined) {
+				$('#tourStepMoveDialog').wcfDialog({
+					title: $('#tourStepMove').text()
+				});
+
+				// bind events
+				$('#tourStepMove').click($.proxy(this._move, this));
+				$('#tourStepMoveCancel').click(function() {
+					$('#tourStepMoveDialog').wcfDialog('close');
+				});
+			} else {
+				$('#tourStepMoveDialog').wcfDialog('show');
+			}
+		}
+	},
+
+	/**
+	 * Moves the marked tour steps to another tour
+	 */
+	_move: function() {
+		WCF.LoadingOverlayHandler.show();
+		new WCF.Action.Proxy({
+			data: {
+				className: 'wcf\\data\\tour\\TourAction',
+				actionName: 'move',
+				objectIDs: [ $('#tourStepMoveTarget').val() ]
+			},
+			autoSend: true,
+			success: function(data) {
+				location.href = data.returnValues;
+			}
+		});
+	}
+});

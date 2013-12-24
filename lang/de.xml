@@ -31,6 +31,7 @@
 		<item name="wcf.acp.tour.edit"><![CDATA[Tour bearbeiten]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Touren auflisten]]></item>
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript-Code]]></item>
+		<item name="wcf.acp.tour.move"><![CDATA[Tourpunkte verschieben]]></item>
 		<!--<item name="wcf.acp.tour.scrollDuration"><![CDATA[Scrolldauer]]></item>-->
 		<!--<item name="wcf.acp.tour.scrollDuration.description"><![CDATA[Geben Sie hier die Zeit in Millisekunden ein, in der die Seite zum nächsten Tourpunkt scrollen soll.]]></item>-->
 		<item name="wcf.acp.tour.tourName"><![CDATA[Bezeichner]]></item>
@@ -83,6 +84,7 @@
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.delete.confirmMessage"><![CDATA[Wollen Sie {if $count == 1}einen Tourpunkt{else}{#$count} Tourpunkte{/if} wirklich löschen?]]></item>
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.disable"><![CDATA[Deaktivieren ({#$count})]]></item>
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.enable"><![CDATA[Aktivieren ({#$count})]]></item>
+		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.move"><![CDATA[Verschieben ({#$count})]]></item>
 		<item name="wcf.clipboard.label.com.thurnax.wcf.tour.step.marked"><![CDATA[{if $count == 1}Ein Tourpunkt{else}{#$count} Tourpunkte{/if} markiert]]></item>
 	</category>
 	

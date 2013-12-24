@@ -20,7 +20,7 @@ class TourStepClipboardAction extends AbstractClipboardAction {
 	/**
 	 * @see	\wcf\system\clipboard\action\AbstractClipboardAction::$supportedActions
 	 */
-	protected $supportedActions = array('enable', 'disable', 'delete');
+	protected $supportedActions = array('enable', 'disable', 'move', 'delete');
 	
 	/**
 	 * @see	\wcf\system\clipboard\action\IClipboardAction::execute()
@@ -48,20 +48,6 @@ class TourStepClipboardAction extends AbstractClipboardAction {
 	 */
 	public function getTypeName() {
 		return 'com.thurnax.wcf.tour.step';
-	}
-	
-	/**
-	 * Returns the ids of the tour steps which can be deleted.
-	 *
-	 * @return	array<integer>
-	 */
-	protected function validateDelete() {
-		// check permissions
-		if (!WCF::getSession()->getPermission('admin.user.canEditTour')) {
-			return array();
-		}
-		
-		return array_keys($this->objects);
 	}
 	
 	/**
@@ -104,5 +90,28 @@ class TourStepClipboardAction extends AbstractClipboardAction {
 		}
 		
 		return $tourStepIDs;
+	}
+	
+	/**
+	 * Returns the ids of the tour steps which can be moved.
+	 * 
+	 * @return	array<integer>
+	 */
+	protected function validateMove() {
+		return $this->validateDelete();
+	}
+	
+	/**
+	 * Returns the ids of the tour steps which can be deleted.
+	 * 
+	 * @return	array<integer>
+	 */
+	protected function validateDelete() {
+		// check permissions
+		if (!WCF::getSession()->getPermission('admin.user.canEditTour')) {
+			return array();
+		}
+		
+		return array_keys($this->objects);
 	}
 }

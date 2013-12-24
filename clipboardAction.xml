@@ -16,9 +16,16 @@
 				<page><![CDATA[wcf\acp\page\TourStepListPage]]></page>
 			</pages>
 		</action>
-		<action name="delete">
+		<action name="move">
 			<actionclassname><![CDATA[wcf\system\clipboard\action\TourStepClipboardAction]]></actionclassname>
 			<showorder>3</showorder>
+			<pages>
+				<page><![CDATA[wcf\acp\page\TourStepListPage]]></page>
+			</pages>
+		</action>
+		<action name="delete">
+			<actionclassname><![CDATA[wcf\system\clipboard\action\TourStepClipboardAction]]></actionclassname>
+			<showorder>4</showorder>
 			<pages>
 				<page><![CDATA[wcf\acp\page\TourStepListPage]]></page>
 			</pages>
