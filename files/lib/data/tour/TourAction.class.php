@@ -37,7 +37,12 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
-	protected $requireACP = array('update', 'delete');
+	protected $requireACP = array('update', 'delete', 'move');
+	
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache
+	 */
+	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'move');
 	
 	/**
 	 * @see	\wcf\data\IToggleAction::toggle()
