@@ -9,6 +9,7 @@ use wcf\system\cache\builder\TourStepCacheBuilder;
  * 
  * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
 class TourStepEditor extends DatabaseObjectEditor implements IEditableCachedObject {

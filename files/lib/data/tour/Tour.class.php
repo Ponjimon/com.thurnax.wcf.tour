@@ -1,7 +1,6 @@
 <?php
 namespace wcf\data\tour;
 use wcf\data\DatabaseObject;
-use wcf\system\request\IRouteController;
 use wcf\system\WCF;
 
 /**
@@ -9,10 +8,10 @@ use wcf\system\WCF;
  *
  * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
- * @category	Community Framework (commercial)
  */
-class Tour extends DatabaseObject implements IRouteController {
+class Tour extends DatabaseObject {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -22,13 +21,6 @@ class Tour extends DatabaseObject implements IRouteController {
 	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
 	 */
 	protected static $databaseTableIndexName = 'tourID';
-	
-	/**
-	 * @see	\wcf\data\ITitledObject::getTitle()
-	 */
-	public function getTitle() {
-		return WCF::getLanguage()->get($this->tourName);
-	}
 	
 	/**
 	 * Fetches a tour by the tour name

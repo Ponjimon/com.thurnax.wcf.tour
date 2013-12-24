@@ -8,6 +8,7 @@ use wcf\form\AbstractForm;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
+use wcf\util\ClassUtil;
 use wcf\util\StringUtil;
 
 /**
@@ -15,6 +16,7 @@ use wcf\util\StringUtil;
  *
  * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
 class TourAddForm extends AbstractForm {
@@ -34,16 +36,28 @@ class TourAddForm extends AbstractForm {
 	public $neededModules = array('MODULE_TOUR');
 	
 	/**
-	 * tour name
-	 * @var	string
-	 */
-	public $tourName = '';
-	
-	/**
 	 * visibleName
 	 * @var	string
 	 */
 	public $visibleName = '';
+	
+	/**
+	 * trigger
+	 * @var	string
+	 */
+	public $tourTrigger = 'firstSite';
+	
+	/**
+	 * class name
+	 * @var	string
+	 */
+	public $className = null;
+	
+	/**
+	 * tour name
+	 * @var	string
+	 */
+	public $tourName = null;
 	
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -61,8 +75,10 @@ class TourAddForm extends AbstractForm {
 		parent::readFormParameters();
 		
 		I18nHandler::getInstance()->readValues();
-		if (isset($_POST['tourName'])) $this->tourName = StringUtil::trim($_POST['tourName']);
 		if (isset($_POST['visibleName'])) $this->visibleName = StringUtil::trim($_POST['visibleName']);
+		if (isset($_POST['tourTrigger'])) $this->tourTrigger = $_POST['tourTrigger'];
+		if (isset($_POST['className'])) $this->className = $_POST['className'];
+		if (isset($_POST['tourName'])) $this->tourName = StringUtil::trim($_POST['tourName']);
 	}
 	
 	/**
@@ -70,7 +86,6 @@ class TourAddForm extends AbstractForm {
 	 */
 	public function validate() {
 		parent::validate();
-		$this->validateTourName();
 		
 		// validate visible name
 		if (!I18nHandler::getInstance()->validateValue('visibleName')) {
@@ -79,6 +94,26 @@ class TourAddForm extends AbstractForm {
 			} else {
 				throw new UserInputException('visibleName', 'multilingual');
 			}
+		}
+		
+		// validate tour trigger
+		switch ($this->tourTrigger) {
+			case 'firstSite': // no additional parameters
+				break;
+			case 'specificSite': // validate class name
+				if (empty($this->className)) {
+					throw new UserInputException('className');
+				}
+				if (!class_exists($this->className) || !ClassUtil::isInstanceOf($this->className, 'wcf\page\IPage')) {
+					throw new UserInputException('className', 'invalid');
+				}
+				
+				break;
+			case 'manual': // validate tour name
+				$this->validateTourName();
+				break;
+			default:
+				throw new UserInputException('tourTrigger');
 		}
 	}
 	
@@ -104,9 +139,10 @@ class TourAddForm extends AbstractForm {
 		
 		// save tour point
 		$this->objectAction = new TourAction(array(), 'create', array('data' => array(
-			'tourName' => $this->tourName,
 			'visibleName' => $this->visibleName,
-			'objectTypeID' => 1
+			'tourTrigger' => $this->tourTrigger,
+			'className' => ($this->className ?: null),
+			'tourName' => ($this->tourName ?: null)
 		)));
 		$this->objectAction->executeAction();
 		$this->saved();
@@ -124,7 +160,8 @@ class TourAddForm extends AbstractForm {
 		}
 		
 		// reset values
-		$this->tourName = $this->visibleName = '';
+		$this->tourName = $this->visibleName = $this->className = '';
+		$this->tourTrigger = 'firstSite';
 		I18nHandler::getInstance()->reset();
 		
 		// show success
@@ -141,7 +178,9 @@ class TourAddForm extends AbstractForm {
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'tourName' => $this->tourName,
-			'visibleName' => $this->visibleName
+			'visibleName' => $this->visibleName,
+			'tourTrigger' => $this->tourTrigger,
+			'className' => $this->className
 		));
 	}
 }

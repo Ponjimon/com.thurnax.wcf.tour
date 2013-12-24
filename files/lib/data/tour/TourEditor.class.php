@@ -2,6 +2,7 @@
 namespace wcf\data\tour;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
+use wcf\system\cache\builder\TourTriggerCacheBuilder;
 use wcf\system\cache\builder\TourStepCacheBuilder;
 
 /**
@@ -9,6 +10,7 @@ use wcf\system\cache\builder\TourStepCacheBuilder;
  *
  * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
 class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
@@ -21,6 +23,7 @@ class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * @see	\wcf\data\IEditableCachedObject::resetCache()
 	 */
 	public static function resetCache() {
+		TourTriggerCacheBuilder::getInstance()->reset();
 		TourStepCacheBuilder::getInstance()->reset();
 	}
 }

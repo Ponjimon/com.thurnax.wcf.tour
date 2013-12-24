@@ -1,35 +1,61 @@
 <?php
 namespace wcf\system\tour;
+use wcf\data\tour\Tour;
+use wcf\system\cache\builder\TourTriggerCacheBuilder;
 use wcf\system\SingletonFactory;
 use wcf\system\user\storage\UserStorageHandler;
 use wcf\system\WCF;
 
 /**
- * Handles tours for the current user
+ * Handles tours
  *
  * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
 class TourHandler extends SingletonFactory {
-	const USER_STORAGE_FIELD = 'activeTours';
+	const SESSION_FIELD = 'activeTour';
+	const USER_STORAGE_FIELD = 'takenTours';
 	
 	/**
-	 * cache for currently active tours
+	 * cache for the current user
 	 * @var	array<string>
 	 */
-	protected $activeTours = array();
+	protected $cache = array('takenTours' => array(), 'availableTours' => array());
 	
 	/**
 	 * @see	\wcf\system\SingletonFactory::init()
 	 */
 	protected function init() {
-		// load active tours
-		$userID = WCF::getUser()->userID;
-		UserStorageHandler::getInstance()->loadStorage(array($userID));
-		$data = UserStorageHandler::getInstance()->getStorage(array($userID), self::USER_STORAGE_FIELD);
-		if ($data[$userID] !== null) {
-			$this->activeTours = unserialize($data[$userID]);
+		if ($this->isEnabled()) {
+			$userID = WCF::getUser()->userID;
+			UserStorageHandler::getInstance()->loadStorage(array($userID));
+			$data = UserStorageHandler::getInstance()->getStorage(array($userID), self::USER_STORAGE_FIELD);
+			if ($data[$userID] === null) { // build cache
+				$sql = "SELECT	tourID
+				FROM	".Tour::getDatabaseTableName()."_user
+				WHERE	userID = ?";
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array($userID));
+
+				// collect taken tour ids
+				while ($row = $statement->fetchArray()) {
+					$this->cache['takenTours'][] = $row['tourID'];
+				}
+
+				// get available tours
+				foreach (TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual') as $tourName => $tour) {
+					if (!in_array($tour->tourID, $this->cache['takenTours'])) {
+						$this->cache['availableTours'][$tour->tourID] = $tourName;
+					}
+				}
+
+				// update user storage
+				UserStorageHandler::getInstance()->update($userID, self::USER_STORAGE_FIELD, serialize($this->cache));
+			} else {
+				$this->cache = unserialize($data[$userID]);
+			}
 		}
 	}
 	
@@ -39,41 +65,63 @@ class TourHandler extends SingletonFactory {
 	 * @return	boolean
 	 */
 	public function isEnabled() {
-		return MODULE_TOUR && WCF::getSession()->getPermission('user.tour.enableTour');
+		return MODULE_TOUR && WCF::getSession()->getPermission('user.tour.enableTour') && WCF::getUser()->userID;
 	}
 	
 	/**
-	 * Returns the active tours
+	 * Returns the available tours
 	 * 
 	 * @return	array<string>
 	 */
-	public function getActiveTours() {
-		return $this->activeTours;
+	public function getAvailableTours() {
+		return array_values($this->cache['availableTours']);
+	}
+	
+	/**
+	 * Returns the active tour
+	 * 
+	 * @return	string
+	 */
+	public function getActiveTour() {
+		return WCF::getSession()->getVar(self::SESSION_FIELD);
 	}
 	
 	/**
 	 * Starts a tour
 	 * 
-	 * @param	string	$tourName
+	 * @param	\wcf\data\tour\Tour	$tour
 	 */
-	public function startTour($tourName) {
-		if (!in_array($tourName, $this->activeTours)) {
-			$this->activeTours[] = $tourName;
+	public function startTour(Tour $tour) {
+		if (!$this->getActiveTour() && !in_array($tour->tourID, $this->cache['takenTours'])) {
+			WCF::getSession()->register(self::SESSION_FIELD, $tour->tourID);
 		}
-		
-		UserStorageHandler::getInstance()->update(WCF::getUser()->userID, self::USER_STORAGE_FIELD, serialize($this->activeTours));
 	}
 	
 	/**
-	 * Marks a tour as ended
-	 * 
-	 * @param	string	$tourName
+	 * Ends the current tour
 	 */
-	public function endTour($tourName) {
-		if(($key = array_search($tourName, $this->activeTours)) !== false) {
-			unset($this->activeTours[$key]);
+	public function endTour() {
+		WCF::getSession()->unregister(self::SESSION_FIELD);
+	}
+	
+	/**
+	 * Marks a tour as taken
+	 * 
+	 * @param	\wcf\data\tour\Tour	$tour
+	 */
+	public function takeTour(Tour $tour) {
+		if (!in_array($tour->tourID, $this->cache['takenTours'])) {
+			$sql = "INSERT INTO ".Tour::getDatabaseTableName()."_user (tourID, userID) VALUES (?, ?)";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array($tour->tourID, WCF::getUser()->userID));
+			
+			// update cache
+			if (isset($this->cache['availableTours'][$tour->tourID])) {
+				unset ($this->cache['availableTours'][$tour->tourID]);
+			}
+			
+			$this->cache['takenTours'][] = $tour->tourID;
+			UserStorageHandler::getInstance()->update(WCF::getUser()->userID, self::USER_STORAGE_FIELD, serialize($this->cache));
 		}
-		
-		UserStorageHandler::getInstance()->update(WCF::getUser()->userID, self::USER_STORAGE_FIELD, serialize($this->activeTours));
 	}
 }

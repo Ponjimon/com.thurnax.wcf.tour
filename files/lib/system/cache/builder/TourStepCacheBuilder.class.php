@@ -8,6 +8,7 @@ use wcf\data\tour\Tour;
  *
  * @author	Magnus Kühn
  * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
 class TourStepCacheBuilder extends AbstractCacheBuilder {
@@ -15,15 +16,9 @@ class TourStepCacheBuilder extends AbstractCacheBuilder {
 	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
 	public function rebuild(array $parameters) {
-		// get tour
-		$tour = Tour::getByName($parameters['tourName']);
-		if (!$tour || !$tour->tourID) {
-			return null;
-		}
-		
 		// fetch tour steps
 		$tourStepList = new TourStepList();
-		$tourStepList->getConditionBuilder()->add('tourID = ?', array($tour->tourID));
+		$tourStepList->getConditionBuilder()->add('tourID = ?', array($parameters['tourID']));
 		$tourStepList->getConditionBuilder()->add('isDisabled = ?', array(0));
 		$tourStepList->sqlOrderBy = 'showOrder ASC';
 		$tourStepList->readObjects();
@@ -34,6 +29,6 @@ class TourStepCacheBuilder extends AbstractCacheBuilder {
 			$tourSteps[] = $tourStep->render();
 		}
 		
-		return array('tour' => $tour, 'tourSteps' => $tourSteps);
+		return $tourSteps;
 	}
 }

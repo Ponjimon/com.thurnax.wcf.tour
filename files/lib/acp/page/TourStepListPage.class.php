@@ -2,6 +2,7 @@
 namespace wcf\acp\page;
 use wcf\data\tour\TourList;
 use wcf\page\SortablePage;
+use wcf\system\clipboard\ClipboardHandler;
 use wcf\system\exception\NamedUserException;
 use wcf\system\WCF;
 
@@ -64,14 +65,11 @@ class TourStepListPage extends SortablePage {
 	 * @see	\wcf\page\IPage::readData()
 	 */
 	public function readData() {
-		parent::readData();
-		
 		// read tours
 		$tourList = new TourList();
 		$tourList->sqlOrderBy = 'visibleName ASC';
 		$tourList->readObjects();
 		$this->tours = $tourList->getObjects();
-		
 		if (empty($this->tours)) {
 			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.acp.tour.step.noTours'));
 		}
@@ -80,6 +78,8 @@ class TourStepListPage extends SortablePage {
 		if (isset($_REQUEST['id']) && isset($this->tours[intval($_REQUEST['id'])])) {
 			$this->tourID = intval($_REQUEST['id']);
 		}
+		
+		parent::readData();
 	}
 	
 	/**
@@ -101,7 +101,8 @@ class TourStepListPage extends SortablePage {
 		
 		WCF::getTPL()->assign(array(
 			'tourID' => $this->tourID,
-			'tours' => $this->tours
+			'tours' => $this->tours,
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour.step'))
 		));
 	}
 }
