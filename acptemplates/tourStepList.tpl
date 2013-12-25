@@ -8,11 +8,21 @@
 </header>
 
 {if $tourID}
+	<script data-relocate="true" src="{@$__wcf->getPath('wcf')}acp/js/WCF.ACP.Tour{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+	<script data-relocate="true">
+		//<![CDATA[
+		$(function() {
+			new WCF.ACP.Tour.RestartTour();
+		});
+		//]]>
+	</script>
+	
 	<div class="contentNavigation">
 		{pages print=true assign=pagesLinks controller="TourStepList" object=$tours[$tourID] link="pageNo=%d&sortField=$sortField&sortOrder=$sortOrder"}
 		
 		<nav>
 			<ul>
+				<li class="button jsTourRestart" data-object-id="{$tourID}"><span class="icon icon16 icon-play"></span> <span>{lang}wcf.acp.tour.restartTour{/lang}</span></li>
 				<li id="jumpToTourTop" class="button dropdown">
 					<div class="dropdownToggle" data-toggle="jumpToTourTop"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.tour.step.jumpToTour{/lang}</span></div>
 					<ul class="dropdownMenu">
@@ -28,7 +38,6 @@
 	</div>
 	
 	{if $objects|count}
-		<script data-relocate="true" src="{@$__wcf->getPath('wcf')}acp/js/WCF.ACP.Tour{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 		<script data-relocate="true">
 			//<![CDATA[
 			$(function() {
@@ -115,15 +124,15 @@
 			
 			<nav>
 				<ul>
+					<li class="button jsTourRestart" data-object-id="{$tourID}"><span class="icon icon16 icon-play"></span> <span>{lang}wcf.acp.tour.restartTour{/lang}</span></li>
 					<li id="jumpToTourBottom" class="button dropdown">
-						<div class="dropdownToggle" data-toggle="jumpToTourBottom"><span class="icon icon16 icon-home"></span> <span>{lang}wcf.acp.tour.step.jumpToTour{/lang}</span></div>
+						<div class="dropdownToggle" data-toggle="jumpToTourBottom"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.tour.step.jumpToTour{/lang}</span></div>
 						<ul class="dropdownMenu">
 							{foreach from=$tours item=tour}
 								<li><a href="{link controller='TourStepList' object=$tour}{/link}">{$tour->visibleName|language}</a></li>
 							{/foreach}
 						</ul>
 					</li>
-					
 					<li><a href="{link controller='TourStepAdd' object=$tours[$tourID]}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
 					{event name='contentNavigationButtonsBottom'}
 				</ul>
@@ -157,7 +166,7 @@
 	<div class="contentNavigation">
 		<nav>
 			<ul>
-				<li><a href="{link controller='TourStepAdd'}{/link}" class="button"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
+				<li><a href="{link controller='TourStepAdd'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
 				{event name='contentNavigationButtonsNoTour'}
 			</ul>
 		</nav>

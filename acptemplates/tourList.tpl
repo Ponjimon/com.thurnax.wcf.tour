@@ -3,11 +3,13 @@
 <header class="boxHeadline">
 	<h1>{lang}wcf.acp.tour.list{/lang}</h1>
 	
+	<script data-relocate="true" src="{@$__wcf->getPath('wcf')}acp/js/WCF.ACP.Tour{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
 	<script data-relocate="true">
 		//<![CDATA[
 		$(function() {
 			new WCF.Action.Delete('wcf\\data\\tour\\TourAction', $('.jsTourRow'));
 			new WCF.Action.Toggle('wcf\\data\\tour\\TourAction', $('.jsTourRow'));
+			new WCF.ACP.Tour.RestartTour();
 			
 			var options = { };
 			{if $pages > 1}
@@ -54,6 +56,7 @@
 				{foreach from=$objects item=tour}
 					<tr class="jsTourRow">
 						<td class="columnIcon">
+							<span class="icon icon16 icon-play jsTourRestart jsTooltip pointer" title="{lang}wcf.acp.tour.restartTour{/lang}" data-object-id="{$tour->tourID}"></span>
 							<span class="icon icon16 icon-check{if $tour->isDisabled}-empty{/if} jsToggleButton jsTooltip pointer" title="{lang}wcf.global.button.{if $tour->isDisabled}enable{else}disable{/if}{/lang}" data-object-id="{$tour->tourID}" data-disable-message="{lang}wcf.global.button.disable{/lang}" data-enable-message="{lang}wcf.global.button.enable{/lang}"></span>
 							<a href="{link controller='TourEdit' object=$tour}{/link}" title="{lang}wcf.global.button.edit{/lang}" class="jsTooltip"><span class="icon icon16 icon-pencil"></span></a>
 							<a href="{link controller='TourStepList' object=$tour}{/link}" title="{lang}wcf.acp.tour.step.list{/lang}" class="jsTooltip"><span class="icon icon16 icon-list"></span></a>

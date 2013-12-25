@@ -69,10 +69,10 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * @return        array<mixed>
 	 */
 	public function loadTour() {
-		$tour = $this->getSingleObject();
-		TourHandler::getInstance()->startTour($tour->getDecoratedObject());
-		TourHandler::getInstance()->takeTour($tour->getDecoratedObject());
-		return TourStepCacheBuilder::getInstance()->getData(array('tourID' => $tour->tourID));
+		$tourEditor = $this->getSingleObject();
+		TourHandler::getInstance()->startTour($tourEditor->getDecoratedObject());
+		TourHandler::getInstance()->takeTour($tourEditor->getDecoratedObject());
+		return TourStepCacheBuilder::getInstance()->getData(array('tourID' => $tourEditor->tourID));
 	}
 	
 	/**
@@ -115,7 +115,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	public function validateEndTour() {
 		WCF::getSession()->checkPermissions(array('user.tour.enableTour'));
 	}
-
+	
 	/**
 	 * Moves tour steps to another tour
 	 * 
@@ -164,11 +164,31 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 		ClipboardHandler::getInstance()->unmarkAll($objectTypeID);
 		return LinkHandler::getInstance()->getLink('TourStepList', array('object' => $targetTour));
 	}
-
+	
 	/**
 	 * Validates the 'move'-action
 	 */
 	public function validateMove() {
 		WCF::getSession()->checkPermissions($this->permissionsUpdate);
+	}
+	
+	/**
+	 * Restarts a tour
+	 */
+	public function restartTour() {
+		$sql = "DELETE FROM ".Tour::getDatabaseTableName()."_user WHERE tourID = ? AND userID = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		foreach ($this->objects as $tourEditor) {
+			$statement->execute(array($tourEditor->tourID, WCF::getUser()->userID));
+		}
+		
+		TourHandler::getInstance()->reset();
+	}
+	
+	/**
+	 * Validates the 'restartTour'-action
+	 */
+	public function validateRestartTour() {
+		$this->validateUpdate();
 	}
 }

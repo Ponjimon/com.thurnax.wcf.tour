@@ -130,7 +130,7 @@ class TourHandler extends SingletonFactory {
 	}
 	
 	/**
-	 * Resets the cache
+	 * Resets the user storage
 	 */
 	public function reset() {
 		UserStorageHandler::getInstance()->resetAll(self::USER_STORAGE_FIELD);

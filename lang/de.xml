@@ -32,6 +32,7 @@
 		<item name="wcf.acp.tour.list"><![CDATA[Touren auflisten]]></item>
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript-Code]]></item>
 		<item name="wcf.acp.tour.move"><![CDATA[Tourpunkte verschieben]]></item>
+		<item name="wcf.acp.tour.restartTour"><![CDATA[Tour erneut ansehen]]></item>
 		<!--<item name="wcf.acp.tour.scrollDuration"><![CDATA[Scrolldauer]]></item>-->
 		<!--<item name="wcf.acp.tour.scrollDuration.description"><![CDATA[Geben Sie hier die Zeit in Millisekunden ein, in der die Seite zum nächsten Tourpunkt scrollen soll.]]></item>-->
 		<item name="wcf.acp.tour.tourName"><![CDATA[Bezeichner]]></item>
