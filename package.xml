@@ -3,17 +3,17 @@
 	<packageinformation>
 		<packagename>Einführungstour</packagename>
 		<packagedescription>Dieses Plugin ermöglicht es neu registrierten Benutzern eine kleine Einführung in die Funktionen der Website zu geben.</packagedescription>
-		<version>0.5.0</version>
-		<date>2013-12-21</date>
+		<version>1.0.0 RC 1</version>
+		<date>2013-12-25</date>
 	</packageinformation>
 	
 	<authorinformation>
 		<author>Thurnax.com</author>
-		<authorurl>http://www.thurnax.com</authorurl>
+		<authorurl>http://board.thurnax.com</authorurl>
 	</authorinformation>
 	
 	<requiredpackages>
-		<requiredpackage minversion="2.0.0 RC 1">com.woltlab.wcf</requiredpackage>
+		<requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
 	</requiredpackages>
 	
 	<instructions type="install">
@@ -21,7 +21,6 @@
 		<instruction type="file">files.tar</instruction>
 		<instruction type="template">templates.tar</instruction>
 		<instruction type="sql">install.sql</instruction>
-		
 		<instruction type="acpMenu">acpMenu.xml</instruction>
 		<instruction type="clipboardAction">clipboardAction.xml</instruction>
 		<instruction type="coreObject">coreObject.xml</instruction>
