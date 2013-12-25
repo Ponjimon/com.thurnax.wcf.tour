@@ -60,16 +60,14 @@ class TourStepEditForm extends TourStepAddForm {
 		// save title
 		if (I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->remove($this->title);
-			$this->stepContent = I18nHandler::getInstance()->getValue('title');
 		} else {
-			$this->stepContent = 'wcf.acp.tour.step.title'.$this->tourStep->tourStepID;
+			$this->title = 'wcf.acp.tour.step.title'.$this->tourStep->tourStepID;
 			I18nHandler::getInstance()->save('title', $this->title, 'wcf.acp.tour', $this->tourStep->tourStepID);
 		}
 		
 		// save content
 		if (I18nHandler::getInstance()->isPlainValue('stepContent')) {
 			I18nHandler::getInstance()->remove($this->stepContent);
-			$this->stepContent = I18nHandler::getInstance()->getValue('stepContent');
 		} else {
 			$this->stepContent = 'wcf.acp.tour.step.content'.$this->tourStep->tourStepID;
 			I18nHandler::getInstance()->save('stepContent', $this->stepContent, 'wcf.acp.tour', $this->tourStep->tourStepID);

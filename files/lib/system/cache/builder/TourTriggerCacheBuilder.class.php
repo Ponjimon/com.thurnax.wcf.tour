@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\cache\builder;
+use wcf\data\tour\step\TourStep;
 use wcf\data\tour\TourList;
 
 /**
@@ -15,20 +16,25 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
 	public function rebuild(array $parameters) {
+		$tourList = new TourList();
+		$tourList->getConditionBuilder()->add("(SELECT	COUNT(tourStepID) as count
+							FROM	".TourStep::getDatabaseTableName()." tour_step
+							WHERE	tour_step.tourID = ".$tourList->getDatabaseTableAlias().".tourID) > 0");
+		
 		return array(
-			'firstSite' => $this->fetchFirstSiteTrigger(),
-			'specificSite' => $this->fetchSpecificSiteTrigger(),
-			'manual' => $this->fetchManualTriggers()
+			'firstSite' => $this->fetchFirstSiteTrigger($tourList),
+			'specificSite' => $this->fetchSpecificSiteTrigger($tourList),
+			'manual' => $this->fetchManualTriggers($tourList)
 		);
 	}
 	
 	/**
 	 * Fetches tours using the first site trigger
-	 *
-	 * @return	array<string>
+	 * 
+	 * @param	\wcf\data\tour\TourList	$tourList
+	 * @return	array<\wcf\data\tour\Tour>
 	 */
-	protected function fetchFirstSiteTrigger() {
-		$tourList = new TourList();
+	protected function fetchFirstSiteTrigger(TourList $tourList) {
 		$tourList->getConditionBuilder()->add('tourTrigger = ?', array('firstSite'));
 		$tourList->readObjects();
 		return $tourList->getObjects();
@@ -37,10 +43,10 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 	/**
 	 * Fetches tours using the specific site trigger
 	 * 
-	 * @return	array<string>
+	 * @param	\wcf\data\tour\TourList	$tourList
+	 * @return	array<\wcf\data\tour\Tour>
 	 */
-	protected function fetchSpecificSiteTrigger() {
-		$tourList = new TourList();
+	protected function fetchSpecificSiteTrigger(TourList $tourList) {
 		$tourList->getConditionBuilder()->add('tourTrigger = ?', array('specificSite'));
 		$tourList->readObjects();
 		
@@ -55,11 +61,11 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 	
 	/**
 	 * Fetches tours using the manual trigger
-	 *
-	 * @return	array<string>
+	 * 
+	 * @param	\wcf\data\tour\TourList	$tourList
+	 * @return	array<\wcf\data\tour\Tour>
 	 */
-	protected function fetchManualTriggers() {
-		$tourList = new TourList();
+	protected function fetchManualTriggers(TourList $tourList) {
 		$tourList->getConditionBuilder()->add('tourTrigger = ?', array('manual'));
 		$tourList->readObjects();
 

@@ -1,6 +1,7 @@
 <?php
 namespace wcf\data\tour;
 use wcf\data\DatabaseObject;
+use wcf\system\request\IRouteController;
 use wcf\system\WCF;
 
 /**
@@ -11,7 +12,7 @@ use wcf\system\WCF;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
-class Tour extends DatabaseObject {
+class Tour extends DatabaseObject implements IRouteController {
 	/**
 	 * @see	\wcf\data\DatabaseObject::$databaseTableName
 	 */
@@ -23,17 +24,9 @@ class Tour extends DatabaseObject {
 	protected static $databaseTableIndexName = 'tourID';
 	
 	/**
-	 * Fetches a tour by the tour name
-	 * 
-	 * @param	string	$tourName
-	 * @return	\wcf\data\tour\Tour
+	 * @see	\wcf\data\ITitledObject::getTitle()
 	 */
-	public static function getByName($tourName) {
-		$sql = "SELECT	*
-			FROM	".self::getDatabaseTableName()."
-			WHERE	tourName = ?";
-		$statement = WCF::getDB()->prepareStatement($sql, 1);
-		$statement->execute(array($tourName));
-		return $statement->fetchObject('wcf\data\tour\Tour');
+	public function getTitle() {
+		return WCF::getLanguage()->get($this->visibleName);
 	}
 }

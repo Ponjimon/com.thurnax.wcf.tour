@@ -25,7 +25,7 @@
 	</nav>
 </div>
 
-<form method="post" action="{if $action == 'add'}{link controller='TourAdd'}{/link}{else}{link controller='TourEdit' id=$tour->tourID}{/link}{/if}">
+<form method="post" action="{if $action == 'add'}{link controller='TourAdd'}{/link}{else}{link controller='TourEdit' object=$tour}{/link}{/if}">
 	<div class="container containerPadding sortableListContainer marginTop">
 		<fieldset>
 			<legend>{lang}wcf.acp.tour.data{/lang}</legend>

@@ -63,10 +63,9 @@ class TourEditForm extends TourAddForm {
 		
 		if (I18nHandler::getInstance()->isPlainValue('visibleName')) {
 			I18nHandler::getInstance()->remove($this->visibleName);
-			$this->visibleName = I18nHandler::getInstance()->getValue('visibleName');
 		} else {
-			I18nHandler::getInstance()->save('visibleName', $this->visibleName, 'wcf.acp.tour', $this->tour->tourID);
 			$this->visibleName = 'wcf.acp.tour.visibleName'.$this->tour->tourID;
+			I18nHandler::getInstance()->save('visibleName', $this->visibleName, 'wcf.acp.tour', $this->tour->tourID);
 		}
 		
 		// update tour

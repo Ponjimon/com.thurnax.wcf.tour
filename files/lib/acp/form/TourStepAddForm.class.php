@@ -218,7 +218,6 @@ class TourStepAddForm extends AbstractForm {
 			I18nHandler::getInstance()->save('title', 'wcf.acp.tour.step.title'.$tourStepID, 'wcf.acp.tour', $packageID);
 			$updateData['title'] = 'wcf.acp.tour.step.title'.$tourStepID;
 		}
-		
 		if (!I18nHandler::getInstance()->isPlainValue('stepContent')) {
 			I18nHandler::getInstance()->save('stepContent', 'wcf.acp.tour.step.content'.$tourStepID, 'wcf.acp.tour', $packageID);
 			$updateData['content'] = 'wcf.acp.tour.step.content'.$tourStepID;

@@ -135,7 +135,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 		
 		// clear clipboard
 		ClipboardHandler::getInstance()->unmarkAll($objectTypeID);
-		return LinkHandler::getInstance()->getLink('TourStepList', array('id' => $targetTour->tourID));
+		return LinkHandler::getInstance()->getLink('TourStepList', array('object' => $targetTour));
 	}
 
 	/**
