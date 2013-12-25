@@ -16,7 +16,7 @@ use wcf\system\WCF;
  */
 class TourHandler extends SingletonFactory {
 	const SESSION_FIELD = 'activeTour';
-	const USER_STORAGE_FIELD = 'takenTours';
+	const USER_STORAGE_FIELD = 'tourCache';
 	
 	/**
 	 * cache for the current user
@@ -127,5 +127,12 @@ class TourHandler extends SingletonFactory {
 			$this->cache['takenTours'][] = $tour->tourID;
 			UserStorageHandler::getInstance()->update(WCF::getUser()->userID, self::USER_STORAGE_FIELD, serialize($this->cache));
 		}
+	}
+	
+	/**
+	 * Resets the cache
+	 */
+	public function reset() {
+		UserStorageHandler::getInstance()->resetAll(self::USER_STORAGE_FIELD);
 	}
 }

@@ -10,7 +10,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			<li><a href="{if $tourID}{link controller='TourStepList' id=$tourID}{/link}{else}{link controller='TourStepList'}{/link}{/if}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.tour.step.list{/lang}</span></a></li>
+			<li><a href="{if $tourID}{link controller='TourStepList' object=$tours[$tourID]}{/link}{else}{link controller='TourStepList'}{/link}{/if}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.tour.step.list{/lang}</span></a></li>
 			{event name='contentNavigationButtons'}
 		</ul>
 	</nav>
