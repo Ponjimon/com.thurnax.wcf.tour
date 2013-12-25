@@ -2,6 +2,7 @@
 namespace wcf\acp\form;
 use wcf\data\tour\step\TourStep;
 use wcf\data\tour\step\TourStepAction;
+use wcf\data\tour\step\TourStepList;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
@@ -34,6 +35,12 @@ class TourStepEditForm extends TourStepAddForm {
 	public $tourStep = null;
 	
 	/**
+	 * available tour steps
+	 * @var	array<\wcf\data\tour\step\TourStep>
+	 */
+	public $availableTourSteps = array();
+	
+	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -49,6 +56,34 @@ class TourStepEditForm extends TourStepAddForm {
 		// register I18n-items
 		I18nHandler::getInstance()->register('title');
 		I18nHandler::getInstance()->register('stepContent');
+	}
+	
+	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+		
+		if (empty($_POST)) {
+			I18nHandler::getInstance()->setOptions('title', $this->tourStep->tourStepID, $this->tourStep->title, 'wcf.acp.tour.step.title\d+');
+			I18nHandler::getInstance()->setOptions('stepContent', $this->tourStep->tourStepID, $this->tourStep->content, 'wcf.acp.tour.step.content\d+');
+
+			$this->tourID = $this->tourStep->tourID;
+			$this->target = $this->tourStep->target;
+			$this->placement = $this->tourStep->placement;
+			$this->title = $this->tourStep->title;
+			$this->stepContent = $this->tourStep->content;
+			$this->xOffset = $this->tourStep->xOffset;
+			$this->yOffset = $this->tourStep->yOffset;
+			$this->showPrevButton = $this->tourStep->showPrevButton;
+			$this->url = $this->tourStep->url;
+		}
+		
+		// read available tour steps
+		$tourStepList = new TourStepList();
+		$tourStepList->getConditionBuilder()->add('tourID = ?', array($this->tourID));	
+		$tourStepList->readObjects();
+		$this->availableTourSteps = $tourStepList->getObjects();
 	}
 	
 	/**
@@ -93,28 +128,6 @@ class TourStepEditForm extends TourStepAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::readData()
-	 */
-	public function readData() {
-		parent::readData();
-		
-		if (empty($_POST)) {
-			I18nHandler::getInstance()->setOptions('title', $this->tourStep->tourStepID, $this->tourStep->title, 'wcf.acp.tour.step.title\d+');
-			I18nHandler::getInstance()->setOptions('stepContent', $this->tourStep->tourStepID, $this->tourStep->content, 'wcf.acp.tour.step.content\d+');
-			
-			$this->tourID = $this->tourStep->tourID;
-			$this->target = $this->tourStep->target;
-			$this->placement = $this->tourStep->placement;
-			$this->title = $this->tourStep->title;
-			$this->stepContent = $this->tourStep->content;
-			$this->xOffset = $this->tourStep->xOffset;
-			$this->yOffset = $this->tourStep->yOffset;
-			$this->showPrevButton = $this->tourStep->showPrevButton;
-			$this->url = $this->tourStep->url;
-		}
-	}
-	
-	/**
 	 * @see	\wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
@@ -124,7 +137,8 @@ class TourStepEditForm extends TourStepAddForm {
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
 			'tourStepID' => $this->tourStepID,
-			'tourStep' => $this->tourStep
+			'tourStep' => $this->tourStep,
+			'availableTourSteps' => $this->availableTourSteps
 		));
 	}
 }

@@ -14,14 +14,13 @@
 		<nav>
 			<ul>
 				<li id="jumpToTourTop" class="button dropdown">
-					<div class="dropdownToggle" data-toggle="jumpToTourTop"><span class="icon icon16 icon-home"></span> <span>{lang}wcf.acp.tour.step.jumpToTour{/lang}</span></div>
+					<div class="dropdownToggle" data-toggle="jumpToTourTop"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.tour.step.jumpToTour{/lang}</span></div>
 					<ul class="dropdownMenu">
 						{foreach from=$tours item=tour}
 							<li><a href="{link controller='TourStepList' object=$tour}{/link}">{$tour->visibleName|language}</a></li>
 						{/foreach}
 					</ul>
 				</li>
-				
 				<li><a href="{link controller='TourStepAdd' object=$tours[$tourID]}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
 				{event name='contentNavigationButtonsTop'}
 			</ul>
@@ -158,7 +157,7 @@
 	<div class="contentNavigation">
 		<nav>
 			<ul>
-				<li><a href="{link controller='TourStepAdd'}{/link}" class="button"><span class="icon icon16 icon-plus"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
+				<li><a href="{link controller='TourStepAdd'}{/link}" class="button"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.tour.step.add{/lang}</span></a></li>
 				{event name='contentNavigationButtonsNoTour'}
 			</ul>
 		</nav>
