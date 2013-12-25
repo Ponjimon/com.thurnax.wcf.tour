@@ -20,6 +20,12 @@
 							<li><a href="{link controller='TourStepEdit' id=$availableTourStep->tourStepID}{/link}">{$availableTourStep->target|tableWordwrap}: {$availableTourStep->content|tableWordwrap|language}</a></li>
 						{/foreach}
 					</ol>
+				</li>	
+				<li id="createNextTourStep">
+					<a href="{link controller='TourStepAdd'}{/link}" class="button">
+						<span class="icon icon16 icon-plus"></span>
+						<span>{lang}wcf.acp.tour.step.add{/lang}</span>
+					</a>
 				</li>				
 				<li><a href="{link controller='TourStepList' object=$tours[$tourID]}{/link}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.tour.step.list{/lang}</span></a></li>
 			{/if}
