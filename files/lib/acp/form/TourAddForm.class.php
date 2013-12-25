@@ -126,7 +126,13 @@ class TourAddForm extends AbstractForm {
 		}
 		
 		// check for collusion
-		if (Tour::getByName($this->tourName)) {
+		$sql = "SELECT	COUNT(tourID) as count
+			FROM	".Tour::getDatabaseTableName()."
+			WHERE	tourName = ?";
+		$statement = WCF::getDB()->prepareStatement($sql, 1);
+		$statement->execute(array($this->tourName));
+		$row = $statement->fetchArray();
+		if ($row['count']) {
 			throw new UserInputException('tourName', 'notUnique');
 		}
 	}

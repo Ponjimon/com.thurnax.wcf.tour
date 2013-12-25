@@ -3,6 +3,7 @@ namespace wcf\data\tour;
 use wcf\data\AbstractDatabaseObjectAction;
 use wcf\data\IToggleAction;
 use wcf\data\tour\step\TourStep;
+use wcf\data\tour\step\TourStepList;
 use wcf\system\cache\builder\TourTriggerCacheBuilder;
 use wcf\system\cache\builder\TourStepCacheBuilder;
 use wcf\system\clipboard\ClipboardHandler;
@@ -88,7 +89,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 */
 	public function loadTourByName() {
 		$cache = TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual');
-		$this->setObjects(array($cache[$this->parameters['tourName']]));
+		$this->setObjects(array(new TourEditor($cache[$this->parameters['tourName']])));
 		$this->objectIDs = array($this->objects[0]->tourID); // @todo Remove after merging #1606 (https://github.com/WoltLab/WCF/pull/1606)
 		return $this->loadTour();
 	}
@@ -124,18 +125,44 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 		$targetTour = $this->getSingleObject();
 		$objectTypeID = ClipboardHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour.step');
 		
-		// update tour steps
+		// select last show order of target tour
+		$sql = "SELECT	showOrder
+			FROM	".TourStep::getDatabaseTableName()."
+			WHERE	tourID = ?
+			ORDER BY showOrder DESC";
+		$statement = WCF::getDB()->prepareStatement($sql, 1);
+		$statement->execute(array($targetTour->tourID));
+		$row = $statement->fetchArray();
+		if (!$row) {
+			$row['showOrder'] = 0;
+		}
+		
+		// read tour step IDs
+		$tourStepIDs = array();
+		foreach (ClipboardHandler::getInstance()->getMarkedItems($objectTypeID) as $tourStep) {
+			$tourStepIDs[] = $tourStep->tourStepID;
+ 		}
+		
+		// read tour steps ordered by the show order
+		$tourStepList = new TourStepList();
+		$tourStepList->setObjectIDs($tourStepIDs);
+		$tourStepList->sqlOrderBy = 'showOrder ASC';
+		$tourStepList->readObjects();
+		
+		// update tour steps (appends the items in the old show order)
 		$sql = "UPDATE	".TourStep::getDatabaseTableName()."
-			SET	tourID = ?
+			SET	tourID = ?, showOrder = ?
 			WHERE	tourStepID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		foreach (ClipboardHandler::getInstance()->getMarkedItems($objectTypeID) as $tourStep) {
-			$statement->execute(array($targetTour->tourID, $tourStep->tourStepID));
+		$showOrderOffset = 1;
+		foreach ($tourStepList->getObjects() as $tourStep) {
+			$statement->execute(array($targetTour->tourID, $row['showOrder'] + $showOrderOffset, $tourStep->tourStepID));
+			$showOrderOffset++;
 		}
 		
 		// clear clipboard
 		ClipboardHandler::getInstance()->unmarkAll($objectTypeID);
-		return LinkHandler::getInstance()->getLink('TourStepList', array('id' => $targetTour->tourID));
+		return LinkHandler::getInstance()->getLink('TourStepList', array('object' => $targetTour));
 	}
 
 	/**

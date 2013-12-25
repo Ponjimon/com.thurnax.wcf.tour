@@ -16,7 +16,7 @@ use wcf\system\WCF;
  */
 class TourHandler extends SingletonFactory {
 	const SESSION_FIELD = 'activeTour';
-	const USER_STORAGE_FIELD = 'takenTours';
+	const USER_STORAGE_FIELD = 'tourCache';
 	
 	/**
 	 * cache for the current user
@@ -90,11 +90,15 @@ class TourHandler extends SingletonFactory {
 	 * Starts a tour
 	 * 
 	 * @param	\wcf\data\tour\Tour	$tour
+	 * @return	boolean
 	 */
 	public function startTour(Tour $tour) {
-		if (!$this->getActiveTour() && !in_array($tour->tourID, $this->cache['takenTours'])) {
-			WCF::getSession()->register(self::SESSION_FIELD, $tour->tourID);
+		if ($this->getActiveTour() || in_array($tour->tourID, $this->cache['takenTours'])) {
+			return false;
 		}
+		
+		WCF::getSession()->register(self::SESSION_FIELD, $tour->tourID);
+		return true;
 	}
 	
 	/**
@@ -123,5 +127,12 @@ class TourHandler extends SingletonFactory {
 			$this->cache['takenTours'][] = $tour->tourID;
 			UserStorageHandler::getInstance()->update(WCF::getUser()->userID, self::USER_STORAGE_FIELD, serialize($this->cache));
 		}
+	}
+	
+	/**
+	 * Resets the cache
+	 */
+	public function reset() {
+		UserStorageHandler::getInstance()->resetAll(self::USER_STORAGE_FIELD);
 	}
 }

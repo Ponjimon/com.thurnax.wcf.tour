@@ -130,14 +130,14 @@ WCF.Tour = {
 	 * @param	string	errorThrown
 	 */
 	_failure: function(data, jqXHR, textStatus, errorThrown) {
-		return (data.stacktrace ? true : false);
+		return (data && data.stacktrace ? true : false);
 	},
 	
 	/**
 	 * Invoked when the tour ends or the user closes the tour.
 	 */
 	_end: function() {
-		this._activeTourID = undefined;
+		this._activeTourID = null;
 		this._proxy.setOption('data', {
 			className: 'wcf\\data\\tour\\TourAction',
 			actionName: 'endTour'

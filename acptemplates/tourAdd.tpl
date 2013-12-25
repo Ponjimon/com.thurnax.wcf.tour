@@ -19,13 +19,16 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
+			{if $action == 'edit'}
+				<li><a href="{link controller='TourStepList' object=$tour}{/link}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.user.tour.step.list{/lang}</span></a></li>
+			{/if}
 			<li><a href="{link controller='TourList'}{/link}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.user.tour.list{/lang}</span></a></li>
 			{event name='contentNavigationButtons'}
 		</ul>
 	</nav>
 </div>
 
-<form method="post" action="{if $action == 'add'}{link controller='TourAdd'}{/link}{else}{link controller='TourEdit' id=$tour->tourID}{/link}{/if}">
+<form method="post" action="{if $action == 'add'}{link controller='TourAdd'}{/link}{else}{link controller='TourEdit' object=$tour}{/link}{/if}">
 	<div class="container containerPadding sortableListContainer marginTop">
 		<fieldset>
 			<legend>{lang}wcf.acp.tour.data{/lang}</legend>

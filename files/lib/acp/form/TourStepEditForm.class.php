@@ -2,6 +2,7 @@
 namespace wcf\acp\form;
 use wcf\data\tour\step\TourStep;
 use wcf\data\tour\step\TourStepAction;
+use wcf\data\tour\step\TourStepList;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
@@ -34,6 +35,12 @@ class TourStepEditForm extends TourStepAddForm {
 	public $tourStep = null;
 	
 	/**
+	 * available tour steps
+	 * @var	array<\wcf\data\tour\step\TourStep>
+	 */
+	public $availableTourSteps = array();
+	
+	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
@@ -52,6 +59,34 @@ class TourStepEditForm extends TourStepAddForm {
 	}
 	
 	/**
+	 * @see	\wcf\page\IPage::readData()
+	 */
+	public function readData() {
+		parent::readData();
+		
+		if (empty($_POST)) {
+			I18nHandler::getInstance()->setOptions('title', $this->tourStep->tourStepID, $this->tourStep->title, 'wcf.acp.tour.step.title\d+');
+			I18nHandler::getInstance()->setOptions('stepContent', $this->tourStep->tourStepID, $this->tourStep->content, 'wcf.acp.tour.step.content\d+');
+
+			$this->tourID = $this->tourStep->tourID;
+			$this->target = $this->tourStep->target;
+			$this->placement = $this->tourStep->placement;
+			$this->title = $this->tourStep->title;
+			$this->stepContent = $this->tourStep->content;
+			$this->xOffset = $this->tourStep->xOffset;
+			$this->yOffset = $this->tourStep->yOffset;
+			$this->showPrevButton = $this->tourStep->showPrevButton;
+			$this->url = $this->tourStep->url;
+		}
+		
+		// read available tour steps
+		$tourStepList = new TourStepList();
+		$tourStepList->getConditionBuilder()->add('tourID = ?', array($this->tourID));	
+		$tourStepList->readObjects();
+		$this->availableTourSteps = $tourStepList->getObjects();
+	}
+	
+	/**
 	 * @see	\wcf\form\IForm::save()
 	 */
 	public function save() {
@@ -60,16 +95,14 @@ class TourStepEditForm extends TourStepAddForm {
 		// save title
 		if (I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->remove($this->title);
-			$this->stepContent = I18nHandler::getInstance()->getValue('title');
 		} else {
-			$this->stepContent = 'wcf.acp.tour.step.title'.$this->tourStep->tourStepID;
+			$this->title = 'wcf.acp.tour.step.title'.$this->tourStep->tourStepID;
 			I18nHandler::getInstance()->save('title', $this->title, 'wcf.acp.tour', $this->tourStep->tourStepID);
 		}
 		
 		// save content
 		if (I18nHandler::getInstance()->isPlainValue('stepContent')) {
 			I18nHandler::getInstance()->remove($this->stepContent);
-			$this->stepContent = I18nHandler::getInstance()->getValue('stepContent');
 		} else {
 			$this->stepContent = 'wcf.acp.tour.step.content'.$this->tourStep->tourStepID;
 			I18nHandler::getInstance()->save('stepContent', $this->stepContent, 'wcf.acp.tour', $this->tourStep->tourStepID);
@@ -95,28 +128,6 @@ class TourStepEditForm extends TourStepAddForm {
 	}
 	
 	/**
-	 * @see	\wcf\page\IPage::readData()
-	 */
-	public function readData() {
-		parent::readData();
-		
-		if (empty($_POST)) {
-			I18nHandler::getInstance()->setOptions('title', $this->tourStep->tourStepID, $this->tourStep->title, 'wcf.acp.tour.step.title\d+');
-			I18nHandler::getInstance()->setOptions('stepContent', $this->tourStep->tourStepID, $this->tourStep->content, 'wcf.acp.tour.step.content\d+');
-			
-			$this->tourID = $this->tourStep->tourID;
-			$this->target = $this->tourStep->target;
-			$this->placement = $this->tourStep->placement;
-			$this->title = $this->tourStep->title;
-			$this->stepContent = $this->tourStep->content;
-			$this->xOffset = $this->tourStep->xOffset;
-			$this->yOffset = $this->tourStep->yOffset;
-			$this->showPrevButton = $this->tourStep->showPrevButton;
-			$this->url = $this->tourStep->url;
-		}
-	}
-	
-	/**
 	 * @see	\wcf\page\IPage::assignVariables()
 	 */
 	public function assignVariables() {
@@ -126,7 +137,8 @@ class TourStepEditForm extends TourStepAddForm {
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
 			'tourStepID' => $this->tourStepID,
-			'tourStep' => $this->tourStep
+			'tourStep' => $this->tourStep,
+			'availableTourSteps' => $this->availableTourSteps
 		));
 	}
 }

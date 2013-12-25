@@ -1,5 +1,6 @@
 <?php
 namespace wcf\system\cache\builder;
+use wcf\data\tour\step\TourStep;
 use wcf\data\tour\TourList;
 
 /**
@@ -24,11 +25,14 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 	
 	/**
 	 * Fetches tours using the first site trigger
-	 *
-	 * @return	array<string>
+	 * 
+	 * @return	array<\wcf\data\tour\Tour>
 	 */
 	protected function fetchFirstSiteTrigger() {
 		$tourList = new TourList();
+		$tourList->getConditionBuilder()->add("(SELECT	COUNT(tourStepID) as count
+							FROM	".TourStep::getDatabaseTableName()." tour_step
+							WHERE	tour_step.tourID = ".$tourList->getDatabaseTableAlias().".tourID) > 0");
 		$tourList->getConditionBuilder()->add('tourTrigger = ?', array('firstSite'));
 		$tourList->readObjects();
 		return $tourList->getObjects();
@@ -37,10 +41,13 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 	/**
 	 * Fetches tours using the specific site trigger
 	 * 
-	 * @return	array<string>
+	 * @return	array<\wcf\data\tour\Tour>
 	 */
 	protected function fetchSpecificSiteTrigger() {
 		$tourList = new TourList();
+		$tourList->getConditionBuilder()->add("(SELECT	COUNT(tourStepID) as count
+							FROM	".TourStep::getDatabaseTableName()." tour_step
+							WHERE	tour_step.tourID = ".$tourList->getDatabaseTableAlias().".tourID) > 0");
 		$tourList->getConditionBuilder()->add('tourTrigger = ?', array('specificSite'));
 		$tourList->readObjects();
 		
@@ -55,11 +62,14 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 	
 	/**
 	 * Fetches tours using the manual trigger
-	 *
-	 * @return	array<string>
+	 * 
+	 * @return	array<\wcf\data\tour\Tour>
 	 */
 	protected function fetchManualTriggers() {
 		$tourList = new TourList();
+		$tourList->getConditionBuilder()->add("(SELECT	COUNT(tourStepID) as count
+							FROM	".TourStep::getDatabaseTableName()." tour_step
+							WHERE	tour_step.tourID = ".$tourList->getDatabaseTableAlias().".tourID) > 0");
 		$tourList->getConditionBuilder()->add('tourTrigger = ?', array('manual'));
 		$tourList->readObjects();
 
