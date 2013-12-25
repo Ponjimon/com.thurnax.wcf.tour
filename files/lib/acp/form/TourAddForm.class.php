@@ -5,6 +5,7 @@ use wcf\data\tour\Tour;
 use wcf\data\tour\TourAction;
 use wcf\data\tour\TourEditor;
 use wcf\form\AbstractForm;
+use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
@@ -28,7 +29,7 @@ class TourAddForm extends AbstractForm {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.user.canEditTour');
+	public $neededPermissions = array('admin.user.canManageTour');
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededModules
@@ -60,12 +61,26 @@ class TourAddForm extends AbstractForm {
 	public $tourName = null;
 	
 	/**
+	 * list of label group to object type relations
+	 * @var	array<array>
+	 */
+	public $objectTypes = array();
+	
+	/**
+	 * object type id
+	 * @var	integer
+	 */
+	public $objectTypeID = 0;
+	
+	/**
 	 * @see	\wcf\page\IPage::readParameters()
 	 */
 	public function readParameters() {
 		parent::readParameters();
 		
+		// setup form
 		I18nHandler::getInstance()->register('visibleName');
+		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour');
 	}
 	
 	/**
@@ -79,6 +94,7 @@ class TourAddForm extends AbstractForm {
 		if (isset($_POST['tourTrigger'])) $this->tourTrigger = $_POST['tourTrigger'];
 		if (isset($_POST['className'])) $this->className = $_POST['className'];
 		if (isset($_POST['tourName'])) $this->tourName = StringUtil::trim($_POST['tourName']);
+		if (isset($_POST['objectTypes']) && is_array($_POST['objectTypes'])) $this->objectTypes = $_POST['objectTypes'];
 	}
 	
 	/**
@@ -156,6 +172,12 @@ class TourAddForm extends AbstractForm {
 		$this->objectAction->executeAction();
 		$this->saved();
 		
+		// save ACL
+		$returnValues = $this->objectAction->getReturnValues();
+		$tourID = $returnValues['returnValues']->tourID;
+		ACLHandler::getInstance()->save($tourID, $this->objectTypeID);
+		ACLHandler::getInstance()->disableAssignVariables();
+		
 		if (!I18nHandler::getInstance()->isPlainValue('visibleName')) {
 			$returnValues = $this->objectAction->getReturnValues();
 			$tourID = $returnValues['returnValues']->tourID;
@@ -183,13 +205,15 @@ class TourAddForm extends AbstractForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
+		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
 		I18nHandler::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'tourName' => $this->tourName,
 			'visibleName' => $this->visibleName,
 			'tourTrigger' => $this->tourTrigger,
-			'className' => $this->className
+			'className' => $this->className,
+			'objectTypeID' => $this->objectTypeID
 		));
 	}
 }

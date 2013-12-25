@@ -38,19 +38,19 @@ class TourHandler extends SingletonFactory {
 				WHERE	userID = ?";
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$statement->execute(array($userID));
-
+				
 				// collect taken tour ids
 				while ($row = $statement->fetchArray()) {
 					$this->cache['takenTours'][] = $row['tourID'];
 				}
-
+				
 				// get available tours
 				foreach (TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual') as $tourName => $tour) {
 					if (!in_array($tour->tourID, $this->cache['takenTours'])) {
 						$this->cache['availableTours'][$tour->tourID] = $tourName;
 					}
 				}
-
+				
 				// update user storage
 				UserStorageHandler::getInstance()->update($userID, self::USER_STORAGE_FIELD, serialize($this->cache));
 			} else {
@@ -65,7 +65,7 @@ class TourHandler extends SingletonFactory {
 	 * @return	boolean
 	 */
 	public function isEnabled() {
-		return MODULE_TOUR && WCF::getSession()->getPermission('user.tour.enableTour') && WCF::getUser()->userID;
+		return MODULE_TOUR && WCF::getSession()->getPermission('user.tour.canViewTour') && WCF::getUser()->userID;
 	}
 	
 	/**

@@ -19,7 +19,7 @@ class TourListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededPermissions
 	 */
-	public $neededPermissions = array('admin.user.canEditTour');
+	public $neededPermissions = array('admin.user.canManageTour');
 	
 	/**
 	 * @see	\wcf\page\AbstractPage::$neededModules

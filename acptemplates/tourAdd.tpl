@@ -1,19 +1,26 @@
 {include file='header' pageTitle='wcf.acp.tour.'|concat:$action}
 
+<script data-relocate="true" src="{@$__wcf->getPath('wcf')}acp/js/WCF.ACP.Tour{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
+<script data-relocate="true">
+	//<![CDATA[
+	$(function() {
+		new WCF.ACP.Tour.TourAdd();
+		{if $action == 'edit'}
+		new WCF.ACP.Tour.RestartTour();
+		{/if}
+	});
+	//]]>
+</script>
+
+{include file='aclPermissions'}
+{if $action == 'add'}
+	{include file='aclPermissionJavaScript' containerID='groupPermissions'}
+{else}
+	{include file='aclPermissionJavaScript' containerID='groupPermissions' objectID=$tourID}
+{/if}
+
 <header class="boxHeadline">
 	<h1>{lang}wcf.acp.tour.{$action}{/lang}</h1>
-	
-	<script data-relocate="true" src="{@$__wcf->getPath('wcf')}acp/js/WCF.ACP.Tour{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}"></script>
-	<script data-relocate="true">
-		//<![CDATA[
-		$(function() {
-			new WCF.ACP.Tour.TourAdd();
-			{if $action == 'edit'}
-				new WCF.ACP.Tour.RestartTour();
-			{/if}
-		});
-		//]]>
-	</script>
 </header>
 
 {include file='formError'}
@@ -45,6 +52,11 @@
 				</dd>
 			</dl>
 			{include file='multipleLanguageInputJavascript' elementIdentifier='visibleName' forceSelection=false}
+
+			<dl id="groupPermissions">
+				<dt>{lang}wcf.acl.permissions{/lang}</dt>
+				<dd></dd>
+			</dl>
 			
 			{event name='dataFields'}
 		</fieldset>

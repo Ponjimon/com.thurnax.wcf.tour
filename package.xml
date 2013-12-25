@@ -20,15 +20,16 @@
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
+		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="sql">install.sql</instruction>
 		<instruction type="template">templates.tar</instruction>
 		
+		<instruction type="aclOption">aclOption.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
 		<instruction type="clipboardAction">clipboardAction.xml</instruction>
 		<instruction type="coreObject">coreObject.xml</instruction>
 		<instruction type="eventListener">eventListener.xml</instruction>
 		<instruction type="language">lang/*.xml</instruction>
-		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="option">option.xml</instruction>
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>

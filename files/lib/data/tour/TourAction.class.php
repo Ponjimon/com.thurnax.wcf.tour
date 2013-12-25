@@ -28,12 +28,12 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsUpdate
 	 */
-	protected $permissionsUpdate = array('admin.user.canEditTour');
+	protected $permissionsUpdate = array('admin.user.canManageTour');
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$permissionsDelete
 	 */
-	protected $permissionsDelete = array('admin.user.canEditTour');
+	protected $permissionsDelete = array('admin.user.canManageTour');
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP

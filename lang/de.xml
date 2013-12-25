@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
+	<category name="wcf.acl.option">
+		<item name="wcf.acl.option.com.thurnax.wcf.tour.canViewTour"><![CDATA[Kann Tour sehen]]></item>
+	</category>
+	
 	<category name="wcf.acp.group">
-		<item name="wcf.acp.group.option.category.admin.user.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.group.option.admin.user.canEditTour"><![CDATA[Kann Tour bearbeiten]]></item>
-		
-		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.group.option.user.tour.enableTour"><![CDATA[Kann Touren sehen]]></item>
+		<item name="wcf.acp.group.option.admin.user.canManageTour"><![CDATA[Kann Touren verwalten]]></item>
+		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Touren]]></item>
+		<item name="wcf.acp.group.option.user.tour.canViewTour"><![CDATA[Kann Touren sehen]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">

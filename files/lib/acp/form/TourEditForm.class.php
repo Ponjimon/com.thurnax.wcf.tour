@@ -4,6 +4,7 @@ use wcf\data\package\PackageCache;
 use wcf\data\tour\Tour;
 use wcf\data\tour\TourAction;
 use wcf\form\AbstractForm;
+use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
@@ -62,6 +63,7 @@ class TourEditForm extends TourAddForm {
 	public function save() {
 		AbstractForm::save();
 		
+		// update visible name
 		if (I18nHandler::getInstance()->isPlainValue('visibleName')) {
 			I18nHandler::getInstance()->remove($this->visibleName);
 		} else {
@@ -77,9 +79,13 @@ class TourEditForm extends TourAddForm {
 			'tourName' => ($this->tourName ?: null)
 		)));
 		$this->objectAction->executeAction();
-		$this->saved();
+		
+		// update acl
+		ACLHandler::getInstance()->save($this->tourID, $this->objectTypeID);
+		ACLHandler::getInstance()->disableAssignVariables();
 		
 		// show success
+		$this->saved();
 		WCF::getTPL()->assign('success', true);
 	}
 	

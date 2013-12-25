@@ -3,6 +3,7 @@ namespace wcf\data\tour;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\data\language\item\LanguageItem;
+use wcf\system\acl\ACLHandler;
 use wcf\system\cache\builder\TourStepCacheBuilder;
 use wcf\system\cache\builder\TourTriggerCacheBuilder;
 use wcf\system\language\LanguageFactory;
@@ -75,6 +76,18 @@ class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		}
 		
 		return $tour;
+	}
+	
+	/**
+	 * @see	\wcf\data\IEditableObject::deleteAll()
+	 */
+	public static function deleteAll(array $objectIDs = array()) {
+		$count = parent::deleteAll($objectIDs);
+		
+		// remove ACL values
+		ACLHandler::getInstance()->removeValues(ACLHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour'), $objectIDs);
+		
+		return $count;
 	}
 	
 	/**
