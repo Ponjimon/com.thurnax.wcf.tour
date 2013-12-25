@@ -8,6 +8,9 @@
 		//<![CDATA[
 		$(function() {
 			new WCF.ACP.Tour.TourAdd();
+			{if $action == 'edit'}
+				new WCF.ACP.Tour.RestartTour();
+			{/if}
 		});
 		//]]>
 	</script>
@@ -20,6 +23,7 @@
 	<nav>
 		<ul>
 			{if $action == 'edit'}
+				<li class="button jsTourRestart" data-object-id="{$tour->tourID}"><span class="icon icon16 icon-play"></span> <span>{lang}wcf.acp.tour.restartTour{/lang}</span></li>
 				<li><a href="{link controller='TourStepList' object=$tour}{/link}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.user.tour.step.list{/lang}</span></a></li>
 			{/if}
 			<li><a href="{link controller='TourList'}{/link}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.user.tour.list{/lang}</span></a></li>

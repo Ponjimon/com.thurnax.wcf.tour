@@ -9,51 +9,78 @@
 WCF.ACP.Tour = { };
 
 /**
- * Handler for the tour add and edit form
- *
- * @author	Magnus Kühn
- * @copyright	2013 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ * Handles the clipboard action 'move'.
+ * 
+ * @param	string		objectType
  */
-WCF.ACP.Tour.TourAdd = Class.extend({
+WCF.ACP.Tour.ClipboardMove = Class.extend({
 	/**
-	 * Initializes the form
+	 * object type used in the clipboard
+	 * @var	string
 	 */
-	init: function() {
-		this._radioChanged();
+	_objectType: undefined,
+	
+	/**
+	 * Initializes the clipboard handler
+	 * 
+	 * @param	string		objectType
+	 */
+	init: function(objectType) {
+		this._objectType = objectType;
 		
-		// bind events
-		$('input[name="tourTrigger"]').change($.proxy(this._radioChanged, this));
-		$('#tourName').keyup($.proxy(this._tourNameChanged, this));
+		// bind listener
+		$('.jsClipboardEditor').each($.proxy(function(index, container) {
+			var $container = $(container);
+			var $types = eval($container.data('types'));
+			if (WCF.inArray(this._objectType, $types)) {
+				$container.on('clipboardAction', $.proxy(this._execute, this));
+				return false;
+			}
+		}, this));
 	},
 	
 	/**
-	 * Event listener for the tour trigger radios
-	 *
-	 * @param	jQuery.Event	event
+	 * Handles clipboard actions.
+	 * 
+	 * @param	object		event
+	 * @param	string		type
+	 * @param	string		actionName
+	 * @param	object		parameters
 	 */
-	_radioChanged: function(event) {
-		$('#classNameContainer, #tourNameContainer, #manualCodeContainer').addClass('disabled');
-		switch ($('input[name="tourTrigger"]:checked').val()) {
-			case 'firstSite':
-				$('#className, #tourName').disable();
-				break;
-			case 'specificSite':
-				$('#classNameContainer').removeClass('disabled');
-				$('#className').enable().focus();
-				break;
-			case 'manual':
-				$('#tourNameContainer, #manualCodeContainer').removeClass('disabled');
-				$('#tourName').enable().focus();
+	_execute: function(event, type, actionName, parameters) {
+		if (actionName == this._objectType + '.move') {
+			if (this._didInit === undefined) {
+				$('#tourStepMoveDialog').wcfDialog({
+					title: $('#tourStepMove').text()
+				});
+				
+				// bind events
+				$('#tourStepMove').click($.proxy(this._move, this));
+				$('#tourStepMoveCancel').click(function() {
+					$('#tourStepMoveDialog').wcfDialog('close');
+				});
+			} else {
+				$('#tourStepMoveDialog').wcfDialog('show');
+			}
 		}
 	},
 	
 	/**
-	 * Event listener for the tour name input
+	 * Moves the marked tour steps to another tour
 	 */
-	_tourNameChanged: function() {
-		$('#manualCode').val("WCF.Tour.loadTour('"+$('#tourName').val()+"');");
+	_move: function() {
+		WCF.LoadingOverlayHandler.show();
+		new WCF.Action.Proxy({
+			data: {
+				className: 'wcf\\data\\tour\\TourAction',
+				actionName: 'move',
+				objectIDs: [ $('#tourStepMoveTarget').val() ]
+			},
+			autoSend: true,
+			success: function(data) {
+				location.href = data.returnValues;
+			}
+		});
 	}
 });
 
@@ -95,7 +122,7 @@ WCF.ACP.Tour.ClipboardToggle = WCF.Action.Toggle.extend({
 	
 	/**
 	 * Handles clipboard actions.
-	 *
+	 * 
 	 * @param	object		event
 	 * @param	string		type
 	 * @param	string		actionName
@@ -109,7 +136,6 @@ WCF.ACP.Tour.ClipboardToggle = WCF.Action.Toggle.extend({
 				interfaceName: 'wcf\\data\\IToggleAction',
 				objectIDs: parameters.objectIDs
 			});
-			
 			this.proxy.sendRequest();
 		}
 	},
@@ -124,77 +150,91 @@ WCF.ACP.Tour.ClipboardToggle = WCF.Action.Toggle.extend({
 });
 
 /**
- * Handles the clipboard action 'move'.
+ * Handler for the tour add and edit form
  * 
- * @param	string		objectType
+ * @author	Magnus Kühn
+ * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.thurnax.wcf.tour
  */
-WCF.ACP.Tour.ClipboardMove = Class.extend({
+WCF.ACP.Tour.TourAdd = Class.extend({
 	/**
-	 * object type used in the clipboard
-	 * @var	string
+	 * Initializes the form
 	 */
-	_objectType: undefined,
-	
-	/**
-	 * Initializes the clipboard handler
-	 * 
-	 * @param	string		objectType
-	 */
-	init: function(objectType) {
-		this._objectType = objectType;
+	init: function() {
+		this._radioChanged();
 		
-		// bind listener
-		$('.jsClipboardEditor').each($.proxy(function(index, container) {
-			var $container = $(container);
-			var $types = eval($container.data('types'));
-			if (WCF.inArray(this._objectType, $types)) {
-				$container.on('clipboardAction', $.proxy(this._execute, this));
-				return false;
-			}
-		}, this));
+		// bind events
+		$('input[name="tourTrigger"]').change($.proxy(this._radioChanged, this));
+		$('#tourName').keyup($.proxy(this._tourNameChanged, this));
 	},
 	
 	/**
-	 * Handles clipboard actions.
-	 *
-	 * @param	object		event
-	 * @param	string		type
-	 * @param	string		actionName
-	 * @param	object		parameters
+	 * Event listener for the tour trigger radios
+	 * 
+	 * @param	jQuery.Event	event
 	 */
-	_execute: function(event, type, actionName, parameters) {
-		if (actionName == this._objectType + '.move') {
-			if (this._didInit === undefined) {
-				$('#tourStepMoveDialog').wcfDialog({
-					title: $('#tourStepMove').text()
-				});
-
-				// bind events
-				$('#tourStepMove').click($.proxy(this._move, this));
-				$('#tourStepMoveCancel').click(function() {
-					$('#tourStepMoveDialog').wcfDialog('close');
-				});
-			} else {
-				$('#tourStepMoveDialog').wcfDialog('show');
-			}
+	_radioChanged: function(event) {
+		$('#classNameContainer, #tourNameContainer, #manualCodeContainer').addClass('disabled');
+		switch ($('input[name="tourTrigger"]:checked').val()) {
+			case 'firstSite':
+				$('#className, #tourName').disable();
+				break;
+			case 'specificSite':
+				$('#classNameContainer').removeClass('disabled');
+				$('#className').enable().focus();
+				break;
+			case 'manual':
+				$('#tourNameContainer, #manualCodeContainer').removeClass('disabled');
+				$('#tourName').enable().focus();
 		}
 	},
-
+	
 	/**
-	 * Moves the marked tour steps to another tour
+	 * Event listener for the tour name input
 	 */
-	_move: function() {
-		WCF.LoadingOverlayHandler.show();
+	_tourNameChanged: function() {
+		$('#manualCode').val("WCF.Tour.loadTour('"+$('#tourName').val()+"');");
+	}
+});
+
+/**
+ * Implementation for restarting a tour AJAXProxy-based
+ * 
+ * @author	Magnus Kühn
+ * @copyright	2013 Thurnax.com
+ * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package	com.thurnax.wcf.tour
+ */
+WCF.ACP.Tour.RestartTour = Class.extend({
+	/**
+	 * Initializes the action
+	 */
+	init: function() {
+		$('.jsTourRestart').click($.proxy(this._click, this));
+	},
+	
+	/**
+	 * Handel button clicks
+	 * 
+	 * @param	jQuery.Event	event
+	 */
+	_click: function(event) {
 		new WCF.Action.Proxy({
 			data: {
 				className: 'wcf\\data\\tour\\TourAction',
-				actionName: 'move',
-				objectIDs: [ $('#tourStepMoveTarget').val() ]
+				actionName: 'restartTour',
+				objectIDs: [ $(event.currentTarget).data('objectID') ]
 			},
 			autoSend: true,
-			success: function(data) {
-				location.href = data.returnValues;
-			}
+			success: $.proxy(this._success, this)
 		});
+	},
+	
+	/**
+	 * Handles successful AJAX requests.
+	 */
+	_success: function() {
+		new WCF.System.Notification().show();
 	}
-});
+})
