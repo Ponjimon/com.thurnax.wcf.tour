@@ -89,7 +89,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 */
 	public function loadTourByName() {
 		$cache = TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual');
-		$this->setObjects(array($cache[$this->parameters['tourName']]));
+		$this->setObjects(array(new TourEditor($cache[$this->parameters['tourName']])));
 		$this->objectIDs = array($this->objects[0]->tourID); // @todo Remove after merging #1606 (https://github.com/WoltLab/WCF/pull/1606)
 		return $this->loadTour();
 	}

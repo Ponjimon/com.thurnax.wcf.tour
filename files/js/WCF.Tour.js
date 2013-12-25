@@ -130,7 +130,7 @@ WCF.Tour = {
 	 * @param	string	errorThrown
 	 */
 	_failure: function(data, jqXHR, textStatus, errorThrown) {
-		return (data.stacktrace ? true : false);
+		return (data && data.stacktrace ? true : false);
 	},
 	
 	/**

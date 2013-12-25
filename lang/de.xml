@@ -5,7 +5,7 @@
 		<item name="wcf.acp.group.option.admin.user.canEditTour"><![CDATA[Kann Tour bearbeiten]]></item>
 		
 		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.group.option.user.tour.enableTour"><![CDATA[Kann Tour sehen]]></item>
+		<item name="wcf.acp.group.option.user.tour.enableTour"><![CDATA[Kann Touren sehen]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
@@ -17,7 +17,7 @@
 	</category>
 	
 	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.module_tour"><![CDATA[Tour]]></item>
+		<item name="wcf.acp.option.module_tour"><![CDATA[Tours]]></item>
 	</category>
 	
 	<category name="wcf.acp.tour">
@@ -55,7 +55,7 @@
 		<item name="wcf.acp.tour.step.edit"><![CDATA[Tourpunkt bearbeiten]]></item>
 		<item name="wcf.acp.tour.step.filter"><![CDATA[Nach Tour filtern]]></item>
 		<item name="wcf.acp.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
-		<item name="wcf.acp.tour.step.noTours"><![CDATA[Bevor Sie Tourpunkte anzeigen und erstellen können, <a href="{link controller='TourAdd'}{/link}">müssen Sie eine Tour errstellen</a>.]]></item>
+		<item name="wcf.acp.tour.step.noTours"><![CDATA[Bevor Sie Tourpunkte anzeigen und erstellen können, <a href="{link controller='TourAdd'}{/link}">müssen Sie eine Tour erstellen</a>.]]></item>
 		<item name="wcf.acp.tour.step.placement"><![CDATA[Position]]></item>
 		<item name="wcf.acp.tour.step.placement.bottom"><![CDATA[Unterhalb]]></item>
 		<item name="wcf.acp.tour.step.placement.description"><![CDATA[Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an.]]></item>
