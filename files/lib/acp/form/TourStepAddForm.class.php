@@ -131,7 +131,7 @@ class TourStepAddForm extends AbstractForm {
 		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if (isset($_POST['stepContent'])) $this->stepContent = StringUtil::trim($_POST['stepContent']);
 		if (isset($_POST['xOffset'])) $this->xOffset = intval($_POST['xOffset']);
-		if (isset($_POST['yOffset'])) $this->xOffset = intval($_POST['yOffset']);
+		if (isset($_POST['yOffset'])) $this->yOffset = intval($_POST['yOffset']);
 		$this->showPrevButton = isset($_POST['showPrevButton']);
 		if (isset($_POST['url'])) $this->url = $_POST['url'];
 	}
