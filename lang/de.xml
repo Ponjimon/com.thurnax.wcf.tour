@@ -54,6 +54,7 @@
 		<item name="wcf.acp.tour.step.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Tourpunkt löschen möchten?]]></item>
 		<item name="wcf.acp.tour.step.edit"><![CDATA[Tourpunkt bearbeiten]]></item>
 		<item name="wcf.acp.tour.step.filter"><![CDATA[Nach Tour filtern]]></item>
+		<item name="wcf.acp.tour.step.jumpToTour"><![CDATA[Tour auswählen]]></item>
 		<item name="wcf.acp.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
 		<item name="wcf.acp.tour.step.noTours"><![CDATA[Bevor Sie Tourpunkte anzeigen und erstellen können, <a href="{link controller='TourAdd'}{/link}">müssen Sie eine Tour erstellen</a>.]]></item>
 		<item name="wcf.acp.tour.step.placement"><![CDATA[Position]]></item>
