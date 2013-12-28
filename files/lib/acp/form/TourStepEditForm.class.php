@@ -20,7 +20,7 @@ class TourStepEditForm extends TourStepAddForm {
 	/**
 	 * @see	\wcf\acp\form\ACPForm::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.user.tour';
+	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.step.list';
 	
 	/**
 	 * tour step id
