@@ -3,7 +3,7 @@
 	<packageinformation>
 		<packagename>Einführungstour</packagename>
 		<packagedescription>Diese Erweiterung ermöglicht Einführungstouren: Erklären Sie die allgemeine Funktionsweise der gesamten Webseite oder auch nur einen kleinen Button.</packagedescription>
-		<version>1.0.0 RC 1</version>
+		<version>1.0.0 RC 2</version>
 		<date>2013-12-25</date>
 	</packageinformation>
 	
@@ -32,4 +32,9 @@
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 	</instructions>
+	
+	<instruction type="update" fromversion="1.0.0 RC 1">
+		<instruction type="file">files.tar</instruction>
+		<instruction type="language">lang/*.xml</instruction>
+	</instruction>
 </package>
