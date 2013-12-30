@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="en">
+	<category name="wcf.acl.option">
+		<item name="wcf.acl.option.com.thurnax.wcf.tour.canViewTour"><![CDATA[Can view tour]]></item>
+	</category>
+	
 	<category name="wcf.acp.group">
-		<item name="wcf.acp.group.option.category.admin.user.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.group.option.admin.user.canEditTour"><![CDATA[Can edit tour]]></item>
-		
-		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.group.option.user.tour.enableTour"><![CDATA[Can see tour]]></item>
+		<item name="wcf.acp.group.option.admin.user.canManageTour"><![CDATA[Can manage tours]]></item>
+		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Tours]]></item>
+		<item name="wcf.acp.group.option.user.tour.canViewTour"><![CDATA[Can view tour]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
@@ -31,7 +33,6 @@
 		<item name="wcf.acp.tour.edit"><![CDATA[Edit Tour]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Tours]]></item>
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript Code]]></item>
-		<item name="wcf.acp.tour.point.title.description"><![CDATA[Enter a title for the Tour Point. This field is NOT required.]]></item>
 		<item name="wcf.acp.tour.move"><![CDATA[Move Tourpoints]]></item>
 		<item name="wcf.acp.tour.restartTour"><![CDATA[Watch Tour again]]></item>
 		<!--<item name="wcf.acp.tour.scrollDuration"><![CDATA[Scrolldauer]]></item>-->
@@ -92,11 +93,11 @@
 		<item name="wcf.clipboard.label.com.thurnax.wcf.tour.step.marked"><![CDATA[{if $count == 1}One tourstep{else}{#$count} Toursteps/if} marked]]></item>
 	</category>
 	
-	<category name="wcf.tour.point">
-		<item name="wcf.tour.point.locales.nextBtn"><![CDATA[Next]]></item>
-		<item name="wcf.tour.point.locales.prevBtn"><![CDATA[Back]]></item>
-		<item name="wcf.tour.point.locales.doneBtn"><![CDATA[Done]]></item>
-		<item name="wcf.tour.point.locales.skipBtn"><![CDATA[Skip]]></item>
-		<item name="wcf.tour.point.locales.closeTooltip"><![CDATA[Close]]></item>
+	<category name="wcf.tour.step">
+		<item name="wcf.tour.step.locales.nextBtn"><![CDATA[Next]]></item>
+		<item name="wcf.tour.step.locales.prevBtn"><![CDATA[Back]]></item>
+		<item name="wcf.tour.step.locales.doneBtn"><![CDATA[Done]]></item>
+		<item name="wcf.tour.step.locales.skipBtn"><![CDATA[Skip]]></item>
+		<item name="wcf.tour.step.locales.closeTooltip"><![CDATA[Close]]></item>
 	</category>
 </language>
