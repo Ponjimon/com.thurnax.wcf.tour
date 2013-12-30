@@ -85,9 +85,8 @@ WCF.Tour = {
 	 */
 	_initHopscotch: function() {
 		// register helpers
-		hopscotch.registerHelper('redirect', function(url) {
-			location.href = url;
-		});
+		hopscotch.registerHelper('redirect_forward', function(url) { location.href = url; });
+		hopscotch.registerHelper('redirect_back', function(url) { history.back(); });
 		
 		WCF.System.Dependency.Manager.invoke('hopscotch');
 	},

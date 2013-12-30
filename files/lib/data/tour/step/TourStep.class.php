@@ -25,9 +25,10 @@ class TourStep extends DatabaseObject {
 	/**
 	 * Renders the tour step
 	 * 
+	 * @param	\wcf\data\tour\step\TourStep	$previousTourStep
 	 * @return	array<mixed>
 	 */
-	public function render() {
+	public function render(TourStep $previousTourStep = null) {
 		$tourStep = array(
 			'target' => $this->target,
 			'placement' => $this->placement,
@@ -40,9 +41,15 @@ class TourStep extends DatabaseObject {
 		if ($this->yOffset) $tourStep['yOffset'] = $this->yOffset;
 		$tourStep['showPrevButton'] = ($this->showPrevButton ? 1 : 0);
 		
+		// redirect forward
 		if ($this->url) {
 			$tourStep['multipage'] = true;
-			$tourStep['onNext'] = array('redirect', $this->url);
+			$tourStep['onNext'] = array('redirect_forward', $this->url);
+		}
+		
+		// redirect back
+		if ($previousTourStep && $previousTourStep->url) {
+			$tourStep['onPrev'] = array('redirect_back');
 		}
 		
 		return $tourStep;

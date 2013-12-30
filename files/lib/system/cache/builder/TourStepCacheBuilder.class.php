@@ -25,8 +25,10 @@ class TourStepCacheBuilder extends AbstractCacheBuilder {
 		
 		// render tour steps
 		$tourSteps = array();
+		$previousTourStep = null;
 		foreach ($tourStepList->getObjects() as $tourStep) {
-			$tourSteps[] = $tourStep->render();
+			$tourSteps[] = $tourStep->render($previousTourStep);
+			$previousTourStep = $tourStep;
 		}
 		
 		return $tourSteps;
