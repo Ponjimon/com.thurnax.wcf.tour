@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- @todo fix namespace -->
-<data xmlns="http://board.thurnax.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://board.thurnax.com http://board.thurnax.com/XSD/tour.xsd">
+<data xmlns="http://board.thurnax.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://board.thurnax.com http://board.thurnax.com/XSD/com.thurnax.wcf.tour/latest.xsd">
 	<import>
 		<tour tourName="com.woltlab.wcf.membersList">
 			<visibleName><![CDATA[Memberslist]]></visibleName>
