@@ -175,11 +175,11 @@ WCF.ACP.Tour.TourAdd = Class.extend({
 	 * @param	jQuery.Event	event
 	 */
 	_radioChanged: function(event) {
+		// disable everything
+		$('#className, #tourName').disable();
 		$('#classNameContainer, #tourNameContainer, #manualCodeContainer').addClass('disabled');
+		
 		switch ($('input[name="tourTrigger"]:checked').val()) {
-			case 'firstSite':
-				$('#className, #tourName').disable();
-				break;
 			case 'specificSite':
 				$('#classNameContainer').removeClass('disabled');
 				$('#className').enable().focus();
