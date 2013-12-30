@@ -19,8 +19,8 @@
 	<instructions type="install">
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
-		<instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
+		<instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
 		<instruction type="sql">install.sql</instruction>
 		<instruction type="template">templates.tar</instruction>
 		
@@ -36,6 +36,7 @@
 	</instructions>
 	
 	<instruction type="update" fromversion="1.0.0 RC 1">
+		<!-- @todo update database -->
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
