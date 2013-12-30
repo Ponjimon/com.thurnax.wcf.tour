@@ -147,6 +147,7 @@ class TourAddForm extends AbstractForm {
 		// save tour point
 		$this->objectAction = new TourAction(array(), 'create', array('data' => array(
 			'visibleName' => $this->visibleName,
+			'isDisabled' => 0,
 			'packageID' => $packageID, 
 			'tourTrigger' => $this->tourTrigger,
 			'className' => ($this->className ?: null),
