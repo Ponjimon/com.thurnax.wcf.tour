@@ -191,11 +191,13 @@ class TourStepAddForm extends AbstractForm {
 	 */
 	public function save() {
 		parent::save();
+		$packageID = PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour');
 		
 		// save tour point
 		$this->objectAction = new TourStepAction(array(), 'create', array('data' => array(
 			'tourID' => $this->tourID,
 			'showOrder' => $this->getShowOrder(),
+			'packageID' => $packageID,
 			'target' => $this->target,
 			'placement' => $this->placement,
 			'title' => $this->title,
@@ -209,7 +211,6 @@ class TourStepAddForm extends AbstractForm {
 		$this->saved();
 		
 		// save I18n-values
-		$packageID = PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour');
 		$returnValues = $this->objectAction->getReturnValues();
 		$tourStepID = $returnValues['returnValues']->tourStepID;
 		$updateData = array();

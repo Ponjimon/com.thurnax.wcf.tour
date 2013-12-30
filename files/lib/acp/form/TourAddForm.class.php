@@ -142,10 +142,12 @@ class TourAddForm extends AbstractForm {
 	 */
 	public function save() {
 		parent::save();
+		$packageID = PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour');
 		
 		// save tour point
 		$this->objectAction = new TourAction(array(), 'create', array('data' => array(
 			'visibleName' => $this->visibleName,
+			'packageID' => $packageID, 
 			'tourTrigger' => $this->tourTrigger,
 			'className' => ($this->className ?: null),
 			'tourName' => ($this->tourName ?: null)
@@ -156,7 +158,7 @@ class TourAddForm extends AbstractForm {
 		if (!I18nHandler::getInstance()->isPlainValue('visibleName')) {
 			$returnValues = $this->objectAction->getReturnValues();
 			$tourID = $returnValues['returnValues']->tourID;
-			I18nHandler::getInstance()->save('visibleName', 'wcf.acp.tour.visibleName'.$tourID, 'wcf.acp.tour', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'));
+			I18nHandler::getInstance()->save('visibleName', 'wcf.acp.tour.visibleName'.$tourID, 'wcf.acp.tour', $packageID);
 			
 			// update tour description
 			$tourEditor = new TourEditor($returnValues['returnValues']);

@@ -1,5 +1,6 @@
 <?php
 namespace wcf\acp\form;
+use wcf\data\package\PackageCache;
 use wcf\data\tour\step\TourStep;
 use wcf\data\tour\step\TourStepAction;
 use wcf\data\tour\step\TourStepList;
@@ -91,13 +92,14 @@ class TourStepEditForm extends TourStepAddForm {
 	 */
 	public function save() {
 		AbstractForm::save();
+		$packageID = PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour');
 		
 		// save title
 		if (I18nHandler::getInstance()->isPlainValue('title')) {
 			I18nHandler::getInstance()->remove($this->title);
 		} else {
 			$this->title = 'wcf.acp.tour.step.title'.$this->tourStep->tourStepID;
-			I18nHandler::getInstance()->save('title', $this->title, 'wcf.acp.tour', $this->tourStep->tourStepID);
+			I18nHandler::getInstance()->save('title', $this->title, 'wcf.acp.tour', $packageID);
 		}
 		
 		// save content
@@ -105,7 +107,7 @@ class TourStepEditForm extends TourStepAddForm {
 			I18nHandler::getInstance()->remove($this->stepContent);
 		} else {
 			$this->stepContent = 'wcf.acp.tour.step.content'.$this->tourStep->tourStepID;
-			I18nHandler::getInstance()->save('stepContent', $this->stepContent, 'wcf.acp.tour', $this->tourStep->tourStepID);
+			I18nHandler::getInstance()->save('stepContent', $this->stepContent, 'wcf.acp.tour', $packageID);
 		}
 		
 		// update tour point

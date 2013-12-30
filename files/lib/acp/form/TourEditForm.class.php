@@ -1,5 +1,6 @@
 <?php
 namespace wcf\acp\form;
+use wcf\data\package\PackageCache;
 use wcf\data\tour\Tour;
 use wcf\data\tour\TourAction;
 use wcf\form\AbstractForm;
@@ -65,7 +66,7 @@ class TourEditForm extends TourAddForm {
 			I18nHandler::getInstance()->remove($this->visibleName);
 		} else {
 			$this->visibleName = 'wcf.acp.tour.visibleName'.$this->tour->tourID;
-			I18nHandler::getInstance()->save('visibleName', $this->visibleName, 'wcf.acp.tour', $this->tour->tourID);
+			I18nHandler::getInstance()->save('visibleName', $this->visibleName, 'wcf.acp.tour', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'));
 		}
 		
 		// update tour
