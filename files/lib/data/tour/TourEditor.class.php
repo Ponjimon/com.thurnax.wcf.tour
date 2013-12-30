@@ -4,7 +4,7 @@ use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
 use wcf\data\language\item\LanguageItem;
 use wcf\system\acl\ACLHandler;
-use wcf\system\cache\builder\TourStepCacheBuilder;
+use wcf\system\cache\builder\TourCacheBuilder;
 use wcf\system\cache\builder\TourTriggerCacheBuilder;
 use wcf\system\language\LanguageFactory;
 use wcf\system\tour\TourHandler;
@@ -94,8 +94,8 @@ class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * @see	\wcf\data\IEditableCachedObject::resetCache()
 	 */
 	public static function resetCache() {
-		TourStepCacheBuilder::getInstance()->reset();
+		TourCacheBuilder::getInstance()->reset();
 		TourTriggerCacheBuilder::getInstance()->reset();
-		TourHandler::getInstance()->reset();
+		TourHandler::reset();
 	}
 }

@@ -5,8 +5,9 @@ use wcf\data\IToggleAction;
 use wcf\data\tour\step\TourStep;
 use wcf\data\tour\step\TourStepList;
 use wcf\system\cache\builder\TourTriggerCacheBuilder;
-use wcf\system\cache\builder\TourStepCacheBuilder;
+use wcf\system\cache\builder\TourCacheBuilder;
 use wcf\system\clipboard\ClipboardHandler;
+use wcf\system\exception\PermissionDeniedException;
 use wcf\system\request\LinkHandler;
 use wcf\system\tour\TourHandler;
 use wcf\system\WCF;
@@ -69,17 +70,21 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * @return        array<mixed>
 	 */
 	public function loadTour() {
-		$tourEditor = $this->getSingleObject();
-		TourHandler::getInstance()->startTour($tourEditor->getDecoratedObject());
-		TourHandler::getInstance()->takeTour($tourEditor->getDecoratedObject());
-		return TourStepCacheBuilder::getInstance()->getData(array('tourID' => $tourEditor->tourID));
+		$tour = $this->getSingleObject();
+		TourHandler::getInstance()->startTour($tour->tourID);
+		TourHandler::getInstance()->takeTour($tour->tourID);
+		
+		$tourSteps = TourCacheBuilder::getInstance()->getData(array(), 'steps');
+		return (isset($tourSteps[$tour->tourID]) ? $tourSteps[$tour->tourID] : null);
 	}
 	
 	/**
 	 * Validates the 'loadTour'-action
 	 */
 	public function validateLoadTour() {
-		WCF::getSession()->checkPermissions(array('user.tour.enableTour'));
+		if (!TourHandler::getInstance()->isEnabled()) {
+			throw new PermissionDeniedException();
+		}
 	}
 	
 	/**
@@ -89,7 +94,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 */
 	public function loadTourByName() {
 		$cache = TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual');
-		$this->setObjects(array(new TourEditor($cache[$this->parameters['tourName']])));
+		$this->setObjects(array($cache[$this->parameters['tourName']]));
 		$this->objectIDs = array($this->objects[0]->tourID); // @todo Remove after merging #1606 (https://github.com/WoltLab/WCF/pull/1606)
 		return $this->loadTour();
 	}
@@ -99,7 +104,10 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 */
 	public function validateLoadTourByName() {
 		$this->readString('tourName');
-		WCF::getSession()->checkPermissions(array('user.tour.enableTour'));
+		
+		if (!TourHandler::getInstance()->isEnabled()) {
+			throw new PermissionDeniedException();
+		}
 	}
 	
 	/**
@@ -113,7 +121,9 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * Validates the 'endTour'-action
 	 */
 	public function validateEndTour() {
-		WCF::getSession()->checkPermissions(array('user.tour.enableTour'));
+		if (!TourHandler::getInstance()->isEnabled()) {
+			throw new PermissionDeniedException();
+		}
 	}
 	
 	/**
@@ -182,7 +192,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 			$statement->execute(array($tourEditor->tourID, WCF::getUser()->userID));
 		}
 		
-		TourHandler::getInstance()->reset();
+		TourHandler::reset();
 	}
 	
 	/**

@@ -15,7 +15,7 @@ use wcf\system\tour\TourHandler;
 class TourPageListener implements IEventListener {
 	/**
 	 * cache of tours
-	 * @var	array<string>
+	 * @var	array<array>
 	 */
 	protected $cache = array();
 	
@@ -25,8 +25,8 @@ class TourPageListener implements IEventListener {
 	public function __construct() {
 		$this->cache = TourTriggerCacheBuilder::getInstance()->getData(array());
 		
-		foreach ($this->cache['firstSite'] as $tour) {
-			if (TourHandler::getInstance()->startTour($tour)) {
+		foreach ($this->cache['firstSite'] as $tourID) {
+			if (TourHandler::getInstance()->startTour($tourID)) {
 				$this->cache = false;
 				break;
 			}

@@ -34,8 +34,8 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 							FROM	".TourStep::getDatabaseTableName()." tour_step
 							WHERE	tour_step.tourID = ".$tourList->getDatabaseTableAlias().".tourID) > 0");
 		$tourList->getConditionBuilder()->add('tourTrigger = ?', array('firstSite'));
-		$tourList->readObjects();
-		return $tourList->getObjects();
+		$tourList->readObjectIDs();
+		return $tourList->getObjectIDs();
 	}
 	
 	/**
@@ -52,12 +52,12 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 		$tourList->readObjects();
 		
 		// use class name as key
-		$tours = array();
+		$tourIDs = array();
 		foreach ($tourList->getObjects() as $tour) {
-			$tours[$tour->className] = $tour;
+			$tourIDs[$tour->className] = $tour->tourID;
 		}
 		
-		return $tours;
+		return $tourIDs;
 	}
 	
 	/**
@@ -72,13 +72,13 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 							WHERE	tour_step.tourID = ".$tourList->getDatabaseTableAlias().".tourID) > 0");
 		$tourList->getConditionBuilder()->add('tourTrigger = ?', array('manual'));
 		$tourList->readObjects();
-
+		
 		// use tour name as key
-		$tours = array();
+		$tourIDs = array();
 		foreach ($tourList->getObjects() as $tour) {
-			$tours[$tour->tourName] = $tour;
+			$tourIDs[$tour->tourName] = $tour->tourID;
 		}
-
-		return $tours;
+		
+		return $tourIDs;
 	}
 }
