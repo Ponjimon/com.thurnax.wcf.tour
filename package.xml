@@ -36,9 +36,15 @@
 	</instructions>
 	
 	<instruction type="update" fromversion="1.0.0 RC 1">
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
+		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
 		 
+		<instruction type="aclOption">aclOption.xml</instruction>
+		<instruction type="acpMenu">acpMenu.xml</instruction>
 		<instruction type="language">lang/*.xml</instruction>
+		<instruction type="option">option.xml</instruction>
+		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 	</instruction>
 </package>
