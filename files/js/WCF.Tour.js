@@ -111,7 +111,8 @@ WCF.Tour = {
 				},
 				steps: data.returnValues,
 				onEnd: $.proxy(this._end, this),
-				onClose: $.proxy(this._end, this)
+				onClose: $.proxy(this._end, this),
+				onError: $.proxy(this._error, this)
 			};
 			
 			// start tour after hopscotch is loaded
@@ -143,5 +144,19 @@ WCF.Tour = {
 			actionName: 'endTour'
 		});
 		this._proxy.sendRequest();
+	},
+
+	/**
+	 * Invoked when the specified target element doesn't exist on the page.
+	 */
+	_error: function() {
+		console.log('[WCF.Tour]: An error occurred while showing the tour with ID '+this._activeTourID+'.');
+		
+		// wait for hopscotch to end the tour
+		setTimeout($.proxy(function() {
+			if (hopscotch.getCurrStepNum() === 0) { // this was the last step
+				this._end();
+			}
+		}, this), 100);
 	}
 };
