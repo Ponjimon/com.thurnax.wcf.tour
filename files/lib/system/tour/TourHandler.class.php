@@ -103,7 +103,6 @@ class TourHandler extends SingletonFactory {
 	 * @return	boolean
 	 */
 	public function startTour($tourID) {
-//		var_dump(!$this->getActiveTour() && !in_array($tourID, $this->userCache['takenTours']));
 		if (!$this->getActiveTour() && !in_array($tourID, $this->userCache['takenTours']) && $this->canViewTour($tourID)) {
 			WCF::getSession()->register(self::SESSION_FIELD, $tourID);
 			return true;
@@ -147,13 +146,10 @@ class TourHandler extends SingletonFactory {
 	 * @return	boolean
 	 */
 	protected function canViewTour($tourID) {
-//		var_dump($tourID);
 		if (!$this->isEnabled() || !isset($this->viewableTourCache[$tourID])) {
 			return false;
 		}
-//		var_dump($this->viewableTourCache[$tourID]->getPermission());
-//		var_dump(WCF::getSession()->getPermission('user.tour.canViewTour'));
-//		var_dump($this->viewableTourCache[$tourID]->getPermission() ?: WCF::getSession()->getPermission('user.tour.canViewTour'));
+		
 		return ($this->viewableTourCache[$tourID]->getPermission() ?: WCF::getSession()->getPermission('user.tour.canViewTour'));
 	}
 	
