@@ -9,4 +9,8 @@
 			</option>
 		</options>
 	</import>
+	<delete>
+		<optioncategory name="tour.settings" />
+		<optioncategory name="tour" />
+	</delete>
 </data>
