@@ -30,7 +30,7 @@
 		<item name="wcf.acp.tour.delete.sure"><![CDATA[Do you really want to delete this tour ({$tour->tourName|language})?]]></item>
 		<item name="wcf.acp.tour.edit"><![CDATA[Edit Tour]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Tours]]></item>
-		<item name="wcf.acp.tour.manualCode><![CDATA[JavaScript Code]]></item>
+		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript Code]]></item>
 		<item name="wcf.acp.tour.point.title.description"><![CDATA[Enter a title for the Tour Point. This field is NOT required.]]></item>
 		<item name="wcf.acp.tour.move"><![CDATA[Move Tourpoints]]></item>
 		<item name="wcf.acp.tour.restartTour"><![CDATA[Watch Tour again]]></item>
