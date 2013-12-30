@@ -2,9 +2,10 @@
 DROP TABLE IF EXISTS wcf1_tour;
 CREATE TABLE wcf1_tour (
 	tourID INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	isDisabled TINYINT(1) NOT NULL DEFAULT 0,
 	visibleName VARCHAR(255) NOT NULL,
-	tourTrigger VARCHAR(255) NOT NULL DEFAULT 'firstSite',
+	isDisabled TINYINT(1) NOT NULL DEFAULT 1,
+	packageID INT(10) NOT NULL,
+	tourTrigger ENUM('firstSite', 'specificSite', 'manual') NOT NULL DEFAULT 'firstSite',
 	className VARCHAR(255) NULL DEFAULT NULL,
 	tourName VARCHAR(255) NULL DEFAULT NULL,
 	
@@ -17,8 +18,9 @@ CREATE TABLE wcf1_tour_step (
 	tourID INT(10) NOT NULL,
 	showOrder INT(10) NOT NULL,
 	isDisabled TINYINT(1) NOT NULL DEFAULT 0,
+	packageID INT(10) NOT NULL,
 	target VARCHAR(255) NOT NULL,
-	placement ENUM('top', 'bottom', 'right', 'left') NOT NULL DEFAULT 'right',
+	placement ENUM('top', 'bottom', 'left', 'right') NOT NULL DEFAULT 'left',
 	title VARCHAR(255) NOT NULL DEFAULT '',
 	content MEDIUMTEXT NOT NULL,
 	xOffset INT(10) NOT NULL DEFAULT 0,
@@ -39,6 +41,8 @@ CREATE TABLE wcf1_tour_user (
 );
 
 /* foreign keys */
+ALTER TABLE wcf1_tour ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 ALTER TABLE wcf1_tour_step ADD FOREIGN KEY (tourID) REFERENCES wcf1_tour (tourID) ON DELETE CASCADE;
+ALTER TABLE wcf1_tour_step ADD FOREIGN KEY (packageID) REFERENCES wcf1_package (packageID) ON DELETE CASCADE;
 ALTER TABLE wcf1_tour_user ADD FOREIGN KEY (tourID) REFERENCES wcf1_tour (tourID) ON DELETE CASCADE;
 ALTER TABLE wcf1_tour_user ADD FOREIGN KEY (userID) REFERENCES wcf1_user (userID) ON DELETE CASCADE;

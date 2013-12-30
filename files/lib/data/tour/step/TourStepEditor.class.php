@@ -2,9 +2,12 @@
 namespace wcf\data\tour\step;
 use wcf\data\DatabaseObjectEditor;
 use wcf\data\IEditableCachedObject;
+use wcf\data\language\item\LanguageItem;
 use wcf\system\cache\builder\TourStepCacheBuilder;
 use wcf\system\cache\builder\TourTriggerCacheBuilder;
+use wcf\system\language\LanguageFactory;
 use wcf\system\tour\TourHandler;
+use wcf\system\WCF;
 
 /**
  * Provides functions to edit tour steps.
@@ -19,6 +22,85 @@ class TourStepEditor extends DatabaseObjectEditor implements IEditableCachedObje
 	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\tour\step\TourStep';
+	
+	/**
+	 * @see	\wcf\data\IEditableObject::create()
+	 */
+	public static function create(array $parameters = array()) {
+		// get I18n fields
+		list($title, $parameters) = self::getI18nField($parameters, 'title');
+		list($content, $parameters) = self::getI18nField($parameters, 'content');
+		
+		$tourStep = parent::create($parameters);
+		
+		// save I18n fields
+		if (!empty($title)) self::saveI18nField($title, 'title', $tourStep);
+		if (!empty($content)) self::saveI18nField($content, 'content', $tourStep);
+		
+		return $tourStep;
+	}
+	
+	/**
+	 * Gets the values for an I18n-field
+	 *
+	 * @param	array	$parameters
+	 * @param	string	$field
+	 * @return	array<string>
+	 */
+	protected static function getI18nField(array $parameters, $field) {
+		$values = array();
+		if (isset($parameters[$field]) && is_array($parameters[$field])) {
+			if (count($parameters[$field]) > 1) {
+				$values = $parameters[$field];
+				$parameters[$field] = '';
+			} else {
+				$parameters[$field] = reset($parameters[$field]);
+			}
+		}
+		
+		return array($values, $parameters);
+	}
+	
+	/**
+	 * Saves the values for an I18n-field
+	 * 
+	 * @param	array<string>			$values
+	 * @param	string				$field
+	 * @param	\wcf\data\tour\step\TourStep	$tourStep
+	 */
+	protected static function saveI18nField($values, $field, TourStep $tourStep) {
+		if (isset($values[''])) { // set default value
+			$defaultValue = $values[''];
+		} else if (isset($values['en'])) { // fallback to English
+			$defaultValue = $values['en'];
+		} else if (isset($values[WCF::getLanguage()->getFixedLanguageCode()])) { // fallback to the language of the current user
+			$defaultValue = $values[WCF::getLanguage()->getFixedLanguageCode()];
+		} else { // fallback to first description
+			$defaultValue = reset($values);
+		}
+		
+		// prepare statement
+		$sql = "INSERT INTO	" . LanguageItem::getDatabaseTableName() . "
+					(languageID, languageItem, languageItemValue, languageCategoryID, packageID)
+			VALUES		(?, ?, ?, ?, ?)";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		
+		// insert into all languages
+		$languages = LanguageFactory::getInstance()->getLanguages();
+		$languageCategory = LanguageFactory::getInstance()->getCategory('wcf.acp.tour');
+		foreach ($languages as $language) {
+			$value = $defaultValue;
+			if (isset($values[$language->languageCode])) {
+				$value = $values[$language->languageCode];
+			}
+			
+			$statement->execute(array($language->languageID, 'wcf.acp.tour.step.'.$field.$tourStep->tourStepID, $value, $languageCategory->languageCategoryID, $tourStep->packageID));
+		}
+		
+		// update tour
+		$tourStepEditor = new self($tourStep);
+		$tourStepEditor->update(array($field => 'wcf.acp.tour.step.'.$field.$tourStep->tourStepID));
+	}
 	
 	/**
 	 * @see	\wcf\data\IEditableCachedObject::resetCache()

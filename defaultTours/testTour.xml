@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @todo fix namespace -->
+<data xmlns="http://board.thurnax.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://board.thurnax.com http://board.thurnax.com/XSD/tour.xsd">
+	<import>
+		<tour tourName="com.woltlab.wcf.membersList">
+			<visibleName><![CDATA[Memberslist]]></visibleName>
+			<visibleName language="de"><![CDATA[Mitgliederliste]]></visibleName>
+			<tourTrigger>specificSite</tourTrigger>
+			<className>wcf\page\MembersListPage</className>
+			<steps>
+				<step>
+					<target>.sidebar</target>
+					<content><![CDATA[This is the sidebar.]]></content>
+					<content language="de"><![CDATA[Das ist die Sidebar.]]></content>
+				</step>
+				<step>
+					<target>#mainMenu</target>
+					<placement>right</placement>
+					<title><![CDATA[ABC]]></title>
+					<title language="de"><![CDATA[DEF]]></title>
+					<content><![CDATA[Das ist die Navigation.]]></content>
+					<url>http://localhost/WCF/Dummy-App/index.php/ConversationList/</url>
+				</step>
+				<step>
+					<showOrder>1</showOrder>
+					<target>#unreadConversations</target>
+					<placement>bottom</placement>
+					<title><![CDATA[Conversations]]></title>
+					<title language="de"><![CDATA[Konversationen]]></title>
+					<content><![CDATA[You can see and start conversations here.]]></content>
+					<content language="de"><![CDATA[Hier können Sie Konversationen lesen und starten.]]></content>
+				</step>
+			</steps>
+		</tour>
+	</import>
+</data>

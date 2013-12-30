@@ -52,6 +52,7 @@
 				<include name="*.tar" />
 				<include name="*.xml" />
 				<exclude name="build.xml" />
+				<include name="defaultTours/**" />
 				<include name="lang/**" />
 				<include name="LICENSE" />
 			</tarfileset>
