@@ -150,7 +150,8 @@ class TourHandler extends SingletonFactory {
 			return false;
 		}
 		
-		return ($this->viewableTourCache[$tourID]->getPermission() ?: WCF::getSession()->getPermission('user.tour.canViewTour'));
+		$aclPermission = $this->viewableTourCache[$tourID]->getPermission();
+		return ($aclPermission === null ? WCF::getSession()->getPermission('user.tour.canViewTour') : $aclPermission);
 	}
 	
 	/**

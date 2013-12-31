@@ -51,18 +51,18 @@ class ViewableTour extends DatabaseObjectDecorator {
 	public function getPermission() {
 		// validate by user id
 		if (WCF::getUser()->userID) {
-			if (isset($this->permissions['user'][WCF::getUser()->userID]) && isset($this->permissions['user'][WCF::getUser()->userID]) && $this->permissions['user'][WCF::getUser()->userID]) {
-				return true;
+			if (isset($this->permissions['user'][WCF::getUser()->userID]) && isset($this->permissions['user'][WCF::getUser()->userID])) {
+				return $this->permissions['user'][WCF::getUser()->userID];
 			}
 		}
 		
 		// validate by group id
 		foreach (WCF::getUser()->getGroupIDs() as $groupID) {
-			if (isset($this->permissions['group'][$groupID]) && isset($this->permissions['group'][$groupID]) && $this->permissions['group'][$groupID]) {
-				return true;
+			if (isset($this->permissions['group'][$groupID]) && isset($this->permissions['group'][$groupID])) {
+				return $this->permissions['group'][$groupID];
 			}
 		}
 		
-		return false;
+		return null;
 	}
 }
