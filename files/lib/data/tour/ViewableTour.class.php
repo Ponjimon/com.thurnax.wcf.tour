@@ -30,7 +30,7 @@ class ViewableTour extends DatabaseObjectDecorator {
 	 * @param	integer	$value
 	 */
 	public function setGroupPermission($userID, $value) {
-		$this->permissions['group'][$userID] = (boolean) $value;
+		$this->permissions['group'][$userID] = ($value == "1" ? true : false);
 	}
 	
 	/**
@@ -40,7 +40,7 @@ class ViewableTour extends DatabaseObjectDecorator {
 	 * @param	integer	$value
 	 */
 	public function setUserPermission($userID, $value) {
-		$this->permissions['user'][$userID] = (boolean) $value;
+		$this->permissions['user'][$userID] = ($value == "1" ? true : false);
 	}
 	
 	/**
