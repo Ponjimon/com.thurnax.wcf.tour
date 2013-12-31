@@ -18,7 +18,6 @@
 	<xs:complexType name="import">
 		<xs:sequence>
 			<xs:element name="tour" maxOccurs="unbounded">
-				<!-- @todo make tour name attribute unique -->
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="isDisabled" type="woltlab_boolean" default="0" minOccurs="0" />
@@ -32,7 +31,7 @@
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
-						<xs:element name="className" type="woltlab_varchar" default="" minOccurs="0" />
+						<xs:element name="className" type="woltlab_varchar" minOccurs="0" />
 						<xs:element name="steps">
 							<xs:complexType>
 								<xs:sequence>
@@ -75,10 +74,6 @@
 					</xs:sequence> 
 					<xs:attribute name="tourName" type="woltlab_varchar" use="required" /> <!-- this is required for identification by the PIP -->
 				</xs:complexType>
-				<xs:unique name="unique-tourName">
-					<xs:selector xpath="tour" />
-					<xs:field xpath="@tourName" />
-				</xs:unique>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
@@ -91,7 +86,6 @@
 	</xs:complexType>
 	
 	<!-- multilingual element type -->
-	<!-- @todo make language attribute unique -->
 	<xs:complexType name="tour_multilingual">
 		<xs:simpleContent>
 			<xs:extension base="woltlab_varchar">

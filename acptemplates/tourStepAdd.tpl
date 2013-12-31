@@ -25,25 +25,7 @@
 <div class="contentNavigation">
 	<nav>
 		<ul>
-			{if $action == 'add'}
-				<li><a href="{link controller='TourStepList'}{/link}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.tour.step.list{/lang}</span></a></li>
-			{else}
-				<li id="jumpToTourStep" class="button dropdown">
-					<div class="dropdownToggle" data-toggle="jumpToTourStep"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.tour.step.jumpToTourStep{/lang}</span></div>
-					<ol class="dropdownMenu">
-						{foreach from=$availableTourSteps item=availableTourStep}
-							<li><a href="{link controller='TourStepEdit' id=$availableTourStep->tourStepID}{/link}">{$availableTourStep->target|tableWordwrap}: {$availableTourStep->content|tableWordwrap|language}</a></li>
-						{/foreach}
-					</ol>
-				</li>	
-				<li id="createNextTourStep">
-					<a href="{link controller='TourStepAdd'}{/link}" class="button">
-						<span class="icon icon16 icon-plus"></span>
-						<span>{lang}wcf.acp.tour.step.add{/lang}</span>
-					</a>
-				</li>				
-				<li><a href="{link controller='TourStepList' object=$tours[$tourID]}{/link}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.tour.step.list{/lang}</span></a></li>
-			{/if}
+			<li><a href="{if $tourID}{link controller='TourStepList' object=$tours[$tourID]}{/link}{else}{link controller='TourStepList' object=$tours|current}{/link}{/if}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.tour.step.list{/lang}</span></a></li>
 			{event name='contentNavigationButtons'}
 		</ul>
 	</nav>

@@ -3,7 +3,6 @@ namespace wcf\acp\form;
 use wcf\data\package\PackageCache;
 use wcf\data\tour\step\TourStep;
 use wcf\data\tour\step\TourStepAction;
-use wcf\data\tour\step\TourStepList;
 use wcf\form\AbstractForm;
 use wcf\system\exception\IllegalLinkException;
 use wcf\system\language\I18nHandler;
@@ -21,7 +20,7 @@ class TourStepEditForm extends TourStepAddForm {
 	/**
 	 * @see	\wcf\acp\form\ACPForm::$activeMenuItem
 	 */
-	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.step.list';
+	public $activeMenuItem = 'wcf.acp.menu.link.user.tour';
 	
 	/**
 	 * tour step id
@@ -34,12 +33,6 @@ class TourStepEditForm extends TourStepAddForm {
 	 * @var	\wcf\data\tour\step\TourStep
 	 */
 	public $tourStep = null;
-	
-	/**
-	 * available tour steps
-	 * @var	array<\wcf\data\tour\step\TourStep>
-	 */
-	public $availableTourSteps = array();
 	
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -90,12 +83,6 @@ class TourStepEditForm extends TourStepAddForm {
 			$this->onShow = $this->tourStep->onShow;
 			$this->onCTA = $this->tourStep->onCTA;
 		}
-		
-		// read available tour steps
-		$tourStepList = new TourStepList();
-		$tourStepList->getConditionBuilder()->add('tourID = ?', array($this->tourID));	
-		$tourStepList->readObjects();
-		$this->availableTourSteps = $tourStepList->getObjects();
 	}
 	
 	/**
@@ -167,8 +154,7 @@ class TourStepEditForm extends TourStepAddForm {
 		WCF::getTPL()->assign(array(
 			'action' => 'edit',
 			'tourStepID' => $this->tourStepID,
-			'tourStep' => $this->tourStep,
-			'availableTourSteps' => $this->availableTourSteps
+			'tourStep' => $this->tourStep
 		));
 	}
 }
