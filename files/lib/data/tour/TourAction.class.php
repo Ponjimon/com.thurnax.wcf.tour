@@ -39,12 +39,17 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$requireACP
 	 */
-	protected $requireACP = array('update', 'delete', 'move');
+	protected $requireACP = array('update', 'delete', 'move', 'restartTour');
 	
 	/**
 	 * @see	\wcf\data\AbstractDatabaseObjectAction::$resetCache
 	 */
 	protected $resetCache = array('create', 'delete', 'toggle', 'update', 'updatePosition', 'move');
+	
+	/**
+	 * @see	\wcf\data\AbstractDatabaseObjectAction::$allowGuestAccess
+	 */
+	protected $allowGuestAccess = array('loadTour', 'endTour');
 	
 	/**
 	 * @see	\wcf\data\IToggleAction::toggle()
@@ -74,6 +79,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 		TourHandler::getInstance()->startTour($tour->tourID);
 		TourHandler::getInstance()->takeTour($tour->tourID);
 		
+		// get tour steps
 		$tourSteps = TourCacheBuilder::getInstance()->getData(array(), 'steps');
 		return (isset($tourSteps[$tour->tourID]) ? $tourSteps[$tour->tourID] : null);
 	}
@@ -93,8 +99,8 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * @return        array<mixed>
 	 */
 	public function loadTourByName() {
-		$cache = TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual');
-		$this->setObjects(array($cache[$this->parameters['tourName']]));
+		$manualTours = TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual');
+		$this->setObjects(array($manualTours[$this->parameters['tourName']]));
 		$this->objectIDs = array($this->objects[0]->tourID); // @todo Remove after merging #1606 (https://github.com/WoltLab/WCF/pull/1606)
 		return $this->loadTour();
 	}

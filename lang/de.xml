@@ -19,7 +19,7 @@
 	</category>
 	
 	<category name="wcf.acp.option">
-		<item name="wcf.acp.option.module_tour"><![CDATA[Touren]]></item>
+		<item name="wcf.acp.option.module_tour"><![CDATA[Einführungstouren]]></item>
 	</category>
 	
 	<category name="wcf.acp.tour">
@@ -35,8 +35,6 @@
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript-Code]]></item>
 		<item name="wcf.acp.tour.move"><![CDATA[Tourpunkte verschieben]]></item>
 		<item name="wcf.acp.tour.restartTour"><![CDATA[Tour erneut ansehen]]></item>
-		<!--<item name="wcf.acp.tour.scrollDuration"><![CDATA[Scrolldauer]]></item>-->
-		<!--<item name="wcf.acp.tour.scrollDuration.description"><![CDATA[Geben Sie hier die Zeit in Millisekunden ein, in der die Seite zum nächsten Tourpunkt scrollen soll.]]></item>-->
 		<item name="wcf.acp.tour.tourName"><![CDATA[Bezeichner]]></item>
 		<item name="wcf.acp.tour.tourName.description"><![CDATA[Dieser Name wird für die JS-API zum starten der Tour verwendet. Es wird empfolen dieses Feld nicht nachträglich zu ändern.]]></item>
 		<item name="wcf.acp.tour.tourName.error.notUnique"><![CDATA[Dieser Name wird bereits verwendet. Bitte wählen Sie einen anderen.]]></item>

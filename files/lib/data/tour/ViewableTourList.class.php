@@ -23,17 +23,19 @@ class ViewableTourList extends TourList {
 		parent::readObjects();
 		
 		// add ACL permissions
-		$permissions = ACLHandler::getInstance()->getPermissions(ACLHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour'), $this->getObjectIDs());
-		foreach ($this->objects as $tourID => $viewableTour) {
-			if (isset($permissions['group'][$tourID])) { // group permissions
-				foreach ($permissions['group'][$tourID] as $groupID => $options) {
-					$viewableTour->setGroupPermission($groupID, array_pop($options));
+		if ($this->getObjectIDs()) {
+			$permissions = ACLHandler::getInstance()->getPermissions(ACLHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour'), $this->getObjectIDs());
+			foreach ($this->objects as $tourID => $viewableTour) {
+				if (isset($permissions['group'][$tourID])) { // group permissions
+					foreach ($permissions['group'][$tourID] as $groupID => $options) {
+						$viewableTour->setGroupPermission($groupID, array_pop($options));
+					}
 				}
-			}
-			
-			if (isset($permissions['user'][$tourID])) { // user permissions
-				foreach ($permissions['user'][$tourID] as $userID => $options) {
-					$viewableTour->setUserPermission($userID, array_pop($options));
+				
+				if (isset($permissions['user'][$tourID])) { // user permissions
+					foreach ($permissions['user'][$tourID] as $userID => $options) {
+						$viewableTour->setUserPermission($userID, array_pop($options));
+					}
 				}
 			}
 		}

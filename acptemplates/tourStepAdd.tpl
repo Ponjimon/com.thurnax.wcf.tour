@@ -98,7 +98,7 @@
 				</dl>
 				{include file='multipleLanguageInputJavascript' elementIdentifier='stepContent' forceSelection=false}
 				
-				{event name='generalFields'}
+				{event name='dataFields'}
 			</fieldset>
 			
 			<fieldset>

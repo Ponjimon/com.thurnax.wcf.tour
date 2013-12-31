@@ -51,8 +51,9 @@ class ViewableTour extends DatabaseObjectDecorator {
 	public function getPermission() {
 		// validate by user id
 		if (WCF::getUser()->userID) {
-			if (isset($this->permissions['user'][WCF::getUser()->userID]) && isset($this->permissions['user'][WCF::getUser()->userID])) {
-				return $this->permissions['user'][WCF::getUser()->userID];
+			$userID = WCF::getUser()->userID;
+			if (isset($this->permissions['user'][$userID]) && isset($this->permissions['user'][$userID])) {
+				return $this->permissions['user'][$userID];
 			}
 		}
 		

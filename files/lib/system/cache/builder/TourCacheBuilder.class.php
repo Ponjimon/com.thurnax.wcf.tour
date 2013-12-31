@@ -1,9 +1,7 @@
 <?php
 namespace wcf\system\cache\builder;
 use wcf\data\tour\step\TourStepList;
-use wcf\data\tour\Tour;
 use wcf\data\tour\ViewableTourList;
-use wcf\system\acl\ACLHandler;
 
 /**
  * Caches the rendered tour steps for a tour
@@ -26,7 +24,7 @@ class TourCacheBuilder extends AbstractCacheBuilder {
 		$data['viewableTours'] = $viewableTourList->getObjects();
 		
 		// fetch tour steps
-		foreach ($viewableTourList->getObjectIDs() as $tourID) {
+		foreach ($viewableTourList->getObjects() as $tourID => $tour) {
 			$tourStepList = new TourStepList();
 			$tourStepList->getConditionBuilder()->add('tourID = ?', array($tourID));
 			$tourStepList->getConditionBuilder()->add('isDisabled = ?', array(0));
