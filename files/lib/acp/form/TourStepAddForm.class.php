@@ -231,6 +231,11 @@ class TourStepAddForm extends AbstractForm {
 				throw new UserInputException('ctaLabel', 'multilingual');
 			}
 		}
+		
+		// validate to use either url or onNext
+		if ($this->url && $this->onNext) {
+			throw new UserInputException('eitherUrlOrOnNext');
+		}
 	}
 	
 	/**

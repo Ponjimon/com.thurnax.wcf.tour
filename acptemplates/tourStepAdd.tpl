@@ -146,10 +146,11 @@
 					</dd>
 				</dl>
 				
-				<dl{if $errorField == 'url'} class="formError"{/if}>
+				<dl{if $errorField == 'eitherUrlOrOnNext'} class="formError"{/if}>
 					<dt><label for="yOffset">{lang}wcf.acp.tour.step.url{/lang}</label></dt>
 					<dd>
 						<input type="url" id="url" name="url" value="{$url}" class="long" />
+						{if $errorField == 'eitherUrlOrOnNext'}<small class="innerError">{lang}wcf.acp.tour.step.eitherUrlOrOnNext{/lang}</small>{/if}
 						<small>{lang}wcf.acp.tour.step.url.description{/lang}</small>
 					</dd>
 				</dl>
@@ -185,11 +186,12 @@
 					<dt><label for="onNext">{lang}wcf.acp.tour.step.onNext{/lang}</label></dt>
 					<dd>
 						<textarea id="onNext" name="onNext" rows="10" cols="40">{$onNext}</textarea>
+						{if $errorField == 'eitherUrlOrOnNext'}<small class="innerError">{lang}wcf.acp.tour.step.eitherUrlOrOnNext{/lang}</small>{/if}
 						<small>{lang}wcf.acp.tour.step.onNext.description{/lang}</small>
 					</dd>
 				</dl>
-				
-				<dl>
+
+				<dl{if $errorField == 'eitherUrlOrOnNext'} class="formError"{/if}>
 					<dt><label for="onShow">{lang}wcf.acp.tour.step.onShow{/lang}</label></dt>
 					<dd>
 						<textarea id="onShow" name="onShow" rows="10" cols="40">{$onShow}</textarea>
