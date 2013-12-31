@@ -2,7 +2,7 @@
  * ACP tour related classes.
  *
  * @author	Magnus Kühn
- * @copyright	2013 Thurnax.com
+ * @copyright	2013-2014 Thurnax.com
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
@@ -153,7 +153,7 @@ WCF.ACP.Tour.ClipboardToggle = WCF.Action.Toggle.extend({
  * Handler for the tour add and edit form
  * 
  * @author	Magnus Kühn
- * @copyright	2013 Thurnax.com
+ * @copyright	2013-2014 Thurnax.com
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
@@ -202,7 +202,7 @@ WCF.ACP.Tour.TourAdd = Class.extend({
  * Implementation for restarting a tour AJAXProxy-based
  * 
  * @author	Magnus Kühn
- * @copyright	2013 Thurnax.com
+ * @copyright	2013-2014 Thurnax.com
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */

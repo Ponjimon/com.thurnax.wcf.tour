@@ -10,7 +10,7 @@ use wcf\system\WCF;
  * Lists available tour steps.
  * 
  * @author	Magnus Kühn
- * @copyright	2013 Thurnax.com
+ * @copyright	2013-2014 Thurnax.com
  * @package	com.thurnax.wcf.tour
  */
 class TourStepListPage extends SortablePage {
