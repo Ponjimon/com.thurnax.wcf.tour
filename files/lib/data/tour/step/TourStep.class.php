@@ -2,6 +2,7 @@
 namespace wcf\data\tour\step;
 use wcf\data\DatabaseObject;
 use wcf\system\WCF;
+use wcf\util\StringUtil;
 
 /**
  * Represents a tour step.
@@ -37,9 +38,9 @@ class TourStep extends DatabaseObject {
 		
 		// add optional fields
 		if ($this->title) $tourStep['title'] = $this->compileField('title');
+		$tourStep['showPrevButton'] = ($this->showPrevButton ? 1 : 0);
 		if ($this->xOffset) $tourStep['xOffset'] = $this->xOffset;
 		if ($this->yOffset) $tourStep['yOffset'] = $this->yOffset;
-		$tourStep['showPrevButton'] = ($this->showPrevButton ? 1 : 0);
 		
 		// redirect forward
 		if ($this->url) {
@@ -51,6 +52,18 @@ class TourStep extends DatabaseObject {
 		if ($previousTourStep && $previousTourStep->url) {
 			$tourStep['onPrev'] = array('redirect_back');
 		}
+		
+		// cta button
+		if ($this->ctaLabel) {
+			$tourStep['showCTAButton'] = true;
+			$tourStep['ctaLabel'] = $this->compileField('ctaLabel');
+		}
+		
+		// callbacks
+		if ($this->onPrev) $tourStep['onPrev'] = array('custom_callback', $this->onPrev);
+		if ($this->onNext) $tourStep['onNext'] = array('custom_callback', $this->onNext);
+		if ($this->onShow) $tourStep['onShow'] = array('custom_callback', $this->onShow);
+		if ($this->onCTA) $tourStep['onCTA'] = $this->onCTA; // on cta doesn't invoke helpers
 		
 		return $tourStep;
 	}

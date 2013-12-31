@@ -57,6 +57,7 @@ class TourStepEditForm extends TourStepAddForm {
 		// register I18n-items
 		I18nHandler::getInstance()->register('title');
 		I18nHandler::getInstance()->register('stepContent');
+		I18nHandler::getInstance()->register('ctaLabel');
 	}
 	
 	/**
@@ -68,16 +69,26 @@ class TourStepEditForm extends TourStepAddForm {
 		if (empty($_POST)) {
 			I18nHandler::getInstance()->setOptions('title', $this->tourStep->tourStepID, $this->tourStep->title, 'wcf.acp.tour.step.title\d+');
 			I18nHandler::getInstance()->setOptions('stepContent', $this->tourStep->tourStepID, $this->tourStep->content, 'wcf.acp.tour.step.content\d+');
+			I18nHandler::getInstance()->setOptions('ctaLabel', $this->tourStep->tourStepID, $this->tourStep->ctaLabel, 'wcf.acp.tour.step.ctaLabel\d+');
 
 			$this->tourID = $this->tourStep->tourID;
 			$this->target = $this->tourStep->target;
 			$this->placement = $this->tourStep->placement;
-			$this->title = $this->tourStep->title;
 			$this->stepContent = $this->tourStep->content;
+			
+			// optionals
+			$this->title = $this->tourStep->title;
+			$this->showPrevButton = $this->tourStep->showPrevButton;
 			$this->xOffset = $this->tourStep->xOffset;
 			$this->yOffset = $this->tourStep->yOffset;
-			$this->showPrevButton = $this->tourStep->showPrevButton;
 			$this->url = $this->tourStep->url;
+			$this->ctaLabel = $this->tourStep->ctaLabel;
+			
+			// callbacks
+			$this->onPrev = $this->tourStep->onPrev;
+			$this->onNext = $this->tourStep->onNext;
+			$this->onShow = $this->tourStep->onShow;
+			$this->onCTA = $this->tourStep->onCTA;
 		}
 		
 		// read available tour steps
@@ -110,17 +121,34 @@ class TourStepEditForm extends TourStepAddForm {
 			I18nHandler::getInstance()->save('stepContent', $this->stepContent, 'wcf.acp.tour', $packageID);
 		}
 		
+		// save cta label
+		if (I18nHandler::getInstance()->isPlainValue('ctaLabel')) {
+			I18nHandler::getInstance()->remove($this->ctaLabel);
+		} else {
+			$this->title = 'wcf.acp.tour.step.ctaLabel'.$this->tourStep->tourStepID;
+			I18nHandler::getInstance()->save('ctaLabel', $this->title, 'wcf.acp.tour', $packageID);
+		}
+		
 		// update tour point
 		$this->objectAction = new TourStepAction(array($this->tourStepID), 'update', array('data' => array(
 			'tourID' => $this->tourID,
 			'target' => $this->target,
 			'placement' => $this->placement,
-			'title' => $this->title,
 			'content' => $this->stepContent,
-			'xOffset' => $this->xOffset,
-			'yOffset' => $this->yOffset,
+			
+			// optionals
+			'title' => ($this->title ?: null),
 			'showPrevButton' => ($this->showPrevButton ? 1 : 0),
-			'url' => $this->url
+			'xOffset' => ($this->xOffset ?: null),
+			'yOffset' => ($this->yOffset ?: null),
+			'url' => ($this->url ?: null),
+			'ctaLabel' => ($this->ctaLabel ?: null),
+			
+			// callbacks
+			'onPrev' => ($this->onPrev ?: null),
+			'onNext' => ($this->onNext ?: null),
+			'onShow' => ($this->onShow ?: null),
+			'onCTA' => ($this->onCTA ?: null),
 		)));
 		$this->objectAction->executeAction();
 		$this->saved();

@@ -67,16 +67,22 @@ class TourStepAddForm extends AbstractForm {
 	public $validPlacements = array('top', 'bottom', 'left', 'right');
 	
 	/**
+	 * content
+	 * @var	string
+	 */
+	public $stepContent = '';
+	
+	/**
 	 * title
 	 * @var	string
 	 */
 	public $title = '';
 	
 	/**
-	 * content
-	 * @var	string
+	 * show previous button
+	 * @var	boolean
 	 */
-	public $stepContent = '';
+	public $showPrevButton = true;
 	
 	/**
 	 * x offset
@@ -91,16 +97,40 @@ class TourStepAddForm extends AbstractForm {
 	public $yOffset = 0;
 	
 	/**
-	 * show previous button
-	 * @var	boolean
-	 */
-	public $showPrevButton = true;
-	
-	/**
 	 * url to redirect to
 	 * @var	string
 	 */
-	public $url = null;
+	public $url = '';
+	
+	/**
+	 * call-to-action label
+	 * @var	string
+	 */
+	public $ctaLabel = '';
+	
+	/**
+	 * callback for when previous-button is clicked
+	 * @var	string
+	 */
+	public $onPrev = '';
+	
+	/**
+	 * callback for when next-button is clicked 
+	 * @var	string
+	 */
+	public $onNext = '';
+	
+	/**
+	 * callback for when step is first displayed
+	 * @var	string
+	 */
+	public $onShow = '';
+	
+	/**
+	 * callback for the optional call-to-action button
+	 * @var	string
+	 */
+	public $onCTA = '';
 	
 	/**
 	 * @see	\wcf\page\IPage::readParameters()
@@ -116,6 +146,7 @@ class TourStepAddForm extends AbstractForm {
 		// register I18n-items
 		I18nHandler::getInstance()->register('title');
 		I18nHandler::getInstance()->register('stepContent');
+		I18nHandler::getInstance()->register('ctaLabel');
 	}
 	
 	/**
@@ -128,12 +159,21 @@ class TourStepAddForm extends AbstractForm {
 		if (isset($_POST['tourID'])) $this->tourID = intval($_POST['tourID']);
 		if (isset($_POST['target'])) $this->target = $_POST['target'];
 		if (isset($_POST['placement'])) $this->placement = $_POST['placement'];
-		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
 		if (isset($_POST['stepContent'])) $this->stepContent = StringUtil::trim($_POST['stepContent']);
+		
+		// optionals
+		if (isset($_POST['title'])) $this->title = StringUtil::trim($_POST['title']);
+		$this->showPrevButton = isset($_POST['showPrevButton']);
 		if (isset($_POST['xOffset'])) $this->xOffset = intval($_POST['xOffset']);
 		if (isset($_POST['yOffset'])) $this->yOffset = intval($_POST['yOffset']);
-		$this->showPrevButton = isset($_POST['showPrevButton']);
 		if (isset($_POST['url'])) $this->url = $_POST['url'];
+		if (isset($_POST['ctaLabel'])) $this->ctaLabel = StringUtil::trim($_POST['ctaLabel']);
+		
+		// callbacks
+		if (isset($_POST['onPrev'])) $this->onPrev = StringUtil::trim($_POST['onPrev']);
+		if (isset($_POST['onNext'])) $this->onNext = StringUtil::trim($_POST['onNext']);
+		if (isset($_POST['onShow'])) $this->onShow = StringUtil::trim($_POST['onShow']);
+		if (isset($_POST['onCTA'])) $this->onCTA = StringUtil::trim($_POST['onCTA']);
 	}
 	
 	/**
@@ -184,6 +224,13 @@ class TourStepAddForm extends AbstractForm {
 				throw new UserInputException('stepContent', 'multilingual');
 			}
 		}
+		
+		// validate cta label
+		if (!I18nHandler::getInstance()->validateValue('ctaLabel')) { // optional
+			if (!I18nHandler::getInstance()->isPlainValue('ctaLabel')) {
+				throw new UserInputException('ctaLabel', 'multilingual');
+			}
+		}
 	}
 	
 	/**
@@ -200,12 +247,21 @@ class TourStepAddForm extends AbstractForm {
 			'packageID' => $packageID,
 			'target' => $this->target,
 			'placement' => $this->placement,
-			'title' => $this->title,
 			'content' => $this->stepContent,
-			'xOffset' => $this->xOffset,
-			'yOffset' => $this->yOffset,
+			
+			// optionals
+			'title' => ($this->title ?: null),
+			'xOffset' => ($this->xOffset ?: null),
+			'yOffset' => ($this->yOffset ?: null),
 			'showPrevButton' => ($this->showPrevButton ? 1 : 0),
-			'url' => $this->url
+			'url' => ($this->url ?: null),
+			'ctaLabel' => ($this->ctaLabel ?: null),
+			
+			// callbacks
+			'onPrev' => ($this->onPrev ?: null),
+			'onNext' => ($this->onNext ?: null),
+			'onShow' => ($this->onShow ?: null),
+			'onCTA' => ($this->onCTA ?: null),
 		)));
 		$this->objectAction->executeAction();
 		$this->saved();
@@ -223,6 +279,10 @@ class TourStepAddForm extends AbstractForm {
 			I18nHandler::getInstance()->save('stepContent', 'wcf.acp.tour.step.content'.$tourStepID, 'wcf.acp.tour', $packageID);
 			$updateData['content'] = 'wcf.acp.tour.step.content'.$tourStepID;
 		}
+		if (!I18nHandler::getInstance()->isPlainValue('ctaLabel')) {
+			I18nHandler::getInstance()->save('ctaLabel', 'wcf.acp.tour.step.ctaLabel'.$tourStepID, 'wcf.acp.tour', $packageID);
+			$updateData['ctaLabel'] = 'wcf.acp.tour.step.ctaLabel'.$tourStepID;
+		}
 		
 		// update tour step
 		if ($updateData) {
@@ -233,8 +293,9 @@ class TourStepAddForm extends AbstractForm {
 		// reset values
 		$this->target = $this->stepContent = $this->url = '';
 		$this->placement = 'left';
-		$this->xOffset = $this->yOffset = 0;
 		$this->showPrevButton = true;
+		$this->xOffset = $this->yOffset = 0;
+		$this->onPrev = $this->onNext = $this->onShow = $this->onCTA = '';
 		I18nHandler::getInstance()->reset();
 		
 		// show success
@@ -270,13 +331,22 @@ class TourStepAddForm extends AbstractForm {
 			'tourID' => $this->tourID,
 			'tours' => $this->tours,
 			'target' => $this->target,
-			'content' => $this->stepContent,
 			'placement' => $this->placement,
 			'validPlacements' => $this->validPlacements,
+			'content' => $this->stepContent,
+			
+			// optionals
+			'showPrevButton' => $this->showPrevButton,
 			'xOffset' => $this->xOffset,
 			'yOffset' => $this->yOffset,
-			'showPrevButton' => $this->showPrevButton,
-			'url' => $this->url
+			'url' => $this->url,
+			'ctaLabel' => $this->ctaLabel,
+			
+			// callbacks
+			'onPrev' => $this->onPrev,
+			'onNext' => $this->onNext,
+			'onShow' => $this->onShow,
+			'onCTA' => $this->onCTA
 		));
 	}
 }

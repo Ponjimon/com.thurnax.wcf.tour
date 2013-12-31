@@ -50,17 +50,30 @@
 		<item name="wcf.acp.tour.visibleName"><![CDATA[Anzeigename]]></item>
 		
 		<item name="wcf.acp.tour.step.add"><![CDATA[Tourpunkt hinzufügen]]></item>
-		<item name="wcf.acp.tour.step.advancedOptions"><![CDATA[Erweiterte Optionen]]></item>
-		<item name="wcf.acp.tour.step.advancedOptions.description"><![CDATA[Hier können Sie erweiterte Optionen angeben. Diese sind nicht erforderlich.]]></item>
+		<item name="wcf.acp.tour.step.advanced"><![CDATA[Erweiterte Optionen]]></item>
+		<item name="wcf.acp.tour.step.advanced.description"><![CDATA[Hier können Sie erweiterte Optionen angeben. Diese sind nicht erforderlich.]]></item>
+		<item name="wcf.acp.tour.step.callbacks"><![CDATA[Callbacks]]></item>
+		<item name="wcf.acp.tour.step.callbacks.description"><![CDATA[Hier können Sie Callbacks für verschiedene Ereignisse festlegen. Diese sind nicht erforderlich.]]></item>
 		<item name="wcf.acp.tour.step.content"><![CDATA[Text]]></item>
-		<item name="wcf.acp.tour.step.data"><![CDATA[Tourpunkt-Informationen]]></item>
+		<item name="wcf.acp.tour.step.ctaLabel"><![CDATA[Call-to-action Label]]></item>
+		<item name="wcf.acp.tour.step.ctaLabel.description"><![CDATA[Sie können hier das Label für einen weiteren Button, dem Call-to-action-Button angeben.]]></item>
+		<item name="wcf.acp.tour.step.data"><![CDATA[Daten]]></item>
 		<item name="wcf.acp.tour.step.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Tourpunkt löschen möchten?]]></item>
 		<item name="wcf.acp.tour.step.edit"><![CDATA[Tourpunkt bearbeiten]]></item>
 		<item name="wcf.acp.tour.step.filter"><![CDATA[Nach Tour filtern]]></item>
+		<item name="wcf.acp.tour.step.general"><![CDATA[Allgemein]]></item>
 		<item name="wcf.acp.tour.step.jumpToTour"><![CDATA[Tour auswählen]]></item>
 		<item name="wcf.acp.tour.step.jumpToTourStep"><![CDATA[Tourpunkt auswählen]]></item>
 		<item name="wcf.acp.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
 		<item name="wcf.acp.tour.step.noTours"><![CDATA[Bevor Sie Tourpunkte anzeigen und erstellen können, <a href="{link controller='TourAdd'}{/link}">müssen Sie eine Tour erstellen</a>.]]></item>
+		<item name="wcf.acp.tour.step.onCTA"><![CDATA[Call-to-action Button]]></item>
+		<item name="wcf.acp.tour.step.onCTA.description"><![CDATA[Wird beim Klicken auf den Call-to-action Button aufgerufen.]]></item>
+		<item name="wcf.acp.tour.step.onNext"><![CDATA[Zurück-Button]]></item>
+		<item name="wcf.acp.tour.step.onNext.description"><![CDATA[Wird beim Klicken auf den Zurück-Button aufgerufen.]]></item>
+		<item name="wcf.acp.tour.step.onPrev"><![CDATA[Weiter-Button]]></item>
+		<item name="wcf.acp.tour.step.onPrev.description"><![CDATA[Wird beim Klicken auf den Weiter-Button aufgerufen.]]></item>
+		<item name="wcf.acp.tour.step.onShow"><![CDATA[Beim Anzeigen]]></item>
+		<item name="wcf.acp.tour.step.onShow.description"><![CDATA[Wird beim erstmaligen Anzeigen der Tourpunktes aufgerufen.]]></item>
 		<item name="wcf.acp.tour.step.placement"><![CDATA[Position]]></item>
 		<item name="wcf.acp.tour.step.placement.bottom"><![CDATA[Unterhalb]]></item>
 		<item name="wcf.acp.tour.step.placement.description"><![CDATA[Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an.]]></item>

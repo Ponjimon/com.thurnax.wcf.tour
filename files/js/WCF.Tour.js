@@ -86,7 +86,8 @@ WCF.Tour = {
 	_initHopscotch: function() {
 		// register helpers
 		hopscotch.registerHelper('redirect_forward', function(url) { location.href = url; });
-		hopscotch.registerHelper('redirect_back', function(url) { history.back(); });
+		hopscotch.registerHelper('redirect_back', function() { history.back(); });
+		hopscotch.registerHelper('custom_callback', function(callback) { eval(callback); });
 		
 		WCF.System.Dependency.Manager.invoke('hopscotch');
 	},
@@ -108,7 +109,7 @@ WCF.Tour = {
 					skipBtn: WCF.Language.get('wcf.tour.step.locales.skipBtn'),
 					closeTooltip: WCF.Language.get('wcf.tour.step.locales.closeTooltip')
 				},
-				steps: data.returnValues,
+				steps: this._fixSteps(data.returnValues),
 				onEnd: $.proxy(this._end, this),
 				onClose: $.proxy(this._end, this),
 				onError: $.proxy(this._error, this)
@@ -119,6 +120,23 @@ WCF.Tour = {
 				hopscotch.startTour($tour);
 			});
 		}
+	},
+	
+	/**
+	 * Fixes the step array.
+	 * Callbacks for onCTA must be converted into a javascript function.
+	 * 
+	 * @param	array<object>	steps
+	 * @return	array<object>
+	 */
+	_fixSteps: function(steps) {
+		for (var i in steps) {
+			if (steps[i].onCTA !== undefined) {
+				steps[i].onCTA = new Function(steps[i].onCTA);
+			}
+		}
+		
+		return steps;
 	},
 	
 	/**
