@@ -75,6 +75,10 @@
 					</xs:sequence> 
 					<xs:attribute name="tourName" type="woltlab_varchar" use="required" /> <!-- this is required for identification by the PIP -->
 				</xs:complexType>
+				<xs:unique name="unique-tourName">
+					<xs:selector xpath="tour" />
+					<xs:field xpath="@tourName" />
+				</xs:unique>
 			</xs:element>
 		</xs:sequence>
 	</xs:complexType>
