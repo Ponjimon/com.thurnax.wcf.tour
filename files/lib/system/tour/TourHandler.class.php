@@ -20,12 +20,6 @@ class TourHandler extends SingletonFactory {
 	const SESSION_FIELD = 'activeTour';
 	
 	/**
-	 * viewable tour cache
-	 * @var	array<\wcf\data\tour\ViewableTour>
-	 */
-	protected $viewableTourCache = array();
-	
-	/**
 	 * tour state storage
 	 * @var	\wcf\system\tour\storage\ITourStateStorage
 	 */
@@ -34,10 +28,7 @@ class TourHandler extends SingletonFactory {
 	/**
 	 * @see	\wcf\system\SingletonFactory::init()
 	 */
-	protected function init() {
-		// build viewable tour cache
-		$this->viewableTourCache = TourCacheBuilder::getInstance()->getData(array(), 'viewableTours');
-		
+	protected function init() {		
 		// init tour state storage
 		if (WCF::getUser()->userID) {
 			$this->tourStateStorage = new UserTourStateStorage();
@@ -117,11 +108,12 @@ class TourHandler extends SingletonFactory {
 	 * @return	boolean
 	 */
 	public function canViewTour($tourID) {
-		if (!$this->isEnabled() || !isset($this->viewableTourCache[$tourID])) {
+		$viewableTours = TourCacheBuilder::getInstance()->getData(array(), 'viewableTours');
+		if (!$this->isEnabled() || !isset($viewableTours[$tourID])) {
 			return false;
 		}
 		
-		$aclPermission = $this->viewableTourCache[$tourID]->getPermission();
+		$aclPermission = $viewableTours[$tourID]->getPermission();
 		return ($aclPermission === null ? WCF::getSession()->getPermission('user.tour.canViewTour') : $aclPermission);
 	}
 	
