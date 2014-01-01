@@ -54,7 +54,7 @@ class UserTourStateStorage extends GuestTourStateStorage {
 			
 			// get available tours
 			foreach (TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual') as $tourName => $tourID) {
-				if (!in_array($tourID, $this->cache['takenTours']) && TourHandler::getInstance()->canViewTour($tourID)) {
+				if (!in_array($tourID, $this->cache['takenTours']) && TourHandler::canViewTour($tourID)) {
 					$this->cache['availableTours'][$tourID] = $tourName;
 				}
 			}
