@@ -12,10 +12,10 @@
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.user.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.menu.link.user.tour.list"><![CDATA[Tours]]></item>
+		<item name="wcf.acp.menu.link.user.tour.list"><![CDATA[List Tours]]></item>
 		<item name="wcf.acp.menu.link.user.tour.add"><![CDATA[Add Tour]]></item>
-		<item name="wcf.acp.menu.link.user.tour.step.list"><![CDATA[Toursteps]]></item>
-		<item name="wcf.acp.menu.link.user.tour.step.add"><![CDATA[Add Tourstep]]></item>
+		<item name="wcf.acp.menu.link.user.tour.step.list"><![CDATA[List Tour Steps]]></item>
+		<item name="wcf.acp.menu.link.user.tour.step.add"><![CDATA[Add Tour Step]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">
@@ -35,8 +35,7 @@
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript Code]]></item>
 		<item name="wcf.acp.tour.move"><![CDATA[Move Tourpoints]]></item>
 		<item name="wcf.acp.tour.restartTour"><![CDATA[Watch Tour again]]></item>
-		<!--<item name="wcf.acp.tour.scrollDuration"><![CDATA[Scrolldauer]]></item>-->
-		<!--<item name="wcf.acp.tour.scrollDuration.description"><![CDATA[Geben Sie hier die Zeit in Millisekunden ein, in der die Seite zum nächsten Tourpunkt scrollen soll.]]></item>-->
+		<item name="wcf.acp.tour.tourImportedNotice"><![CDATA[Klick here to active the imported tours.]]></item>
 		<item name="wcf.acp.tour.tourName"><![CDATA[Identifier]]></item>
 		<item name="wcf.acp.tour.tourName.description"><![CDATA[This name will be used by the JS-API. It is not recommended to change this field later.]]></item>
 		<item name="wcf.acp.tour.tourName.error.notUnique"><![CDATA[This name is already used. Please choose another.]]></item>
@@ -50,34 +49,45 @@
 		<item name="wcf.acp.tour.visibleName"><![CDATA[Visible name]]></item>
 		
 		<item name="wcf.acp.tour.step.add"><![CDATA[Add Tourstep]]></item>
-		<item name="wcf.acp.tour.step.advancedOptions"><![CDATA[Advanced Options]]></item>
-		<item name="wcf.acp.tour.step.advancedOptions.description"><![CDATA[Here you can specify advanced options. These are not required.]]></item>
+		<item name="wcf.acp.tour.step.advanced"><![CDATA[Advanced Options]]></item>
+		<item name="wcf.acp.tour.step.advanced.description"><![CDATA[Here you can specify advanced options. These are not required.]]></item>
 		<item name="wcf.acp.tour.step.content"><![CDATA[Text]]></item>
+		<item name="wcf.acp.tour.step.ctaLabel"><![CDATA[Call-to-action Label]]></item>
+		<item name="wcf.acp.tour.step.ctaLabel.description"><![CDATA[Enter the label for an additional button, the call-to-action button.]]></item>
 		<item name="wcf.acp.tour.step.data"><![CDATA[Tourstep-Informatione]]></item>
-		<item name="wcf.acp.tour.step.delete.sure"><![CDATA[Are you sure that you want to delete this tourstep?]]></item>
+		<item name="wcf.acp.tour.step.delete.sure"><![CDATA[Are you sure that you want to delete this tour step?]]></item>
 		<item name="wcf.acp.tour.step.edit"><![CDATA[Edit Tourstep]]></item>
+		<item name="wcf.acp.tour.step.eitherUrlOrOnNext"><![CDATA[You can either use a redirect or have a next-callback.]]></item>
 		<item name="wcf.acp.tour.step.filter"><![CDATA[Filter by tour]]></item>
+		<item name="wcf.acp.tour.step.general"><![CDATA[General]]></item>
 		<item name="wcf.acp.tour.step.jumpToTour"><![CDATA[Select Tour]]></item>
-		<item name="wcf.acp.tour.step.jumpToTourStep"><![CDATA[Select Tourstep]]></item>
-		<item name="wcf.acp.tour.step.list"><![CDATA[Toursteps]]></item>
-		<item name="wcf.acp.tour.step.noTours"><![CDATA[You have to <a href="{link controller='TourAdd'}{/link}">create a tour</a> before you can list and add toursteps.]]></item>
+		<item name="wcf.acp.tour.step.list"><![CDATA[Tour steps]]></item>
+		<item name="wcf.acp.tour.step.noTours"><![CDATA[<a href="{link controller='TourAdd'}{/link}">You have to create a tour</a> before you can add tour steps.]]></item>
+		<item name="wcf.acp.tour.step.onCTA"><![CDATA[Call-to-action Button]]></item>
+		<item name="wcf.acp.tour.step.onCTA.description"><![CDATA[Callback for the optional call-to-action button.]]></item>
+		<item name="wcf.acp.tour.step.onNext"><![CDATA[Next-Button]]></item>
+		<item name="wcf.acp.tour.step.onNext.description"><![CDATA[Callback for when 'Next' button is clicked. This callback may not be used together with a redirect.]]></item>
+		<item name="wcf.acp.tour.step.onPrev"><![CDATA[Previous-Button]]></item>
+		<item name="wcf.acp.tour.step.onPrev.description"><![CDATA[Callback for when 'Previous' button is clicked.]]></item>
+		<item name="wcf.acp.tour.step.onShow"><![CDATA[On Show]]></item>
+		<item name="wcf.acp.tour.step.onShow.description"><![CDATA[Callback for when step is first displayed.]]></item>
 		<item name="wcf.acp.tour.step.placement"><![CDATA[Position]]></item>
 		<item name="wcf.acp.tour.step.placement.bottom"><![CDATA[Bottom]]></item>
-		<item name="wcf.acp.tour.step.placement.description"><![CDATA[Select the position of the tourstep Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an.]]></item>
+		<item name="wcf.acp.tour.step.placement.description"><![CDATA[Select the position of the tour step.]]></item>
 		<item name="wcf.acp.tour.step.placement.left"><![CDATA[Left]]></item>
 		<item name="wcf.acp.tour.step.placement.right"><![CDATA[Right]]></item>
 		<item name="wcf.acp.tour.step.placement.top"><![CDATA[Top]]></item>
 		<item name="wcf.acp.tour.step.showOrder"><![CDATA[Order]]></item>
 		<item name="wcf.acp.tour.step.showPrevButton"><![CDATA[Show Previous-Button]]></item>
 		<item name="wcf.acp.tour.step.target"><![CDATA[DOM-Element]]></item>
-		<item name="wcf.acp.tour.step.target.description"><![CDATA[Enter the DOM-Element at which the tourstep should be displayed.]]></item>
+		<item name="wcf.acp.tour.step.target.description"><![CDATA[Enter the DOM-Element at which the tour step should be displayed.]]></item>
 		<item name="wcf.acp.tour.step.title"><![CDATA[Title]]></item>
-		<item name="wcf.acp.tour.step.title.description"><![CDATA[Enter the title of the tourstep. This field is not required.]]></item>
+		<item name="wcf.acp.tour.step.title.description"><![CDATA[Enter the title of the tour step. This field is not required.]]></item>
 		<item name="wcf.acp.tour.step.title.none"><![CDATA[No title]]></item>
 		<item name="wcf.acp.tour.step.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.tour.step.tour.description"><![CDATA[Select the tour for which you want to add toursteps.]]></item>
+		<item name="wcf.acp.tour.step.tour.description"><![CDATA[Select the tour for which you want to add tour steps.]]></item>
 		<item name="wcf.acp.tour.step.url"><![CDATA[Redirection]]></item>
-		<item name="wcf.acp.tour.step.url.description"><![CDATA[Enter the URL to which the tourstep will be redirect.]]></item>
+		<item name="wcf.acp.tour.step.url.description"><![CDATA[Enter the URL to which the tour step will be redirect.]]></item>
 		<item name="wcf.acp.tour.step.xOffset"><![CDATA[X-Offset]]></item>
 		<item name="wcf.acp.tour.step.xOffset.description"><![CDATA[Enter the offset on the X axis of the DOM-Element in pixels.]]></item>
 		<item name="wcf.acp.tour.step.yOffset"><![CDATA[Y-Offset]]></item>
@@ -86,11 +96,11 @@
 	
 	<category name="wcf.clipboard">
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.delete"><![CDATA[Delete ({#$count})]]></item>
-		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.delete.confirmMessage"><![CDATA[Dou you want to delete {if $count == 1}one tourstep{else}{#$count} toursteps{/if}?]]></item>
+		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.delete.confirmMessage"><![CDATA[Dou you want to delete {if $count == 1}one tour step{else}{#$count} tour steps{/if}?]]></item>
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.disable"><![CDATA[Disable ({#$count})]]></item>
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.enable"><![CDATA[Enable ({#$count})]]></item>
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.move"><![CDATA[Move ({#$count})]]></item>
-		<item name="wcf.clipboard.label.com.thurnax.wcf.tour.step.marked"><![CDATA[{if $count == 1}One tourstep{else}{#$count} Toursteps/if} marked]]></item>
+		<item name="wcf.clipboard.label.com.thurnax.wcf.tour.step.marked"><![CDATA[{if $count == 1}One tour step{else}{#$count} tour steps/if} marked]]></item>
 	</category>
 	
 	<category name="wcf.tour.step">
