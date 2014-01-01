@@ -40,7 +40,8 @@
 		<instruction type="file">files.tar</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
-		<instruction type="sql">update_1.0.0_rc_2.sql</instruction>
+		<instruction type="script">acp/update_com.thurnax.wcf.tour_1.0.0_rc_2.php</instruction>
+		<instruction type="sql">update_1.0.0_rc_2.sql</instruction>		
 		<instruction type="template">templates.tar</instruction>
 		
 		<instruction type="aclOption">aclOption.xml</instruction>
