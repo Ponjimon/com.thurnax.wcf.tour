@@ -35,6 +35,7 @@
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript-Code]]></item>
 		<item name="wcf.acp.tour.move"><![CDATA[Tourpunkte verschieben]]></item>
 		<item name="wcf.acp.tour.restartTour"><![CDATA[Tour erneut ansehen]]></item>
+		<item name="wcf.acp.tour.tourImportedNotice"><![CDATA[Es wurden neue Touren importiert. Klicken Sie hier um diese zu aktivieren.]]></item>
 		<item name="wcf.acp.tour.tourName"><![CDATA[Bezeichner]]></item>
 		<item name="wcf.acp.tour.tourName.description"><![CDATA[Dieser Name wird für die JS-API zum starten der Tour verwendet. Es wird empfolen dieses Feld nicht nachträglich zu ändern.]]></item>
 		<item name="wcf.acp.tour.tourName.error.notUnique"><![CDATA[Dieser Name wird bereits verwendet. Bitte wählen Sie einen anderen.]]></item>

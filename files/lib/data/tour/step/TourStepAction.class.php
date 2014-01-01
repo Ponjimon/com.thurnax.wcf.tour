@@ -79,9 +79,7 @@ class TourStepAction extends AbstractDatabaseObjectAction implements ISortableAc
 	 */
 	public function toggle() {
 		foreach ($this->objects as $tourStep) {
-			$tourStep->update(array(
-				'isDisabled' => $tourStep->isDisabled ? 0 : 1
-			));
+			$tourStep->update(array('isDisabled' => $tourStep->isDisabled ? 0 : 1));
 		}
 	}
 	

@@ -1,18 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/templatelistener.xsd">
 	<import>
+		<!-- tour include -->
 		<templatelistener name="javascriptTourInclude">
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInclude</eventname>
 			<templatecode><![CDATA[{if $__wcf->getTourHandler()->isEnabled()}<script data-relocate="true" src="{@$__wcf->getPath('wcf')}js/WCF.Tour{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}" type="text/javascript"></script>{/if}]]></templatecode>
-		</templatelistener>
-		
-		<templatelistener name="javascriptTourInit">
-			<environment>user</environment>
-			<templatename>headInclude</templatename>
-			<eventname>javascriptInit</eventname>
-			<templatecode><![CDATA[{include file='__initTour'}]]></templatecode>
 		</templatelistener>
 		
 		<templatelistener name="javascriptTourLanguageImport">
@@ -26,6 +20,22 @@
 	'wcf.tour.step.locales.skipBtn': '{lang}wcf.tour.step.locales.skipBtn{/lang}',
 	'wcf.tour.step.locales.closeTooltip': '{lang}wcf.tour.step.locales.closeTooltip{/lang}'
 {/if}]]></templatecode>
+		</templatelistener>
+		
+		<!-- tour init -->
+		<templatelistener name="javascriptTourInit">
+			<environment>user</environment>
+			<templatename>headInclude</templatename>
+			<eventname>javascriptInit</eventname>
+			<templatecode><![CDATA[{include file='__initTour'}]]></templatecode>
+		</templatelistener>
+		
+		<!-- tour imported notice -->
+		<templatelistener name="tourImportedNotice">
+			<environment>admin</environment>
+			<templatename>index</templatename>
+			<eventname>userNotice</eventname>
+			<templatecode><![CDATA[{include file='__tourImportedNotice'}]]></templatecode>
 		</templatelistener>
 	</import>
 </data>		

@@ -198,5 +198,8 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 				TourStepEditor::create($stepData);
 			}
 		}
+		
+		// show notification about imported tours
+		WCF::getSession()->register('tourImportedNotice', true);
 	}
 }

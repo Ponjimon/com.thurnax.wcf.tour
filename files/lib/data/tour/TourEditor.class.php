@@ -97,5 +97,6 @@ class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		TourCacheBuilder::getInstance()->reset();
 		TourTriggerCacheBuilder::getInstance()->reset();
 		TourHandler::reset();
+		WCF::getSession()->unregister('tourImportedNotice');
 	}
 }
