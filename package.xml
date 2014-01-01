@@ -4,7 +4,7 @@
 		<packagename>Einführungstour</packagename>
 		<packagedescription>Diese Erweiterung ermöglicht Einführungstouren: Erklären Sie die allgemeine Funktionsweise der gesamten Webseite oder auch nur einen kleinen Button.</packagedescription>
 		<version>1.0.0 RC 2</version>
-		<date>2013-12-25</date>
+		<date>2014-01-01</date>
 	</packageinformation>
 	
 	<authorinformation>
@@ -35,17 +35,18 @@
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
 	</instructions>
 	
-	<instruction type="update" fromversion="1.0.0 RC 1">
-		<!-- @todo update database -->
+	<instructions type="update" fromversion="1.0.0 RC 1">
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
 		<instruction type="objectType">objectType.xml</instruction>
 		<instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
-		 
+		<instruction type="sql">update_1.0.0_rc_2.sql</instruction>
+		<instruction type="template">templates.tar</instruction>
+		
 		<instruction type="aclOption">aclOption.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
 		<instruction type="language">lang/*.xml</instruction>
 		<instruction type="option">option.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
-	</instruction>
+	</instructions>
 </package>
