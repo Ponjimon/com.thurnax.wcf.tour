@@ -27,7 +27,7 @@ abstract class AbstractTourStateStorage implements ITourStateStorage {
 	 * @see	\wcf\system\tour\storage\ITourStateStorage::getAvailableTours(getAvailableManualTours
 	 */
 	public function getAvailableManualTours() {
-		return $this->cache['availableTours'];
+		return array_values($this->cache['availableTours']);
 	}
 	
 	/**
