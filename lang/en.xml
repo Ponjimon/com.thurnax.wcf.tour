@@ -100,7 +100,7 @@
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.disable"><![CDATA[Disable ({#$count})]]></item>
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.enable"><![CDATA[Enable ({#$count})]]></item>
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.move"><![CDATA[Move ({#$count})]]></item>
-		<item name="wcf.clipboard.label.com.thurnax.wcf.tour.step.marked"><![CDATA[{if $count == 1}One tour step{else}{#$count} tour steps/if} marked]]></item>
+		<item name="wcf.clipboard.label.com.thurnax.wcf.tour.step.marked"><![CDATA[{if $count == 1}One tour step{else}{#$count} tour steps{/if} marked]]></item>
 	</category>
 	
 	<category name="wcf.tour.step">
