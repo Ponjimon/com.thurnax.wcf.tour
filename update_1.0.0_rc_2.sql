@@ -3,7 +3,7 @@ ALTER TABLE wcf1_tour ADD COLUMN packageID INT(10) NULL DEFAULT NULL;
 ALTER TABLE wcf1_tour CHANGE COLUMN tourTrigger tourTrigger ENUM('firstSite', 'specificSite', 'manual') NOT NULL DEFAULT 'firstSite';
 
 /* update wcf1_tour_step */
-ALTER TABLE wcf1_tour_step ADD COLUMN packageID INT(10) NOT NULL;
+ALTER TABLE wcf1_tour_step ADD COLUMN packageID INT(10) NULL DEFAULT NULL;
 ALTER TABLE wcf1_tour_step CHANGE COLUMN placement placement ENUM('top', 'bottom', 'left', 'right') NOT NULL DEFAULT 'left';
 ALTER TABLE wcf1_tour_step CHANGE COLUMN xOffset xOffset INT(10) NOT NULL DEFAULT 0;
 ALTER TABLE wcf1_tour_step CHANGE COLUMN yOffset yOffset INT(10) NOT NULL DEFAULT 0;
