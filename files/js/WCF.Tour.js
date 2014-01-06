@@ -98,7 +98,7 @@ WCF.Tour = {
 	 * @param	object		data
 	 */
 	_success: function(data) {
-		if (data.actionName == 'loadTour' && this._activeTourID === null) {
+		if ((data.actionName == 'loadTour' || data.actionName == 'loadTourByName') && this._activeTourID === null) {
 			this._activeTourID = data.objectIDs.pop();
 			var $tour = {
 				id: 'com.thurnax.wcf.tour' + this._activeTourID,

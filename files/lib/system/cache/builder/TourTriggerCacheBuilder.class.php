@@ -76,7 +76,7 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 		// use tour name as key
 		$tourIDs = array();
 		foreach ($tourList->getObjects() as $tour) {
-			$tourIDs[$tour->tourName] = $tour->tourID;
+			$tourIDs[$tour->tourName] = $tour;
 		}
 		
 		return $tourIDs;
