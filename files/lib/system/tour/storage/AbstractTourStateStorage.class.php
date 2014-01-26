@@ -10,8 +10,7 @@ namespace wcf\system\tour\storage;
  * @package	com.thurnax.wcf.tour
  */
 abstract class AbstractTourStateStorage implements ITourStateStorage {
-	const STORAGE_NAME = 'tourCache';
-	
+
 	/**
 	 * cache for the current user
 	 * @var	array<string>
@@ -22,6 +21,19 @@ abstract class AbstractTourStateStorage implements ITourStateStorage {
 	 * Initializes the tour state storage
 	 */
 	abstract public function __construct();
+	
+	/**
+	 * Reads cookie data
+	 */
+	protected function readCookie() {
+		if (isset($_COOKIE[COOKIE_PREFIX.self::STORAGE_NAME])) {
+			$this->cache['takenTours'] = @unserialize($_COOKIE[COOKIE_PREFIX.self::STORAGE_NAME]);
+			
+			if (!$this->cache['takenTours'] || !is_array($this->cache['takenTours'])) {
+				$this->cache['takenTours'] = array();
+			}
+		}
+	}
 	
 	/**
 	 * @see	\wcf\system\tour\storage\ITourStateStorage::getAvailableTours(getAvailableManualTours

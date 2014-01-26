@@ -39,7 +39,7 @@ class UserTourStateStorage extends GuestTourStateStorage {
 					$this->cache['takenTours'][] = $row['tourID'];
 				}
 			} else { // import cookie data to the database
-				$sql = "INSERT INTO ".Tour::getDatabaseTableName()."_user (tourID, userID) VALUES (?, ?)";
+				$sql = "INSERT IGNORE INTO ".Tour::getDatabaseTableName()."_user (tourID, userID) VALUES (?, ?)";
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$viewableTours = TourCacheBuilder::getInstance()->getData(array(), 'viewableTours');
 				foreach ($this->getTakenTours() as $takenTourID) {

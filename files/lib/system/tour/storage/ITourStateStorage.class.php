@@ -10,6 +10,8 @@ namespace wcf\system\tour\storage;
  * @package	com.thurnax.wcf.tour
  */
 interface ITourStateStorage {
+	const STORAGE_NAME = 'tourCache';
+
 	/**
 	 * Returns the available tours with the tour trigger 'manual'
 	 * 
