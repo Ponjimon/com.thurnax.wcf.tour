@@ -30,9 +30,4 @@
 			<!-- /user.tour -->
 		</options>
 	</import>
-	<delete>
-		<optioncategory name="admin.user.tour" />
-		<option name="admin.user.canEditTour" />
-		<option name="user.tour.enableTour" />
-	</delete>
 </data>

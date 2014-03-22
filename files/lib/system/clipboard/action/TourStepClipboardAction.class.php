@@ -57,7 +57,7 @@ class TourStepClipboardAction extends AbstractClipboardAction {
 	 */
 	protected function validateEnable() {
 		// check permissions
-		if (!WCF::getSession()->getPermission('admin.user.canEditTour')) {
+		if (!WCF::getSession()->getPermission('admin.user.canManageTour')) {
 			return array();
 		}
 		
@@ -78,7 +78,7 @@ class TourStepClipboardAction extends AbstractClipboardAction {
 	 */
 	protected function validateDisable() {
 		// check permissions
-		if (!WCF::getSession()->getPermission('admin.user.canEditTour')) {
+		if (!WCF::getSession()->getPermission('admin.user.canManageTour')) {
 			return array();
 		}
 		
@@ -108,7 +108,7 @@ class TourStepClipboardAction extends AbstractClipboardAction {
 	 */
 	protected function validateDelete() {
 		// check permissions
-		if (!WCF::getSession()->getPermission('admin.user.canEditTour')) {
+		if (!WCF::getSession()->getPermission('admin.user.canManageTour')) {
 			return array();
 		}
 		
