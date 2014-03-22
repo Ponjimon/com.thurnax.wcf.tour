@@ -1,20 +1,19 @@
-/**
- *
- * Copyright 2013 LinkedIn Corp. All rights reserved.
-
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
-
- *     http://www.apache.org/licenses/LICENSE-2.0
-
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
+/**! hopscotch - v0.1.3
+*
+* Copyright 2014 LinkedIn Corp. All rights reserved.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 (function(context, namespace) {
   var Hopscotch,
       HopscotchBubble,
@@ -337,32 +336,30 @@
      * @private
      */
     getStepTargetHelper: function(target){
-      var result;
-      // Check if it's querySelector-eligible. Only accepting IDs and classes,
-      // because that's the only thing that makes sense. Tag name and pseudo-class
-      // are just silly.
-      if (/^[#\.]/.test(target)) {
-        if (document.querySelector) {
-          return document.querySelector(target);
-        }
-        if (hasJquery) {
-          result = jQuery(target);
-          return result.length ? result[0] : null;
-        }
-        if (Sizzle) {
-          result = new Sizzle(target);
-          return result.length ? result[0] : null;
-        }
-        // Regex test for id. Following the HTML 4 spec for valid id formats.
-        // (http://www.w3.org/TR/html4/types.html#type-id)
-        if (/^#[a-zA-Z][\w-_:.]*$/.test(target)) {
-          return document.getElementById(target.substring(1));
-        }
-        // Can't extract element. Likely IE <=7 and no jQuery/Sizzle.
-        return null;
+      var result = document.getElementById(target);
+
+      //Backwards compatibility: assume the string is an id
+      if (result) {
+        return result;
       }
-      // Else assume it's a string id.
-      return document.getElementById(target);
+      if (document.querySelector) {
+        return document.querySelector(target);
+      }
+      if (hasJquery) {
+        result = jQuery(target);
+        return result.length ? result[0] : null;
+      }
+      if (Sizzle) {
+        result = new Sizzle(target);
+        return result.length ? result[0] : null;
+      }
+      // Regex test for id. Following the HTML 4 spec for valid id formats.
+      // (http://www.w3.org/TR/html4/types.html#type-id)
+      if (/^#[a-zA-Z][\w-_:.]*$/.test(target)) {
+        return document.getElementById(target.substring(1));
+      }
+
+      return null;
     },
 
     /**
@@ -826,8 +823,8 @@
             winHopscotch.getCalloutManager().removeCallout(step.id);
           }
           // Call onCTA callback if one is provided
-          if (step.onCTA && typeof step.onCTA === 'function') {
-            step.onCTA();
+          if (step.onCTA) {
+            utils.invokeCallback(step.onCTA);
           }
         };
 

@@ -17,7 +17,7 @@ WCF.Tour = {
 	 * dependencies to load
 	 * @var	array<string>
 	 */
-	_dependencies: [ WCF_PATH + 'js/3rdParty/hopscotch/hopscotch-0.1.2.min.js', WCF_PATH + 'js/3rdParty/hopscotch/hopscotch-0.1.2.min.css' ],
+	_dependencies: [ WCF_PATH + 'js/3rdParty/hopscotch-0.1.13/js/hopscotch.min.js', WCF_PATH + 'js/3rdParty/hopscotch-0.1.13/css/hopscotch.min.css' ],
 	
 	/**
 	 * ID of the currently active tour
