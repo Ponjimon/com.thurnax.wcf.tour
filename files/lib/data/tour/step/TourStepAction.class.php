@@ -55,7 +55,7 @@ class TourStepAction extends AbstractDatabaseObjectAction implements ISortableAc
 	 * @see	\wcf\data\ISortableAction::validateUpdatePosition()
 	 */
 	public function validateUpdatePosition() {
-		WCF::getSession()->checkPermissions(array('admin.user.canEditTour'));
+		WCF::getSession()->checkPermissions(array('admin.user.canManageTour'));
 		$this->readInteger('offset', false, 'data');
 		if (!isset($this->parameters['data']) || !isset($this->parameters['data']['structure']) || !isset($this->parameters['data']['structure'][0])) {
 			throw new UserInputException('structure');
