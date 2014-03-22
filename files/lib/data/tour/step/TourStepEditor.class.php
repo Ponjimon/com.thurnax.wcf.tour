@@ -10,6 +10,24 @@ use wcf\system\WCF;
 /**
  * Provides functions to edit tour steps.
  * 
+ * @property	integer	$tourStepID
+ * @property	integer	$tourID
+ * @property	integer	$showOrder
+ * @property	integer	$isDisabled
+ * @property	integer	$packageID
+ * @property	string	$target
+ * @property	string	$placement
+ * @property	string	$content
+ * @property	string	$title
+ * @property	integer	$showPrevButton
+ * @property	integer	$xOffset
+ * @property	integer	$yOffset
+ * @property	string	$url
+ * @property	string	$ctaLabel
+ * @property	string	$onPrev
+ * @property	string	$onNext
+ * @property	string	$onShow
+ * @property	string	$onCTA
  * @author	Magnus Kühn
  * @copyright	2013-2014 Thurnax.com
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>

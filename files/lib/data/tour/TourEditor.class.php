@@ -12,7 +12,14 @@ use wcf\system\WCF;
 
 /**
  * Provides functions to edit tours.
- *
+ * 
+ * @property	integer	$tourID
+ * @property	string	$visibleName
+ * @property	integer	$isDisabled
+ * @property	integer	$packageID
+ * @property	string	$tourTrigger
+ * @property	string	$className
+ * @property	string	$tourName
  * @author	Magnus Kühn
  * @copyright	2013-2014 Thurnax.com
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -23,7 +30,7 @@ class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\tour\Tour';
-
+	
 	/**
 	 * @see	\wcf\data\IEditableObject::create()
 	 */
