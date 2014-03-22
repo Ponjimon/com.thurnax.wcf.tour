@@ -72,7 +72,7 @@
 							</xs:complexType>
 						</xs:element>
 					</xs:sequence> 
-					<xs:attribute name="tourName" type="woltlab_varchar" use="required" /> <!-- this is required for identification by the PIP -->
+					<xs:attribute name="tourName" type="woltlab_varchar" use="required" /> <!-- @todo remove -->
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

@@ -19,7 +19,6 @@ use wcf\system\WCF;
  * @property	integer	$packageID
  * @property	string	$tourTrigger
  * @property	string	$className
- * @property	string	$tourName
  * @author	Magnus Kühn
  * @copyright	2013-2014 Thurnax.com
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>

@@ -33,12 +33,10 @@
 		<item name="wcf.acp.tour.edit"><![CDATA[Tour bearbeiten]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Touren auflisten]]></item>
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript-Code]]></item>
+		<item name="wcf.acp.tour.manualCode.createFirst"><![CDATA[Der JavaScript-Code ist erst nach dem Hinzufügen einer Tour verfügbar]]></item>
 		<item name="wcf.acp.tour.move"><![CDATA[Tourpunkte verschieben]]></item>
 		<item name="wcf.acp.tour.restartTour"><![CDATA[Tour erneut ansehen]]></item>
 		<item name="wcf.acp.tour.tourImportedNotice"><![CDATA[Es wurden neue Touren importiert. Klicken Sie hier um diese zu aktivieren.]]></item>
-		<item name="wcf.acp.tour.tourName"><![CDATA[Bezeichner]]></item>
-		<item name="wcf.acp.tour.tourName.description"><![CDATA[Dieser Name wird für die JS-API zum starten der Tour verwendet. Es wird empfolen dieses Feld nicht nachträglich zu ändern.]]></item>
-		<item name="wcf.acp.tour.tourName.error.notUnique"><![CDATA[Dieser Name wird bereits verwendet. Bitte wählen Sie einen anderen.]]></item>
 		<item name="wcf.acp.tour.tourTrigger"><![CDATA[Auslöser]]></item>
 		<item name="wcf.acp.tour.tourTrigger.firstSite"><![CDATA[Nach der Registrierung]]></item>
 		<item name="wcf.acp.tour.tourTrigger.firstSite.description"><![CDATA[Verwenden Sie diesen Auslöser um die allgemeine Funktionsweise der Webseite zu erklären.]]></item>

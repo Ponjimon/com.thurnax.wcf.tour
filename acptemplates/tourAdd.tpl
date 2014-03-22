@@ -6,7 +6,7 @@
 	$(function() {
 		new WCF.ACP.Tour.TourAdd();
 		{if $action == 'edit'}
-		new WCF.ACP.Tour.RestartTour();
+			new WCF.ACP.Tour.RestartTour();
 		{/if}
 	});
 	//]]>
@@ -95,17 +95,9 @@
 					<small>{lang}wcf.acp.tour.tourTrigger.manual.description{/lang}</small>
 				</dd>
 			</dl>
-			<dl id="tourNameContainer" class="disabled{if $errorField == 'tourName'} formError{/if}">
-				<dt><label for="tourName">{lang}wcf.acp.tour.tourName{/lang}</label></dt>
-				<dd>
-					<input type="text" id="tourName" name="tourName" value="{$tourName}" required="required" disabled="disabled" class="long" />
-					{if $errorField == 'tourName'}<small class="innerError">{if $errorType == 'notUnique'}{lang}wcf.acp.tour.tourName.error.notUnique{/lang}{else}{lang}wcf.global.form.error.empty{/lang}{/if}</small>{/if}
-					<small>{lang}wcf.acp.tour.tourName.description{/lang}</small>
-				</dd>
-			</dl>
 			<dl id="manualCodeContainer" class="disabled">
 				<dt><label for="manualCode">{lang}wcf.acp.tour.manualCode{/lang}</label></dt>
-				<dd><input type="text" value="WCF.Tour.loadTour('{$tourName}');" id="manualCode" disabled="disabled" class="long" /></dd>
+				<dd><input type="text" value="{if $action == 'add'}{lang}wcf.acp.tour.manualCode.createFirst{/lang}{else}WCF.Tour.loadTour('{$tourID}');{/if}" id="manualCode" disabled="disabled" class="long" /></dd>
 			</dl>
 			
 			{event name='triggerFields'}

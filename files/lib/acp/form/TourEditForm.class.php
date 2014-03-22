@@ -47,15 +47,6 @@ class TourEditForm extends TourAddForm {
 			throw new IllegalLinkException();
 		}
 	}
-
-	/**
-	 * @see	\wcf\acp\form\TourAddForm::validateTourName()
-	 */
-	protected function validateTourName() {
-		if ($this->tourName != $this->tour->tourName) { // only validate if value has changed
-			parent::validateTourName();
-		}
-	}
 	
 	/**
 	 * @see	\wcf\form\IForm::save()
@@ -76,7 +67,6 @@ class TourEditForm extends TourAddForm {
 			'visibleName' => $this->visibleName,
 			'tourTrigger' => $this->tourTrigger,
 			'className' => ($this->className ?: null),
-			'tourName' => ($this->tourName ?: null)
 		)));
 		$this->objectAction->executeAction();
 		
@@ -101,7 +91,6 @@ class TourEditForm extends TourAddForm {
 			$this->visibleName = $this->tour->visibleName;
 			$this->tourTrigger = $this->tour->tourTrigger;
 			$this->className = $this->tour->className;
-			$this->tourName = $this->tour->tourName;
 		}
 	}
 	

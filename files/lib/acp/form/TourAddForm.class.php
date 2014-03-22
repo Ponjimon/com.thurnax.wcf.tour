@@ -55,12 +55,6 @@ class TourAddForm extends AbstractForm {
 	public $className = null;
 	
 	/**
-	 * tour name
-	 * @var	string
-	 */
-	public $tourName = null;
-	
-	/**
 	 * list of label group to object type relations
 	 * @var	array<array>
 	 */
@@ -93,7 +87,6 @@ class TourAddForm extends AbstractForm {
 		if (isset($_POST['visibleName'])) $this->visibleName = StringUtil::trim($_POST['visibleName']);
 		if (isset($_POST['tourTrigger'])) $this->tourTrigger = $_POST['tourTrigger'];
 		if (isset($_POST['className'])) $this->className = $_POST['className'];
-		if (isset($_POST['tourName'])) $this->tourName = StringUtil::trim($_POST['tourName']);
 		if (isset($_POST['objectTypes']) && is_array($_POST['objectTypes'])) $this->objectTypes = $_POST['objectTypes'];
 	}
 	
@@ -114,8 +107,6 @@ class TourAddForm extends AbstractForm {
 		
 		// validate tour trigger
 		switch ($this->tourTrigger) {
-			case 'firstSite': // no additional parameters
-				break;
 			case 'specificSite': // validate class name
 				if (empty($this->className)) {
 					throw new UserInputException('className');
@@ -123,33 +114,11 @@ class TourAddForm extends AbstractForm {
 				if (!class_exists($this->className) || !ClassUtil::isInstanceOf($this->className, 'wcf\page\IPage')) {
 					throw new UserInputException('className', 'invalid');
 				}
-				
-				break;
-			case 'manual': // validate tour name
-				$this->validateTourName();
+			case 'firstSite': // no additional parameters
+			case 'manual':
 				break;
 			default:
 				throw new UserInputException('tourTrigger');
-		}
-	}
-	
-	/**
-	 * Validates the tour name
-	 */
-	protected function validateTourName() {
-		if (empty($this->tourName)) {
-			throw new UserInputException('tourName');
-		}
-		
-		// check for collusion
-		$sql = "SELECT	COUNT(tourID) as count
-			FROM	".Tour::getDatabaseTableName()."
-			WHERE	tourName = ?";
-		$statement = WCF::getDB()->prepareStatement($sql, 1);
-		$statement->execute(array($this->tourName));
-		$row = $statement->fetchArray();
-		if ($row['count']) {
-			throw new UserInputException('tourName', 'notUnique');
 		}
 	}
 	
@@ -166,8 +135,7 @@ class TourAddForm extends AbstractForm {
 			'isDisabled' => 0,
 			'packageID' => $packageID, 
 			'tourTrigger' => $this->tourTrigger,
-			'className' => ($this->className ?: null),
-			'tourName' => ($this->tourName ?: null)
+			'className' => ($this->className ?: null)
 		)));
 		$this->objectAction->executeAction();
 		$this->saved();
@@ -191,7 +159,7 @@ class TourAddForm extends AbstractForm {
 		}
 		
 		// reset values
-		$this->tourName = $this->visibleName = $this->className = '';
+		$this->visibleName = $this->className = '';
 		$this->tourTrigger = 'firstSite';
 		I18nHandler::getInstance()->reset();
 		
@@ -209,7 +177,6 @@ class TourAddForm extends AbstractForm {
 		I18nHandler::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
-			'tourName' => $this->tourName,
 			'visibleName' => $this->visibleName,
 			'tourTrigger' => $this->tourTrigger,
 			'className' => $this->className,

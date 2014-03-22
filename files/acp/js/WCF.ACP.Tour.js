@@ -164,9 +164,8 @@ WCF.ACP.Tour.TourAdd = Class.extend({
 	init: function() {
 		this._radioChanged();
 		
-		// bind events
+		// bind event
 		$('input[name="tourTrigger"]').change($.proxy(this._radioChanged, this));
-		$('#tourName').keyup($.proxy(this._tourNameChanged, this));
 	},
 	
 	/**
@@ -175,26 +174,13 @@ WCF.ACP.Tour.TourAdd = Class.extend({
 	 * @param	jQuery.Event	event
 	 */
 	_radioChanged: function(event) {
-		// disable everything
-		$('#className, #tourName').disable();
-		$('#classNameContainer, #tourNameContainer, #manualCodeContainer').addClass('disabled');
-		
-		switch ($('input[name="tourTrigger"]:checked').val()) {
-			case 'specificSite':
-				$('#classNameContainer').removeClass('disabled');
-				$('#className').enable().focus();
-				break;
-			case 'manual':
-				$('#tourNameContainer, #manualCodeContainer').removeClass('disabled');
-				$('#tourName').enable().focus();
+		if ($('input[name="tourTrigger"]:checked').val() == 'specificSite') {
+			$('#classNameContainer').removeClass('disabled');
+			$('#className').enable().focus();
+		} else {
+			$('#classNameContainer, #manualCodeContainer').addClass('disabled');
+			$('#className').disable();
 		}
-	},
-	
-	/**
-	 * Event listener for the tour name input
-	 */
-	_tourNameChanged: function() {
-		$('#manualCode').val("WCF.Tour.loadTour('"+$('#tourName').val()+"');");
 	}
 });
 
