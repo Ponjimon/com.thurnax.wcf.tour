@@ -113,7 +113,7 @@
 				<dl{if $errorField == 'xOffset'} class="formError"{/if}>
 					<dt><label for="xOffset">{lang}wcf.acp.tour.step.xOffset{/lang}</label></dt>
 					<dd>
-						<input type="number" id="xOffset" name="xOffset" value="{$xOffset}" min="0" max="8388607" class="tiny" />
+						<input type="number" id="xOffset" name="xOffset" value="{$xOffset}" class="tiny" />
 						{if $errorField == 'xOffset'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
 						<small>{lang}wcf.acp.tour.step.xOffset.description{/lang}</small>
 					</dd>
@@ -122,7 +122,7 @@
 				<dl{if $errorField == 'yOffset'} class="formError"{/if}>
 					<dt><label for="yOffset">{lang}wcf.acp.tour.step.yOffset{/lang}</label></dt>
 					<dd>
-						<input type="number" id="yOffset" name="yOffset" value="{$yOffset}" min="0" max="8388607" class="tiny" />
+						<input type="number" id="yOffset" name="yOffset" value="{$yOffset}" class="tiny" />
 						{if $errorField == 'yOffset'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
 						<small>{lang}wcf.acp.tour.step.yOffset.description{/lang}</small>
 					</dd>
