@@ -55,8 +55,9 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * @see	\wcf\data\IToggleAction::toggle()
 	 */
 	public function toggle() {
-		foreach ($this->objects as $tourStep) {
-			$tourStep->update(array('isDisabled' => $tourStep->isDisabled ? 0 : 1));
+		/** @var $tour \wcf\data\tour\TourEditor */
+		foreach ($this->objects as $tour) {
+			$tour->update(array('isDisabled' => $tour->isDisabled ? 0 : 1));
 		}
 	}
 	
@@ -73,8 +74,9 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * @return        array<mixed>
 	 */
 	public function loadTour() {
+		/** @var $tour \wcf\data\tour\TourEditor */
 		$tour = $this->getSingleObject();
-		TourHandler::getInstance()->startTour($tour->tourID);
+		TourHandler::getInstance()->startTour($tour->tourID, true);
 		TourHandler::getInstance()->takeTour($tour->tourID);
 		
 		// get tour steps
@@ -86,29 +88,6 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * Validates the 'loadTour'-action
 	 */
 	public function validateLoadTour() {
-		if (!TourHandler::getInstance()->isEnabled()) {
-			throw new PermissionDeniedException();
-		}
-	}
-	
-	/**
-	 * Loads the steps for a tour by the tour name
-	 * 
-	 * @return        array<mixed>
-	 */
-	public function loadTourByName() {
-		$manualTours = TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual');
-		$this->setObjects(array($manualTours[$this->parameters['tourName']]));
-		$this->objectIDs = array($this->objects[0]->tourID); // @todo Remove after merging #1606 (https://github.com/WoltLab/WCF/pull/1606)
-		return $this->loadTour();
-	}
-	
-	/**
-	 * Validates the 'loadTourByName'-action
-	 */
-	public function validateLoadTourByName() {
-		$this->readString('tourName');
-		
 		if (!TourHandler::getInstance()->isEnabled()) {
 			throw new PermissionDeniedException();
 		}
@@ -136,6 +115,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 	 * @return	string
 	 */
 	public function move() {
+		/** @var $targetTour \wcf\data\tour\TourEditor */
 		$targetTour = $this->getSingleObject();
 		$objectTypeID = ClipboardHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour.step');
 		
@@ -153,6 +133,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 		
 		// read tour step IDs
 		$tourStepIDs = array();
+		/** @var $tourStep \wcf\data\tour\step\TourStep */
 		foreach (ClipboardHandler::getInstance()->getMarkedItems($objectTypeID) as $tourStep) {
 			$tourStepIDs[] = $tourStep->tourStepID;
  		}
@@ -169,6 +150,7 @@ class TourAction extends AbstractDatabaseObjectAction implements IToggleAction {
 			WHERE	tourStepID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$showOrderOffset = 1;
+		/** @var $tourStep \wcf\data\tour\TourStep */
 		foreach ($tourStepList->getObjects() as $tourStep) {
 			$statement->execute(array($targetTour->tourID, $row['showOrder'] + $showOrderOffset, $tourStep->tourStepID));
 			$showOrderOffset++;

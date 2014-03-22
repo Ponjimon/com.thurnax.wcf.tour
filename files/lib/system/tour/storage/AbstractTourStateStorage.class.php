@@ -10,7 +10,6 @@ namespace wcf\system\tour\storage;
  * @package	com.thurnax.wcf.tour
  */
 abstract class AbstractTourStateStorage implements ITourStateStorage {
-
 	/**
 	 * cache for the current user
 	 * @var	array<string>
@@ -39,7 +38,7 @@ abstract class AbstractTourStateStorage implements ITourStateStorage {
 	 * @see	\wcf\system\tour\storage\ITourStateStorage::getAvailableTours(getAvailableManualTours
 	 */
 	public function getAvailableManualTours() {
-		return array_values($this->cache['availableTours']);
+		return $this->cache['availableTours'];
 	}
 	
 	/**
@@ -55,8 +54,8 @@ abstract class AbstractTourStateStorage implements ITourStateStorage {
 	public function takeTour($tourID) {
 		// update cache
 		$this->cache['takenTours'][] = $tourID;
-		if (isset($this->cache['availableTours'][$tourID])) {
-			unset ($this->cache['availableTours'][$tourID]);
+		if (($index = array_search($tourID, $this->cache['availableTours'])) !== null) {
+			unset ($this->cache['availableTours'][$index]);
 		}
 	}
 }

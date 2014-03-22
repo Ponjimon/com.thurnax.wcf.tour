@@ -9,15 +9,15 @@
 WCF.Tour = {
 	/**
 	 * list of available tours
-	 * @var	array<string>
+	 * @var	array<integer>
 	 */
 	availableTours: [],
 	
 	/**
-	 * dependencies to load
-	 * @var	array<string>
+	 * action proxy
+	 * @var	WCF.Action.Proxy
 	 */
-	_dependencies: [ WCF_PATH + 'js/3rdParty/hopscotch-0.1.13/js/hopscotch.min.js', WCF_PATH + 'js/3rdParty/hopscotch-0.1.13/css/hopscotch.min.css' ],
+	_proxy: null,
 	
 	/**
 	 * ID of the currently active tour
@@ -26,34 +26,31 @@ WCF.Tour = {
 	_activeTourID: null,
 	
 	/**
-	 * Loads a tour.
+	 * Loads a tour by the id.
 	 * 
-	 * @param	string	tourName
+	 * @param	integer	tourID
+	 * @param	boolean	force
 	 */
-	loadTour: function(tourName) {
-		if (this._activeTourID || !WCF.inArray(tourName, this.availableTours)) { // tour is already taken
+	loadTour: function(tourID, force) {
+		// check if tour is already taken / running
+		if (!force && (this._activeTourID || !WCF.inArray(tourID, this.availableTours))) {
 			return;
 		}
 		
-		// load tour
-		this._setup();
-		this._proxy.setOption('data', {
-			className: 'wcf\\data\\tour\\TourAction',
-			actionName: 'loadTourByName',
-			parameters: {
-				tourName: tourName
-			}
-		});
-		this._proxy.sendRequest();
-	},
-
-	/**
-	 * Loads a tour by the id. Do *not* use this method.
-	 * 
-	 * @param	integer	tourID
-	 */
-	loadTourByID: function(tourID) {
-		this._setup();
+		// setup
+		if (this._proxy === null) {
+			// init proxy
+			this._proxy = new WCF.Action.Proxy({
+				success: $.proxy(this._success, this),
+				failure: $.proxy(this._failure, this),
+				showLoadingOverlay: false
+			});
+			
+			// load hopscotch
+			head.load([ WCF_PATH + 'js/3rdParty/hopscotch-0.1.13/js/hopscotch.min.js', WCF_PATH + 'js/3rdParty/hopscotch-0.1.13/css/hopscotch.min.css' ], $.proxy(this._initHopscotch, this));
+		}
+		
+		// send request
 		this._proxy.setOption('data', {
 			className: 'wcf\\data\\tour\\TourAction',
 			actionName: 'loadTour',
@@ -62,24 +59,6 @@ WCF.Tour = {
 		this._proxy.sendRequest();
 	},
 
-	/**
-	 * Sets up the environment.
-	 */
-	_setup: function() {
-		if (this._dependencies !== null) {
-			// init proxy
-			this._proxy = new WCF.Action.Proxy({
-				success: $.proxy(this._success, this),
-				failure: $.proxy(this._failure, this),
-				showLoadingOverlay: false
-			});
-
-			// load hopscotch
-			head.load(this._dependencies, $.proxy(this._initHopscotch, this));
-			this._dependencies = null;
-		}
-	},
-	
 	/**
 	 * Callback after loading hopscotch.
 	 */
@@ -155,6 +134,12 @@ WCF.Tour = {
 	 * Invoked when the tour ends or the user closes the tour.
 	 */
 	_end: function() {
+		// remove action tour from available tours
+		if (WCF.inArray(this._activeTourID, this.availableTours)) {
+			this.availableTours.splice(this.availableTours.indexOf(this._activeTourID), 1);
+		}
+		
+		// send request
 		this._activeTourID = null;
 		this._proxy.setOption('data', {
 			className: 'wcf\\data\\tour\\TourAction',

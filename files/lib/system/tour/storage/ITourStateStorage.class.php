@@ -15,14 +15,14 @@ interface ITourStateStorage {
 	/**
 	 * Returns the available tours with the tour trigger 'manual'
 	 * 
-	 * @return	array<string>
+	 * @return	array<integer>
 	 */
 	public function getAvailableManualTours();
 	
 	/**
 	 * Returns the taken tours
 	 * 
-	 * @return	array<string>
+	 * @return	array<integer>
 	 */
 	public function getTakenTours();
 	

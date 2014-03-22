@@ -23,13 +23,10 @@ class TourPageListener implements IEventListener {
 	 * Initializes the event listener
 	 */
 	public function __construct() {
-		$this->cache = TourTriggerCacheBuilder::getInstance()->getData(array(), 'specificSite');
-		
 		// start tours using the 'firstSite'-trigger
 		foreach (TourTriggerCacheBuilder::getInstance()->getData(array(), 'firstSite') as $tourID) {
 			if (TourHandler::getInstance()->startTour($tourID)) {
-				$this->cache = false;
-				break;
+				return;
 			}
 		}
 	}
@@ -38,8 +35,10 @@ class TourPageListener implements IEventListener {
 	 * @see	\wcf\system\event\IEventListener::execute()
 	 */
 	public function execute($eventObj, $className, $eventName) {
-		if ($this->cache && isset($this->cache[$className])) {
-			TourHandler::getInstance()->startTour($this->cache[$className]);
+		$triggers = TourTriggerCacheBuilder::getInstance()->getData(array(), 'specificSite');
+		
+		if (isset($triggers[$className])) {
+			TourHandler::getInstance()->startTour($triggers[$className]);
 		}
 	}
 }
