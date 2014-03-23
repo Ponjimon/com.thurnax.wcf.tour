@@ -32,7 +32,7 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 	 */
 	protected function handleDelete(array $items) {
 		$sql = "DELETE FROM	".Tour::getDatabaseTableName()."
-			WHERE		tourName = ? AND packageID = ?";
+			WHERE		className = ? AND packageID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		foreach ($items as $item) {
 			$statement->execute(array($item['value'], $this->installation->getPackageID()));
@@ -46,7 +46,7 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 		$tourData = array(
 			'visibleName' => $data['elements']['visibleName'],
 			'tourTrigger' => $data['elements']['tourTrigger'],
-			'tourName' => $data['attributes']['tourName'],
+			'className' => $data['attributes']['className'],
 			'steps' => array()
 		);
 		
@@ -55,9 +55,8 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 			$tourData['steps'][] = $this->prepareStepImport($stepData);
 		}
 		
-		// get optional values
+		// get optional value
 		if (isset($data['elements']['isDisabled'])) $tourData['isDisabled'] = intval($data['elements']['isDisabled']);
-		if (isset($data['elements']['className'])) $tourData['className'] = $data['elements']['className'];
 		
 		return $tourData;
 	}
@@ -99,7 +98,7 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 	 */
 	protected function getElement(\DOMXpath $xpath, array &$elements, \DOMElement $element) {
 		switch ($element->tagName) {
-			case 'visibleName':
+			case 'visibleName': // multilingual values
 			case 'title':
 			case 'content':
 			case 'ctaLabel':
@@ -159,8 +158,8 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 	protected function findExistingItem(array $data) {
 		$sql = "SELECT	*
 			FROM	".Tour::getDatabaseTableName()."
-			WHERE	tourName = ? AND packageID = ?";
-		return array('sql' => $sql, 'parameters' => array($data['tourName'], $this->installation->getPackageID()));
+			WHERE	className = ? AND packageID = ?";
+		return array('sql' => $sql, 'parameters' => array($data['className'], $this->installation->getPackageID()));
 	}
 	
 	/**

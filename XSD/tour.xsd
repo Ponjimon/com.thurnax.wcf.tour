@@ -31,7 +31,6 @@
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
-						<xs:element name="className" type="woltlab_varchar" minOccurs="0" />
 						<xs:element name="steps">
 							<xs:complexType>
 								<xs:sequence>
@@ -71,8 +70,8 @@
 								</xs:sequence>
 							</xs:complexType>
 						</xs:element>
-					</xs:sequence> 
-					<xs:attribute name="tourName" type="woltlab_varchar" use="required" /> <!-- @todo remove -->
+					</xs:sequence>
+					<xs:attribute name="className" type="woltlab_varchar" use="required" /> <!-- this is used for identification by the pip -->
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>
