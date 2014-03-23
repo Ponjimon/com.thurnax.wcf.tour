@@ -199,6 +199,6 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 		}
 		
 		// show notification about imported tours
-		WCF::getSession()->register('tourImportedNotice', true);
+		WCF::getSession()->register(TourEditor::TOUR_IMPORTED_NOTICE, true);
 	}
 }

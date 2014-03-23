@@ -25,6 +25,8 @@ use wcf\system\WCF;
  * @package	com.thurnax.wcf.tour
  */
 class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
+	const TOUR_IMPORTED_NOTICE = 'tourImportedNotice';
+	
 	/**
 	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
@@ -103,6 +105,6 @@ class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		TourCacheBuilder::getInstance()->reset();
 		TourTriggerCacheBuilder::getInstance()->reset();
 		TourHandler::reset();
-		WCF::getSession()->unregister('tourImportedNotice');
+		WCF::getSession()->unregister(self::TOUR_IMPORTED_NOTICE);
 	}
 }
