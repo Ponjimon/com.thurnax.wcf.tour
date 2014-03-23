@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- This file is used for xml files which install or update tours. -->
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://board.thurnax.com" targetNamespace="http://board.thurnax.com" elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="https://www.thurnax.com" targetNamespace="https://www.thurnax.com" elementFormDefault="qualified">
 	<!-- include types -->
 	<xs:include schemaLocation="http://www.woltlab.com/XSD/maelstrom/types.xsd" />
 	
@@ -71,7 +71,7 @@
 							</xs:complexType>
 						</xs:element>
 					</xs:sequence>
-					<xs:attribute name="className" type="woltlab_varchar" use="required" /> <!-- this is used for identification by the pip -->
+					<xs:attribute name="className" type="woltlab_varchar" use="required" /> <!-- @todo this is used for identification by the pip - this is not ideal -->
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

@@ -31,6 +31,7 @@
 		<item name="wcf.acp.tour.data"><![CDATA[Tour-Information]]></item>
 		<item name="wcf.acp.tour.delete.sure"><![CDATA[Do you really want to delete this tour ({$tour->visibleName|language})?]]></item>
 		<item name="wcf.acp.tour.edit"><![CDATA[Edit Tour]]></item>
+		<item name="wcf.acp.tour.exportTour"><![CDATA[Export tour]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Tours]]></item>
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript code]]></item>
 		<item name="wcf.acp.tour.manualCode.createFirst"><![CDATA[The JavaScript code ist not available until the creating of a tour.]]></item>

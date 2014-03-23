@@ -98,7 +98,7 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 	 */
 	protected function getElement(\DOMXpath $xpath, array &$elements, \DOMElement $element) {
 		switch ($element->tagName) {
-			case 'visibleName': // multilingual values
+			case 'visibleName': // I18n values
 			case 'title':
 			case 'content':
 			case 'ctaLabel':
