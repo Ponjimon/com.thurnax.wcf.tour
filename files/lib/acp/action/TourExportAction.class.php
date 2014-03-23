@@ -93,7 +93,7 @@ class TourExportAction extends AbstractAction {
 			$xml->writeElement('showOrder', $tourStep->showOrder);
 			$xml->writeElement('target', $tourStep->target);
 			$xml->writeElement('placement', $tourStep->placement);
-			$xml->writeI18nElement('content', $tourStep->content);
+			$xml->writeI18nElement('content', $tourStep->content, array(), true);
 			
 			// optionals
 			$xml->writeI18nElement('title', $tourStep->title);

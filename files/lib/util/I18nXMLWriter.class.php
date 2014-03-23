@@ -14,10 +14,15 @@ use wcf\system\WCF;
  */
 class I18nXMLWriter extends XMLWriter {
 	/**
-	 * @see	\wcf\util\XMLWriter::writeElement()
+	 * Writes an element directly.
+	 * 
+	 * @param	string		$element
+	 * @param	string		$cdata
+	 * @param	array<string>	$attributes
+	 * @param	boolean		$force
 	 */
-	public function writeElement($element, $cdata, array $attributes = array()) {
-		if ($cdata) {
+	public function writeElement($element, $cdata, array $attributes = array(), $force = false) {
+		if ($force || $cdata) {
 			parent::writeElement($element, $cdata, $attributes);
 		}
 	}
@@ -28,9 +33,10 @@ class I18nXMLWriter extends XMLWriter {
 	 * @param	string		$element
 	 * @param	string		$cdata
 	 * @param	array<string>	$attributes
+	 * @param	boolean		$force
 	 */
-	public function writeI18nElement($element, $cdata, array $attributes = array()) {
-		if (WCF::getLanguage()->get($cdata, true)) { // I18n value
+	public function writeI18nElement($element, $cdata, array $attributes = array(), $force = false) {
+		if (WCF::getLanguage()->get($cdata) != $cdata) { // I18n value
 			$sql = "SELECT	language.languageCode, language_item.languageItemValue
 				FROM	".LanguageItem::getDatabaseTableName()." language_item
 				LEFT JOIN ".Language::getDatabaseTableName()." language
@@ -42,10 +48,10 @@ class I18nXMLWriter extends XMLWriter {
 			// write language values
 			while ($row = $statement->fetchArray()) {
 				$attributes['language'] = $row['languageCode'];
-				$this->writeElement($element, $row['languageItemValue'], $attributes);
+				$this->writeElement($element, $row['languageItemValue'], $attributes, $force);
 			}
 		} else { // plain value
-			$this->writeElement($element, $cdata, $attributes);
+			$this->writeElement($element, $cdata, $attributes, $force);
 		}
 	}
 
