@@ -171,9 +171,10 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 		unset($data['steps']);
 		
 		// import or update action
+		/** @var $tour \wcf\data\tour\Tour */
 		$tour = parent::import($row, $data);
 		
-		// store pages for later import
+		// store steps for later import
 		$this->tourSteps[$tour->tourID] = $steps;
 	}
 	
@@ -188,7 +189,9 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 		$statement->execute(array($this->installation->getPackageID()));
 		
 		// import tour steps
+		/** @var $tourSteps array<array> */
 		foreach ($this->tourSteps as $tourID => $tourSteps) {
+			/** @var $stepData array<mixed> */
 			foreach ($tourSteps as $stepData) {
 				$stepData['tourID'] = $tourID;
 				$stepData['showOrder'] = $this->getShowOrder($stepData['showOrder'], $tourID, 'tourID', '_step');
