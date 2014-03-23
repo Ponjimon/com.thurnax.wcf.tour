@@ -12,10 +12,11 @@
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.user.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.menu.link.user.tour.list"><![CDATA[Touren auflisten]]></item>
 		<item name="wcf.acp.menu.link.user.tour.add"><![CDATA[Tour hinzufügen]]></item>
-		<item name="wcf.acp.menu.link.user.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
+		<item name="wcf.acp.menu.link.user.tour.import"><![CDATA[Touren importieren]]></item>
+		<item name="wcf.acp.menu.link.user.tour.list"><![CDATA[Touren auflisten]]></item>
 		<item name="wcf.acp.menu.link.user.tour.step.add"><![CDATA[Tourpunkt hinzufügen]]></item>
+		<item name="wcf.acp.menu.link.user.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">
@@ -32,6 +33,11 @@
 		<item name="wcf.acp.tour.delete.sure"><![CDATA[Möchten Sie wirklich die Tour {$tour->visibleName|language} löschen?]]></item>
 		<item name="wcf.acp.tour.edit"><![CDATA[Tour bearbeiten]]></item>
 		<item name="wcf.acp.tour.exportTour"><![CDATA[Tour exportieren]]></item>
+		<item name="wcf.acp.tour.importTour"><![CDATA[Tour importieren]]></item>
+		<item name="wcf.acp.tour.import.source"><![CDATA[Datenquelle]]></item>
+		<item name="wcf.acp.tour.import.source.upload"><![CDATA[Tour hochladen]]></item>
+		<item name="wcf.acp.tour.import.source.upload.description"><![CDATA[Geben Sie eine Tour-Datei von Ihrem lokalen Rechner an.]]></item>
+		<item name="wcf.acp.tour.import.source.error.importFailed"><![CDATA[Die Tour konnte nicht importiert werden. Es handelt sich nicht um eine gültige Tour-Datei.]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Touren auflisten]]></item>
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript-Code]]></item>
 		<item name="wcf.acp.tour.manualCode.createFirst"><![CDATA[Der JavaScript-Code ist erst nach dem Hinzufügen einer Tour verfügbar]]></item>

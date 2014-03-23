@@ -12,10 +12,11 @@
 	
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.user.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.menu.link.user.tour.list"><![CDATA[List Tours]]></item>
 		<item name="wcf.acp.menu.link.user.tour.add"><![CDATA[Add Tour]]></item>
-		<item name="wcf.acp.menu.link.user.tour.step.list"><![CDATA[List Tour Steps]]></item>
+		<item name="wcf.acp.menu.link.user.tour.import"><![CDATA[Import Tour]]></item>
+		<item name="wcf.acp.menu.link.user.tour.list"><![CDATA[List Tours]]></item>
 		<item name="wcf.acp.menu.link.user.tour.step.add"><![CDATA[Add Tour Step]]></item>
+		<item name="wcf.acp.menu.link.user.tour.step.list"><![CDATA[List Tour Steps]]></item>
 	</category>
 	
 	<category name="wcf.acp.option">
@@ -31,7 +32,12 @@
 		<item name="wcf.acp.tour.data"><![CDATA[Tour-Information]]></item>
 		<item name="wcf.acp.tour.delete.sure"><![CDATA[Do you really want to delete this tour ({$tour->visibleName|language})?]]></item>
 		<item name="wcf.acp.tour.edit"><![CDATA[Edit Tour]]></item>
-		<item name="wcf.acp.tour.exportTour"><![CDATA[Export tour]]></item>
+		<item name="wcf.acp.tour.exportTour"><![CDATA[Export Tour]]></item>
+		<item name="wcf.acp.tour.importTour"><![CDATA[Import Tour]]></item>
+		<item name="wcf.acp.tour.import.source"><![CDATA[Data Source]]></item>
+		<item name="wcf.acp.tour.import.source.upload"><![CDATA[Upload Style]]></item>
+		<item name="wcf.acp.tour.import.source.upload.description"><![CDATA[Upload a tour from your local machine.]]></item>
+		<item name="wcf.acp.tour.import.source.error.importFailed"><![CDATA[Unable to import the selected tour, uploaded file is not a valid tour.]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Tours]]></item>
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript code]]></item>
 		<item name="wcf.acp.tour.manualCode.createFirst"><![CDATA[The JavaScript code ist not available until the creating of a tour.]]></item>

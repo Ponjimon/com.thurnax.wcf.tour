@@ -5,7 +5,9 @@ use wcf\data\tour\step\TourStep;
 use wcf\data\tour\step\TourStepEditor;
 use wcf\data\tour\Tour;
 use wcf\data\tour\TourEditor;
+use wcf\system\package\DummyPackageInstallationDispatcher;
 use wcf\system\WCF;
+use wcf\util\XML;
 
 /**
  * Installs, updates and deletes tours.
@@ -203,5 +205,22 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 		
 		// show notification about imported tours
 		WCF::getSession()->register(TourEditor::TOUR_IMPORTED_NOTICE, true);
+	}
+	
+	/**
+	 * Imports a file
+	 * 
+	 * @param	string	$fileName
+	 */
+	public static function importFile($fileName) {
+		// prepare xml document
+		$xml = new XML();
+		$xml->load($fileName);
+		
+		// import items
+		/** @var $pip \wcf\system\package\plugin\TourPackageInstallationPlugin */
+		$pip = new static(new DummyPackageInstallationDispatcher('com.thurnax.wcf.tour'));
+		$pip->importItems($xml->xpath());
+		$pip->cleanup();
 	}
 }
