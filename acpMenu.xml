@@ -17,7 +17,7 @@
 			<parent>wcf.acp.menu.link.user.tour</parent>
 		</acpmenuitem>
 		<acpmenuitem name="wcf.acp.menu.link.user.tour.exportImport">
-			<controller>wcf\acp\form\TourExportImport</controller>
+			<controller>wcf\acp\form\TourExportImportForm</controller>
 			<parent>wcf.acp.menu.link.user.tour</parent>
 		</acpmenuitem>
 		<!-- /tour -->
