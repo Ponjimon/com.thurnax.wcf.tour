@@ -69,12 +69,19 @@ class TourExportImportForm extends AbstractForm {
 	 */
 	public function readData() {
 		// read tours
-		$tourList = new TourList();
-		$tourList->readObjects();
-		$this->tours = $tourList->getObjects();
+		$this->readTours();
 		
 		// submit form - read form parameters, validate and save
 		parent::readData();
+	}
+	
+	/**
+	 * Reads the tours
+	 */
+	public function readTours() {
+		$tourList = new TourList();
+		$tourList->readObjects();
+		$this->tours = $tourList->getObjects();
 	}
 	
 	/**
@@ -139,6 +146,7 @@ class TourExportImportForm extends AbstractForm {
 			@unlink($this->selectedTours['tmp_name']);
 			
 			// import done
+			$this->readTours();
 			$this->saved();
 			WCF::getTPL()->assign('success', true);
 		} else {
