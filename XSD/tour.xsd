@@ -31,6 +31,7 @@
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
+						<xs:element name="className" type="woltlab_varchar_nullable" minOccurs="1" maxOccurs="unbounded" />
 						<xs:element name="steps">
 							<xs:complexType>
 								<xs:sequence>
@@ -71,7 +72,7 @@
 							</xs:complexType>
 						</xs:element>
 					</xs:sequence>
-					<xs:attribute name="className" type="woltlab_varchar" use="required" /> <!-- @todo this is used for identification by the pip - this is not ideal -->
+					<xs:attribute name="identifier" type="woltlab_varchar" use="required" /> <!-- this is used for identification by the pip -->
 				</xs:complexType>
 			</xs:element>
 		</xs:sequence>

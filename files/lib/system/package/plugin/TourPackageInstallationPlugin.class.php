@@ -34,7 +34,7 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 	 */
 	protected function handleDelete(array $items) {
 		$sql = "DELETE FROM	".Tour::getDatabaseTableName()."
-			WHERE		className = ? AND packageID = ?";
+			WHERE		identifier = ? AND packageID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		foreach ($items as $item) {
 			$statement->execute(array($item['value'], $this->installation->getPackageID()));
@@ -48,7 +48,7 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 		$tourData = array(
 			'visibleName' => $data['elements']['visibleName'],
 			'tourTrigger' => $data['elements']['tourTrigger'],
-			'className' => $data['attributes']['className'],
+			'identifier' => $data['attributes']['identifier'],
 			'steps' => array()
 		);
 		
@@ -57,8 +57,9 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 			$tourData['steps'][] = $this->prepareStepImport($stepData);
 		}
 		
-		// get optional value
+		// get optional values
 		if (isset($data['elements']['isDisabled'])) $tourData['isDisabled'] = intval($data['elements']['isDisabled']);
+		if (isset($data['elements']['className'])) $tourData['className'] = intval($data['elements']['className']);
 		
 		return $tourData;
 	}
@@ -160,8 +161,8 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 	protected function findExistingItem(array $data) {
 		$sql = "SELECT	*
 			FROM	".Tour::getDatabaseTableName()."
-			WHERE	className = ? AND packageID = ?";
-		return array('sql' => $sql, 'parameters' => array($data['className'], $this->installation->getPackageID()));
+			WHERE	identifier = ? AND packageID = ?";
+		return array('sql' => $sql, 'parameters' => array($data['identifier'], $this->installation->getPackageID()));
 	}
 	
 	/**

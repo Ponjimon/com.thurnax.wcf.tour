@@ -2,6 +2,7 @@
 namespace wcf\system\tour;
 use wcf\data\tour\step\TourStepList;
 use wcf\data\tour\Tour;
+use wcf\system\exception\SystemException;
 use wcf\util\FileUtil;
 use wcf\util\I18nXMLWriter;
 
@@ -33,12 +34,19 @@ class TourExporter {
 	 * Writes a tour to a XMLWriter
 	 * 
 	 * @param	\wcf\data\tour\Tour	$tour
+	 * @return	boolean
 	 */
 	public function writeTour(Tour $tour) {
-		$this->xml->startElement('tour', array('className' => $tour->className)); // @todo this is not ideal
-		$this->xml->writeElement('isDisabled', $tour->isDisabled);
+		if (!$tour->identifier) {
+			return false;
+		}
+		
+		// write tour data
+		$this->xml->startElement('tour', array('identifier' => $tour->identifier));
+		$this->xml->writeElement('isDisabled', $tour->isDisabled, true);
 		$this->xml->writeI18nElement('visibleName', $tour->visibleName);
 		$this->xml->writeElement('tourTrigger', $tour->tourTrigger);
+		$this->xml->writeElement('className', $tour->className);
 		
 		// get steps
 		$tourStepList = new TourStepList();
@@ -70,8 +78,10 @@ class TourExporter {
 			$this->xml->writeElement('onCTA', $tourStep->onCTA);
 			$this->xml->endElement();
 		}
+		
 		$this->xml->endElement(); // steps
 		$this->xml->endElement(); // tour
+		return true;
 	}
 	
 	/**
