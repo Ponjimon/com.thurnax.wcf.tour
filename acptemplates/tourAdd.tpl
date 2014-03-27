@@ -30,7 +30,9 @@
 	<nav>
 		<ul>
 			{if $action == 'edit'}
-				<li><a class="button" href="{link controller=TourExportImport object=$tour}{/link}"><span class="icon icon16 icon-download-alt"></span> <span>{lang}wcf.acp.tour.export.this{/lang}</span></a></li>
+				{if $identifier}
+					<li><a class="button" href="{link controller=TourExportImport object=$tour}{/link}"><span class="icon icon16 icon-download-alt"></span> <span>{lang}wcf.acp.tour.export.this{/lang}</span></a></li>
+				{/if}
 				<li class="button jsTourRestart" data-object-id="{$tour->tourID}"><span class="icon icon16 icon-play"></span> <span>{lang}wcf.acp.tour.restartTour{/lang}</span></li>
 				<li><a href="{link controller='TourStepList' object=$tour}{/link}" class="button"><span class="icon icon16 icon-list"></span> <span>{lang}wcf.acp.menu.link.user.tour.step.list{/lang}</span></a></li>
 			{/if}
