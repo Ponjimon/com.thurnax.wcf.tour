@@ -34,7 +34,7 @@
 		<item name="wcf.acp.tour.edit"><![CDATA[Tour bearbeiten]]></item>
 		<item name="wcf.acp.tour.export"><![CDATA[Touren exportieren]]></item>
 		<item name="wcf.acp.tour.export.button"><![CDATA[Export starten]]></item>
-		<item name="wcf.acp.tour.export.description"><![CDATA[Wählen Sie hier aus, welche Touren Sie exportieren möchten.]]></item>
+		<item name="wcf.acp.tour.export.description"><![CDATA[Wählen Sie hier aus, welche Touren Sie exportieren möchten. Es können nur Touren mit einem Bezeichner exportiert werden.]]></item>
 		<item name="wcf.acp.tour.export.this"><![CDATA[Tour exportieren]]></item>
 		<item name="wcf.acp.tour.exportImportTour"><![CDATA[Touren ex- und importieren]]></item>
 		<item name="wcf.acp.tour.identifier"><![CDATA[Bezeichner]]></item>

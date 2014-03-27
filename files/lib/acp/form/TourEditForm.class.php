@@ -74,6 +74,7 @@ class TourEditForm extends TourAddForm {
 			'visibleName' => $this->visibleName,
 			'tourTrigger' => $this->tourTrigger,
 			'className' => ($this->className ?: null),
+			'identifier' => ($this->identifier ?: null)
 		)));
 		$this->objectAction->executeAction();
 		

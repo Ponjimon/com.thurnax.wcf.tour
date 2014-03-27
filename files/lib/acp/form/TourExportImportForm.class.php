@@ -81,6 +81,7 @@ class TourExportImportForm extends AbstractForm {
 	public function readTours() {
 		$tourList = new TourList();
 		$tourList->getConditionBuilder()->add('identifier IS NOT NULL');
+		$tourList->sqlOrderBy = 'tourID ASC';
 		$tourList->readObjects();
 		$this->tours = $tourList->getObjects();
 	}
