@@ -21,7 +21,8 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 			FROM	".Tour::getDatabaseTableName()." tour
 			WHERE	(SELECT	COUNT(tourStepID) as count
 				FROM	".TourStep::getDatabaseTableName()." tour_step
-				WHERE	tour_step.tourID = tour.tourID) > 0";
+				WHERE	tour_step.tourID = tour.tourID) > 0 AND
+				isDisabled = 0";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute();
 
