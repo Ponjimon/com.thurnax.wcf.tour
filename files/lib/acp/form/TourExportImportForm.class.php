@@ -59,8 +59,8 @@ class TourExportImportForm extends AbstractForm {
 		parent::readParameters();
 		
 		// read preselected tour
-		if (isset($_POST['id'])) {
-			$this->selectedTours[] = intval($_POST['id']);
+		if (isset($_GET['id'])) {
+			$this->selectedTours[] = intval($_GET['id']);
 		}
 	}
 	
@@ -158,7 +158,7 @@ class TourExportImportForm extends AbstractForm {
 			}
 			
 			// send tour xml
-			$tourExporter->send('TOUR'); // @todo add proper filename
+			$tourExporter->send(WCF::getLanguage()->get('wcf.acp.tour'));
 			$this->saved();
 			exit;
 		}

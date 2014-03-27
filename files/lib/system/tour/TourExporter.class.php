@@ -3,6 +3,8 @@ namespace wcf\system\tour;
 use wcf\data\tour\step\TourStepList;
 use wcf\data\tour\Tour;
 use wcf\system\exception\SystemException;
+use wcf\system\WCF;
+use wcf\util\DateUtil;
 use wcf\util\FileUtil;
 use wcf\util\I18nXMLWriter;
 
@@ -97,15 +99,20 @@ class TourExporter {
 	/**
 	 * Sends the tour xml to the client.
 	 * 
-	 * @param	string	$fileName
+	 * @param	string	$filename
 	 */
-	public function send($fileName) {
+	public function send($filename) {
 		// write file
-		$tourFileName = FileUtil::getTemporaryFilename('tour_', '.xml');
-		$this->save($tourFileName);
+		$tourFilename = FileUtil::getTemporaryFilename('tour_', '.xml');
+		$this->save($tourFilename);
+		
+		// format current time
+		$dateTimeObject = DateUtil::getDateTimeByTimestamp(TIME_NOW);
+		$date = DateUtil::format($dateTimeObject, DateUtil::DATE_FORMAT);
+		$time = DateUtil::format($dateTimeObject, DateUtil::TIME_FORMAT);
 		
 		// send file
-		header('Content-Disposition: attachment; filename="'.$fileName.'.xml"');
-		readfile($tourFileName);
+		header('Content-Disposition: attachment; filename="'.$filename.' - '.$date.' - '.$time.'.xml"');
+		readfile($tourFilename);
 	}
 }
