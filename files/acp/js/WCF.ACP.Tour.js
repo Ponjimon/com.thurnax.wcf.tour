@@ -164,12 +164,13 @@ WCF.ACP.Tour.TourAdd = Class.extend({
 	init: function() {
 		this._radioChanged();
 		
-		// bind event
+		// bind events
 		$('input[name="tourTrigger"]').change($.proxy(this._radioChanged, this));
+		$('#identifier').keyup($.proxy(this._identifierChanged, this));
 	},
 	
 	/**
-	 * Event listener for the tour trigger radios
+	 * Change listener on the tour trigger radios
 	 * 
 	 * @param	jQuery.Event	event
 	 */
@@ -181,6 +182,13 @@ WCF.ACP.Tour.TourAdd = Class.extend({
 			$('#classNameContainer, #manualCodeContainer').addClass('disabled');
 			$('#className').disable();
 		}
+	},
+	
+	/**
+	 * Change listener on the identifier
+	 */
+	_identifierChanged: function() {
+		$('#manualCode').val("WCF.Tour.loadTour('"+$('#identifier').val()+"');");
 	}
 });
 

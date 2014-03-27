@@ -37,6 +37,9 @@
 		<item name="wcf.acp.tour.export.description"><![CDATA[Wählen Sie hier aus, welche Touren Sie exportieren möchten.]]></item>
 		<item name="wcf.acp.tour.export.this"><![CDATA[Tour exportieren]]></item>
 		<item name="wcf.acp.tour.exportImportTour"><![CDATA[Touren ex- und importieren]]></item>
+		<item name="wcf.acp.tour.identifier"><![CDATA[Bezeichner]]></item>
+		<item name="wcf.acp.tour.identifier.description"><![CDATA[Geben Sie hier optional einen Bezeichner für die Tour ein. Diser wird beim Export und zum Starten der Tour durch die JavaScript-API verwendet. Um Probleme mit Plugins zu vermeiden, sollte der Bezeichner nicht geändert werden.]]></item>
+		<item name="wcf.acp.tour.identifier.error.notUnique"><![CDATA[Dieser Bezeichner wird bereits verwendet.]]></item>
 		<item name="wcf.acp.tour.import"><![CDATA[Touren importieren]]></item>
 		<item name="wcf.acp.tour.import.button"><![CDATA[Import starten]]></item>
 		<item name="wcf.acp.tour.import.source"><![CDATA[Datenquelle]]></item>
@@ -45,7 +48,6 @@
 		<item name="wcf.acp.tour.import.source.error.importFailed"><![CDATA[Die Tour konnte nicht importiert werden. Es handelt sich nicht um eine gültige Tour-Datei.]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Touren auflisten]]></item>
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript-Code]]></item>
-		<item name="wcf.acp.tour.manualCode.createFirst"><![CDATA[Der JavaScript-Code ist erst nach dem Hinzufügen einer Tour verfügbar]]></item>
 		<item name="wcf.acp.tour.move"><![CDATA[Tourpunkte verschieben]]></item>
 		<item name="wcf.acp.tour.restartTour"><![CDATA[Tour erneut ansehen]]></item>
 		<item name="wcf.acp.tour.tourImportedNotice"><![CDATA[Es wurden neue Touren importiert. Klicken Sie hier um diese zu aktivieren.]]></item>
@@ -55,7 +57,7 @@
 		<item name="wcf.acp.tour.tourTrigger.specificSite"><![CDATA[Beim Aufruf einer Seite]]></item>
 		<item name="wcf.acp.tour.tourTrigger.specificSite.description"><![CDATA[Verwenden Sie diesen Auslöser um die Funktionsweise einer bestimmten Seite zu erklären.]]></item>
 		<item name="wcf.acp.tour.tourTrigger.manual"><![CDATA[Durch die JavaScript-API]]></item>
-		<item name="wcf.acp.tour.tourTrigger.manual.description"><![CDATA[Verwenden Sie diesen Auslöser um die Tour manuell zu starten.]]></item>
+		<item name="wcf.acp.tour.tourTrigger.manual.description"><![CDATA[Verwenden Sie diesen Auslöser um die Tour manuell zu starten. Um diesen Auslöser benutzen zu können, müssen Sie einen Bezeichner vergeben.]]></item>
 		<item name="wcf.acp.tour.visibleName"><![CDATA[Anzeigename]]></item>
 		
 		<item name="wcf.acp.tour.step.add"><![CDATA[Tourpunkt hinzufügen]]></item>

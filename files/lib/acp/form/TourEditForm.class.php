@@ -49,6 +49,13 @@ class TourEditForm extends TourAddForm {
 	}
 	
 	/**
+	 * @see	\wcf\acp\form\TourAddForm::validateIdentifier()
+	 */
+	protected function validateIdentifier() {
+		return (mb_strtolower($this->tour->identifier) == mb_strtolower($this->identifier)) || parent::validateIdentifier();
+	}
+	
+	/**
 	 * @see	\wcf\form\IForm::save()
 	 */
 	public function save() {
@@ -91,6 +98,7 @@ class TourEditForm extends TourAddForm {
 			$this->visibleName = $this->tour->visibleName;
 			$this->tourTrigger = $this->tour->tourTrigger;
 			$this->className = $this->tour->className;
+			$this->identifier = $this->tour->identifier;
 		}
 	}
 	

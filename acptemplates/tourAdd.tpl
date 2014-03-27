@@ -58,6 +58,15 @@
 				<dt>{lang}wcf.acl.permissions{/lang}</dt>
 				<dd></dd>
 			</dl>
+
+			<dl{if $errorField == 'identifier'} class="formError"{/if}>
+				<dt><label for="identifier">{lang}wcf.acp.tour.identifier{/lang}</label></dt>
+				<dd>
+					<input type="text" id="identifier" name="identifier" value="{$identifier}" class="long" />
+					{if $errorField == 'identifier'}<small class="innerError">{if $errorType == 'empty'}{lang}wcf.global.form.error.empty{/lang}{else}{lang}wcf.acp.tour.identifier.error.{@$errorType}{/lang}{/if}</small>{/if}
+					<small>{lang}wcf.acp.tour.identifier.description{/lang}</small>
+				</dd>
+			</dl>
 			
 			{event name='dataFields'}
 		</fieldset>
@@ -98,7 +107,7 @@
 			</dl>
 			<dl id="manualCodeContainer" class="disabled">
 				<dt><label for="manualCode">{lang}wcf.acp.tour.manualCode{/lang}</label></dt>
-				<dd><input type="text" value="{if $action == 'add'}{lang}wcf.acp.tour.manualCode.createFirst{/lang}{else}WCF.Tour.loadTour({$tourID});{/if}" id="manualCode" disabled="disabled" class="long" /></dd>
+				<dd><input type="text" value="WCF.Tour.loadTour('{$identifier}');" id="manualCode" disabled="disabled" class="long" /></dd>
 			</dl>
 			
 			{event name='triggerFields'}

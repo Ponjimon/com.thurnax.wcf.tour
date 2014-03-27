@@ -6,7 +6,10 @@ CREATE TABLE wcf1_tour (
 	isDisabled TINYINT(1) NOT NULL DEFAULT 1,
 	packageID INT(10) NOT NULL,
 	tourTrigger ENUM('firstSite', 'specificSite', 'manual') NOT NULL DEFAULT 'firstSite',
-	className VARCHAR(255) NULL DEFAULT NULL
+	className VARCHAR(255) NULL DEFAULT NULL,
+	identifier VARCHAR(255) NULL DEFAULT NULL,
+	
+	UNIQUE KEY (identifier)
 );
 
 DROP TABLE IF EXISTS wcf1_tour_step;

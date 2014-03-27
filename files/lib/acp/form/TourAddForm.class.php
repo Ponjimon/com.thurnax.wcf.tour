@@ -55,6 +55,12 @@ class TourAddForm extends AbstractForm {
 	public $className = null;
 	
 	/**
+	 * identifier
+	 * @var	string
+	 */
+	public $identifier = null;
+	
+	/**
 	 * list of label group to object type relations
 	 * @var	array<array>
 	 */
@@ -87,6 +93,7 @@ class TourAddForm extends AbstractForm {
 		if (isset($_POST['visibleName'])) $this->visibleName = StringUtil::trim($_POST['visibleName']);
 		if (isset($_POST['tourTrigger'])) $this->tourTrigger = $_POST['tourTrigger'];
 		if (isset($_POST['className'])) $this->className = $_POST['className'];
+		if (isset($_POST['identifier'])) $this->identifier = $_POST['identifier'];
 		if (isset($_POST['objectTypes']) && is_array($_POST['objectTypes'])) $this->objectTypes = $_POST['objectTypes'];
 	}
 	
@@ -115,11 +122,34 @@ class TourAddForm extends AbstractForm {
 					throw new UserInputException('className', 'invalid');
 				}
 			case 'firstSite': // no additional parameters
-			case 'manual':
+				break;
+			case 'manual': // require identifier
+				if (empty($this->identifier)) {
+					throw new UserInputException('identifier');
+				}
+				
 				break;
 			default:
 				throw new UserInputException('tourTrigger');
 		}
+		
+		// validate identifier
+		if ($this->identifier && !$this->validateIdentifier()) {
+			throw new UserInputException('identifier', 'notUnique');
+		}
+	}
+	
+	/**
+	 * Validates the identifier
+	 */
+	protected function validateIdentifier() {
+		$sql = "SELECT	COUNT(tourID) as count
+			FROM	".Tour::getDatabaseTableName()."
+			WHERE	identifier = ?";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		$statement->execute(array($this->identifier));
+		$row = $statement->fetchArray();
+		return $row['count'] == 0;
 	}
 	
 	/**
@@ -135,7 +165,8 @@ class TourAddForm extends AbstractForm {
 			'isDisabled' => 0,
 			'packageID' => $packageID, 
 			'tourTrigger' => $this->tourTrigger,
-			'className' => ($this->className ?: null)
+			'className' => ($this->className ?: null),
+			'identifier' => ($this->identifier ?: null)
 		)));
 		$this->objectAction->executeAction();
 		$this->saved();
@@ -159,7 +190,7 @@ class TourAddForm extends AbstractForm {
 		}
 		
 		// reset values
-		$this->visibleName = $this->className = '';
+		$this->visibleName = $this->className = $this->identifier = '';
 		$this->tourTrigger = 'firstSite';
 		I18nHandler::getInstance()->reset();
 		
@@ -180,6 +211,7 @@ class TourAddForm extends AbstractForm {
 			'visibleName' => $this->visibleName,
 			'tourTrigger' => $this->tourTrigger,
 			'className' => $this->className,
+			'identifier' => $this->identifier,
 			'objectTypeID' => $this->objectTypeID
 		));
 	}
