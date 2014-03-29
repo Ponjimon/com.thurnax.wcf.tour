@@ -27,11 +27,11 @@ interface ITourStateStorage {
 	public function getTakenTours();
 	
 	/**
-	 * Returns the last tour time
+	 * Checks whether a tour should be started
 	 * 
-	 * @return	integer
+	 * @return	boolean
 	 */
-	public function getLastTourTime();
+	public function shouldStartTour();
 	
 	/**
 	 * Marks a tour as taken

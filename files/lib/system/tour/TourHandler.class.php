@@ -82,7 +82,8 @@ class TourHandler extends SingletonFactory {
 	 * @return	boolean
 	 */
 	public function startTour($tourID, $force = false) {
-		if ($this->isEnabled() && self::canViewTour($tourID) && !$this->getActiveTour() && ($force || !in_array($tourID, $this->tourStateStorage->getTakenTours()))) {
+		if ($this->isEnabled() && self::canViewTour($tourID) && !$this->getActiveTour() && 
+			($force || (!in_array($tourID, $this->tourStateStorage->getTakenTours()) && $this->tourStateStorage->shouldStartTour()))) {
 			WCF::getSession()->register(self::SESSION_FIELD, $tourID);
 			return true;
 		}

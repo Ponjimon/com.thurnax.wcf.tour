@@ -35,7 +35,7 @@ abstract class AbstractTourStateStorage implements ITourStateStorage {
 	}
 	
 	/**
-	 * @see	\wcf\system\tour\storage\ITourStateStorage::getAvailableTours(getAvailableManualTours
+	 * @see	\wcf\system\tour\storage\ITourStateStorage::getAvailableTours()
 	 */
 	public function getAvailableManualTours() {
 		return $this->cache['availableTours'];
@@ -49,10 +49,10 @@ abstract class AbstractTourStateStorage implements ITourStateStorage {
 	}
 	
 	/**
-	 * @see	\wcf\system\tour\storage\ITourStateStorage::getLastTourTime()
+	 * @see	\wcf\system\tour\storage\ITourStateStorage::shouldStartTour()
 	 */
-	public function getLastTourTime() {
-		return $this->cache['lastTourTime'];
+	public function shouldStartTour() {
+		return ($this->cache['lastTourTime'] + TOUR_COOLDOWN_TIME * 60) <= TIME_NOW;
 	}
 	
 	/**
