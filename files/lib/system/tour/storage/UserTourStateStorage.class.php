@@ -16,7 +16,7 @@ use wcf\util\HeaderUtil;
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
  * @package	com.thurnax.wcf.tour
  */
-class UserTourStateStorage extends GuestTourStateStorage {	
+class UserTourStateStorage extends AbstractTourStateStorage {	
 	/**
 	 * @see	\wcf\system\tour\storage\AbstractTourStateStorage::__construct()
 	 */
@@ -25,20 +25,9 @@ class UserTourStateStorage extends GuestTourStateStorage {
 		$data = UserStorageHandler::getInstance()->getStorage(array(WCF::getUser()->userID), self::STORAGE_NAME);
 		
 		if ($data[WCF::getUser()->userID] === null) {
-			parent::__construct();
+			$this->readCookie();
 			
-			// collect taken tour ids from database
-			if (!$this->cache['takenTours']) {
-				$sql = "SELECT	tourID
-					FROM	".Tour::getDatabaseTableName()."_user
-					WHERE	userID = ?";
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array(WCF::getUser()->userID));
-				
-				while ($row = $statement->fetchArray()) {
-					$this->cache['takenTours'][] = $row['tourID'];
-				}
-			} else { // import cookie data to the database
+			if ($this->cache['takenTours']) { // import cookie data to database
 				$sql = "INSERT IGNORE INTO ".Tour::getDatabaseTableName()."_user (tourID, userID) VALUES (?, ?)";
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$viewableTours = TourCacheBuilder::getInstance()->getData(array(), 'viewableTours');
@@ -50,6 +39,19 @@ class UserTourStateStorage extends GuestTourStateStorage {
 				
 				// delete cookie
 				HeaderUtil::setCookie(self::STORAGE_NAME);
+			}
+			
+			// get taken tour ids from database
+			if (!$this->cache['takenTours']) {
+				$sql = "SELECT	tourID
+					FROM	".Tour::getDatabaseTableName()."_user
+					WHERE	userID = ?";
+				$statement = WCF::getDB()->prepareStatement($sql);
+				$statement->execute(array(WCF::getUser()->userID));
+				
+				while ($row = $statement->fetchArray()) {
+					$this->cache['takenTours'][] = $row['tourID'];
+				}
 			}
 			
 			// get available tours

@@ -15,13 +15,7 @@ class GuestTourStateStorage extends AbstractTourStateStorage {
 	 * @see	\wcf\system\tour\storage\AbstractTourStateStorage::__construct()
 	 */
 	public function __construct() {
-		if (isset($_COOKIE[COOKIE_PREFIX.self::STORAGE_NAME])) {
-			$this->cache['takenTours'] = @unserialize($_COOKIE[COOKIE_PREFIX.self::STORAGE_NAME]);
-			
-			if (!$this->cache['takenTours'] || !is_array($this->cache['takenTours'])) {
-				$this->cache['takenTours'] = array();
-			}
-		}
+		$this->readCookie();
 	}
 	
 	/**

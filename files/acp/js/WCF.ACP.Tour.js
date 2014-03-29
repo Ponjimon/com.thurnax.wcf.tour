@@ -188,7 +188,7 @@ WCF.ACP.Tour.TourAdd = Class.extend({
 	 * Change listener on the identifier
 	 */
 	_identifierChanged: function() {
-		$('#manualCode').val("WCF.Tour.loadTour('"+$('#identifier').val()+"');");
+		$('#manualCode').val("WCF.Tour.loadTourByIdentifier('"+$('#identifier').val()+"');");
 	}
 });
 

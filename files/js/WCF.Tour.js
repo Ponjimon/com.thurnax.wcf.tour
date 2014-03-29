@@ -8,10 +8,16 @@
  */
 WCF.Tour = {
 	/**
-	 * list of available tours
+	 * list of manual tours
 	 * @var	array<integer>
 	 */
-	availableTours: [],
+	manualTours: [],
+	
+	/**
+	 * list of available manual tours
+	 * @var	array<integer>
+	 */
+	availableManualTours: [],
 	
 	/**
 	 * action proxy
@@ -29,12 +35,16 @@ WCF.Tour = {
 	 * Loads a tour by the id.
 	 * 
 	 * @param	integer	tourID
-	 * @param	boolean	force
+	 * @param	boolean	forceStop
 	 */
-	loadTour: function(tourID, force) {
-		// check if tour is already taken / running
-		if (!force && (this._activeTourID || !WCF.inArray(tourID, this.availableTours))) {
-			return;
+	loadTour: function(tourID, forceStop) {
+		// a tour is already running
+		if (this._activeTourID) {
+			if (forceStop) { // stop tour
+				hopscotch.endTour();
+			} else { // cancel request
+				return;
+			}
 		}
 		
 		// setup
@@ -57,6 +67,20 @@ WCF.Tour = {
 			objectIDs: [ tourID ]
 		});
 		this._proxy.sendRequest();
+	},
+
+	/**
+	 * Loads a tour by the identifier
+	 * 
+	 * @param	string	identifier
+	 * @param	boolean	force
+	 * @param	boolean	forceLoading
+	 */
+	loadTourByIdentifier: function(identifier, force, forceStop) {
+		var $tourID = this.manualTours[identifier];
+		if ($tourID !== undefined && (force || WCF.inArray($tourID, this.availableManualTours))) {
+			this.loadTour($tourID, forceStop);
+		}
 	},
 
 	/**
@@ -135,8 +159,8 @@ WCF.Tour = {
 	 */
 	_end: function() {
 		// remove action tour from available tours
-		if (WCF.inArray(this._activeTourID, this.availableTours)) {
-			this.availableTours.splice(this.availableTours.indexOf(this._activeTourID), 1);
+		if (WCF.inArray(this._activeTourID, this.availableManualTours)) {
+			this.availableManualTours.splice(this.availableManualTours.indexOf(this._activeTourID), 1);
 		}
 		
 		// send request

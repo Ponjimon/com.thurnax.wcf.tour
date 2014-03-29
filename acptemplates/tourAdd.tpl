@@ -109,7 +109,7 @@
 			</dl>
 			<dl id="manualCodeContainer" class="disabled">
 				<dt><label for="manualCode">{lang}wcf.acp.tour.manualCode{/lang}</label></dt>
-				<dd><input type="text" value="WCF.Tour.loadTour('{$identifier}');" id="manualCode" disabled="disabled" class="long" /></dd>
+				<dd><input type="text" value="WCF.Tour.loadTourByIdentifier('{$identifier}');" id="manualCode" disabled="disabled" class="long" /></dd>
 			</dl>
 			
 			{event name='triggerFields'}

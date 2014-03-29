@@ -17,7 +17,7 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
 	 */
 	public function rebuild(array $parameters) {
-		$sql = "SELECT	tourID, className, tourTrigger
+		$sql = "SELECT	tourID, tourTrigger, className, identifier
 			FROM	".Tour::getDatabaseTableName()." tour
 			WHERE	(SELECT	COUNT(tourStepID) as count
 				FROM	".TourStep::getDatabaseTableName()." tour_step
@@ -29,13 +29,17 @@ class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 		// group by tour trigger
 		$tourTriggers = array('firstSite' => array(), 'specificSite' => array(), 'manual' => array());
 		while ($row = $statement->fetchArray()) {
-			if ($row['tourTrigger'] == 'specificSite') {
-				$tourTriggers['specificSite'][$row['className']] = intval($row['tourID']);
-			} else {
-				$tourTriggers[$row['tourTrigger']][] = intval($row['tourID']);
+			switch ($row['tourTrigger']) {
+				case 'specificSite':
+					$tourTriggers['specificSite'][$row['className']] = intval($row['tourID']);
+					break;
+				case 'manual':
+					$tourTriggers['manual'][$row['identifier']] = intval($row['tourID']);
+					break;
+				default:
+					$tourTriggers[$row['tourTrigger']][] = intval($row['tourID']);
 			}
 		}
-		
 		return $tourTriggers;
 	}
 }

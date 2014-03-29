@@ -1,6 +1,7 @@
 <?php
 namespace wcf\system\tour;
 use wcf\system\cache\builder\TourCacheBuilder;
+use wcf\system\cache\builder\TourTriggerCacheBuilder;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\SingletonFactory;
 use wcf\system\tour\storage\GuestTourStateStorage;
@@ -44,6 +45,15 @@ class TourHandler extends SingletonFactory {
 	 */
 	public function isEnabled() {
 		return MODULE_TOUR;
+	}
+	
+	/**
+	 * Returns all tours with the trigger 'manual'
+	 * 
+	 * @return	array<string>
+	 */
+	public function getManualTours() {
+		return TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual');
 	}
 	
 	/**
