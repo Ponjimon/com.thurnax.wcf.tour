@@ -9,7 +9,8 @@ CREATE TABLE wcf1_tour (
 	className VARCHAR(255) NULL DEFAULT NULL,
 	identifier VARCHAR(255) NULL DEFAULT NULL,
 	
-	UNIQUE KEY (identifier)
+	UNIQUE KEY (identifier),
+	KEY (isDisabled)
 );
 
 DROP TABLE IF EXISTS wcf1_tour_step;
@@ -47,7 +48,7 @@ CREATE TABLE wcf1_tour_user (
 	takeTime INT(10) NOT NULL,
 	
 	UNIQUE KEY (tourID, userID),
-	KEY (userID)
+	KEY (userID, takeTime)
 );
 
 /* foreign keys */
