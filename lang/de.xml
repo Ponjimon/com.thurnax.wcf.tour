@@ -124,7 +124,6 @@
 		<item name="wcf.tour.step.locales.nextBtn"><![CDATA[Weiter]]></item>
 		<item name="wcf.tour.step.locales.prevBtn"><![CDATA[Zurück]]></item>
 		<item name="wcf.tour.step.locales.doneBtn"><![CDATA[Ende]]></item>
-		<item name="wcf.tour.step.locales.skipBtn"><![CDATA[Überspringen]]></item>
-		<item name="wcf.tour.step.locales.closeTooltip"><![CDATA[Schließen]]></item>
+		<item name="wcf.tour.step.locales.closeTooltip"><![CDATA[Tour beenden]]></item>
 	</category>
 </language>

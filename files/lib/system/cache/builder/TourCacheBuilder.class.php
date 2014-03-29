@@ -2,6 +2,7 @@
 namespace wcf\system\cache\builder;
 use wcf\data\tour\step\TourStepList;
 use wcf\data\tour\ViewableTourList;
+use wcf\system\WCF;
 
 /**
  * Caches the rendered tour steps for a tour
@@ -33,6 +34,7 @@ class TourCacheBuilder extends AbstractCacheBuilder {
 			
 			// render tour steps
 			$previousTourStep = null;
+			/** @var $tourStep \wcf\data\tour\step\TourStep */
 			foreach ($tourStepList->getObjects() as $tourStep) {
 				$data['steps'][$tourID][] = $tourStep->render($previousTourStep);
 				$previousTourStep = $tourStep;

@@ -1,5 +1,6 @@
 /**
  * JS-API for starting hopscotch tours
+ * The positioning code is heavily based on or taken from WCF.Popover.
  * 
  * @author	Magnus Kühn
  * @copyright	2013-2014 Thurnax.com
@@ -30,6 +31,12 @@ WCF.Tour = {
 	 * @var	integer
 	 */
 	_activeTourID: null,
+	
+	/**
+	 * active tour
+	 * @var	WCF.Tour.Tour
+	 */
+	_activeTour: null,
 	
 	/**
 	 * Loads a tour by the id.
@@ -82,18 +89,6 @@ WCF.Tour = {
 			this.loadTour($tourID, forceStop);
 		}
 	},
-
-	/**
-	 * Callback after loading hopscotch.
-	 */
-	_initHopscotch: function() {
-		// register helpers
-		hopscotch.registerHelper('redirect_forward', function(url) { location.href = url; });
-		hopscotch.registerHelper('redirect_back', function() { history.back(); });
-		hopscotch.registerHelper('custom_callback', function(callback) { eval(callback); });
-		
-		WCF.System.Dependency.Manager.invoke('hopscotch');
-	},
 	
 	/**
 	 * Handles AJAX responses.
@@ -102,44 +97,204 @@ WCF.Tour = {
 	 */
 	_success: function(data) {
 		if (data.actionName == 'loadTour' && this._activeTourID === null) {
-			this._activeTourID = data.objectIDs.pop();
-			var $tour = {
-				id: 'com.thurnax.wcf.tour' + this._activeTourID,
-				i18n: {
-					nextBtn: WCF.Language.get('wcf.tour.step.locales.nextBtn'),
-					prevBtn: WCF.Language.get('wcf.tour.step.locales.prevBtn'),
-					doneBtn: WCF.Language.get('wcf.tour.step.locales.doneBtn'),
-					skipBtn: WCF.Language.get('wcf.tour.step.locales.skipBtn'),
-					closeTooltip: WCF.Language.get('wcf.tour.step.locales.closeTooltip')
-				},
-				steps: this._fixSteps(data.returnValues),
-				onEnd: $.proxy(this._end, this),
-				onClose: $.proxy(this._end, this),
-				onError: $.proxy(this._error, this)
-			};
+			if (this._tour === undefined)  {
+				// create dom nodes
+				this._tour = $('<div class="tour"><div class="tourContainer"><span class="icon icon16 icon-remove jsTooltip pointer" title="'+WCF.Language.get('wcf.tour.step.locales.closeTooltip')+'"></span>' +
+					'<div class="tourContent" /></div><span class="pointer"></span></div>').hide().appendTo(document.body);
+				this._tourContent = this._tour.find('.tourContent:eq(0)');
+				this._pointer = this._tour.children('.pointer');
+				
+				// bind events
+				this._tour.find('.icon').click($.proxy(this._close, this));
+			}
 			
-			// start tour after hopscotch is loaded
-			WCF.System.Dependency.Manager.register('hopscotch', function () {
-				hopscotch.startTour($tour);
-			});
+			// start tour
+			this._activeTourID = data.objectIDs.pop();
+			this._activeTour = data.returnValues;
+			this._showTourStep(0);
 		}
 	},
 	
+	_showTourStep: function(index) {
+		this._popoverOffset = 10;
+		this._margin = 20;
+		
+		// insert content
+		var $element = $(this._activeTour[index].target + ':eq(0)');
+		this._tourContent.html(this._activeTour[index].template);
+		
+		// get dimensions
+		var $dimensions = this._fixElementDimensions(this._tour, this._tour.show().getDimensions());
+		this._tour.hide();
+		
+		// position tour
+		var $orientation = this._getOrientation($element, $dimensions.height, $dimensions.width, 'left', 'top');
+		this._tour.css(this.getCSS($element, $orientation.x, $orientation.y));
+		this._tour.removeClass('bottom left right top').addClass($orientation.x).addClass($orientation.y);
+		console.log($orientation);
+		
+		// show tour
+		this._tour.stop().show().css({ opacity: 1 }).wcfFadeIn();
+		this._tour.children('span').hide();
+	},
+	
 	/**
-	 * Fixes the step array.
-	 * Callbacks for onCTA must be converted into a javascript function.
+	 * Resolves tour orientation, tries to use default orientation first.
 	 * 
-	 * @param	array<object>	steps
-	 * @return	array<object>
+	 * @param	jQuery	element
+	 * @param	integer	height
+	 * @param	integer	width
+	 * @param	string	defaultX
+	 * @param	string	defaultY
+	 * @return	object
 	 */
-	_fixSteps: function(steps) {
-		for (var i in steps) {
-			if (steps[i].onCTA !== undefined) {
-				steps[i].onCTA = new Function(steps[i].onCTA);
+	_getOrientation: function(element, height, width, defaultX, defaultY) {
+		// get offsets and dimensions
+		var $offsets = element.getOffsets('offset');
+		var $elementDimensions = element.getDimensions();
+		var $documentDimensions = $(document).getDimensions();
+		
+		// try default orientation first
+		var $orientationX = (defaultX === 'left') ? 'left' : 'right';
+		var $orientationY = (defaultY === 'bottom') ? 'bottom' : 'top';
+		var $result = this._evaluateOrientation($orientationX, $orientationY, $offsets, $elementDimensions, $documentDimensions, height, width);
+		
+		if ($result.flawed) {
+			// try flipping orientationX
+			$orientationX = ($orientationX === 'left') ? 'right' : 'left';
+			$result = this._evaluateOrientation($orientationX, $orientationY, $offsets, $elementDimensions, $documentDimensions, height, width);
+			
+			if ($result.flawed) {
+				// try flipping orientationY while maintaing original orientationX
+				$orientationX = ($orientationX === 'right') ? 'left' : 'right';
+				$orientationY = ($orientationY === 'bottom') ? 'top' : 'bottom';
+				$result = this._evaluateOrientation($orientationX, $orientationY, $offsets, $elementDimensions, $documentDimensions, height, width);
+				
+				if ($result.flawed) {
+					// try flipping both orientationX and orientationY compared to default values
+					$orientationX = ($orientationX === 'left') ? 'right' : 'left';
+					$result = this._evaluateOrientation($orientationX, $orientationY, $offsets, $elementDimensions, $documentDimensions, height, width);
+					
+					if ($result.flawed) {
+						// fuck this shit, we will use the default orientation
+						$orientationX = (defaultX === 'left') ? 'left' : 'right';
+						$orientationY = (defaultY === 'bottom') ? 'bottom' : 'top';
+					}
+				}
 			}
 		}
 		
-		return steps;
+		return {
+			x: $orientationX,
+			y: $orientationY
+		};
+	},
+	
+	/**
+	 * Evaluates if tour fits into given orientation.
+	 * 
+	 * @param	string		orientationX
+	 * @param	string		orientationY
+	 * @param	object		offsets
+	 * @param	object		elementDimensions
+	 * @param	object		documentDimensions
+	 * @param	integer		height
+	 * @param	integer		width
+	 * @return	object
+	 */
+	_evaluateOrientation: function(orientationX, orientationY, offsets, elementDimensions, documentDimensions, height, width) {
+		var $heightDifference = 0, $widthDifference = 0;
+		switch (orientationX) {
+			case 'left':
+				$widthDifference = offsets.left - width;
+				break;
+			
+			case 'right':
+				$widthDifference = documentDimensions.width - (offsets.left + width);
+				break;
+		}
+		
+		switch (orientationY) {
+			case 'bottom':
+				$heightDifference = documentDimensions.height - (offsets.top + elementDimensions.height + this._popoverOffset + height);
+				break;
+			
+			case 'top':
+				$heightDifference = offsets.top - (height - this._popoverOffset);
+				break;
+		}
+		
+		// check if both difference are above margin
+		var $flawed = false;
+		if ($heightDifference < this._margin || $widthDifference < this._margin) {
+			$flawed = true;
+		}
+		
+		return {
+			flawed: $flawed,
+			x: $widthDifference,
+			y: $heightDifference
+		};
+	},
+	
+	/**
+	 * Computes CSS for tour.
+	 * 
+	 * @param	jQuery	element
+	 * @param	string	orientationX
+	 * @param	string	orientationY
+	 * @return	object
+	 */
+	getCSS: function(element, orientationX, orientationY) {
+		var $offsets = element.getOffsets('offset');
+		var $elementDimensions = this._fixElementDimensions(element, element.getDimensions());
+		var $windowDimensions = $(window).getDimensions();
+		
+		var $left = 0;
+		switch (orientationX) {
+			case 'left':
+				$left = $offsets.left + $elementDimensions.width - this._tour.outerWidth() - this._popoverOffset;
+				break;
+			case 'right':
+				$left = $offsets.left + this._popoverOffset;
+				break;
+		}
+		
+		var $top = 0;
+		switch (orientationY) {
+			case 'top':
+				$top = $offsets.top - this._tour.outerHeight() - this._popoverOffset;
+				break;
+			case 'bottom':
+				$top = $offsets.top + element.outerHeight() + this._popoverOffset;
+				break;
+		}
+		
+		return {
+			left: $left,
+			top: $top
+		};
+	},
+	
+	/**
+	 * Tries to fix dimensions if element is partially hidden (overflow: hidden).
+	 * 
+	 * @param	jQuery		element
+	 * @param	object		dimensions
+	 * @return	dimensions
+	 */
+	_fixElementDimensions: function(element, dimensions) {
+		var $parentDimensions = element.parent().getDimensions();
+		
+		if ($parentDimensions.height < dimensions.height) {
+			dimensions.height = $parentDimensions.height;
+		}
+		
+		if ($parentDimensions.width < dimensions.width) {
+			dimensions.width = $parentDimensions.width;
+		}
+		
+		return dimensions;
 	},
 	
 	/**

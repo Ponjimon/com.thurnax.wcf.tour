@@ -51,7 +51,12 @@ class TourStep extends DatabaseObject {
 		$tourStep = array(
 			'target' => $this->target,
 			'placement' => $this->placement,
-			'content' => $this->compileField('content')
+			'content' => $this->compileField('content'),
+			'template' => WCF::getTPL()->fetch('tour', 'wcf', array(
+				'tourStep' => $this,
+				'content' => $this->compileField('content'),
+				'title' => $this->compileField('title')
+			))
 		);
 		
 		// add optional fields
