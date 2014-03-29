@@ -44,6 +44,7 @@ DROP TABLE IF EXISTS wcf1_tour_user;
 CREATE TABLE wcf1_tour_user (
 	tourID INT(10) NOT NULL,
 	userID INT(10) NOT NULL,
+	takeTime INT(10) NOT NULL,
 	
 	UNIQUE KEY (tourID, userID),
 	KEY (userID)

@@ -25,9 +25,9 @@ class UserTourStateStorage extends AbstractTourStateStorage {
 		$data = UserStorageHandler::getInstance()->getStorage(array(WCF::getUser()->userID), self::STORAGE_NAME);
 		
 		if ($data[WCF::getUser()->userID] === null) {
+			// import cookie data to database
 			$this->readCookie();
-			
-			if ($this->cache['takenTours']) { // import cookie data to database
+			if ($this->cache['takenTours']) {
 				$sql = "INSERT IGNORE INTO ".Tour::getDatabaseTableName()."_user (tourID, userID) VALUES (?, ?)";
 				$statement = WCF::getDB()->prepareStatement($sql);
 				$viewableTours = TourCacheBuilder::getInstance()->getData(array(), 'viewableTours');
@@ -37,21 +37,24 @@ class UserTourStateStorage extends AbstractTourStateStorage {
 					}
 				}
 				
-				// delete cookie
+				// cleanup cookie
 				HeaderUtil::setCookie(self::STORAGE_NAME);
+				$this->cache['takenTours'] = array();
 			}
 			
 			// get taken tour ids from database
-			if (!$this->cache['takenTours']) {
-				$sql = "SELECT	tourID
-					FROM	".Tour::getDatabaseTableName()."_user
-					WHERE	userID = ?";
-				$statement = WCF::getDB()->prepareStatement($sql);
-				$statement->execute(array(WCF::getUser()->userID));
-				
-				while ($row = $statement->fetchArray()) {
-					$this->cache['takenTours'][] = $row['tourID'];
+			$sql = "SELECT	tourID, takeTime
+				FROM	".Tour::getDatabaseTableName()."_user
+				WHERE	userID = ?
+				ORDER BY takeTime DESC";
+			$statement = WCF::getDB()->prepareStatement($sql);
+			$statement->execute(array(WCF::getUser()->userID));
+			while ($row = $statement->fetchArray()) {
+				if (!$this->cache['lastTourTime']) {
+					$this->cache['lastTourTime'] = $row['takeTime'];
 				}
+				
+				$this->cache['takenTours'][] = $row['tourID'];
 			}
 			
 			// get available tours
@@ -72,9 +75,9 @@ class UserTourStateStorage extends AbstractTourStateStorage {
 	 * @see	\wcf\system\tour\storage\ITourStateStorage::takeTour()
 	 */
 	public function takeTour($tourID) {
-		$sql = "INSERT INTO ".Tour::getDatabaseTableName()."_user (tourID, userID) VALUES (?, ?)";
+		$sql = "INSERT INTO ".Tour::getDatabaseTableName()."_user (tourID, userID, takeTime) VALUES (?, ?, ?)";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($tourID, WCF::getUser()->userID));
+		$statement->execute(array($tourID, WCF::getUser()->userID, TIME_NOW));
 		
 		AbstractTourStateStorage::takeTour($tourID);
 		UserStorageHandler::getInstance()->update(WCF::getUser()->userID, self::STORAGE_NAME, serialize($this->cache));

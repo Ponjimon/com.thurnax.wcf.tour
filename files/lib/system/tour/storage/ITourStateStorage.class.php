@@ -27,6 +27,13 @@ interface ITourStateStorage {
 	public function getTakenTours();
 	
 	/**
+	 * Returns the last tour time
+	 * 
+	 * @return	integer
+	 */
+	public function getLastTourTime();
+	
+	/**
 	 * Marks a tour as taken
 	 * 
 	 * @param	integer	$tourID

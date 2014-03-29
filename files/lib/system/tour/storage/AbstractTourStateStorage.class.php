@@ -12,9 +12,9 @@ namespace wcf\system\tour\storage;
 abstract class AbstractTourStateStorage implements ITourStateStorage {
 	/**
 	 * cache for the current user
-	 * @var	array<string>
+	 * @var	array<mixed>
 	 */
-	protected $cache = array('availableTours' => array(), 'takenTours' => array());
+	protected $cache = array('availableTours' => array(), 'takenTours' => array(), 'lastTourTime' => 0);
 	
 	/**
 	 * Initializes the tour state storage
@@ -49,11 +49,19 @@ abstract class AbstractTourStateStorage implements ITourStateStorage {
 	}
 	
 	/**
+	 * @see	\wcf\system\tour\storage\ITourStateStorage::getLastTourTime()
+	 */
+	public function getLastTourTime() {
+		return $this->cache['lastTourTime'];
+	}
+	
+	/**
 	 * @see	\wcf\system\tour\storage\ITourStateStorage::takeTour()
 	 */
 	public function takeTour($tourID) {
 		// update cache
 		$this->cache['takenTours'][] = $tourID;
+		$this->cache['lastTourTime'] = TIME_NOW;
 		if (($index = array_search($tourID, $this->cache['availableTours'])) !== null) {
 			unset ($this->cache['availableTours'][$index]);
 		}
