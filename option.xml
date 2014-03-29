@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/options.xsd">
 	<import>
+		<categories>
+			<category name="user.general.tour">
+				<parent>user.general</parent>
+			</category>
+		</categories>
+		
   		<options>
+			<!-- module.user -->
 			<option name="module_tour">
 				<categoryname>module.user</categoryname>
 				<optiontype>boolean</optiontype>
 				<defaultvalue>1</defaultvalue>
 			</option>
+			<!-- /module.user -->
+			
+			<!-- user.general.tour -->
+			<option name="tour_cooldown_time">
+				<categoryname>user.general.tour</categoryname>
+				<optiontype>integer</optiontype>
+				<defaultvalue>0</defaultvalue>
+			</option>
+			<!-- /user.general.tour -->
 		</options>
 	</import>
-	<delete>
-		<optioncategory name="tour.settings" />
-		<optioncategory name="tour" />
-	</delete>
 </data>
