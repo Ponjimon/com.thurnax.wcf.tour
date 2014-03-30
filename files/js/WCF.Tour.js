@@ -34,9 +34,21 @@ WCF.Tour = {
 	
 	/**
 	 * active tour
-	 * @var	WCF.Tour.Tour
+	 * @var	array<mixed>
 	 */
 	_activeTour: null,
+	
+	/**
+	 * tour offset
+	 * @var	integer
+	 */
+	_tourOffset: 10,
+	
+	/**
+	 * minimum margin (all directions) for tour
+	 * @var	integer
+	 */
+	_margin: 20,
 	
 	/**
 	 * Loads a tour by the id.
@@ -63,8 +75,13 @@ WCF.Tour = {
 				showLoadingOverlay: false
 			});
 			
-			// load hopscotch
-			head.load([ WCF_PATH + 'js/3rdParty/hopscotch-0.1.13/js/hopscotch.min.js', WCF_PATH + 'js/3rdParty/hopscotch-0.1.13/css/hopscotch.min.css' ], $.proxy(this._initHopscotch, this));
+			// create dom nodes
+			this._tour = $('<div class="tour"><div class="tourContainer"><span class="icon icon16 icon-remove jsTooltip pointer" title="'+
+				WCF.Language.get('wcf.tour.step.locales.closeTooltip')+'"></span><div class="tourContent" /></div></div>').hide().appendTo(document.body);
+			this._tourContent = this._tour.find('.tourContent:eq(0)');
+			
+			// bind events
+			this._tour.find('.icon').click($.proxy(this._close, this));
 		}
 		
 		// send request
@@ -97,17 +114,6 @@ WCF.Tour = {
 	 */
 	_success: function(data) {
 		if (data.actionName == 'loadTour' && this._activeTourID === null) {
-			if (this._tour === undefined)  {
-				// create dom nodes
-				this._tour = $('<div class="tour"><div class="tourContainer"><span class="icon icon16 icon-remove jsTooltip pointer" title="'+WCF.Language.get('wcf.tour.step.locales.closeTooltip')+'"></span>' +
-					'<div class="tourContent" /></div><span class="pointer"></span></div>').hide().appendTo(document.body);
-				this._tourContent = this._tour.find('.tourContent:eq(0)');
-				this._pointer = this._tour.children('.pointer');
-				
-				// bind events
-				this._tour.find('.icon').click($.proxy(this._close, this));
-			}
-			
 			// start tour
 			this._activeTourID = data.objectIDs.pop();
 			this._activeTour = data.returnValues;
@@ -115,12 +121,19 @@ WCF.Tour = {
 		}
 	},
 	
+	/**
+	 * Shows a tour step
+	 *  
+	 * @param	integer	index
+	 * @return	boolean
+	 */
 	_showTourStep: function(index) {
-		this._popoverOffset = 10;
-		this._margin = 20;
+		var $element = $(this._activeTour[index].target + ':eq(0)');
+		if (!$element.length) {
+			return false;
+		}
 		
 		// insert content
-		var $element = $(this._activeTour[index].target + ':eq(0)');
 		this._tourContent.html(this._activeTour[index].template);
 		
 		// get dimensions
@@ -131,11 +144,11 @@ WCF.Tour = {
 		var $orientation = this._getOrientation($element, $dimensions.height, $dimensions.width, 'left', 'top');
 		this._tour.css(this.getCSS($element, $orientation.x, $orientation.y));
 		this._tour.removeClass('bottom left right top').addClass($orientation.x).addClass($orientation.y);
-		console.log($orientation);
 		
 		// show tour
-		this._tour.stop().show().css({ opacity: 1 }).wcfFadeIn();
+		this._tour.stop().wcfFadeIn();
 		this._tour.children('span').hide();
+		return true;
 	},
 	
 	/**
@@ -203,25 +216,16 @@ WCF.Tour = {
 	 * @return	object
 	 */
 	_evaluateOrientation: function(orientationX, orientationY, offsets, elementDimensions, documentDimensions, height, width) {
-		var $heightDifference = 0, $widthDifference = 0;
-		switch (orientationX) {
-			case 'left':
-				$widthDifference = offsets.left - width;
-				break;
-			
-			case 'right':
-				$widthDifference = documentDimensions.width - (offsets.left + width);
-				break;
+		if (orientationX === 'left') {
+			var $widthDifference = offsets.left - width;
+		} else {
+			var $widthDifference = documentDimensions.width - (offsets.left + width);
 		}
 		
-		switch (orientationY) {
-			case 'bottom':
-				$heightDifference = documentDimensions.height - (offsets.top + elementDimensions.height + this._popoverOffset + height);
-				break;
-			
-			case 'top':
-				$heightDifference = offsets.top - (height - this._popoverOffset);
-				break;
+		if (orientationY === 'bottom') {
+			var $heightDifference = documentDimensions.height - (offsets.top + elementDimensions.height + this._tourOffset + height);
+		} else {
+			var $heightDifference = offsets.top - (height - this._tourOffset);
 		}
 		
 		// check if both difference are above margin
@@ -248,26 +252,17 @@ WCF.Tour = {
 	getCSS: function(element, orientationX, orientationY) {
 		var $offsets = element.getOffsets('offset');
 		var $elementDimensions = this._fixElementDimensions(element, element.getDimensions());
-		var $windowDimensions = $(window).getDimensions();
 		
-		var $left = 0;
-		switch (orientationX) {
-			case 'left':
-				$left = $offsets.left + $elementDimensions.width - this._tour.outerWidth() - this._popoverOffset;
-				break;
-			case 'right':
-				$left = $offsets.left + this._popoverOffset;
-				break;
+		if (orientationX === 'left') {
+			var $left = $offsets.left + $elementDimensions.width - this._tour.outerWidth() - this._tourOffset;
+		} else if (orientationX === 'right') {
+			var $left = $offsets.left + this._tourOffset;
 		}
 		
-		var $top = 0;
-		switch (orientationY) {
-			case 'top':
-				$top = $offsets.top - this._tour.outerHeight() - this._popoverOffset;
-				break;
-			case 'bottom':
-				$top = $offsets.top + element.outerHeight() + this._popoverOffset;
-				break;
+		if (orientationY === 'top') {
+			var $top = $offsets.top - this._tour.outerHeight() - this._tourOffset;
+		} else if (orientationY === 'bottom') {
+			var $top = $offsets.top + element.outerHeight() + this._tourOffset;
 		}
 		
 		return {
@@ -278,7 +273,7 @@ WCF.Tour = {
 	
 	/**
 	 * Tries to fix dimensions if element is partially hidden (overflow: hidden).
-	 * 
+	 *  
 	 * @param	jQuery		element
 	 * @param	object		dimensions
 	 * @return	dimensions
@@ -325,19 +320,5 @@ WCF.Tour = {
 			actionName: 'endTour'
 		});
 		this._proxy.sendRequest();
-	},
-
-	/**
-	 * Invoked when the specified target element doesn't exist on the page.
-	 */
-	_error: function() {
-		console.log('[WCF.Tour]: An error occurred while showing the tour with ID '+this._activeTourID+'.');
-		
-		// wait for hopscotch to end the tour
-		setTimeout($.proxy(function() {
-			if (hopscotch.getCurrStepNum() === 0) { // this was the last step
-				this._end();
-			}
-		}, this), 100);
 	}
 };

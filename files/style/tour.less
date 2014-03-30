@@ -32,43 +32,6 @@
 		}
 	}
 	
-	> .pointer {
-//		border-color: @wcfTooltipBackgroundColor transparent;
-//		border-style: solid;
-//		border-width: 0 5px 5px;
-		left: 50%;
-		position: absolute;
-		top: -10px;
-		
-		&.left {
-			border-top: 10px solid transparent;
-			border-right: 10px solid rgba(0, 0, 0, .3);
-			border-bottom: 10px solid transparent;
-		}
-		
-		&.right {
-			border-top: 10px solid transparent;
-			border-left: 10px solid rgba(0, 0, 0, .3);
-			border-bottom: 10px solid transparent;
-		}
-		
-		&.top {
-			border-left: 10px solid transparent;
-			border-right: 10px solid transparent;
-			border-bottom: 10px solid rgba(0, 0, 0, .3);
-		}
-		
-		&.bottom {
-			border-left: 10px solid transparent;
-			border-right: 10px solid transparent;
-			border-top: 10px solid rgba(0, 0, 0, .3);
-		}
-	}
-	
-	&.inverse .pointer {
-		border-width: 5px 5px 0;
-	}
-	
 	&::after {
 		border: 10px solid transparent;
 		content: "";
