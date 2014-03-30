@@ -51,19 +51,17 @@ class TourStep extends DatabaseObject {
 		$tourStep = array(
 			'target' => $this->target,
 			'orientation' => $this->getOrientation(),
-			'content' => $this->compileField('content'),
 			'template' => WCF::getTPL()->fetch('tour', 'wcf', array(
 				'tourStep' => $this,
 				'content' => $this->compileField('content'),
 				'title' => $this->compileField('title')
-			))
+			)),
+			'xOffset' => ($this->xOffset ?: 0),
+			'yOffset' => ($this->yOffset ?: 0)
 		);
 		
 		// add optional fields
-		if ($this->title) $tourStep['title'] = $this->compileField('title');
 		$tourStep['showPrevButton'] = ($this->showPrevButton ? 1 : 0);
-		if ($this->xOffset) $tourStep['xOffset'] = $this->xOffset;
-		if ($this->yOffset) $tourStep['yOffset'] = $this->yOffset;
 		
 		// redirect forward
 		if ($this->url) {

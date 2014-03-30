@@ -81,7 +81,7 @@ WCF.Tour = {
 			this._tourContent = this._tour.find('.tourContent:eq(0)');
 			
 			// bind events
-			this._tour.find('.icon').click($.proxy(this._close, this));
+			this._tour.find('.icon').click($.proxy(this.end, this));
 		}
 		
 		// send request
@@ -141,8 +141,9 @@ WCF.Tour = {
 		this._tour.hide();
 		
 		// position tour
-		var $orientation = this._getOrientation($element, $dimensions.height, $dimensions.width, this._activeTour[index].orientation.x, this._activeTour[index].orientation.y);
-		this._tour.css(this.getCSS($element, $orientation.x, $orientation.y));
+		var $orientation = this._getOrientation($element, $dimensions.height, $dimensions.width, this._activeTour[index].orientation.x, 
+			this._activeTour[index].orientation.y, this._activeTour[index].xOffset, this._activeTour[index].yOffset);
+		this._tour.css(this.getCSS($element, $orientation.x, $orientation.y, this._activeTour[index].xOffset, this._activeTour[index].yOffset));
 		this._tour.removeClass('bottom left right top').addClass($orientation.x).addClass($orientation.y);
 		
 		// show tour
@@ -159,39 +160,45 @@ WCF.Tour = {
 	 * @param	integer	width
 	 * @param	string	defaultX
 	 * @param	string	defaultY
+	 * @param	integer	xOffset
+	 * @param	integer	yOffset
 	 * @return	object
 	 */
-	_getOrientation: function(element, height, width, defaultX, defaultY) {
+	_getOrientation: function(element, height, width, defaultX, defaultY, xOffset, yOffset) {
 		// get offsets and dimensions
 		var $offsets = element.getOffsets('offset');
 		var $elementDimensions = element.getDimensions();
 		var $documentDimensions = $(document).getDimensions();
 		
+		// apply offsets
+		$offsets.left += parseInt(xOffset);
+		$offsets.top += parseInt(yOffset);
+		
 		// try default orientation first
-		var $orientationX = (defaultX === 'left') ? 'left' : 'right';
-		var $orientationY = (defaultY === 'bottom') ? 'bottom' : 'top';
+		var $orientationX = (defaultX === 'left' ? 'left' : 'right');
+		var $orientationY = (defaultY === 'bottom' ? 'bottom' : 'top');
 		var $result = this._evaluateOrientation($orientationX, $orientationY, $offsets, $elementDimensions, $documentDimensions, height, width);
 		
 		if ($result.flawed) {
 			// try flipping orientationX
-			$orientationX = ($orientationX === 'left') ? 'right' : 'left';
+			$orientationX = ($orientationX === 'left' ? 'right' : 'left');
 			$result = this._evaluateOrientation($orientationX, $orientationY, $offsets, $elementDimensions, $documentDimensions, height, width);
 			
 			if ($result.flawed) {
 				// try flipping orientationY while maintaing original orientationX
-				$orientationX = ($orientationX === 'right') ? 'left' : 'right';
-				$orientationY = ($orientationY === 'bottom') ? 'top' : 'bottom';
+				$orientationX = ($orientationX === 'right' ? 'left' : 'right');
+				$orientationY = ($orientationY === 'bottom' ? 'top' : 'bottom');
 				$result = this._evaluateOrientation($orientationX, $orientationY, $offsets, $elementDimensions, $documentDimensions, height, width);
 				
 				if ($result.flawed) {
 					// try flipping both orientationX and orientationY compared to default values
-					$orientationX = ($orientationX === 'left') ? 'right' : 'left';
+					$orientationX = ($orientationX === 'left' ? 'right' : 'left');
 					$result = this._evaluateOrientation($orientationX, $orientationY, $offsets, $elementDimensions, $documentDimensions, height, width);
 					
 					if ($result.flawed) {
 						// fuck this shit, we will use the default orientation
-						$orientationX = (defaultX === 'left') ? 'left' : 'right';
-						$orientationY = (defaultY === 'bottom') ? 'bottom' : 'top';
+						$orientationX = (defaultX === 'left' ? 'left' : 'right');
+						$orientationY = (defaultY === 'bottom' ? 'bottom' : 'top');
 					}
 				}
 			}
@@ -247,9 +254,11 @@ WCF.Tour = {
 	 * @param	jQuery	element
 	 * @param	string	orientationX
 	 * @param	string	orientationY
+	 * @param	integer	xOffset
+	 * @param	integer	yOffset
 	 * @return	object
 	 */
-	getCSS: function(element, orientationX, orientationY) {
+	getCSS: function(element, orientationX, orientationY, xOffset, yOffset) {
 		var $offsets = element.getOffsets('offset');
 		var $elementDimensions = this._fixElementDimensions(element, element.getDimensions());
 		
@@ -266,8 +275,8 @@ WCF.Tour = {
 		}
 		
 		return {
-			left: $left,
-			top: $top
+			left: $left + parseInt(xOffset),
+			top: $top + parseInt(yOffset)
 		};
 	},
 	
@@ -307,7 +316,14 @@ WCF.Tour = {
 	/**
 	 * Invoked when the tour ends or the user closes the tour.
 	 */
-	_end: function() {
+	end: function() {
+		if (this._activeTour === null || this._tour === undefined) {
+			return;
+		}
+		
+		// close
+		this._tour.wcfFadeOut();
+		
 		// remove action tour from available tours
 		if (WCF.inArray(this._activeTourID, this.availableManualTours)) {
 			this.availableManualTours.splice(this.availableManualTours.indexOf(this._activeTourID), 1);
@@ -315,6 +331,7 @@ WCF.Tour = {
 		
 		// send request
 		this._activeTourID = null;
+		this._activeTour = null;
 		this._proxy.setOption('data', {
 			className: 'wcf\\data\\tour\\TourAction',
 			actionName: 'endTour'
