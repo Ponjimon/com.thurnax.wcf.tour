@@ -66,7 +66,7 @@ class TourStepEditForm extends TourStepAddForm {
 
 			$this->tourID = $this->tourStep->tourID;
 			$this->target = $this->tourStep->target;
-			$this->placement = $this->tourStep->placement;
+			$this->orientation = $this->tourStep->orientation;
 			$this->stepContent = $this->tourStep->content;
 			
 			// optionals
@@ -120,7 +120,7 @@ class TourStepEditForm extends TourStepAddForm {
 		$this->objectAction = new TourStepAction(array($this->tourStepID), 'update', array('data' => array(
 			'tourID' => $this->tourID,
 			'target' => $this->target,
-			'placement' => $this->placement,
+			'orientation' => $this->orientation,
 			'content' => $this->stepContent,
 			
 			// optionals

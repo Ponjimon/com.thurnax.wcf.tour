@@ -5,7 +5,7 @@ use wcf\system\WCF;
 use wcf\util\StringUtil;
 
 /**
- * Represents a tour step.
+ * Represents a tour step. 
  * 
  * @property	integer	$tourStepID
  * @property	integer	$tourID
@@ -13,7 +13,7 @@ use wcf\util\StringUtil;
  * @property	integer	$isDisabled
  * @property	integer	$packageID
  * @property	string	$target
- * @property	string	$placement
+ * @property	string	 $orientation
  * @property	string	$content
  * @property	string	$title
  * @property	integer	$showPrevButton
@@ -50,7 +50,7 @@ class TourStep extends DatabaseObject {
 	public function render(TourStep $previousTourStep = null) {
 		$tourStep = array(
 			'target' => $this->target,
-			'placement' => $this->placement,
+			'orientation' => $this->getOrientation(),
 			'content' => $this->compileField('content'),
 			'template' => WCF::getTPL()->fetch('tour', 'wcf', array(
 				'tourStep' => $this,
@@ -90,7 +90,17 @@ class TourStep extends DatabaseObject {
 		
 		return $tourStep;
 	}
-
+	
+	/**
+	 * Returns the orientation
+	 * 
+	 * @return	array<string>
+	 */
+	public function getOrientation() {
+		$orientations = explode('-', $this->orientation);
+		return array('x' => $orientations[1], 'y' => $orientations[0]);
+	}
+	
 	/**
 	 * Compiles a field
 	 * 

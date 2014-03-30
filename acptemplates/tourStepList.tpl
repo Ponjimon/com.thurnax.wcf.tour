@@ -85,7 +85,7 @@
 						<th class="columnText{if $sortField == 'target'} active {@$sortOrder}{/if}"><a href="{link controller='TourStepList'}pageNo={@$pageNo}&sortField=target&sortOrder={if $sortField == 'target' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.step.target{/lang}</a></th>
 						<th class="columnText{if $sortField == 'title'} active {@$sortOrder}{/if}"><a href="{link controller='TourStepList'}pageNo={@$pageNo}&sortField=title&sortOrder={if $sortField == 'title' && $sortOder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.step.title{/lang}</a></th>
 						<th class="columnText{if $sortField == 'content'} active {@$sortOrder}{/if}"><a href="{link controller='TourStepList'}pageNo={@$pageNo}&sortField=content&sortOrder={if $sortField == 'content' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.step.content{/lang}</a></th>
-						<th class="columnText{if $sortField == 'placement'} active {@$sortOrder}{/if}"><a href="{link controller='TourStepList'}pageNo={@$pageNo}&sortField=placement&sortOrder={if $sortField == 'placement' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.step.placement{/lang}</a></th>
+						<th class="columnText{if $sortField == 'orientation'} active {@$sortOrder}{/if}"><a href="{link controller='TourStepList'}pageNo={@$pageNo}&sortField=orientation&sortOrder={if $sortField == 'orientation' && $sortOrder == 'ASC'}DESC{else}ASC{/if}{/link}">{lang}wcf.acp.tour.step.orientation{/lang}</a></th>
 						
 						{event name='columnHeads'}
 					</tr>
@@ -106,7 +106,7 @@
 							<td class="columnText">{$tourStep->target|tableWordwrap}</td>
 							<td class="columnText">{if $tourStep->title}{$tourStep->title|language|tableWordwrap}{else}{lang}wcf.acp.tour.step.title.none{/lang}{/if}</td>
 							<td class="columnText">{$tourStep->content|language|tableWordwrap}</td>
-							<td class="columnText">{lang}wcf.acp.tour.step.placement.{$tourStep->placement}{/lang}</td>
+							<td class="columnText">{lang}wcf.acp.tour.step.orientation.{$tourStep->orientation}{/lang}</td>
 							
 							{event name='columns'}
 						</tr>

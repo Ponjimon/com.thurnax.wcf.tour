@@ -16,7 +16,7 @@ use wcf\system\WCF;
  * @property	integer	$isDisabled
  * @property	integer	$packageID
  * @property	string	$target
- * @property	string	$placement
+ * @property	string	$orientation
  * @property	string	$content
  * @property	string	$title
  * @property	integer	$showPrevButton

@@ -42,7 +42,7 @@ class TourStepListPage extends SortablePage {
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$validSortFields
 	 */
-	public $validSortFields = array('tourStepID', 'showOrder', 'target', 'placement', 'title', 'content', 'xOffset', 'yOffset', 'showPrevButton', 'url');
+	public $validSortFields = array('tourStepID', 'showOrder', 'target', 'orientation', 'title', 'content', 'xOffset', 'yOffset', 'showPrevButton', 'url');
 	
 	/**
 	 * @see	\wcf\page\MultipleLinkPage::$itemsPerPage

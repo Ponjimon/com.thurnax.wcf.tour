@@ -141,7 +141,7 @@ WCF.Tour = {
 		this._tour.hide();
 		
 		// position tour
-		var $orientation = this._getOrientation($element, $dimensions.height, $dimensions.width, 'left', 'top');
+		var $orientation = this._getOrientation($element, $dimensions.height, $dimensions.width, this._activeTour[index].orientation.x, this._activeTour[index].orientation.y);
 		this._tour.css(this.getCSS($element, $orientation.x, $orientation.y));
 		this._tour.removeClass('bottom left right top').addClass($orientation.x).addClass($orientation.y);
 		

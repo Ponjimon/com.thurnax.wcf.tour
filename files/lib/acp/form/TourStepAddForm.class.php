@@ -55,16 +55,16 @@ class TourStepAddForm extends AbstractForm {
 	public $target = '';
 	
 	/**
-	 * placement
+	 * orientation
 	 * @var	string
 	 */
-	public $placement =  'left';
+	public $orientation =  'left';
 	
 	/**
-	 * valid placements
+	 * valid orientations
 	 * @var	string
 	 */
-	public $validPlacements = array('top', 'bottom', 'left', 'right');
+	public $validOrientations = array('top-left', 'top-right', 'bottom-left', 'bottom-right');
 	
 	/**
 	 * content
@@ -158,7 +158,7 @@ class TourStepAddForm extends AbstractForm {
 		I18nHandler::getInstance()->readValues();
 		if (isset($_POST['tourID'])) $this->tourID = intval($_POST['tourID']);
 		if (isset($_POST['target'])) $this->target = $_POST['target'];
-		if (isset($_POST['placement'])) $this->placement = $_POST['placement'];
+		if (isset($_POST['orientation'])) $this->orientation = $_POST['orientation'];
 		if (isset($_POST['stepContent'])) $this->stepContent = StringUtil::trim($_POST['stepContent']);
 		
 		// optionals
@@ -204,9 +204,9 @@ class TourStepAddForm extends AbstractForm {
 			throw new UserInputException('target');
 		}
 		
-		// validate placement
-		if (empty($this->placement) || !in_array($this->placement, $this->validPlacements)) {
-			throw new UserInputException('placement');
+		// validate orientation
+		if (empty($this->orientation) || !in_array($this->orientation, $this->validOrientations)) {
+			throw new UserInputException('orientation');
 		}
 		
 		// validate title
@@ -251,7 +251,7 @@ class TourStepAddForm extends AbstractForm {
 			'showOrder' => $this->getShowOrder(),
 			'packageID' => $packageID,
 			'target' => $this->target,
-			'placement' => $this->placement,
+			'orientation' => $this->orientation,
 			'content' => $this->stepContent,
 			
 			// optionals
@@ -297,7 +297,7 @@ class TourStepAddForm extends AbstractForm {
 		
 		// reset values
 		$this->target = $this->stepContent = $this->url = '';
-		$this->placement = 'left';
+		$this->orientation = 'left';
 		$this->showPrevButton = true;
 		$this->xOffset = $this->yOffset = 0;
 		$this->onPrev = $this->onNext = $this->onShow = $this->onCTA = '';
@@ -336,8 +336,8 @@ class TourStepAddForm extends AbstractForm {
 			'tourID' => $this->tourID,
 			'tours' => $this->tours,
 			'target' => $this->target,
-			'placement' => $this->placement,
-			'validPlacements' => $this->validPlacements,
+			'orientation' => $this->orientation,
+			'validOrientations' => $this->validOrientations,
 			'content' => $this->stepContent,
 			
 			// optionals

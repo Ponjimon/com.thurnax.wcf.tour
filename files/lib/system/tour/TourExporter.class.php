@@ -62,7 +62,7 @@ class TourExporter {
 			$this->xml->startElement('step');
 			$this->xml->writeElement('showOrder', $tourStep->showOrder);
 			$this->xml->writeElement('target', $tourStep->target);
-			$this->xml->writeElement('placement', $tourStep->placement);
+			$this->xml->writeElement('orientation', $tourStep->orientation);
 			$this->xml->writeI18nElement('content', $tourStep->content, array(), true);
 			
 			// optionals

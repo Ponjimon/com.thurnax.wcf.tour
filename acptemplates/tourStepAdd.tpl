@@ -67,15 +67,15 @@
 					</dd>
 				</dl>
 				
-				<dl{if $errorField == 'placement'} class="formError"{/if}>
-					<dt><label for="placement">{lang}wcf.acp.tour.step.placement{/lang}</label></dt>
+				<dl{if $errorField == 'orientation'} class="formError"{/if}>
+					<dt><label for="orientation">{lang}wcf.acp.tour.step.orientation{/lang}</label></dt>
 					<dd>
-						<select id="placement" name="placement">
-							{foreach from=$validPlacements item=validPlacement}
-								<option value="{$validPlacement}"{if $placement == $validPlacement} selected="selected"{/if}>{lang}wcf.acp.tour.step.placement.{$validPlacement}{/lang}</option>
+						<select id="orientation" name="orientation">
+							{foreach from=$validOrientations item=validOrientation}
+								<option value="{$validOrientation}"{if $orientation == $validOrientation} selected="selected"{/if}>{lang}wcf.acp.tour.step.orientation.{$validOrientation}{/lang}</option>
 							{/foreach}
 						</select>
-						{if $errorField == 'placement'}<small class="innerError">{lang}wcf.global.form.error.empty{/lang}</small>{/if}
+						{if $errorField == 'orientation'}<small class="innerError">{lang}wcf.global.form.error.empty{/lang}</small>{/if}
 					</dd>
 				</dl>
 				

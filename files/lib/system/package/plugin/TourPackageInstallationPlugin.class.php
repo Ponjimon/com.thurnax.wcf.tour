@@ -79,7 +79,7 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 		);
 		
 		// get optional values
-		if (isset($data['elements']['placement'])) $stepData['placement'] = $data['elements']['placement'];
+		if (isset($data['elements']['orientation'])) $stepData['orientation'] = $data['elements']['orientation'];
 		if (isset($data['elements']['title'])) $stepData['title'] = $data['elements']['title'];
 		if (isset($data['elements']['showPrevButton'])) $stepData['showPrevButton'] = (bool) $data['elements']['showPrevButton'];
 		if (isset($data['elements']['xOffset'])) $stepData['xOffset'] = $data['elements']['xOffset'];

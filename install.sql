@@ -21,7 +21,7 @@ CREATE TABLE wcf1_tour_step (
 	isDisabled TINYINT(1) NOT NULL DEFAULT 0,
 	packageID INT(10) NOT NULL,
 	target VARCHAR(255) NOT NULL,
-	placement ENUM('top', 'bottom', 'left', 'right') NOT NULL DEFAULT 'left',
+	orientation ENUM('top-left', 'top-right', 'bottom-left', 'bottom-right') NOT NULL DEFAULT 'top-left',
 	content MEDIUMTEXT NOT NULL,
 	
 	-- optionals
