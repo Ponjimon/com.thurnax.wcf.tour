@@ -41,7 +41,7 @@
 		<item name="wcf.acp.tour.export.this"><![CDATA[Tour exportieren]]></item>
 		<item name="wcf.acp.tour.exportImportTour"><![CDATA[Touren ex- und importieren]]></item>
 		<item name="wcf.acp.tour.identifier"><![CDATA[Bezeichner]]></item>
-		<item name="wcf.acp.tour.identifier.description"><![CDATA[Geben Sie hier optional einen Bezeichner für die Tour ein. Diser wird beim Export und zum Starten der Tour durch die JavaScript-API verwendet. Um Probleme mit Plugins zu vermeiden, sollte der Bezeichner nicht geändert werden.]]></item>
+		<item name="wcf.acp.tour.identifier.description"><![CDATA[Geben Sie hier optional einen Bezeichner für die Tour ein. Dieser wird beim Export und zum Starten der Tour durch die JavaScript-API verwendet. Um Probleme mit Plugins zu vermeiden, sollte der Bezeichner nicht geändert werden.]]></item>
 		<item name="wcf.acp.tour.identifier.error.notUnique"><![CDATA[Dieser Bezeichner wird bereits verwendet.]]></item>
 		<item name="wcf.acp.tour.import"><![CDATA[Touren importieren]]></item>
 		<item name="wcf.acp.tour.import.button"><![CDATA[Import starten]]></item>
