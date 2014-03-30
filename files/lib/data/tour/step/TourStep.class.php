@@ -13,7 +13,7 @@ use wcf\util\StringUtil;
  * @property	integer	$isDisabled
  * @property	integer	$packageID
  * @property	string	$target
- * @property	string	 $orientation
+ * @property	string	$orientation
  * @property	string	$content
  * @property	string	$title
  * @property	integer	$showPrevButton

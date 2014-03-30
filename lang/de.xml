@@ -86,14 +86,14 @@
 		<item name="wcf.acp.tour.step.onNext.description"><![CDATA[Wird beim Klicken auf den Weiter-Button aufgerufen.]]></item>
 		<item name="wcf.acp.tour.step.onPrev"><![CDATA[Zurück-Button]]></item>
 		<item name="wcf.acp.tour.step.onPrev.description"><![CDATA[Wird beim Klicken auf den Zurück-Button aufgerufen. Dieses Callback kann nicht zusammen mit einer Weiterleitung verwendet werden.]]></item>
-		<item name="wcf.acp.tour.step.onShow"><![CDATA[Beim Anzeigen]]></item>
-		<item name="wcf.acp.tour.step.onShow.description"><![CDATA[Wird beim erstmaligen Anzeigen der Tourpunktes aufgerufen.]]></item>
 		<item name="wcf.acp.tour.step.orientation"><![CDATA[Position]]></item>
-		<item name="wcf.acp.tour.step.orientation.description"><![CDATA[Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an.]]></item>
+		<item name="wcf.acp.tour.step.orientation.description"><![CDATA[Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an. Diese Position wird nach Möglichkeit verwendet, aber nicht erzwungen.]]></item>
 		<item name="wcf.acp.tour.step.orientation.top-left"><![CDATA[Oberhalb: Links]]></item>
 		<item name="wcf.acp.tour.step.orientation.top-right"><![CDATA[Oberhalb: Rechts]]></item>
 		<item name="wcf.acp.tour.step.orientation.bottom-left"><![CDATA[Unterhalb: Links]]></item>
 		<item name="wcf.acp.tour.step.orientation.bottom-right"><![CDATA[Unterhalb: Rechts]]></item>
+		<item name="wcf.acp.tour.step.onShow"><![CDATA[Beim Anzeigen]]></item>
+		<item name="wcf.acp.tour.step.onShow.description"><![CDATA[Wird beim erstmaligen Anzeigen der Tourpunktes aufgerufen.]]></item>
 		<item name="wcf.acp.tour.step.showOrder"><![CDATA[Reihenfolge]]></item>
 		<item name="wcf.acp.tour.step.showPrevButton"><![CDATA[Zurück-Button anzeigen]]></item>
 		<item name="wcf.acp.tour.step.target"><![CDATA[DOM-Element]]></item>
