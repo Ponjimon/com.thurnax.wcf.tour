@@ -67,17 +67,12 @@ class TourExporter {
 			
 			// optionals
 			$this->xml->writeI18nElement('title', $tourStep->title);
-			$this->xml->writeElement('showPrevButton', $tourStep->showPrevButton);
 			$this->xml->writeElement('xOffset', $tourStep->xOffset);
 			$this->xml->writeElement('yOffset', $tourStep->yOffset);
 			$this->xml->writeElement('url', $tourStep->url);
-			$this->xml->writeI18nElement('ctaLabel', $tourStep->ctaLabel);
+			$this->xml->writeElement('callbackBefore', $tourStep->callbackBefore);
+			$this->xml->writeElement('callbackAfter', $tourStep->callbackAfter);
 			
-			// callbacks
-			$this->xml->writeElement('onPrev', $tourStep->onPrev);
-			$this->xml->writeElement('onNext', $tourStep->onNext);
-			$this->xml->writeElement('onShow', $tourStep->onShow);
-			$this->xml->writeElement('onCTA', $tourStep->onCTA);
 			$this->xml->endElement();
 		}
 		

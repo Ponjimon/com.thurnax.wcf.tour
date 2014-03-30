@@ -6,8 +6,10 @@ use wcf\util\StringUtil;
 
 /**
  * Represents a tour step. 
- * 
- * @property	integer	$tourStepID
+  
+  
+*
+*@property	integer	$tourStepID
  * @property	integer	$tourID
  * @property	integer	$showOrder
  * @property	integer	$isDisabled
@@ -16,15 +18,11 @@ use wcf\util\StringUtil;
  * @property	string	$orientation
  * @property	string	$content
  * @property	string	$title
- * @property	integer	$showPrevButton
  * @property	integer	$xOffset
  * @property	integer	$yOffset
  * @property	string	$url
- * @property	string	$ctaLabel
- * @property	string	$onPrev
- * @property	string	$onNext
- * @property	string	$onShow
- * @property	string	$onCTA
+ * @property	string	$callbackBefore
+ * @property	string	$callbackAfter
  * @author	Magnus Kühn
  * @copyright	2013-2014 Thurnax.com
  * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -60,31 +58,20 @@ class TourStep extends DatabaseObject {
 			'yOffset' => ($this->yOffset ?: 0)
 		);
 		
-		// add optional fields
-		$tourStep['showPrevButton'] = ($this->showPrevButton ? 1 : 0);
-		
-		// redirect forward
-		if ($this->url) {
-			$tourStep['multipage'] = true;
-			$tourStep['onNext'] = array('redirect_forward', $this->url);
-		}
-		
-		// redirect back
-		if ($previousTourStep && $previousTourStep->url) {
-			$tourStep['onPrev'] = array('redirect_back');
-		}
-		
-		// cta button
-		if ($this->ctaLabel) {
-			$tourStep['showCTAButton'] = true;
-			$tourStep['ctaLabel'] = $this->compileField('ctaLabel');
-		}
+//		// redirect forward
+//		if ($this->url) {
+//			$tourStep['multipage'] = true;
+//			$tourStep['callbackAfter'] = array('redirect_forward', $this->url);
+//		}
+//		
+//		// redirect back
+//		if ($previousTourStep && $previousTourStep->url) {
+//			$tourStep['callbackBefore'] = array('redirect_back');
+//		}
 		
 		// callbacks
-		if ($this->onPrev) $tourStep['onPrev'] = array('custom_callback', $this->onPrev);
-		if ($this->onNext) $tourStep['onNext'] = array('custom_callback', $this->onNext);
-		if ($this->onShow) $tourStep['onShow'] = array('custom_callback', $this->onShow);
-		if ($this->onCTA) $tourStep['onCTA'] = $this->onCTA; // on cta doesn't invoke helpers
+		if ($this->callbackBefore) $tourStep['callbackBefore'] = array('custom_callback', $this->callbackBefore);
+		if ($this->callbackAfter) $tourStep['callbackAfter'] = array('custom_callback', $this->callbackAfter);
 		
 		return $tourStep;
 	}

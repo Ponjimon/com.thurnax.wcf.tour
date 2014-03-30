@@ -81,17 +81,11 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 		// get optional values
 		if (isset($data['elements']['orientation'])) $stepData['orientation'] = $data['elements']['orientation'];
 		if (isset($data['elements']['title'])) $stepData['title'] = $data['elements']['title'];
-		if (isset($data['elements']['showPrevButton'])) $stepData['showPrevButton'] = (bool) $data['elements']['showPrevButton'];
 		if (isset($data['elements']['xOffset'])) $stepData['xOffset'] = $data['elements']['xOffset'];
 		if (isset($data['elements']['yOffset'])) $stepData['yOffset'] = $data['elements']['yOffset'];
 		if (isset($data['elements']['url'])) $stepData['url'] = $data['elements']['url'];
-		if (isset($data['elements']['ctaLabel'])) $stepData['ctaLabel'] = $data['elements']['ctaLabel'];
-		
-		// get callbacks
-		if (isset($data['elements']['onPrev'])) $stepData['onPrev'] = $data['elements']['onPrev'];
-		if (isset($data['elements']['onNext'])) $stepData['onNext'] = $data['elements']['onNext'];
-		if (isset($data['elements']['onShow'])) $stepData['onShow'] = $data['elements']['onShow'];
-		if (isset($data['elements']['onCTA'])) $stepData['onCTA'] = $data['elements']['onCTA'];
+		if (isset($data['elements']['callbackBefore'])) $stepData['callbackBefore'] = $data['elements']['callbackBefore'];
+		if (isset($data['elements']['callbackAfter'])) $stepData['callbackAfter'] = $data['elements']['callbackAfter'];
 		
 		return $stepData;
 	}
@@ -104,7 +98,6 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 			case 'visibleName': // I18n values
 			case 'title':
 			case 'content':
-			case 'ctaLabel':
 				if (!isset($elements[$element->tagName])) {
 					$elements[$element->tagName] = array();
 				}

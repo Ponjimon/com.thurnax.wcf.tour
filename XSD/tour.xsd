@@ -54,17 +54,11 @@
 												
 												<!-- optionals -->
 												<xs:element name="title" type="tour_multilingual" minOccurs="0" maxOccurs="unbounded" />
-												<xs:element name="showPrevButton" type="woltlab_boolean" default="1" minOccurs="0" />
 												<xs:element name="xOffset" type="xs:integer" default="0" minOccurs="0" />
 												<xs:element name="yOffset" type="xs:integer" default="0" minOccurs="0" />
 												<xs:element name="url" type="woltlab_varchar" default="" minOccurs="0" />
-												<xs:element name="ctaLabel" type="tour_multilingual" minOccurs="0" maxOccurs="unbounded" />
-												
-												<!-- callbacks -->
-												<xs:element name="onPrev" type="xs:string" minOccurs="0" />
-												<xs:element name="onNext" type="xs:string" minOccurs="0" />
-												<xs:element name="onShow" type="xs:string" minOccurs="0" />
-												<xs:element name="onCTA" type="xs:string" minOccurs="0" />
+												<xs:element name="callbackBefore" type="xs:string" minOccurs="0" />
+												<xs:element name="callbackAfter" type="xs:string" minOccurs="0" />
 											</xs:sequence>
 										</xs:complexType>
 									</xs:element>

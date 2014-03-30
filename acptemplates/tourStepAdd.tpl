@@ -105,11 +105,6 @@
 				<legend>{lang}wcf.acp.tour.step.advanced{/lang}</legend>
 				<small>{lang}wcf.acp.tour.step.advanced.description{/lang}</small>
 				
-				<dl>
-					<dt class="reversed"><label for="showPrevButton">{lang}wcf.acp.tour.step.showPrevButton{/lang}</label></dt>
-					<dd><input type="checkbox" id="showPrevButton" name="showPrevButton"{if $showPrevButton} checked="checked"{/if} /></dd>
-				</dl>
-				
 				<dl{if $errorField == 'xOffset'} class="formError"{/if}>
 					<dt><label for="xOffset">{lang}wcf.acp.tour.step.xOffset{/lang}</label></dt>
 					<dd>
@@ -128,24 +123,14 @@
 					</dd>
 				</dl>
 				
-				<dl{if $errorField == 'eitherUrlOrOnNext'} class="formError"{/if}>
+				<dl{if $errorField == 'eitherUrlOrCallbackAfter'} class="formError"{/if}>
 					<dt><label for="yOffset">{lang}wcf.acp.tour.step.url{/lang}</label></dt>
 					<dd>
 						<input type="url" id="url" name="url" value="{$url}" class="long" />
-						{if $errorField == 'eitherUrlOrOnNext'}<small class="innerError">{lang}wcf.acp.tour.step.eitherUrlOrOnNext{/lang}</small>{/if}
+						{if $errorField == 'eitherUrlOrCallbackAfter'}<small class="innerError">{lang}wcf.acp.tour.step.eitherUrlOrCallbackAfter{/lang}</small>{/if}
 						<small>{lang}wcf.acp.tour.step.url.description{/lang}</small>
 					</dd>
 				</dl>
-				
-				<dl{if $errorField == 'ctaLabel'} class="formError"{/if}>
-					<dt><label for="ctaLabel">{lang}wcf.acp.tour.step.ctaLabel{/lang}</label></dt>
-					<dd>
-						<input type="text" id="ctaLabel" name="ctaLabel" value="{$i18nPlainValues['ctaLabel']}" />
-						{if $errorField == 'ctaLabel'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
-						<small>{lang}wcf.acp.tour.step.ctaLabel.description{/lang}</small>
-					</dd>
-				</dl>
-				{include file='multipleLanguageInputJavascript' elementIdentifier='ctaLabel' forceSelection=false}
 				
 				{event name='advancedFields'}
 			</fieldset>
@@ -157,42 +142,26 @@
 				<small>{lang}wcf.acp.tour.step.callbacks.description{/lang}</small>
 				
 				<dl>
-					<dt><label for="onPrev">{lang}wcf.acp.tour.step.onPrev{/lang}</label></dt>
+					<dt><label for="callbackBefore">{lang}wcf.acp.tour.step.callbackBefore{/lang}</label></dt>
 					<dd>
-						<textarea id="onPrev" name="onPrev" rows="10" cols="40">{$onPrev}</textarea>
-						<small>{lang}wcf.acp.tour.step.onPrev.description{/lang}</small>
+						<textarea id="callbackBefore" name="callbackBefore" rows="10" cols="40">{$callbackBefore}</textarea>
+						<small>{lang}wcf.acp.tour.step.callbackBefore.description{/lang}</small>
 					</dd>
 				</dl>
 				
 				<dl>
-					<dt><label for="onNext">{lang}wcf.acp.tour.step.onNext{/lang}</label></dt>
+					<dt><label for="callbackAfter">{lang}wcf.acp.tour.step.callbackAfter{/lang}</label></dt>
 					<dd>
-						<textarea id="onNext" name="onNext" rows="10" cols="40">{$onNext}</textarea>
-						{if $errorField == 'eitherUrlOrOnNext'}<small class="innerError">{lang}wcf.acp.tour.step.eitherUrlOrOnNext{/lang}</small>{/if}
-						<small>{lang}wcf.acp.tour.step.onNext.description{/lang}</small>
-					</dd>
-				</dl>
-
-				<dl{if $errorField == 'eitherUrlOrOnNext'} class="formError"{/if}>
-					<dt><label for="onShow">{lang}wcf.acp.tour.step.onShow{/lang}</label></dt>
-					<dd>
-						<textarea id="onShow" name="onShow" rows="10" cols="40">{$onShow}</textarea>
-						<small>{lang}wcf.acp.tour.step.onShow.description{/lang}</small>
+						<textarea id="callbackAfter" name="callbackAfter" rows="10" cols="40">{$callbackAfter}</textarea>
+						{if $errorField == 'eitherUrlOrCallbackAfter'}<small class="innerError">{lang}wcf.acp.tour.step.eitherUrlOrCallbackAfter{/lang}</small>{/if}
+						<small>{lang}wcf.acp.tour.step.callbackAfter.description{/lang}</small>
 					</dd>
 				</dl>
 				
-				<dl>
-					<dt><label for="onCTA">{lang}wcf.acp.tour.step.onCTA{/lang}</label></dt>
-					<dd>
-						<textarea id="onCTA" name="onCTA" rows="10" cols="40">{$onCTA}</textarea>
-						<small>{lang}wcf.acp.tour.step.onCTA.description{/lang}</small>
-					</dd>
-				</dl>
-				
-				{include file='codemirror' codemirrorMode='javascript' codemirrorSelector='#onPrev,#onNext,#onShow,#onCTA'}
 				{event name='callbackFields'}
 			</fieldset>
 			
+			{include file='codemirror' codemirrorMode='javascript' codemirrorSelector='#callbackBefore,#callbackAfter'}
 			{event name='fieldsets'}
 		</div>
 	</div>
