@@ -231,4 +231,4 @@ WCF.ACP.Tour.RestartTour = Class.extend({
 	_success: function() {
 		new WCF.System.Notification().show();
 	}
-})
+});

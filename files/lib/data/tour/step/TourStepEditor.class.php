@@ -24,8 +24,8 @@ use wcf\system\WCF;
  * @property	integer	$yOffset
  * @property	string	$url
  * @property	string	$ctaLabel
- * @property	string	$onPrev
- * @property	string	$onNext
+ * @property	string	$callbackBefore
+ * @property	string	$callbackAfter
  * @property	string	$onShow
  * @property	string	$onCTA
  * @author	Magnus Kühn
@@ -46,14 +46,13 @@ class TourStepEditor extends DatabaseObjectEditor implements IEditableCachedObje
 		// get I18n fields
 		list($title, $parameters) = self::getI18nField($parameters, 'title');
 		list($content, $parameters) = self::getI18nField($parameters, 'content');
-		list($ctaLabel, $parameters) = self::getI18nField($parameters, 'ctaLabel');
 		
+		/** @var $tourStep \wcf\data\tour\step\TourStep */
 		$tourStep = parent::create($parameters);
 		
 		// save I18n fields
 		if (!empty($title)) self::saveI18nField($title, 'title', $tourStep);
 		if (!empty($content)) self::saveI18nField($content, 'content', $tourStep);
-		if (!empty($ctaLabel)) self::saveI18nField($ctaLabel, 'ctaLabel', $tourStep);
 		
 		return $tourStep;
 	}
