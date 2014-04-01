@@ -88,6 +88,7 @@ WCF.Tour = {
 			
 			// bind events
 			this._tour.find('.icon').click($.proxy(this.end, this));
+			$(window).resize($.proxy(this._renderCurrentStep, this));
 		}
 		
 		// send request
@@ -123,7 +124,7 @@ WCF.Tour = {
 			// start tour
 			this._activeTourID = data.objectIDs.pop();
 			this._activeTour = data.returnValues;
-			this._showTourStep(0);
+			this.showStep(0);
 		}
 	},
 	
@@ -166,12 +167,12 @@ WCF.Tour = {
 	},
 	
 	/**
-	 * Shows a tour step
-	 *  
+	 * Shows a specific tour step
+	 * 
 	 * @param	integer	index
 	 * @return	boolean
 	 */
-	_showTourStep: function(index) {
+	showStep: function(index) {
 		var $element = $(this._activeTour[index].target + ':eq(0)');
 		if (!$element.length) {
 			return false;
@@ -187,14 +188,16 @@ WCF.Tour = {
 		this._tour.hide();
 		
 		// position tour
-		var $orientation = this._getOrientation($element, $dimensions.height, $dimensions.width, this._activeTour[index].orientation.x, 
+		var $orientation = this._getOrientation($element, $dimensions.height, $dimensions.width, this._activeTour[index].orientation.x,
 			this._activeTour[index].orientation.y, this._activeTour[index].xOffset, this._activeTour[index].yOffset);
 		this._tour.css(this.getCSS($element, $orientation.x, $orientation.y, this._activeTour[index].xOffset, this._activeTour[index].yOffset));
 		this._tour.removeClass('bottom left right top').addClass($orientation.x).addClass($orientation.y);
 		
 		// show tour
-		this._tour.stop().wcfFadeIn();
-		this._tour.children('span').hide();
+		setTimeout(function() {
+			WCF.Tour._tour.stop().wcfFadeIn();
+		}, 300);
+
 		return true;
 	},
 	
@@ -217,16 +220,20 @@ WCF.Tour = {
 	},
 	
 	/**
-	 * Shows a specific tour step
-	 * 
-	 * @param	integer	index
+	 * Shows a tour step
 	 */
-	showStep: function(index) {
-		this._tour.wcfFadeOut();
+	_renderCurrentStep: function() {
+		var $element = $(this._activeTour[this._currentStep].target + ':eq(0)');
+		if (!$element.length) {
+			return;
+		}
 		
-		setTimeout(function() {
-			WCF.Tour._showTourStep(index);
-		}, 300);
+		// get dimensions and position tour
+		var $dimensions = this._fixElementDimensions(this._tour, this._tour.show().getDimensions());
+		var $orientation = this._getOrientation($element, $dimensions.height, $dimensions.width, this._activeTour[this._currentStep].orientation.x,
+			this._activeTour[this._currentStep].orientation.y, this._activeTour[this._currentStep].xOffset, this._activeTour[this._currentStep].yOffset);
+		this._tour.css(this.getCSS($element, $orientation.x, $orientation.y, this._activeTour[this._currentStep].xOffset, this._activeTour[this._currentStep].yOffset));
+		this._tour.removeClass('bottom left right top').addClass($orientation.x).addClass($orientation.y);
 	},
 	
 	/**
