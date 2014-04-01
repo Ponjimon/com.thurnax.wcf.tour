@@ -39,6 +39,12 @@ WCF.Tour = {
 	_activeTour: null,
 	
 	/**
+	 * current step
+	 * @var	integer
+	 */
+	_currentStep: 0,
+	
+	/**
 	 * tour offset
 	 * @var	integer
 	 */
@@ -122,6 +128,44 @@ WCF.Tour = {
 	},
 	
 	/**
+	 * Handles AJAX errors. Ignores errors when not in debug mode (stacktrace is not sent)
+	 * 
+	 * @param	object	data
+	 * @param	object	jqXHR
+	 * @param	string	textStatus
+	 * @param	string	errorThrown
+	 */
+	_failure: function(data, jqXHR, textStatus, errorThrown) {
+		return (data && data.stacktrace ? true : false);
+	},
+
+	/**
+	 * Invoked when the tour ends or the user closes the tour.
+	 */
+	end: function() {
+		if (this._activeTour === null || this._tour === undefined) {
+			return;
+		}
+		
+		// close
+		this._tour.wcfFadeOut();
+		
+		// remove action tour from available tours
+		if (WCF.inArray(this._activeTourID, this.availableManualTours)) {
+			this.availableManualTours.splice(this.availableManualTours.indexOf(this._activeTourID), 1);
+		}
+		
+		// send request
+		this._activeTourID = null;
+		this._activeTour = null;
+		this._proxy.setOption('data', {
+			className: 'wcf\\data\\tour\\TourAction',
+			actionName: 'endTour'
+		});
+		this._proxy.sendRequest();
+	},
+	
+	/**
 	 * Shows a tour step
 	 *  
 	 * @param	integer	index
@@ -134,7 +178,9 @@ WCF.Tour = {
 		}
 		
 		// insert content
+		this._currentStep = index;
 		this._tourContent.html(this._activeTour[index].template);
+		this._tourContent.find('.jsTourButton').click($.proxy(this._click, this));
 		
 		// get dimensions
 		var $dimensions = this._fixElementDimensions(this._tour, this._tour.show().getDimensions());
@@ -150,6 +196,37 @@ WCF.Tour = {
 		this._tour.stop().wcfFadeIn();
 		this._tour.children('span').hide();
 		return true;
+	},
+	
+	/**
+	 * Click listener for tour buttons
+	 * 
+	 * @param	jQuery.Event	event
+	 */
+	_click: function(event) {
+		var $button = $(event.currentTarget);
+		
+		switch ($button.data('action')) {
+			case 'previous':
+				this.showStep(this._currentStep -1);
+				break;
+			case 'next':
+				this.showStep(this._currentStep +1);
+				break;
+		}
+	},
+	
+	/**
+	 * Shows a specific tour step
+	 * 
+	 * @param	integer	index
+	 */
+	showStep: function(index) {
+		this._tour.wcfFadeOut();
+		
+		setTimeout(function() {
+			WCF.Tour._showTourStep(index);
+		}, 300);
 	},
 	
 	/**
@@ -299,43 +376,5 @@ WCF.Tour = {
 		}
 		
 		return dimensions;
-	},
-	
-	/**
-	 * Handles AJAX errors. Ignores errors when not in debug mode (stacktrace is not sent)
-	 * 
-	 * @param	object	data
-	 * @param	object	jqXHR
-	 * @param	string	textStatus
-	 * @param	string	errorThrown
-	 */
-	_failure: function(data, jqXHR, textStatus, errorThrown) {
-		return (data && data.stacktrace ? true : false);
-	},
-	
-	/**
-	 * Invoked when the tour ends or the user closes the tour.
-	 */
-	end: function() {
-		if (this._activeTour === null || this._tour === undefined) {
-			return;
-		}
-		
-		// close
-		this._tour.wcfFadeOut();
-		
-		// remove action tour from available tours
-		if (WCF.inArray(this._activeTourID, this.availableManualTours)) {
-			this.availableManualTours.splice(this.availableManualTours.indexOf(this._activeTourID), 1);
-		}
-		
-		// send request
-		this._activeTourID = null;
-		this._activeTour = null;
-		this._proxy.setOption('data', {
-			className: 'wcf\\data\\tour\\TourAction',
-			actionName: 'endTour'
-		});
-		this._proxy.sendRequest();
 	}
 };

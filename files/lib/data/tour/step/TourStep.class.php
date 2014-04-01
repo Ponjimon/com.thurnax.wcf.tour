@@ -52,7 +52,8 @@ class TourStep extends DatabaseObject {
 			'template' => WCF::getTPL()->fetch('tour', 'wcf', array(
 				'tourStep' => $this,
 				'content' => $this->compileField('content'),
-				'title' => $this->compileField('title')
+				'title' => $this->compileField('title'),
+				'previousTourStep' => $previousTourStep
 			)),
 			'xOffset' => ($this->xOffset ?: 0),
 			'yOffset' => ($this->yOffset ?: 0)
