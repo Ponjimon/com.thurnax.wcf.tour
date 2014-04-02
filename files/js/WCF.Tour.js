@@ -183,21 +183,11 @@ WCF.Tour = {
 		this._tourContent.html(this._activeTour[index].template);
 		this._tourContent.find('.jsTourButton').click($.proxy(this._click, this));
 		
-		// get dimensions
-		var $dimensions = this._fixElementDimensions(this._tour, this._tour.show().getDimensions());
-		this._tour.hide();
-		
-		// position tour
-		var $orientation = this._getOrientation($element, $dimensions.height, $dimensions.width, this._activeTour[index].orientation.x,
-			this._activeTour[index].orientation.y, this._activeTour[index].xOffset, this._activeTour[index].yOffset);
-		this._tour.css(this.getCSS($element, $orientation.x, $orientation.y, this._activeTour[index].xOffset, this._activeTour[index].yOffset));
-		this._tour.removeClass('bottom left right top').addClass($orientation.x).addClass($orientation.y);
-		
 		// show tour
-		setTimeout(function() {
-			WCF.Tour._tour.stop().wcfFadeIn();
-		}, 300);
-
+		this._renderCurrentStep();
+		this._tour.hide();
+		WCF.Tour._tour.show();
+		
 		return true;
 	},
 	
