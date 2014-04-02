@@ -57,7 +57,7 @@ WCF.Tour = {
 			});
 			
 			// load hopscotch
-			head.load([ WCF_PATH + 'js/3rdParty/hopscotch-0.1.13/js/hopscotch.min.js', WCF_PATH + 'js/3rdParty/hopscotch-0.1.13/css/hopscotch.min.css' ], $.proxy(this._initHopscotch, this));
+			head.load([ WCF_PATH + 'js/3rdParty/hopscotch-0.2.0/js/hopscotch.min.js', WCF_PATH + 'js/3rdParty/hopscotch-0.2.0/css/hopscotch.min.css' ], $.proxy(this._initHopscotch, this));
 		}
 		
 		// send request
