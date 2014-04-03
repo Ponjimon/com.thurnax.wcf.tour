@@ -24,6 +24,7 @@
 		<item name="wcf.acp.option.module_tour"><![CDATA[Einführungstouren]]></item>
 		<item name="wcf.acp.option.tour_cooldown_time"><![CDATA[Zeit zwischen zwei Touren]]></item>
 		<item name="wcf.acp.option.tour_cooldown_time.description"><![CDATA[Zeitraum in Minuten, der zwischen zwei Touren liegen muss. Dies gilt nicht für Touren mit dem Auslöser "Durch die JavaScript-API".]]></item>
+		<item name="wcf.acp.option.tour_show_mobile"><![CDATA[Tour auf mobilen Geräten anzeigen]]></item>
 	</category>
 	
 	<category name="wcf.acp.tour">

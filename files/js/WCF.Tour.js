@@ -20,6 +20,12 @@ WCF.Tour = {
 	availableManualTours: [],
 	
 	/**
+	 * show tour on mobile
+	 * @var	boolean
+	 */
+	showMobile: false,
+	
+	/**
 	 * action proxy
 	 * @var	WCF.Action.Proxy
 	 */
@@ -38,6 +44,12 @@ WCF.Tour = {
 	 * @param	boolean	forceStop
 	 */
 	loadTour: function(tourID, forceStop) {
+		// check mobile
+		console.log(WCF.System.Mobile.UX._enabled);
+		if (WCF.System.Mobile.UX._enabled && !this.showMobile) {
+			return;
+		}
+		
 		// a tour is already running
 		if (this._activeTourID) {
 			if (forceStop) { // stop tour
@@ -74,7 +86,7 @@ WCF.Tour = {
 	 * 
 	 * @param	string	identifier
 	 * @param	boolean	force
-	 * @param	boolean	forceLoading
+	 * @param	boolean	forceStop
 	 */
 	loadTourByIdentifier: function(identifier, force, forceStop) {
 		var $tourID = this.manualTours[identifier];

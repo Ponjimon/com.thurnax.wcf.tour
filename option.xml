@@ -22,6 +22,11 @@
 				<optiontype>integer</optiontype>
 				<defaultvalue>0</defaultvalue>
 			</option>
+			<option name="tour_show_mobile">
+				<categoryname>user.general.tour</categoryname>
+				<optiontype>boolean</optiontype>
+				<defaultvalue>0</defaultvalue>
+			</option>
 			<!-- /user.general.tour -->
 		</options>
 	</import>
