@@ -3,13 +3,13 @@
 	<packageinformation>
 		<packagename>Einführungstour</packagename>
 		<packagedescription>Diese Erweiterung ermöglicht Einführungstouren: Erklären Sie die allgemeine Funktionsweise der gesamten Webseite oder auch nur einen kleinen Button.</packagedescription>
-		<version>1.0.0 RC 5</version>
-		<date>2014-01-05</date>
+		<version>1.0.0</version>
+		<date>2014-04-05</date>
 	</packageinformation>
 	
 	<authorinformation>
-		<author>Thurnax.com</author>
-		<authorurl>http://board.thurnax.com</authorurl>
+		<author>Thurnax.com und Magnus Kühn</author>
+		<authorurl>https://www.thurnax.com</authorurl>
 	</authorinformation>
 
 	<requiredpackages>
