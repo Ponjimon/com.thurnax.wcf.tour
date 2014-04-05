@@ -45,7 +45,6 @@ WCF.Tour = {
 	 */
 	loadTour: function(tourID, forceStop) {
 		// check mobile
-		console.log(WCF.System.Mobile.UX._enabled);
 		if (WCF.System.Mobile.UX._enabled && !this.showMobile) {
 			return;
 		}
