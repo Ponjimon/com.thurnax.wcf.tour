@@ -23,8 +23,8 @@
 		<nav>
 			<ul>
 				<li class="button jsTourRestart" data-object-id="{$tourID}"><span class="icon icon16 icon-play"></span> <span>{lang}wcf.acp.tour.restartTour{/lang}</span></li>
-				<li id="jumpToTourTop" class="button dropdown">
-					<div class="dropdownToggle" data-toggle="jumpToTourTop"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.tour.step.jumpToTour{/lang}</span></div>
+				<li id="jumpToTourTop" class="dropdown">
+					<a class="button dropdownToggle" data-toggle="jumpToTourTop"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.tour.step.jumpToTour{/lang}</span></a>
 					<ul class="dropdownMenu">
 						{foreach from=$tours item=tour}
 							<li><a href="{link controller='TourStepList' object=$tour}{/link}">{$tour->visibleName|language}</a></li>
@@ -125,8 +125,8 @@
 			<nav>
 				<ul>
 					<li class="button jsTourRestart" data-object-id="{$tourID}"><span class="icon icon16 icon-play"></span> <span>{lang}wcf.acp.tour.restartTour{/lang}</span></li>
-					<li id="jumpToTourBottom" class="button dropdown">
-						<div class="dropdownToggle" data-toggle="jumpToTourBottom"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.tour.step.jumpToTour{/lang}</span></div>
+					<li id="jumpToTourTop" class="dropdown">
+						<a class="button dropdownToggle" data-toggle="jumpToTourTop"><span class="icon icon16 icon-sort"></span> <span>{lang}wcf.acp.tour.step.jumpToTour{/lang}</span></a>
 						<ul class="dropdownMenu">
 							{foreach from=$tours item=tour}
 								<li><a href="{link controller='TourStepList' object=$tour}{/link}">{$tour->visibleName|language}</a></li>
