@@ -50,17 +50,16 @@
 			<dl{if $errorField == 'visibleName'} class="formError"{/if}>
 				<dt><label for="visibleName">{lang}wcf.acp.tour.visibleName{/lang}</label></dt>
 				<dd>
-					<input type="text" id="visibleName" name="visibleName" value="{$i18nPlainValues['visibleName']}" required="required" class="long" />
-					{if $errorField == 'visibleName'}<small class="innerError">{lang}wcf.global.form.error.{@$errorType}{/lang}</small>{/if}
+					<input type="text" id="visibleName" name="visibleName" value="{$visibleName}" required="required" class="long" />
+					{if $errorField == 'visibleName'}<small class="innerError">{lang}wcf.global.form.error.empty{/lang}</small>{/if}
 				</dd>
 			</dl>
-			{include file='multipleLanguageInputJavascript' elementIdentifier='visibleName' forceSelection=false}
-
+			
 			<dl id="groupPermissions">
 				<dt>{lang}wcf.acl.permissions{/lang}</dt>
 				<dd></dd>
 			</dl>
-
+			
 			<dl{if $errorField == 'identifier'} class="formError"{/if}>
 				<dt><label for="identifier">{lang}wcf.acp.tour.identifier{/lang}</label></dt>
 				<dd>
@@ -117,7 +116,7 @@
 		
 		{event name='fieldsets'}
 	</div>
-
+	
 	<div class="formSubmit">
 		<input type="submit" value="{lang}wcf.global.button.submit{/lang}" accesskey="s" />
 		{@SECURITY_TOKEN_INPUT_TAG}

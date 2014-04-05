@@ -21,7 +21,7 @@
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="isDisabled" type="woltlab_boolean" default="0" minOccurs="0" />
-						<xs:element name="visibleName" type="tour_multilingual" minOccurs="1" maxOccurs="unbounded" />
+						<xs:element name="visibleName" type="woltlab_varchar" minOccurs="1" />
 						<xs:element name="tourTrigger">
 							<xs:simpleType>
 								<xs:restriction base="xs:string">

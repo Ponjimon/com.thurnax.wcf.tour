@@ -3,11 +3,9 @@ namespace wcf\acp\form;
 use wcf\data\package\PackageCache;
 use wcf\data\tour\Tour;
 use wcf\data\tour\TourAction;
-use wcf\data\tour\TourEditor;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\UserInputException;
-use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 use wcf\util\ClassUtil;
 use wcf\util\StringUtil;
@@ -79,7 +77,6 @@ class TourAddForm extends AbstractForm {
 		parent::readParameters();
 		
 		// setup form
-		I18nHandler::getInstance()->register('visibleName');
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour');
 	}
 	
@@ -89,7 +86,6 @@ class TourAddForm extends AbstractForm {
 	public function readFormParameters() {
 		parent::readFormParameters();
 		
-		I18nHandler::getInstance()->readValues();
 		if (isset($_POST['visibleName'])) $this->visibleName = StringUtil::trim($_POST['visibleName']);
 		if (isset($_POST['tourTrigger'])) $this->tourTrigger = $_POST['tourTrigger'];
 		if (isset($_POST['className'])) $this->className = $_POST['className'];
@@ -104,12 +100,8 @@ class TourAddForm extends AbstractForm {
 		parent::validate();
 		
 		// validate visible name
-		if (!I18nHandler::getInstance()->validateValue('visibleName')) {
-			if (I18nHandler::getInstance()->isPlainValue('visibleName')) {
-				throw new UserInputException('visibleName');
-			} else {
-				throw new UserInputException('visibleName', 'multilingual');
-			}
+		if (empty($this->visibleName)) {
+			throw new UserInputException('visibleName');
 		}
 		
 		// validate tour trigger
@@ -173,26 +165,12 @@ class TourAddForm extends AbstractForm {
 		
 		// save ACL
 		$returnValues = $this->objectAction->getReturnValues();
-		$tourID = $returnValues['returnValues']->tourID;
-		ACLHandler::getInstance()->save($tourID, $this->objectTypeID);
+		ACLHandler::getInstance()->save($returnValues['returnValues']->tourID, $this->objectTypeID);
 		ACLHandler::getInstance()->disableAssignVariables();
-		
-		if (!I18nHandler::getInstance()->isPlainValue('visibleName')) {
-			$returnValues = $this->objectAction->getReturnValues();
-			$tourID = $returnValues['returnValues']->tourID;
-			I18nHandler::getInstance()->save('visibleName', 'wcf.acp.tour.visibleName'.$tourID, 'wcf.acp.tour', $packageID);
-			
-			// update tour description
-			$tourEditor = new TourEditor($returnValues['returnValues']);
-			$tourEditor->update(array(
-				'visibleName' => 'wcf.acp.tour.visibleName'.$tourID
-			));
-		}
 		
 		// reset values
 		$this->visibleName = $this->className = $this->identifier = '';
 		$this->tourTrigger = 'firstSite';
-		I18nHandler::getInstance()->reset();
 		
 		// show success
 		WCF::getTPL()->assign('success', true);
@@ -205,7 +183,6 @@ class TourAddForm extends AbstractForm {
 		parent::assignVariables();
 		
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
-		I18nHandler::getInstance()->assignVariables();
 		WCF::getTPL()->assign(array(
 			'action' => 'add',
 			'visibleName' => $this->visibleName,

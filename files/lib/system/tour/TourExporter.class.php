@@ -46,7 +46,7 @@ class TourExporter {
 		// write tour data
 		$this->xml->startElement('tour', array('identifier' => $tour->identifier));
 		$this->xml->writeElement('isDisabled', $tour->isDisabled, array(), true);
-		$this->xml->writeI18nElement('visibleName', $tour->visibleName);
+		$this->xml->writeElement('visibleName', $tour->visibleName);
 		$this->xml->writeElement('tourTrigger', $tour->tourTrigger);
 		$this->xml->writeElement('className', $tour->className);
 		
