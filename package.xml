@@ -11,11 +11,11 @@
 		<author>Thurnax.com und Magnus Kühn</author>
 		<authorurl>https://www.thurnax.com</authorurl>
 	</authorinformation>
-
+	
 	<requiredpackages>
 		<requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
 	</requiredpackages>
-
+	
 	<instructions type="install">
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
@@ -23,7 +23,7 @@
 		<instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
 		<instruction type="sql">install.sql</instruction>
 		<instruction type="template">templates.tar</instruction>
-
+		
 		<instruction type="aclOption">aclOption.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
 		<instruction type="clipboardAction">clipboardAction.xml</instruction>
