@@ -31,7 +31,7 @@
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
-						<xs:element name="className" type="woltlab_varchar_nullable" minOccurs="1" maxOccurs="unbounded" />
+						<xs:element name="className" type="woltlab_varchar" minOccurs="0" />
 						<xs:element name="steps">
 							<xs:complexType>
 								<xs:sequence>
@@ -39,6 +39,7 @@
 										<xs:complexType>
 											<xs:sequence>
 												<xs:element name="showOrder" type="xs:positiveInteger" minOccurs="0" />
+												<xs:element name="isDisabled" type="woltlab_boolean" default="0" minOccurs="0" />
 												<xs:element name="target" type="woltlab_varchar" />
 												<xs:element name="placement" default="left" minOccurs="0">
 													<xs:simpleType>
@@ -53,12 +54,12 @@
 												<xs:element name="content" type="tour_multilingual" maxOccurs="unbounded" />
 												
 												<!-- optionals -->
-												<xs:element name="title" type="tour_multilingual" minOccurs="0" maxOccurs="unbounded" />
+												<xs:element name="title" type="tour_multilingual" default="" minOccurs="0" maxOccurs="unbounded" />
 												<xs:element name="showPrevButton" type="woltlab_boolean" default="1" minOccurs="0" />
 												<xs:element name="xOffset" type="xs:integer" default="0" minOccurs="0" />
 												<xs:element name="yOffset" type="xs:integer" default="0" minOccurs="0" />
 												<xs:element name="url" type="woltlab_varchar" default="" minOccurs="0" />
-												<xs:element name="ctaLabel" type="tour_multilingual" minOccurs="0" maxOccurs="unbounded" />
+												<xs:element name="ctaLabel" type="tour_multilingual" default="" minOccurs="0" maxOccurs="unbounded" />
 												
 												<!-- callbacks -->
 												<xs:element name="onPrev" type="xs:string" minOccurs="0" />

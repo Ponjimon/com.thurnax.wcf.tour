@@ -6,6 +6,7 @@ use wcf\data\language\item\LanguageItem;
 use wcf\system\acl\ACLHandler;
 use wcf\system\cache\builder\TourCacheBuilder;
 use wcf\system\cache\builder\TourTriggerCacheBuilder;
+use wcf\system\language\I18nHandler;
 use wcf\system\language\LanguageFactory;
 use wcf\system\tour\TourHandler;
 use wcf\system\WCF;
@@ -47,37 +48,12 @@ class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 			}
 		}
 		
+		/** @var $tour \wcf\data\tour\Tour */
 		$tour = parent::create($parameters);
 		
 		// save visible name
 		if (!empty($visibleNames)) {
-			if (isset($visibleNames[''])) { // set default value
-				$defaultValue = $visibleNames[''];
-			} else if (isset($visibleNames['en'])) { // fallback to English
-				$defaultValue = $visibleNames['en'];
-			} else if (isset($visibleNames[WCF::getLanguage()->getFixedLanguageCode()])) { // fallback to the language of the current user
-				$defaultValue = $visibleNames[WCF::getLanguage()->getFixedLanguageCode()];
-			} else { // fallback to first description
-				$defaultValue = reset($visibleNames);
-			}
-			
-			// prepare statement
-			$sql = "INSERT INTO	".LanguageItem::getDatabaseTableName()."
-						(languageID, languageItem, languageItemValue, languageCategoryID, packageID)
-				VALUES		(?, ?, ?, ?, ?)";
-			$statement = WCF::getDB()->prepareStatement($sql);
-			
-			// insert into all languages
-			$languages = LanguageFactory::getInstance()->getLanguages();
-			$languageCategory = LanguageFactory::getInstance()->getCategory('wcf.acp.tour');
-			foreach ($languages as $language) {
-				$value = $defaultValue;
-				if (isset($visibleNames[$language->languageCode])) {
-					$value = $visibleNames[$language->languageCode];
-				}
-				
-				$statement->execute(array($language->languageID, 'wcf.acp.tour.visibleName'.$tour->tourID, $value, $languageCategory->languageCategoryID, $tour->packageID));
-			}
+			self::saveVisibleNames($tour, $visibleNames);
 			
 			// update tour
 			$tourEditor = new TourEditor($tour);
@@ -85,6 +61,22 @@ class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		}
 		
 		return $tour;
+	}
+	
+	/**
+	 * @see	\wcf\data\IEditableObject::update()
+	 */
+	public function update(array $parameters = array()) {
+		// update visible name
+		if (isset($parameters['visibleName'])) {
+			I18nHandler::getInstance()->remove('wcf.acp.tour.visibleName'.$this->tourID);
+			if (is_array($parameters['visibleName'])) {
+				self::saveVisibleNames($this->getDecoratedObject(), $parameters['visibleName']);
+				$parameters['visibleName'] = 'wcf.acp.tour.visibleName'.$this->tourID;
+			}
+		}
+		
+		parent::update($parameters);
 	}
 	
 	/**
@@ -107,5 +99,41 @@ class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 		TourTriggerCacheBuilder::getInstance()->reset();
 		TourHandler::reset();
 		WCF::getSession()->unregister(self::TOUR_IMPORTED_NOTICE);
+	}
+	
+	/**
+	 * Saves the visible names to the database.
+	 * 
+	 * @param	\wcf\data\tour\Tour	$tour
+	 * @param	array<string>		$visibleNames
+	 */
+	protected static function saveVisibleNames(Tour $tour, $visibleNames) {
+		if (isset($visibleNames[''])) { // set default value
+			$defaultValue = $visibleNames[''];
+		} else if (isset($visibleNames['en'])) { // fallback to English
+			$defaultValue = $visibleNames['en'];
+		} else if (isset($visibleNames[WCF::getLanguage()->getFixedLanguageCode()])) { // fallback to the language of the current user
+			$defaultValue = $visibleNames[WCF::getLanguage()->getFixedLanguageCode()];
+		} else { // fallback to first description
+			$defaultValue = reset($visibleNames);
+		}
+		
+		// prepare statement
+		$sql = "INSERT INTO	".LanguageItem::getDatabaseTableName()."
+					(languageID, languageItem, languageItemValue, languageCategoryID, packageID)
+			VALUES		(?, ?, ?, ?, ?)";
+		$statement = WCF::getDB()->prepareStatement($sql);
+		
+		// insert into all languages
+		$languages = LanguageFactory::getInstance()->getLanguages();
+		$languageCategory = LanguageFactory::getInstance()->getCategory('wcf.acp.tour');
+		foreach ($languages as $language) {
+			$value = $defaultValue;
+			if (isset($visibleNames[$language->languageCode])) {
+				$value = $visibleNames[$language->languageCode];
+			}
+			
+			$statement->execute(array($language->languageID, 'wcf.acp.tour.visibleName'.$tour->tourID, $value, $languageCategory->languageCategoryID, $tour->packageID));
+		}
 	}
 }
