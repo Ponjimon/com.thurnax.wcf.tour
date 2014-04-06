@@ -28,7 +28,7 @@ class TourExporter {
 	 */
 	public function __construct() {
 		$this->xml = new I18nXMLWriter();
-		$this->xml->beginDocument('data', 'https://www.thurnax.com', 'https://www.thurnax.com/XSD/tour.xsd'); // @todo fix schema location
+		$this->xml->beginDocument('data', 'https://www.thurnax.com', 'https://www.thurnax.com/XSD/tour.xsd');
 		$this->xml->startElement('import');
 	}
 	
@@ -45,7 +45,7 @@ class TourExporter {
 		
 		// write tour data
 		$this->xml->startElement('tour', array('identifier' => $tour->identifier));
-		$this->xml->writeElement('isDisabled', $tour->isDisabled, array(), true);
+		$this->xml->writeElement('isDisabled', $tour->isDisabled);
 		$this->xml->writeElement('visibleName', $tour->visibleName);
 		$this->xml->writeElement('tourTrigger', $tour->tourTrigger);
 		$this->xml->writeElement('className', $tour->className);
@@ -61,6 +61,7 @@ class TourExporter {
 		foreach ($tourStepList->getObjects() as $tourStep) {
 			$this->xml->startElement('step');
 			$this->xml->writeElement('showOrder', $tourStep->showOrder);
+			$this->xml->writeElement('isDisabled', $tourStep->isDisabled);
 			$this->xml->writeElement('target', $tourStep->target);
 			$this->xml->writeElement('placement', $tourStep->placement);
 			$this->xml->writeI18nElement('content', $tourStep->content, array(), true);
