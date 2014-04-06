@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="com.thurnax.wcf.tour" xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/package.xsd">
 	<packageinformation>
-		<packagename>Einführungstour</packagename>
-		<packagedescription>Diese Erweiterung ermöglicht Einführungstouren: Erklären Sie die allgemeine Funktionsweise der gesamten Webseite oder auch nur einen kleinen Button.</packagedescription>
+		<packagename>Tour</packagename>
+		<packagename language="de">Einführungstour</packagename>
+		<packagedescription><![CDATA[This plugin allows tours: show off and explain how everything works or just a single little button.]]></packagedescription>
+		<packagedescription language="de"><![CDATA[Diese Erweiterung ermöglicht Einführungstouren: Erklären Sie die allgemeine Funktionsweise der gesamten Webseite oder auch nur einen kleinen Button.]]></packagedescription>
 		<version>1.0.0</version>
-		<date>2014-04-05</date>
+		<date>2014-04-06</date>
 	</packageinformation>
 	
 	<authorinformation>
