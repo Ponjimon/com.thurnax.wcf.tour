@@ -5,8 +5,8 @@
 		WCF.TabMenu.init();
 		$('.tabMenuContainer').on('wcftabsbeforeactivate', function () {
 			setTimeout(function() {
-				$('#onPrev')[0].codemirror.refresh();
-				$('#onNext')[0].codemirror.refresh();
+				$('#callbackBefore')[0].codemirror.refresh();
+				$('#callbackAfter')[0].codemirror.refresh();
 			}, 100);
 		});
 	});
