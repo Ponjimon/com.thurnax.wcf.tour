@@ -81,14 +81,6 @@
 		<item name="wcf.acp.tour.step.jumpToTour"><![CDATA[Jump to Tour]]></item>
 		<item name="wcf.acp.tour.step.list"><![CDATA[List Toursteps]]></item>
 		<item name="wcf.acp.tour.step.noTours"><![CDATA[<a href="{link controller='TourAdd'}{/link}">You must create a tour</a> before showing or adding toursteps.]]></item>
-		<item name="wcf.acp.tour.step.onCTA"><![CDATA[Call-to-action Button]]></item>
-		<item name="wcf.acp.tour.step.onCTA.description"><![CDATA[This code is executed when clicking the call-to-action button.]]></item>
-		<item name="wcf.acp.tour.step.onNext"><![CDATA[Next-Button]]></item>
-		<item name="wcf.acp.tour.step.onNext.description"><![CDATA[This code is executed when clicking the next button. This callback may not be used together with a redirect.]]></item>
-		<item name="wcf.acp.tour.step.onPrev"><![CDATA[Previous-Button]]></item>
-		<item name="wcf.acp.tour.step.onPrev.description"><![CDATA[This code is executed when clicking the previous button.]]></item>
-		<item name="wcf.acp.tour.step.onShow"><![CDATA[On Show]]></item>
-		<item name="wcf.acp.tour.step.onShow.description"><![CDATA[This code is executed when showing the tourstep.]]></item>
 		<item name="wcf.acp.tour.step.orientation"><![CDATA[Position]]></item>
 		<item name="wcf.acp.tour.step.orientation.bottom"><![CDATA[Below]]></item>
 		<item name="wcf.acp.tour.step.orientation.description"><![CDATA[Select the position of the tourstep relative to the DOM-node.]]></item>
