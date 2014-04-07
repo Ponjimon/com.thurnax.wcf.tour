@@ -76,8 +76,7 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 			'showOrder' => (isset($data['elements']['showOrder']) ? $data['elements']['showOrder'] : null),
 			'isDisabled' => (!isset($data['elements']['className']) ? 0 : intval($data['elements']['className'])),
 			'target' => $data['elements']['target'],
-			'content' => $data['elements']['content'],
-			'showPrevButton' => (!isset($data['elements']['showPrevButton']) ? 1 : intval($data['elements']['showPrevButton'])),
+			'content' => $data['elements']['content']
 		);
 		
 		// get optional values
