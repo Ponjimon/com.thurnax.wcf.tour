@@ -46,20 +46,20 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 	 */
 	protected function prepareImport(array $data) {
 		$tourData = array(
+			'isDisabled' => (!isset($data['elements']['className']) ? 0 : intval($data['elements']['className'])),
 			'visibleName' => $data['elements']['visibleName'],
 			'tourTrigger' => $data['elements']['tourTrigger'],
 			'identifier' => $data['attributes']['identifier'],
 			'steps' => array()
 		);
 		
+		// get optional value
+		if (isset($data['elements']['className'])) $tourData['className'] = $data['elements']['className'];
+		
 		// prepare steps
 		foreach ($data['elements']['steps'] as $stepData) {
 			$tourData['steps'][] = $this->prepareStepImport($stepData);
 		}
-		
-		// get optional values
-		if (isset($data['elements']['isDisabled'])) $tourData['isDisabled'] = intval($data['elements']['isDisabled']);
-		if (isset($data['elements']['className'])) $tourData['className'] = intval($data['elements']['className']);
 		
 		return $tourData;
 	}
@@ -73,9 +73,11 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 	 */
 	protected function prepareStepImport(array $data) {
 		$stepData = array(
+			'showOrder' => (isset($data['elements']['showOrder']) ? $data['elements']['showOrder'] : null),
+			'isDisabled' => (!isset($data['elements']['className']) ? 0 : intval($data['elements']['className'])),
 			'target' => $data['elements']['target'],
 			'content' => $data['elements']['content'],
-			'showOrder' => (isset($data['elements']['showOrder']) ? $data['elements']['showOrder'] : null)
+			'showPrevButton' => (!isset($data['elements']['showPrevButton']) ? 1 : intval($data['elements']['showPrevButton'])),
 		);
 		
 		// get optional values
@@ -95,8 +97,7 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 	 */
 	protected function getElement(\DOMXpath $xpath, array &$elements, \DOMElement $element) {
 		switch ($element->tagName) {
-			case 'visibleName': // I18n values
-			case 'title':
+			case 'title': // i18n values
 			case 'content':
 				if (!isset($elements[$element->tagName])) {
 					$elements[$element->tagName] = array();
@@ -171,7 +172,9 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 		$tour = parent::import($row, $data);
 		
 		// store steps for later import
-		$this->tourSteps[$tour->tourID] = $steps;
+		if ($steps) {
+			$this->tourSteps[$tour->tourID] = $steps;
+		}
 	}
 	
 	/**
@@ -180,13 +183,14 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 	protected function postImport() {
 		// clear tour steps
 		$sql = "DELETE FROM	".TourStep::getDatabaseTableName()."
-			WHERE		packageID = ?";
+			WHERE		tourID = ?";
 		$statement = WCF::getDB()->prepareStatement($sql);
-		$statement->execute(array($this->installation->getPackageID()));
 		
 		// import tour steps
 		/** @var $tourSteps array<array> */
 		foreach ($this->tourSteps as $tourID => $tourSteps) {
+			$statement->execute(array($tourID));
+			
 			/** @var $stepData array<mixed> */
 			foreach ($tourSteps as $stepData) {
 				$stepData['tourID'] = $tourID;
@@ -214,6 +218,7 @@ class TourPackageInstallationPlugin extends AbstractXMLPackageInstallationPlugin
 		// import items
 		/** @var $pip \wcf\system\package\plugin\TourPackageInstallationPlugin */
 		$pip = new static(new DummyPackageInstallationDispatcher('com.thurnax.wcf.tour'));
+		$pip->deleteItems($xml->xpath());
 		$pip->importItems($xml->xpath());
 		$pip->cleanup();
 	}

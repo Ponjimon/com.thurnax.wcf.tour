@@ -1,12 +1,10 @@
 <?php
 namespace wcf\acp\form;
-use wcf\data\package\PackageCache;
 use wcf\data\tour\Tour;
 use wcf\data\tour\TourAction;
 use wcf\form\AbstractForm;
 use wcf\system\acl\ACLHandler;
 use wcf\system\exception\IllegalLinkException;
-use wcf\system\language\I18nHandler;
 use wcf\system\WCF;
 
 /**
@@ -61,14 +59,6 @@ class TourEditForm extends TourAddForm {
 	public function save() {
 		AbstractForm::save();
 		
-		// update visible name
-		if (I18nHandler::getInstance()->isPlainValue('visibleName')) {
-			I18nHandler::getInstance()->remove($this->visibleName);
-		} else {
-			$this->visibleName = 'wcf.acp.tour.visibleName'.$this->tour->tourID;
-			I18nHandler::getInstance()->save('visibleName', $this->visibleName, 'wcf.acp.tour', PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour'));
-		}
-		
 		// update tour
 		$this->objectAction = new TourAction(array($this->tourID), 'update', array('data' => array(
 			'visibleName' => $this->visibleName,
@@ -94,8 +84,6 @@ class TourEditForm extends TourAddForm {
 		parent::readData();
 		
 		if (empty($_POST)) {
-			I18nHandler::getInstance()->setOptions('visibleName', $this->tour->tourID, $this->tour->visibleName, 'wcf.acp.tour.visibleName\d+');
-			
 			$this->visibleName = $this->tour->visibleName;
 			$this->tourTrigger = $this->tour->tourTrigger;
 			$this->className = $this->tour->className;
@@ -109,7 +97,6 @@ class TourEditForm extends TourAddForm {
 	public function assignVariables() {
 		parent::assignVariables();
 		
-		I18nHandler::getInstance()->assignVariables(!empty($_POST));
 		WCF::getTPL()->assign(array(
 			'tourID' => $this->tourID,
 			'tour' => $this->tour,

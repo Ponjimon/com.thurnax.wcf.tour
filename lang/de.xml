@@ -24,6 +24,7 @@
 		<item name="wcf.acp.option.module_tour"><![CDATA[Einführungstouren]]></item>
 		<item name="wcf.acp.option.tour_cooldown_time"><![CDATA[Zeit zwischen zwei Touren]]></item>
 		<item name="wcf.acp.option.tour_cooldown_time.description"><![CDATA[Zeitraum in Minuten, der zwischen zwei Touren liegen muss. Dies gilt nicht für Touren mit dem Auslöser "Durch die JavaScript-API".]]></item>
+		<item name="wcf.acp.option.tour_show_mobile"><![CDATA[Tour auf mobilen Geräten anzeigen]]></item>
 	</category>
 	
 	<category name="wcf.acp.tour">
@@ -82,12 +83,20 @@
 		<item name="wcf.acp.tour.step.jumpToTour"><![CDATA[Tour auswählen]]></item>
 		<item name="wcf.acp.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
 		<item name="wcf.acp.tour.step.noTours"><![CDATA[Bevor Sie Tourpunkte anzeigen und erstellen können, <a href="{link controller='TourAdd'}{/link}">müssen Sie eine Tour erstellen</a>.]]></item>
+		<item name="wcf.acp.tour.step.onCTA"><![CDATA[Call-to-action Button]]></item>
+		<item name="wcf.acp.tour.step.onCTA.description"><![CDATA[Wird beim Klicken auf den Call-to-action Button aufgerufen.]]></item>
+		<item name="wcf.acp.tour.step.onNext"><![CDATA[Weiter-Button]]></item>
+		<item name="wcf.acp.tour.step.onNext.description"><![CDATA[Wird beim Klicken auf den Weiter-Button aufgerufen. Dieses Callback kann nicht zusammen mit einer Weiterleitung verwendet werden.]]></item>
+		<item name="wcf.acp.tour.step.onPrev"><![CDATA[Zurück-Button]]></item>
+		<item name="wcf.acp.tour.step.onPrev.description"><![CDATA[Wird beim Klicken auf den Zurück-Button aufgerufen.]]></item>
+		<item name="wcf.acp.tour.step.onShow"><![CDATA[Beim Anzeigen]]></item>
+		<item name="wcf.acp.tour.step.onShow.description"><![CDATA[Wird beim erstmaligen Anzeigen der Tourpunktes aufgerufen.]]></item>
 		<item name="wcf.acp.tour.step.orientation"><![CDATA[Position]]></item>
-		<item name="wcf.acp.tour.step.orientation.description"><![CDATA[Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an. Diese Position wird nach Möglichkeit verwendet, aber nicht erzwungen.]]></item>
-		<item name="wcf.acp.tour.step.orientation.top-left"><![CDATA[Oberhalb: Links]]></item>
-		<item name="wcf.acp.tour.step.orientation.top-right"><![CDATA[Oberhalb: Rechts]]></item>
-		<item name="wcf.acp.tour.step.orientation.bottom-left"><![CDATA[Unterhalb: Links]]></item>
-		<item name="wcf.acp.tour.step.orientation.bottom-right"><![CDATA[Unterhalb: Rechts]]></item>
+		<item name="wcf.acp.tour.step.orientation.bottom"><![CDATA[Unterhalb]]></item>
+		<item name="wcf.acp.tour.step.orientation.description"><![CDATA[Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an.]]></item>
+		<item name="wcf.acp.tour.step.orientation.left"><![CDATA[Links]]></item>
+		<item name="wcf.acp.tour.step.orientation.right"><![CDATA[Rechts]]></item>
+		<item name="wcf.acp.tour.step.orientation.top"><![CDATA[Oberhalb]]></item>
 		<item name="wcf.acp.tour.step.showOrder"><![CDATA[Reihenfolge]]></item>
 		<item name="wcf.acp.tour.step.target"><![CDATA[DOM-Element]]></item>
 		<item name="wcf.acp.tour.step.target.description"><![CDATA[Geben Sie hier das DOM-Element ein, bei dem der Tourpunkt angezeigt werden soll.]]></item>
@@ -95,7 +104,7 @@
 		<item name="wcf.acp.tour.step.title.description"><![CDATA[Geben Sie hier einen Titel für den Tourpunkt ein. Dieses Feld ist nicht erforderlich.]]></item>
 		<item name="wcf.acp.tour.step.title.none"><![CDATA[Kein Titel]]></item>
 		<item name="wcf.acp.tour.step.tour"><![CDATA[Tour]]></item>
-		<item name="wcf.acp.tour.step.tour.description"><![CDATA[Wählen Sie die Tour aus, für die ein Tourpunkt eingefügt werden soll.]]></item>
+		<item name="wcf.acp.tour.step.tour.description"><![CDATA[Wählen Sie die Tour aus, bei dem der Tourpunkt eingefügt werden soll.]]></item>
 		<item name="wcf.acp.tour.step.url"><![CDATA[Weiterleitung]]></item>
 		<item name="wcf.acp.tour.step.url.description"><![CDATA[Geben Sie hier die URL ein, auf die nach diesem Tourpunkt weitergeleitet werden soll. Dies kann nicht zusammen mit einem Callback für Weiter verwendet werden.]]></item>
 		<item name="wcf.acp.tour.step.xOffset"><![CDATA[X-Verschiebung]]></item>
@@ -114,9 +123,15 @@
 	</category>
 	
 	<category name="wcf.tour.step">
+		<item name="wcf.tour.step.locales.closeTooltip"><![CDATA[Schließen]]></item>
+		<item name="wcf.tour.step.locales.doneBtn"><![CDATA[Ende]]></item>
 		<item name="wcf.tour.step.locales.nextBtn"><![CDATA[Weiter]]></item>
 		<item name="wcf.tour.step.locales.prevBtn"><![CDATA[Zurück]]></item>
+<<<<<<< HEAD
 		<item name="wcf.tour.step.locales.doneBtn"><![CDATA[Ende]]></item>
 		<item name="wcf.tour.step.locales.closeTooltip"><![CDATA[Tour beenden]]></item>
+=======
+		<item name="wcf.tour.step.locales.skipBtn"><![CDATA[Überspringen]]></item>
+>>>>>>> master
 	</category>
 </language>

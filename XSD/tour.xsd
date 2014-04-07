@@ -21,7 +21,7 @@
 				<xs:complexType>
 					<xs:sequence>
 						<xs:element name="isDisabled" type="woltlab_boolean" default="0" minOccurs="0" />
-						<xs:element name="visibleName" type="tour_multilingual" minOccurs="1" maxOccurs="unbounded" />
+						<xs:element name="visibleName" type="woltlab_varchar" minOccurs="1" />
 						<xs:element name="tourTrigger">
 							<xs:simpleType>
 								<xs:restriction base="xs:string">
@@ -31,7 +31,7 @@
 								</xs:restriction>
 							</xs:simpleType>
 						</xs:element>
-						<xs:element name="className" type="woltlab_varchar_nullable" minOccurs="1" maxOccurs="unbounded" />
+						<xs:element name="className" type="woltlab_varchar" minOccurs="0" />
 						<xs:element name="steps">
 							<xs:complexType>
 								<xs:sequence>
@@ -39,6 +39,7 @@
 										<xs:complexType>
 											<xs:sequence>
 												<xs:element name="showOrder" type="xs:positiveInteger" minOccurs="0" />
+												<xs:element name="isDisabled" type="woltlab_boolean" default="0" minOccurs="0" />
 												<xs:element name="target" type="woltlab_varchar" />
 												<xs:element name="placement" default="left" minOccurs="0">
 													<xs:simpleType>
