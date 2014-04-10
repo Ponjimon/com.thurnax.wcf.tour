@@ -119,11 +119,6 @@
 		<item name="wcf.tour.step.locales.doneBtn"><![CDATA[Ende]]></item>
 		<item name="wcf.tour.step.locales.nextBtn"><![CDATA[Weiter]]></item>
 		<item name="wcf.tour.step.locales.prevBtn"><![CDATA[Zurück]]></item>
-<<<<<<< HEAD
-		<item name="wcf.tour.step.locales.doneBtn"><![CDATA[Ende]]></item>
-		<item name="wcf.tour.step.locales.closeTooltip"><![CDATA[Tour beenden]]></item>
-=======
 		<item name="wcf.tour.step.locales.skipBtn"><![CDATA[Überspringen]]></item>
->>>>>>> master
 	</category>
 </language>
