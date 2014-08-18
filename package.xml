@@ -45,5 +45,6 @@
 
 	<instructions type="update" fromversion="1.0.1">
 		<!-- no updates required -->
+		<instruction type="file">files.tar</instruction>
 	</instructions>
 </package>
