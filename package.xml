@@ -3,21 +3,23 @@
 	<packageinformation>
 		<packagename>Tour</packagename>
 		<packagename language="de">Einführungstour</packagename>
-		<packagedescription><![CDATA[This plugin allows tours: show off and explain how everything works or just a single little button.]]></packagedescription>
-		<packagedescription language="de"><![CDATA[Diese Erweiterung ermöglicht Einführungstouren: Erklären Sie die allgemeine Funktionsweise der gesamten Webseite oder auch nur einen kleinen Button.]]></packagedescription>
+		<packagedescription>
+			<![CDATA[This plugin allows tours: show off and explain how everything works or just a single little button.]]></packagedescription>
+		<packagedescription language="de">
+			<![CDATA[Diese Erweiterung ermöglicht Einführungstouren: Erklären Sie die allgemeine Funktionsweise der gesamten Webseite oder auch nur einen kleinen Button.]]></packagedescription>
 		<version>1.0.1</version>
 		<date>2014-08-17</date>
 	</packageinformation>
-	
+
 	<authorinformation>
 		<author>Thurnax.com und Magnus Kühn</author>
 		<authorurl>https://www.thurnax.com</authorurl>
 	</authorinformation>
-	
+
 	<requiredpackages>
 		<requiredpackage minversion="2.0.0">com.woltlab.wcf</requiredpackage>
 	</requiredpackages>
-	
+
 	<instructions type="install">
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
 		<instruction type="file">files.tar</instruction>
@@ -25,7 +27,7 @@
 		<instruction type="packageInstallationPlugin">packageInstallationPlugin.xml</instruction>
 		<instruction type="sql">install.sql</instruction>
 		<instruction type="template">templates.tar</instruction>
-		
+
 		<instruction type="aclOption">aclOption.xml</instruction>
 		<instruction type="acpMenu">acpMenu.xml</instruction>
 		<instruction type="clipboardAction">clipboardAction.xml</instruction>
@@ -35,5 +37,9 @@
 		<instruction type="option">option.xml</instruction>
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="1.0.0">
+		<instruction type="acpTemplate">acptemplates.tar</instruction>
 	</instructions>
 </package>
