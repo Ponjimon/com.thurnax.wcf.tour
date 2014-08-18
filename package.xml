@@ -7,8 +7,8 @@
 			<![CDATA[This plugin allows tours: show off and explain how everything works or just a single little button.]]></packagedescription>
 		<packagedescription language="de">
 			<![CDATA[Diese Erweiterung ermöglicht Einführungstouren: Erklären Sie die allgemeine Funktionsweise der gesamten Webseite oder auch nur einen kleinen Button.]]></packagedescription>
-		<version>1.0.1</version>
-		<date>2014-08-17</date>
+		<version>1.0.2</version>
+		<date>2014-08-18</date>
 	</packageinformation>
 
 	<authorinformation>
@@ -41,5 +41,9 @@
 
 	<instructions type="update" fromversion="1.0.0">
 		<instruction type="acpTemplate">acptemplates.tar</instruction>
+	</instructions>
+
+	<instructions type="update" fromversion="1.0.1">
+		<!-- no updates required -->
 	</instructions>
 </package>
