@@ -64,7 +64,7 @@ class TourCacheBuilder extends AbstractCacheBuilder {
 			$previousTourStep = null;
 			foreach ($tourStepList->getObjects() as $tourStep) {
 				/** @var $tourStep \wcf\data\tour\step\TourStep */
-				$tourSteps[$tourID][$tourStep->showOrder] = $tourStep->render($previousTourStep);
+				$tourSteps[$tourID][] = $tourStep->render($previousTourStep);
 				$previousTourStep = $tourStep;
 			}
 		}
