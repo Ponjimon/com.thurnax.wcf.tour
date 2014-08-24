@@ -30,7 +30,7 @@ class UserTourStateStorage extends AbstractTourStateStorage {
 			if ($this->cache['takenTours']) {
 				$sql = "INSERT IGNORE INTO ".Tour::getDatabaseTableName()."_user (tourID, userID) VALUES (?, ?)";
 				$statement = WCF::getDB()->prepareStatement($sql);
-				$viewableTours = TourCacheBuilder::getInstance()->getData(array(), 'viewableTours');
+				$viewableTours = TourCacheBuilder::getInstance()->getData(array(), 'tours');
 				foreach ($this->getTakenTours() as $takenTourID) {
 					if (isset($viewableTours[$takenTourID])) {
 						$statement->execute(array($takenTourID, WCF::getUser()->userID));

@@ -4,66 +4,74 @@ use wcf\data\DatabaseObjectDecorator;
 use wcf\system\WCF;
 
 /**
- * Represents a viewable label group.
- * 
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ * Represents a viewable tour.
+ *
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 class ViewableTour extends DatabaseObjectDecorator {
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
 	 */
 	protected static $baseClass = 'wcf\data\tour\Tour';
-	
+
 	/**
 	 * list of permissions by type
-	 * @var	array<array>
+	 *
+	 * @var int[]
 	 */
 	protected $permissions = array('group' => array(), 'user' => array());
-	
+
 	/**
-	 * Sets a group permission.
-	 * 
-	 * @param	integer	$userID
-	 * @param	integer	$value
+	 * Sets group permissions
+	 *
+	 * @param int                              $groupID
+	 * @param int[]                            $options
+	 * @param \wcf\data\acl\option\ACLOption[] $aclOptions
 	 */
-	public function setGroupPermission($userID, $value) {
-		$this->permissions['group'][$userID] = ($value == "1" ? true : false);
+	public function setGroupPermissions($groupID, $options, $aclOptions) {
+		foreach ($options as $optionID => $value) {
+			$this->permissions['group'][$groupID][$aclOptions[$optionID]->optionName] = $value;
+		}
 	}
-	
+
 	/**
-	 * Sets an user permission.
-	 * 
-	 * @param	integer	$userID
-	 * @param	integer	$value
+	 * Sets user permissions
+	 *
+	 * @param int                              $userID
+	 * @param int[]                            $options
+	 * @param \wcf\data\acl\option\ACLOption[] $aclOptions
 	 */
-	public function setUserPermission($userID, $value) {
-		$this->permissions['user'][$userID] = ($value == "1" ? true : false);
+	public function setUserPermissions($userID, $options, $aclOptions) {
+		foreach ($options as $optionID => $value) {
+			$this->permissions['user'][$userID][$aclOptions[$optionID]->optionName] = $value;
+		}
 	}
-	
+
 	/**
-	 * Returns true, if current user can view the tour.
-	 * 
-	 * @return	boolean
+	 * Returns true, if current user can view the tour
+	 *
+	 * @param string $option
+	 * @return boolean
 	 */
-	public function getPermission() {
-		// validate by user id
-		if (WCF::getUser()->userID) {
-			$userID = WCF::getUser()->userID;
-			if (isset($this->permissions['user'][$userID]) && isset($this->permissions['user'][$userID])) {
-				return $this->permissions['user'][$userID];
+	public function getPermission($option) {
+		// check user permissions
+		$userID = WCF::getUser()->userID;
+		if ($userID) {
+			if (isset($this->permissions['user'][$userID]) && isset($this->permissions['user'][$userID][$option]) && $this->permissions['user'][$userID][$option] == 1) {
+				return true;
 			}
 		}
-		
-		// validate by group id
+
+		// check group permissions
 		foreach (WCF::getUser()->getGroupIDs() as $groupID) {
-			if (isset($this->permissions['group'][$groupID]) && isset($this->permissions['group'][$groupID])) {
-				return $this->permissions['group'][$groupID];
+			if (isset($this->permissions['group'][$groupID]) && isset($this->permissions['group'][$groupID][$option]) && $this->permissions['group'][$groupID][$option] == 1) {
+				return true;
 			}
 		}
-		
+
 		return null;
 	}
 }
