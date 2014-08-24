@@ -6,34 +6,34 @@ use wcf\system\WCF;
 
 /**
  * Writes XML documents supporting I18n values.
- * 
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ *
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 class I18nXMLWriter extends XMLWriter {
 	/**
 	 * Writes an element directly.
-	 * 
-	 * @param	string		$element
-	 * @param	string		$cdata
-	 * @param	array<string>	$attributes
-	 * @param	boolean		$force
+	 *
+	 * @param string   $element
+	 * @param string   $cdata
+	 * @param string[] $attributes
+	 * @param boolean  $force
 	 */
 	public function writeElement($element, $cdata, array $attributes = array(), $force = false) {
 		if ($force || $cdata) {
 			parent::writeElement($element, $cdata, $attributes);
 		}
 	}
-	
+
 	/**
 	 * Writes an I18n element directly.
-	 * 
-	 * @param	string		$element
-	 * @param	string		$cdata
-	 * @param	array<string>	$attributes
-	 * @param	boolean		$force
+	 *
+	 * @param string   $element
+	 * @param string   $cdata
+	 * @param string[] $attributes
+	 * @param boolean  $force
 	 */
 	public function writeI18nElement($element, $cdata, array $attributes = array(), $force = false) {
 		if (WCF::getLanguage()->get($cdata) != $cdata) { // I18n value
@@ -44,7 +44,7 @@ class I18nXMLWriter extends XMLWriter {
 				WHERE	language_item.languageItem = ?";
 			$statement = WCF::getDB()->prepareStatement($sql);
 			$statement->execute(array($cdata));
-			
+
 			// write language values
 			while ($row = $statement->fetchArray()) {
 				$attributes['language'] = $row['languageCode'];

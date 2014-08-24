@@ -6,32 +6,38 @@ use wcf\system\WCF;
 
 /**
  * Represents a tour.
- * 
- * @property	integer	$tourID
- * @property	string	$visibleName
- * @property	integer	$isDisabled
- * @property	integer	$packageID
- * @property	string	$tourTrigger
- * @property	string	$className
- * @property	string	$identifier
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ *
+ * @property integer $tourID
+ * @property string  $visibleName
+ * @property integer $isDisabled
+ * @property integer $packageID
+ * @property string  $tourTrigger
+ * @property string  $className
+ * @property string  $identifier
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 class Tour extends DatabaseObject implements IRouteController {
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableName
+	 * database table for this object
+	 *
+	 * @var string
 	 */
 	protected static $databaseTableName = 'tour';
-	
+
 	/**
-	 * @see	\wcf\data\DatabaseObject::$databaseTableIndexName
+	 * name of the primary index column
+	 *
+	 * @var string
 	 */
 	protected static $databaseTableIndexName = 'tourID';
-	
+
 	/**
-	 * @see	\wcf\data\ITitledObject::getTitle()
+	 * Returns the title of the object.
+	 *
+	 * @return string
 	 */
 	public function getTitle() {
 		return WCF::getLanguage()->get($this->visibleName);

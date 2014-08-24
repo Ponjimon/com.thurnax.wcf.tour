@@ -8,7 +8,7 @@
 			<listclassname>wcf\data\tour\step\TourStepList</listclassname>
 		</type>
 		<!-- /clipboard -->
-		
+
 		<!-- ACL -->
 		<type>
 			<name>com.thurnax.wcf.tour</name>

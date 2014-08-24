@@ -7,18 +7,19 @@ use wcf\system\tour\TourHandler;
 /**
  * Event listener for show@wcf\page\IPage.
  *
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 class TourPageListener implements IEventListener {
 	/**
 	 * cache of tours using the 'specificSite'-trigger
-	 * @var	array<integer>
+	 *
+	 * @var int[]
 	 */
 	protected $cache = array();
-	
+
 	/**
 	 * Initializes the event listener
 	 */
@@ -30,13 +31,17 @@ class TourPageListener implements IEventListener {
 			}
 		}
 	}
-	
+
 	/**
-	 * @see	\wcf\system\event\IEventListener::execute()
+	 * Executes this action.
+	 *
+	 * @param \wcf\page\AbstractPage $eventObj
+	 * @param string                 $className
+	 * @param string                 $eventName
 	 */
 	public function execute($eventObj, $className, $eventName) {
 		$triggers = TourTriggerCacheBuilder::getInstance()->getData(array(), 'specificSite');
-		
+
 		if (isset($triggers[$className])) {
 			TourHandler::getInstance()->startTour($triggers[$className]);
 		}

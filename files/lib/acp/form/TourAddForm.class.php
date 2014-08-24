@@ -13,97 +13,109 @@ use wcf\util\StringUtil;
 /**
  * Shows the tour add form.
  *
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 class TourAddForm extends AbstractForm {
 	/**
-	 * @see	\wcf\acp\page\AbstractPage::$activeMenuItem
+	 * name of the active menu item
+	 *
+	 * @var string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.add';
-	
+
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * name of the active menu item
+	 *
+	 * @var string
 	 */
 	public $neededPermissions = array('admin.user.canManageTour');
-	
+
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededModules
+	 * name of the active menu item
+	 *
+	 * @var string
 	 */
 	public $neededModules = array('MODULE_TOUR');
-	
+
 	/**
 	 * visibleName
-	 * @var	string
+	 *
+	 * @var string
 	 */
 	public $visibleName = '';
-	
+
 	/**
 	 * trigger
-	 * @var	string
+	 *
+	 * @var string
 	 */
 	public $tourTrigger = 'firstSite';
-	
+
 	/**
 	 * class name
-	 * @var	string
+	 *
+	 * @var string
 	 */
 	public $className = null;
-	
+
 	/**
 	 * identifier
-	 * @var	string
+	 *
+	 * @var string
 	 */
 	public $identifier = null;
-	
+
 	/**
 	 * list of label group to object type relations
-	 * @var	array<array>
+	 *
+	 * @var array<array>
 	 */
 	public $objectTypes = array();
-	
+
 	/**
 	 * object type id
-	 * @var	integer
+	 *
+	 * @var integer
 	 */
 	public $objectTypeID = 0;
-	
+
 	/**
-	 * @see	\wcf\page\IPage::readParameters()
+	 * Reads the given parameters.
 	 */
 	public function readParameters() {
 		parent::readParameters();
-		
+
 		// setup form
 		$this->objectTypeID = ACLHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour');
 	}
-	
+
 	/**
-	 * @see	\wcf\form\IForm::readFormParameters()
+	 * Validates form inputs.
 	 */
 	public function readFormParameters() {
 		parent::readFormParameters();
-		
+
 		if (isset($_POST['visibleName'])) $this->visibleName = StringUtil::trim($_POST['visibleName']);
 		if (isset($_POST['tourTrigger'])) $this->tourTrigger = $_POST['tourTrigger'];
 		if (isset($_POST['className'])) $this->className = $_POST['className'];
 		if (isset($_POST['identifier'])) $this->identifier = $_POST['identifier'];
 		if (isset($_POST['objectTypes']) && is_array($_POST['objectTypes'])) $this->objectTypes = $_POST['objectTypes'];
 	}
-	
+
 	/**
-	 * @see	\wcf\form\IForm::validate()
+	 * Validates form inputs.
 	 */
 	public function validate() {
 		parent::validate();
-		
+
 		// validate visible name
 		if (empty($this->visibleName)) {
 			throw new UserInputException('visibleName');
 		}
-		
+
 		// validate tour trigger
 		switch ($this->tourTrigger) {
 			case 'specificSite': // validate class name
@@ -119,18 +131,18 @@ class TourAddForm extends AbstractForm {
 				if (empty($this->identifier)) {
 					throw new UserInputException('identifier');
 				}
-				
+
 				break;
 			default:
 				throw new UserInputException('tourTrigger');
 		}
-		
+
 		// validate identifier
 		if ($this->identifier && !$this->validateIdentifier()) {
 			throw new UserInputException('identifier', 'notUnique');
 		}
 	}
-	
+
 	/**
 	 * Validates the identifier
 	 */
@@ -143,53 +155,49 @@ class TourAddForm extends AbstractForm {
 		$row = $statement->fetchArray();
 		return $row['count'] == 0;
 	}
-	
+
 	/**
-	 * @see	\wcf\form\IForm::save()
+	 * Saves the data of the form.
 	 */
 	public function save() {
 		parent::save();
 		$packageID = PackageCache::getInstance()->getPackageID('com.thurnax.wcf.tour');
-		
+
 		// save tour point
-		$this->objectAction = new TourAction(array(), 'create', array('data' => array(
-			'visibleName' => $this->visibleName,
+		$this->objectAction = new TourAction(array(), 'create', array('data' => array('visibleName' => $this->visibleName,
 			'isDisabled' => 0,
-			'packageID' => $packageID, 
+			'packageID' => $packageID,
 			'tourTrigger' => $this->tourTrigger,
-			'className' => ($this->className ?: null),
-			'identifier' => ($this->identifier ?: null)
-		)));
+			'className' => ($this->className ? : null),
+			'identifier' => ($this->identifier ? : null))));
 		$this->objectAction->executeAction();
 		$this->saved();
-		
+
 		// save ACL
 		$returnValues = $this->objectAction->getReturnValues();
 		ACLHandler::getInstance()->save($returnValues['returnValues']->tourID, $this->objectTypeID);
 		ACLHandler::getInstance()->disableAssignVariables();
-		
+
 		// reset values
 		$this->visibleName = $this->className = $this->identifier = '';
 		$this->tourTrigger = 'firstSite';
-		
+
 		// show success
 		WCF::getTPL()->assign('success', true);
 	}
-	
+
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * Assigns variables to the template engine.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
+
 		ACLHandler::getInstance()->assignVariables($this->objectTypeID);
-		WCF::getTPL()->assign(array(
-			'action' => 'add',
+		WCF::getTPL()->assign(array('action' => 'add',
 			'visibleName' => $this->visibleName,
 			'tourTrigger' => $this->tourTrigger,
 			'className' => $this->className,
 			'identifier' => $this->identifier,
-			'objectTypeID' => $this->objectTypeID
-		));
+			'objectTypeID' => $this->objectTypeID));
 	}
 }

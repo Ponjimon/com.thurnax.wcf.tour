@@ -10,20 +10,20 @@ use wcf\util\HeaderUtil;
 
 /**
  * Tour state storage for users
- * 
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ *
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
-class UserTourStateStorage extends AbstractTourStateStorage {	
+class UserTourStateStorage extends AbstractTourStateStorage {
 	/**
-	 * @see	\wcf\system\tour\storage\AbstractTourStateStorage::__construct()
+	 * Initializes the tour state storage
 	 */
 	public function __construct() {
 		UserStorageHandler::getInstance()->loadStorage(array(WCF::getUser()->userID));
 		$data = UserStorageHandler::getInstance()->getStorage(array(WCF::getUser()->userID), self::STORAGE_NAME);
-		
+
 		if ($data[WCF::getUser()->userID] === null) {
 			// import cookie data to database
 			$this->readCookie();
@@ -36,12 +36,12 @@ class UserTourStateStorage extends AbstractTourStateStorage {
 						$statement->execute(array($takenTourID, WCF::getUser()->userID));
 					}
 				}
-				
+
 				// cleanup cookie
 				HeaderUtil::setCookie(self::STORAGE_NAME);
 				$this->cache['takenTours'] = array();
 			}
-			
+
 			// get taken tour ids from database
 			$sql = "SELECT	tourID, takeTime
 				FROM	".Tour::getDatabaseTableName()."_user
@@ -53,32 +53,34 @@ class UserTourStateStorage extends AbstractTourStateStorage {
 				if (!$this->cache['lastTourTime']) {
 					$this->cache['lastTourTime'] = $row['takeTime'];
 				}
-				
+
 				$this->cache['takenTours'][] = $row['tourID'];
 			}
-			
+
 			// get available tours
 			foreach (TourTriggerCacheBuilder::getInstance()->getData(array(), 'manual') as $tourID) {
 				if (!in_array($tourID, $this->cache['takenTours']) && TourHandler::canViewTour($tourID)) {
 					$this->cache['availableTours'][] = $tourID;
 				}
 			}
-			
+
 			// update user storage
 			UserStorageHandler::getInstance()->update(WCF::getUser()->userID, self::STORAGE_NAME, serialize($this->cache));
 		} else {
 			$this->cache = unserialize($data[WCF::getUser()->userID]);
 		}
 	}
-	
+
 	/**
-	 * @see	\wcf\system\tour\storage\ITourStateStorage::takeTour()
+	 * Marks a tour as taken
+	 *
+	 * @param int $tourID
 	 */
 	public function takeTour($tourID) {
 		$sql = "INSERT INTO ".Tour::getDatabaseTableName()."_user (tourID, userID, takeTime) VALUES (?, ?, ?)";
 		$statement = WCF::getDB()->prepareStatement($sql);
 		$statement->execute(array($tourID, WCF::getUser()->userID, TIME_NOW));
-		
+
 		AbstractTourStateStorage::takeTour($tourID);
 		UserStorageHandler::getInstance()->update(WCF::getUser()->userID, self::STORAGE_NAME, serialize($this->cache));
 	}

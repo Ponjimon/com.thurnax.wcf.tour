@@ -5,39 +5,51 @@ use wcf\page\SortablePage;
 /**
  * Lists all tours.
  *
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 class TourListPage extends SortablePage {
 	/**
-	 * @see	\wcf\acp\page\AbstractPage::$activeMenuItem
+	 * name of the active menu item
+	 *
+	 * @var string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.list';
-	
+
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * needed permissions to view this page
+	 *
+	 * @var string[]
 	 */
 	public $neededPermissions = array('admin.user.canManageTour');
-	
+
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededModules
+	 * needed modules to view this page
+	 *
+	 * @var string[]
 	 */
 	public $neededModules = array('MODULE_TOUR');
-	
+
 	/**
-	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
+	 * class name for DatabaseObjectList
+	 *
+	 * @var string
 	 */
 	public $objectListClassName = 'wcf\data\tour\TourList';
-	
+
 	/**
-	 * @see	\wcf\page\MultipleLinkPage::$defaultSortField
+	 * default sort field
+	 *
+	 * @var        string
 	 */
 	public $defaultSortField = 'visibleName';
-	
+
 	/**
-	 * @see	\wcf\page\MultipleLinkPage::$validSortFields
+	 * list of valid sort fields
+	 *
+	 * @var string[]
 	 */
 	public $validSortFields = array('tourID', 'visibleName', 'tourTrigger', 'className');
 }

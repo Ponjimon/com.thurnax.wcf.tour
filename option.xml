@@ -6,8 +6,8 @@
 				<parent>user.general</parent>
 			</category>
 		</categories>
-		
-  		<options>
+
+		<options>
 			<!-- module.user -->
 			<option name="module_tour">
 				<categoryname>module.user</categoryname>
@@ -15,7 +15,7 @@
 				<defaultvalue>1</defaultvalue>
 			</option>
 			<!-- /module.user -->
-			
+
 			<!-- user.general.tour -->
 			<option name="tour_cooldown_time">
 				<categoryname>user.general.tour</categoryname>

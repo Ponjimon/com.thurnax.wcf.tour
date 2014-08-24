@@ -25,7 +25,8 @@
 			{foreach from=$tours item=tour}
 				<li class="box16">
 					<div class="containerHeadline">
-						<h3><a class="icon icon16 icon-play" onclick="WCF.Tour.loadTour({$tour->tourID}, true);"></a> {$tour->visibleName|language}</h3>
+						<h3><a class="icon icon16 icon-play" onclick="WCF.Tour.loadTour({$tour->tourID}, true);"></a> {$tour->visibleName|language}
+						</h3>
 					</div>
 				</li>
 			{/foreach}

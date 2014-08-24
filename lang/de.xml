@@ -4,14 +4,14 @@
 		<item name="wcf.acl.option.com.thurnax.wcf.tour.canViewTour"><![CDATA[Kann Tour sehen]]></item>
 		<item name="wcf.acl.option.com.thurnax.wcf.tour.canPlayTourAgain"><![CDATA[Kann die Tour erneut starten]]></item>
 	</category>
-	
+
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.admin.user.canManageTour"><![CDATA[Kann Touren verwalten]]></item>
 		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Touren]]></item>
 		<item name="wcf.acp.group.option.user.tour.canViewTour"><![CDATA[Kann Touren sehen]]></item>
 		<item name="wcf.acp.group.option.user.tour.canPlayTourAgain"><![CDATA[Kann Touren erneut starten]]></item>
 	</category>
-	
+
 	<category name="wcf.acp.menu">
 		<item name="wcf.acp.menu.link.user.tour"><![CDATA[Tour]]></item>
 		<item name="wcf.acp.menu.link.user.tour.add"><![CDATA[Tour hinzufügen]]></item>
@@ -20,38 +20,43 @@
 		<item name="wcf.acp.menu.link.user.tour.step.add"><![CDATA[Tourpunkt hinzufügen]]></item>
 		<item name="wcf.acp.menu.link.user.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
 	</category>
-	
+
 	<category name="wcf.acp.option">
 		<item name="wcf.acp.option.category.user.general.tour"><![CDATA[Einführungstouren]]></item>
 		<item name="wcf.acp.option.module_tour"><![CDATA[Einführungstouren]]></item>
 		<item name="wcf.acp.option.tour_cooldown_time"><![CDATA[Zeit zwischen zwei Touren]]></item>
-		<item name="wcf.acp.option.tour_cooldown_time.description"><![CDATA[Zeitraum in Minuten, der zwischen zwei Touren liegen muss. Dies gilt nicht für Touren mit dem Auslöser "Durch die JavaScript-API".]]></item>
+		<item name="wcf.acp.option.tour_cooldown_time.description">
+			<![CDATA[Zeitraum in Minuten, der zwischen zwei Touren liegen muss. Dies gilt nicht für Touren mit dem Auslöser "Durch die JavaScript-API".]]></item>
 		<item name="wcf.acp.option.tour_show_mobile"><![CDATA[Tour auf mobilen Geräten anzeigen]]></item>
 	</category>
-	
+
 	<category name="wcf.acp.tour">
 		<item name="wcf.acp.tour"><![CDATA[Tour]]></item>
 		<item name="wcf.acp.tour.add"><![CDATA[Tour hinzufügen]]></item>
 		<item name="wcf.acp.tour.className"><![CDATA[PHP-Klassenname]]></item>
 		<item name="wcf.acp.tour.className.description"><![CDATA[Geben Sie den PHP-Klassennamen der gewünschten Seite ein.]]></item>
-		<item name="wcf.acp.tour.className.error.invalid"><![CDATA[Diese PHP-Klasse existiert nicht oder erbt nicht von 'wcf\page\AbstractPage'.]]></item>
+		<item name="wcf.acp.tour.className.error.invalid">
+			<![CDATA[Diese PHP-Klasse existiert nicht oder erbt nicht von 'wcf\page\AbstractPage'.]]></item>
 		<item name="wcf.acp.tour.data"><![CDATA[Tour-Informationen]]></item>
 		<item name="wcf.acp.tour.delete.sure"><![CDATA[Möchten Sie wirklich die Tour {$tour->visibleName|language} löschen?]]></item>
 		<item name="wcf.acp.tour.edit"><![CDATA[Tour bearbeiten]]></item>
 		<item name="wcf.acp.tour.export"><![CDATA[Touren exportieren]]></item>
 		<item name="wcf.acp.tour.export.button"><![CDATA[Export starten]]></item>
-		<item name="wcf.acp.tour.export.description"><![CDATA[Wählen Sie hier aus, welche Touren Sie exportieren möchten. Es können nur Touren mit einem Bezeichner exportiert werden.]]></item>
+		<item name="wcf.acp.tour.export.description">
+			<![CDATA[Wählen Sie hier aus, welche Touren Sie exportieren möchten. Es können nur Touren mit einem Bezeichner exportiert werden.]]></item>
 		<item name="wcf.acp.tour.export.this"><![CDATA[Tour exportieren]]></item>
 		<item name="wcf.acp.tour.exportImportTour"><![CDATA[Touren ex- und importieren]]></item>
 		<item name="wcf.acp.tour.identifier"><![CDATA[Bezeichner]]></item>
-		<item name="wcf.acp.tour.identifier.description"><![CDATA[Geben Sie hier optional einen Bezeichner für die Tour ein. Dieser wird beim Export und zum Starten der Tour durch die JavaScript-API verwendet. Um Probleme mit Plugins zu vermeiden, sollte der Bezeichner nicht geändert werden.]]></item>
+		<item name="wcf.acp.tour.identifier.description">
+			<![CDATA[Geben Sie hier optional einen Bezeichner für die Tour ein. Dieser wird beim Export und zum Starten der Tour durch die JavaScript-API verwendet. Um Probleme mit Plugins zu vermeiden, sollte der Bezeichner nicht geändert werden.]]></item>
 		<item name="wcf.acp.tour.identifier.error.notUnique"><![CDATA[Dieser Bezeichner wird bereits verwendet.]]></item>
 		<item name="wcf.acp.tour.import"><![CDATA[Touren importieren]]></item>
 		<item name="wcf.acp.tour.import.button"><![CDATA[Import starten]]></item>
 		<item name="wcf.acp.tour.import.source"><![CDATA[Datenquelle]]></item>
 		<item name="wcf.acp.tour.import.source.upload"><![CDATA[Tour hochladen]]></item>
 		<item name="wcf.acp.tour.import.source.upload.description"><![CDATA[Geben Sie eine Tour-Datei von Ihrem lokalen Rechner an.]]></item>
-		<item name="wcf.acp.tour.import.source.error.importFailed"><![CDATA[Die Tour konnte nicht importiert werden. Es handelt sich nicht um eine gültige Tour-Datei.]]></item>
+		<item name="wcf.acp.tour.import.source.error.importFailed">
+			<![CDATA[Die Tour konnte nicht importiert werden. Es handelt sich nicht um eine gültige Tour-Datei.]]></item>
 		<item name="wcf.acp.tour.list"><![CDATA[Touren auflisten]]></item>
 		<item name="wcf.acp.tour.manualCode"><![CDATA[JavaScript-Code]]></item>
 		<item name="wcf.acp.tour.move"><![CDATA[Tourpunkte verschieben]]></item>
@@ -59,74 +64,92 @@
 		<item name="wcf.acp.tour.tourImportedNotice"><![CDATA[Es wurden neue Touren importiert. Klicken Sie hier um diese zu aktivieren.]]></item>
 		<item name="wcf.acp.tour.tourTrigger"><![CDATA[Auslöser]]></item>
 		<item name="wcf.acp.tour.tourTrigger.firstSite"><![CDATA[Nach der Registrierung]]></item>
-		<item name="wcf.acp.tour.tourTrigger.firstSite.description"><![CDATA[Verwenden Sie diesen Auslöser um die allgemeine Funktionsweise der Webseite zu erklären.]]></item>
+		<item name="wcf.acp.tour.tourTrigger.firstSite.description">
+			<![CDATA[Verwenden Sie diesen Auslöser um die allgemeine Funktionsweise der Webseite zu erklären.]]></item>
 		<item name="wcf.acp.tour.tourTrigger.specificSite"><![CDATA[Beim Aufruf einer Seite]]></item>
-		<item name="wcf.acp.tour.tourTrigger.specificSite.description"><![CDATA[Verwenden Sie diesen Auslöser um die Funktionsweise einer bestimmten Seite zu erklären.]]></item>
+		<item name="wcf.acp.tour.tourTrigger.specificSite.description">
+			<![CDATA[Verwenden Sie diesen Auslöser um die Funktionsweise einer bestimmten Seite zu erklären.]]></item>
 		<item name="wcf.acp.tour.tourTrigger.manual"><![CDATA[Durch die JavaScript-API]]></item>
-		<item name="wcf.acp.tour.tourTrigger.manual.description"><![CDATA[Verwenden Sie diesen Auslöser um die Tour manuell zu starten. Um diesen Auslöser benutzen zu können, müssen Sie einen Bezeichner vergeben. Touren mit diesem Auslöser können nicht von Gästen verwendet werden und sind nicht von der Zeit zwischen zwei Touren betroffen.]]></item>
+		<item name="wcf.acp.tour.tourTrigger.manual.description">
+			<![CDATA[Verwenden Sie diesen Auslöser um die Tour manuell zu starten. Um diesen Auslöser benutzen zu können, müssen Sie einen Bezeichner vergeben. Touren mit diesem Auslöser können nicht von Gästen verwendet werden und sind nicht von der Zeit zwischen zwei Touren betroffen.]]></item>
 		<item name="wcf.acp.tour.visibleName"><![CDATA[Anzeigename]]></item>
-		
+
 		<item name="wcf.acp.tour.step.add"><![CDATA[Tourpunkt hinzufügen]]></item>
 		<item name="wcf.acp.tour.step.advanced"><![CDATA[Erweiterte Optionen]]></item>
-		<item name="wcf.acp.tour.step.advanced.description"><![CDATA[Hier können Sie erweiterte Optionen angeben. Diese sind nicht erforderlich.]]></item>
+		<item name="wcf.acp.tour.step.advanced.description">
+			<![CDATA[Hier können Sie erweiterte Optionen angeben. Diese sind nicht erforderlich.]]></item>
 		<item name="wcf.acp.tour.step.callbacks"><![CDATA[Callbacks]]></item>
-		<item name="wcf.acp.tour.step.callbacks.description"><![CDATA[Hier können Sie Callbacks für verschiedene Ereignisse festlegen. Diese sind nicht erforderlich.]]></item>
+		<item name="wcf.acp.tour.step.callbacks.description">
+			<![CDATA[Hier können Sie Callbacks für verschiedene Ereignisse festlegen. Diese sind nicht erforderlich.]]></item>
 		<item name="wcf.acp.tour.step.content"><![CDATA[Text]]></item>
 		<item name="wcf.acp.tour.step.ctaLabel"><![CDATA[Call-to-action Label]]></item>
-		<item name="wcf.acp.tour.step.ctaLabel.description"><![CDATA[Sie können hier das Label für einen weiteren Button, dem Call-to-action-Button angeben.]]></item>
+		<item name="wcf.acp.tour.step.ctaLabel.description">
+			<![CDATA[Sie können hier das Label für einen weiteren Button, dem Call-to-action-Button angeben.]]></item>
 		<item name="wcf.acp.tour.step.data"><![CDATA[Daten]]></item>
 		<item name="wcf.acp.tour.step.delete.sure"><![CDATA[Sind Sie sicher, dass Sie diesen Tourpunkt löschen möchten?]]></item>
 		<item name="wcf.acp.tour.step.edit"><![CDATA[Tourpunkt bearbeiten]]></item>
-		<item name="wcf.acp.tour.step.eitherUrlOrOnNext"><![CDATA[Sie können entweder eine Weiterleitung oder ein Callback für Weiter verwenden.]]></item>
+		<item name="wcf.acp.tour.step.eitherUrlOrOnNext">
+			<![CDATA[Sie können entweder eine Weiterleitung oder ein Callback für Weiter verwenden.]]></item>
 		<item name="wcf.acp.tour.step.filter"><![CDATA[Nach Tour filtern]]></item>
 		<item name="wcf.acp.tour.step.general"><![CDATA[Allgemein]]></item>
 		<item name="wcf.acp.tour.step.jumpToTour"><![CDATA[Tour auswählen]]></item>
 		<item name="wcf.acp.tour.step.list"><![CDATA[Tourpunkte auflisten]]></item>
-		<item name="wcf.acp.tour.step.noTours"><![CDATA[Bevor Sie Tourpunkte anzeigen und erstellen können, <a href="{link controller='TourAdd'}{/link}">müssen Sie eine Tour erstellen</a>.]]></item>
+		<item name="wcf.acp.tour.step.noTours">
+			<![CDATA[Bevor Sie Tourpunkte anzeigen und erstellen können, <a href="{link controller='TourAdd'}{/link}">müssen Sie eine Tour erstellen</a>.]]></item>
 		<item name="wcf.acp.tour.step.onCTA"><![CDATA[Call-to-action Button]]></item>
 		<item name="wcf.acp.tour.step.onCTA.description"><![CDATA[Wird beim Klicken auf den Call-to-action Button aufgerufen.]]></item>
 		<item name="wcf.acp.tour.step.onNext"><![CDATA[Weiter-Button]]></item>
-		<item name="wcf.acp.tour.step.onNext.description"><![CDATA[Wird beim Klicken auf den Weiter-Button aufgerufen. Dieses Callback kann nicht zusammen mit einer Weiterleitung verwendet werden.]]></item>
+		<item name="wcf.acp.tour.step.onNext.description">
+			<![CDATA[Wird beim Klicken auf den Weiter-Button aufgerufen. Dieses Callback kann nicht zusammen mit einer Weiterleitung verwendet werden.]]></item>
 		<item name="wcf.acp.tour.step.onPrev"><![CDATA[Zurück-Button]]></item>
 		<item name="wcf.acp.tour.step.onPrev.description"><![CDATA[Wird beim Klicken auf den Zurück-Button aufgerufen.]]></item>
 		<item name="wcf.acp.tour.step.onShow"><![CDATA[Beim Anzeigen]]></item>
 		<item name="wcf.acp.tour.step.onShow.description"><![CDATA[Wird beim erstmaligen Anzeigen der Tourpunktes aufgerufen.]]></item>
 		<item name="wcf.acp.tour.step.placement"><![CDATA[Position]]></item>
 		<item name="wcf.acp.tour.step.placement.bottom"><![CDATA[Unterhalb]]></item>
-		<item name="wcf.acp.tour.step.placement.description"><![CDATA[Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an.]]></item>
+		<item name="wcf.acp.tour.step.placement.description">
+			<![CDATA[Geben Sie hier die Position des Tourpunktes ausgehend vom DOM-Element an.]]></item>
 		<item name="wcf.acp.tour.step.placement.left"><![CDATA[Links]]></item>
 		<item name="wcf.acp.tour.step.placement.right"><![CDATA[Rechts]]></item>
 		<item name="wcf.acp.tour.step.placement.top"><![CDATA[Oberhalb]]></item>
 		<item name="wcf.acp.tour.step.showOrder"><![CDATA[Reihenfolge]]></item>
 		<item name="wcf.acp.tour.step.showPrevButton"><![CDATA[Zurück-Button anzeigen]]></item>
 		<item name="wcf.acp.tour.step.target"><![CDATA[DOM-Element]]></item>
-		<item name="wcf.acp.tour.step.target.description"><![CDATA[Geben Sie hier das DOM-Element ein, bei dem der Tourpunkt angezeigt werden soll.]]></item>
+		<item name="wcf.acp.tour.step.target.description">
+			<![CDATA[Geben Sie hier das DOM-Element ein, bei dem der Tourpunkt angezeigt werden soll.]]></item>
 		<item name="wcf.acp.tour.step.title"><![CDATA[Titel]]></item>
-		<item name="wcf.acp.tour.step.title.description"><![CDATA[Geben Sie hier einen Titel für den Tourpunkt ein. Dieses Feld ist nicht erforderlich.]]></item>
+		<item name="wcf.acp.tour.step.title.description">
+			<![CDATA[Geben Sie hier einen Titel für den Tourpunkt ein. Dieses Feld ist nicht erforderlich.]]></item>
 		<item name="wcf.acp.tour.step.title.none"><![CDATA[Kein Titel]]></item>
 		<item name="wcf.acp.tour.step.tour"><![CDATA[Tour]]></item>
 		<item name="wcf.acp.tour.step.tour.description"><![CDATA[Wählen Sie die Tour aus, bei dem der Tourpunkt eingefügt werden soll.]]></item>
 		<item name="wcf.acp.tour.step.url"><![CDATA[Weiterleitung]]></item>
-		<item name="wcf.acp.tour.step.url.description"><![CDATA[Geben Sie hier die URL ein, auf die nach diesem Tourpunkt weitergeleitet werden soll. Dies kann nicht zusammen mit einem Callback für Weiter verwendet werden.]]></item>
+		<item name="wcf.acp.tour.step.url.description">
+			<![CDATA[Geben Sie hier die URL ein, auf die nach diesem Tourpunkt weitergeleitet werden soll. Dies kann nicht zusammen mit einem Callback für Weiter verwendet werden.]]></item>
 		<item name="wcf.acp.tour.step.xOffset"><![CDATA[X-Verschiebung]]></item>
-		<item name="wcf.acp.tour.step.xOffset.description"><![CDATA[Geben Sie hier die Verschiebung entlang der X-Achse vom DOM-Element in Pixel ein.]]></item>
+		<item name="wcf.acp.tour.step.xOffset.description">
+			<![CDATA[Geben Sie hier die Verschiebung entlang der X-Achse vom DOM-Element in Pixel ein.]]></item>
 		<item name="wcf.acp.tour.step.yOffset"><![CDATA[Y-Verschiebung]]></item>
-		<item name="wcf.acp.tour.step.yOffset.description"><![CDATA[Geben Sie hier die Verschiebung entlang der Y-Achse vom DOM-Element in Pixel ein.]]></item>
+		<item name="wcf.acp.tour.step.yOffset.description">
+			<![CDATA[Geben Sie hier die Verschiebung entlang der Y-Achse vom DOM-Element in Pixel ein.]]></item>
 	</category>
-	
+
 	<category name="wcf.clipboard">
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.delete"><![CDATA[Löschen ({#$count})]]></item>
-		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.delete.confirmMessage"><![CDATA[Wollen Sie {if $count == 1}einen Tourpunkt{else}{#$count} Tourpunkte{/if} wirklich löschen?]]></item>
+		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.delete.confirmMessage">
+			<![CDATA[Wollen Sie {if $count == 1}einen Tourpunkt{else}{#$count} Tourpunkte{/if} wirklich löschen?]]></item>
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.disable"><![CDATA[Deaktivieren ({#$count})]]></item>
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.enable"><![CDATA[Aktivieren ({#$count})]]></item>
 		<item name="wcf.clipboard.item.com.thurnax.wcf.tour.step.move"><![CDATA[Verschieben ({#$count})]]></item>
-		<item name="wcf.clipboard.label.com.thurnax.wcf.tour.step.marked"><![CDATA[{if $count == 1}Ein Tourpunkt{else}{#$count} Tourpunkte{/if} markiert]]></item>
+		<item name="wcf.clipboard.label.com.thurnax.wcf.tour.step.marked">
+			<![CDATA[{if $count == 1}Ein Tourpunkt{else}{#$count} Tourpunkte{/if} markiert]]></item>
 	</category>
-	
+
 	<category name="wcf.tour">
 		<item name="wcf.tour.list"><![CDATA[Einführungstouren]]></item>
 		<item name="wcf.tour.list.none"><![CDATA[Es stehen keine Einführungstouren zur Verfügung.]]></item>
-		<item name="wcf.tour.list.notice"><![CDATA[Hier können Sie Einführungstouren erneut anschauen. Klicken Sie dazu auf den <span class="icon icon16 icon-play"></span> Play-Button.]]></item>
+		<item name="wcf.tour.list.notice">
+			<![CDATA[Hier können Sie Einführungstouren erneut anschauen. Klicken Sie dazu auf den <span class="icon icon16 icon-play"></span> Play-Button.]]></item>
 	</category>
 
 	<category name="wcf.tour.step">

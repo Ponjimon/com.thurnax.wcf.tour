@@ -8,61 +8,79 @@ use wcf\system\WCF;
 
 /**
  * Lists available tour steps.
- * 
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @package	com.thurnax.wcf.tour
+ *
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @package   com.thurnax.wcf.tour
  */
 class TourStepListPage extends SortablePage {
 	/**
-	 * @see	\wcf\acp\page\AbstractPage::$activeMenuItem
+	 * name of the active menu item
+	 *
+	 * @var string
 	 */
 	public $activeMenuItem = 'wcf.acp.menu.link.user.tour.step.list';
-	
+
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededPermissions
+	 * needed permissions to view this page
+	 *
+	 * @var string[]
 	 */
 	public $neededPermissions = array('admin.user.canManageTour');
-	
+
 	/**
-	 * @see	\wcf\page\AbstractPage::$neededModules
+	 * needed modules to view this page
+	 *
+	 * @var string[]
 	 */
 	public $neededModules = array('MODULE_TOUR');
-	
+
 	/**
-	 * @see	\wcf\page\MultipleLinkPage::$objectListClassName
+	 * class name for DatabaseObjectList
+	 *
+	 * @var string
 	 */
 	public $objectListClassName = 'wcf\data\tour\step\TourStepList';
-	
+
 	/**
-	 * @see	\wcf\page\MultipleLinkPage::$defaultSortField
+	 * default sort field
+	 *
+	 * @var string
 	 */
 	public $defaultSortField = 'showOrder';
-	
+
 	/**
-	 * @see	\wcf\page\MultipleLinkPage::$validSortFields
+	 * list of valid sort fields
+	 *
+	 * @var string
 	 */
-	public $validSortFields = array('tourStepID', 'showOrder', 'target', 'placement', 'title', 'content', 'xOffset', 'yOffset', 'showPrevButton', 'url');
-	
-	/**
-	 * @see	\wcf\page\MultipleLinkPage::$itemsPerPage
-	 */
-	public $itemsPerPage = 100;
-	
+	public $validSortFields = array('tourStepID',
+		'showOrder',
+		'target',
+		'placement',
+		'title',
+		'content',
+		'xOffset',
+		'yOffset',
+		'showPrevButton',
+		'url');
+
 	/**
 	 * selected tour id
-	 * @var	integer
+	 *
+	 * @var int
 	 */
 	public $tourID = null;
-	
+
 	/**
 	 * list of all tours
-	 * @var	array<\wcf\data\tour\Tour>
+	 *
+	 * @var \wcf\data\tour\Tour[]
 	 */
 	public $tours = null;
-	
+
 	/**
-	 * @see	\wcf\page\IPage::readData()
+	 * Reads/Gets the data to be displayed on this page.
 	 */
 	public function readData() {
 		// read tours
@@ -73,36 +91,34 @@ class TourStepListPage extends SortablePage {
 		if (empty($this->tours)) {
 			throw new NamedUserException(WCF::getLanguage()->getDynamicVariable('wcf.acp.tour.step.noTours'));
 		}
-		
+
 		// validate tour id
 		if (isset($_REQUEST['id']) && isset($this->tours[intval($_REQUEST['id'])])) {
 			$this->tourID = intval($_REQUEST['id']);
 		}
-		
+
 		parent::readData();
 	}
-	
+
 	/**
-	 * @see	\wcf\page\MultipleLinkPage::initObjectList()
+	 * Initializes DatabaseObjectList instance.
 	 */
 	protected function initObjectList() {
 		parent::initObjectList();
-		
+
 		if ($this->tourID) {
 			$this->objectList->getConditionBuilder()->add('tourID = ?', array($this->tourID));
 		}
 	}
-	
+
 	/**
-	 * @see	\wcf\page\IPage::assignVariables()
+	 * Assigns variables to the template engine.
 	 */
 	public function assignVariables() {
 		parent::assignVariables();
-		
-		WCF::getTPL()->assign(array(
-			'tourID' => $this->tourID,
+
+		WCF::getTPL()->assign(array('tourID' => $this->tourID,
 			'tours' => $this->tours,
-			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour.step'))
-		));
+			'hasMarkedItems' => ClipboardHandler::getInstance()->hasMarkedItems(ClipboardHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour.step'))));
 	}
 }

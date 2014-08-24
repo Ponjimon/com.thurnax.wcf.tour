@@ -4,22 +4,24 @@ use wcf\util\HeaderUtil;
 
 /**
  * Tour state storage for guests
- * 
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ *
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 class GuestTourStateStorage extends AbstractTourStateStorage {
 	/**
-	 * @see	\wcf\system\tour\storage\AbstractTourStateStorage::__construct()
+	 * Initializes the tour state storage
 	 */
 	public function __construct() {
 		$this->readCookie();
 	}
-	
+
 	/**
-	 * @see	\wcf\system\tour\storage\ITourStateStorage::takeTour()
+	 * Marks a tour as taken
+	 *
+	 * @param int $tourID
 	 */
 	public function takeTour($tourID) {
 		parent::takeTour($tourID);

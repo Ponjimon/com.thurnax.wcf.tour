@@ -81,9 +81,9 @@ class TourHandler extends SingletonFactory {
 	/**
 	 * Starts a tour
 	 *
-	 * @param int           $tourID
-	 * @param       boolean $force
-	 * @return boolean
+	 * @param int  $tourID
+	 * @param bool $force
+	 * @return bool
 	 */
 	public function startTour($tourID, $force = false) {
 		if ($this->isEnabled() && self::canViewTour($tourID) && !$this->getActiveTour() && ($force || (!in_array($tourID, $this->tourStateStorage->getTakenTours()) && $this->tourStateStorage->shouldStartTour()))) {
@@ -122,7 +122,7 @@ class TourHandler extends SingletonFactory {
 	 *
 	 * @param int    $tourID
 	 * @param string $permission
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function canViewTour($tourID, $permission = 'canViewTour') {
 		/** @var $viewableTours \wcf\data\tour\ViewableTour[] */

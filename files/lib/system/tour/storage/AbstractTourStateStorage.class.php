@@ -3,60 +3,69 @@ namespace wcf\system\tour\storage;
 
 /**
  * Tour state storage for users
- * 
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ *
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 abstract class AbstractTourStateStorage implements ITourStateStorage {
 	/**
 	 * cache for the current user
-	 * @var	array<mixed>
+	 *
+	 * @var array
 	 */
 	protected $cache = array('availableTours' => array(), 'takenTours' => array(), 'lastTourTime' => 0);
-	
+
 	/**
 	 * Initializes the tour state storage
 	 */
 	abstract public function __construct();
-	
+
 	/**
 	 * Reads cookie data
 	 */
 	protected function readCookie() {
 		if (isset($_COOKIE[COOKIE_PREFIX.self::STORAGE_NAME])) {
 			$this->cache['takenTours'] = @unserialize($_COOKIE[COOKIE_PREFIX.self::STORAGE_NAME]);
-			
+
 			if (!$this->cache['takenTours'] || !is_array($this->cache['takenTours'])) {
 				$this->cache['takenTours'] = array();
 			}
 		}
 	}
-	
+
 	/**
-	 * @see	\wcf\system\tour\storage\ITourStateStorage::getAvailableTours()
+	 * Returns the available tours with the tour trigger 'manual'
+	 *
+	 * @return int[]
 	 */
 	public function getAvailableManualTours() {
 		return $this->cache['availableTours'];
 	}
-	
+
 	/**
-	 * @see	\wcf\system\tour\storage\ITourStateStorage::getTakenTours()
+	 * Returns the taken tours
+	 *
+	 * @return int[]
 	 */
 	public function getTakenTours() {
 		return $this->cache['takenTours'];
 	}
-	
+
 	/**
-	 * @see	\wcf\system\tour\storage\ITourStateStorage::shouldStartTour()
+	 * Checks whether a tour should be started
+	 *
+	 * @return boolean
 	 */
 	public function shouldStartTour() {
 		return ($this->cache['lastTourTime'] + TOUR_COOLDOWN_TIME * 60) <= TIME_NOW;
 	}
-	
+
 	/**
-	 * @see	\wcf\system\tour\storage\ITourStateStorage::takeTour()
+	 * Marks a tour as taken
+	 *
+	 * @param int $tourID
 	 */
 	public function takeTour($tourID) {
 		// update cache

@@ -1,33 +1,33 @@
 /**
  * ACP tour related classes.
  *
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ * @author Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package com.thurnax.wcf.tour
  */
 WCF.ACP.Tour = { };
 
 /**
  * Handles the clipboard action 'move'.
- * 
- * @param	string		objectType
+ *
+ * @param objectType string
  */
 WCF.ACP.Tour.ClipboardMove = Class.extend({
 	/**
 	 * object type used in the clipboard
-	 * @var	string
+	 * @var string
 	 */
 	_objectType: undefined,
-	
+
 	/**
 	 * Initializes the clipboard handler
-	 * 
-	 * @param	string		objectType
+	 *
+	 * @param objectType string
 	 */
 	init: function(objectType) {
 		this._objectType = objectType;
-		
+
 		// bind listener
 		$('.jsClipboardEditor').each($.proxy(function(index, container) {
 			var $container = $(container);
@@ -38,22 +38,21 @@ WCF.ACP.Tour.ClipboardMove = Class.extend({
 			}
 		}, this));
 	},
-	
+
 	/**
 	 * Handles clipboard actions.
-	 * 
-	 * @param	object		event
-	 * @param	string		type
-	 * @param	string		actionName
-	 * @param	object		parameters
+	 *
+	 * @param event jQuery
+	 * @param type string
+	 * @param actionName string array<string>
 	 */
-	_execute: function(event, type, actionName, parameters) {
+	_execute: function(event, type, actionName) {
 		if (actionName == this._objectType + '.move') {
 			if (this._didInit === undefined) {
 				$('#tourStepMoveDialog').wcfDialog({
 					title: $('#tourStepMove').text()
 				});
-				
+
 				// bind events
 				$('#tourStepMove').click($.proxy(this._move, this));
 				$('#tourStepMoveCancel').click(function() {
@@ -64,7 +63,7 @@ WCF.ACP.Tour.ClipboardMove = Class.extend({
 			}
 		}
 	},
-	
+
 	/**
 	 * Moves the marked tour steps to another tour
 	 */
@@ -87,28 +86,31 @@ WCF.ACP.Tour.ClipboardMove = Class.extend({
 /**
  * Implementation for AJAXProxy-based toggle actions.
  * Handles the clipboard actions 'enable' and 'disable'.
- * 
- * @see	https://github.com/WoltLab/WCF/pull/1615
- * @param	string		className
- * @param	jQuery		containerList
- * @param	string		buttonSelector
- * @param	string		objectType
+ *
+ * @see https://github.com/WoltLab/WCF/pull/1615
+ * @param className string
+ * @param containerList jQuery
+ * @param buttonSelector string
+ * @param objectType string
  */
 WCF.ACP.Tour.ClipboardToggle = WCF.Action.Toggle.extend({
 	/**
 	 * object type used in the clipboard
-	 * @var	string
+	 * @var string
 	 */
 	_objectType: undefined,
-	
+
 	/**
-	 * @see		WCF.Action.Toggle.init()
-	 * @param	string		objectType
+	 * @see WCF.Action.Toggle.init()
+	 * @param className string
+	 * @param containerList jQuery
+	 * @param buttonSelector string
+	 * @param objectType string
 	 */
 	init: function(className, containerSelector, buttonSelector, objectType) {
 		this._super(className, containerSelector, buttonSelector);
 		this._objectType = objectType;
-		
+
 		// bind listener
 		$('.jsClipboardEditor').each($.proxy(function(index, container) {
 			var $container = $(container);
@@ -119,14 +121,14 @@ WCF.ACP.Tour.ClipboardToggle = WCF.Action.Toggle.extend({
 			}
 		}, this));
 	},
-	
+
 	/**
 	 * Handles clipboard actions.
-	 * 
-	 * @param	object		event
-	 * @param	string		type
-	 * @param	string		actionName
-	 * @param	object		parameters
+	 *
+	 * @param event jQuery
+	 * @param type string
+	 * @param actionName string
+	 * @param parameters array<string>
 	 */
 	_execute: function(event, type, actionName, parameters) {
 		if (actionName == this._objectType + '.enable' || actionName == this._objectType + '.disable') {
@@ -139,9 +141,9 @@ WCF.ACP.Tour.ClipboardToggle = WCF.Action.Toggle.extend({
 			this.proxy.sendRequest();
 		}
 	},
-	
+
 	/**
-	 * @see	WCF.Action.Toggle._success()
+	 * @see WCF.Action.Toggle._success()
 	 */
 	_success: function(data, textStatus, jqXHR) {
 		this._super(data, textStatus, jqXHR);
@@ -150,12 +152,12 @@ WCF.ACP.Tour.ClipboardToggle = WCF.Action.Toggle.extend({
 });
 
 /**
- * Handler for the tour add and edit form
- * 
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ * Handler for the tour add and edit form.
+ *
+ * @author Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package com.thurnax.wcf.tour
  */
 WCF.ACP.Tour.TourAdd = Class.extend({
 	/**
@@ -163,16 +165,16 @@ WCF.ACP.Tour.TourAdd = Class.extend({
 	 */
 	init: function() {
 		this._radioChanged();
-		
+
 		// bind events
 		$('input[name="tourTrigger"]').change($.proxy(this._radioChanged, this));
 		$('#identifier').keyup($.proxy(this._identifierChanged, this));
 	},
-	
+
 	/**
 	 * Change listener on the tour trigger radios
-	 * 
-	 * @param	jQuery.Event	event
+	 *
+	 * @param event jQuery.Event
 	 */
 	_radioChanged: function(event) {
 		if ($('input[name="tourTrigger"]:checked').val() == 'specificSite') {
@@ -183,22 +185,22 @@ WCF.ACP.Tour.TourAdd = Class.extend({
 			$('#className').disable();
 		}
 	},
-	
+
 	/**
 	 * Change listener on the identifier
 	 */
 	_identifierChanged: function() {
-		$('#manualCode').val("WCF.Tour.loadTourByIdentifier('"+$('#identifier').val()+"');");
+		$('#manualCode').val("WCF.Tour.loadTourByIdentifier('" + $('#identifier').val() + "');");
 	}
 });
 
 /**
- * Implementation for restarting a tour AJAXProxy-based
- * 
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ * Implementation for restarting a tour.
+ *
+ * @author Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package com.thurnax.wcf.tour
  */
 WCF.ACP.Tour.RestartTour = Class.extend({
 	/**
@@ -207,11 +209,11 @@ WCF.ACP.Tour.RestartTour = Class.extend({
 	init: function() {
 		$('.jsTourRestart').click($.proxy(this._click, this));
 	},
-	
+
 	/**
 	 * Handel button clicks
-	 * 
-	 * @param	jQuery.Event	event
+	 *
+	 * @param event jQuery.Event
 	 */
 	_click: function(event) {
 		new WCF.Action.Proxy({
@@ -224,7 +226,7 @@ WCF.ACP.Tour.RestartTour = Class.extend({
 			success: $.proxy(this._success, this)
 		});
 	},
-	
+
 	/**
 	 * Handles successful AJAX requests.
 	 */

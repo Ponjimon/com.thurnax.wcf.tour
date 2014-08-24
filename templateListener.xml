@@ -6,9 +6,10 @@
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
 			<eventname>javascriptInclude</eventname>
-			<templatecode><![CDATA[{if $__wcf->getTourHandler()->isEnabled()}<script data-relocate="true" src="{@$__wcf->getPath('wcf')}js/WCF.Tour{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}" type="text/javascript"></script>{/if}]]></templatecode>
+			<templatecode>
+				<![CDATA[{if $__wcf->getTourHandler()->isEnabled()}<script data-relocate="true" src="{@$__wcf->getPath('wcf')}js/WCF.Tour{if !ENABLE_DEBUG_MODE}.min{/if}.js?v={@$__wcfVersion}" type="text/javascript"></script>{/if}]]></templatecode>
 		</templatelistener>
-		
+
 		<templatelistener name="javascriptTourLanguageImport">
 			<environment>user</environment>
 			<templatename>headInclude</templatename>
@@ -21,7 +22,7 @@
 	'wcf.tour.step.locales.closeTooltip': '{lang}wcf.tour.step.locales.closeTooltip{/lang}'
 {/if}]]></templatecode>
 		</templatelistener>
-		
+
 		<!-- tour init -->
 		<templatelistener name="javascriptTourInit">
 			<environment>user</environment>
@@ -29,7 +30,7 @@
 			<eventname>javascriptInit</eventname>
 			<templatecode><![CDATA[{include file='__initTour'}]]></templatecode>
 		</templatelistener>
-		
+
 		<!-- tour imported notice -->
 		<templatelistener name="tourImportedNotice">
 			<environment>admin</environment>

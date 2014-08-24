@@ -6,7 +6,7 @@
 			<options>module_tour</options>
 			<permissions>admin.user.canManageTour</permissions>
 		</acpmenuitem>
-		
+
 		<!-- tour -->
 		<acpmenuitem name="wcf.acp.menu.link.user.tour.list">
 			<controller>wcf\acp\page\TourListPage</controller>
@@ -21,7 +21,7 @@
 			<parent>wcf.acp.menu.link.user.tour</parent>
 		</acpmenuitem>
 		<!-- /tour -->
-		
+
 		<!-- tour step -->
 		<acpmenuitem name="wcf.acp.menu.link.user.tour.step.list">
 			<controller>wcf\acp\page\TourStepListPage</controller>

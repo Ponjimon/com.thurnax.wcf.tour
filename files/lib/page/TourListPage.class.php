@@ -5,11 +5,12 @@ use wcf\system\menu\user\UserMenu;
 use wcf\system\WCF;
 
 /**
- * Tour list page.
+ * Lists all tours available for replaying.
  *
  * @author    Magnus Kühn
- * @copyright 2014 Magnus Kühn
- * @package   de.nefaria.wcf.cts
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 class TourListPage extends AbstractPage {
 	/**

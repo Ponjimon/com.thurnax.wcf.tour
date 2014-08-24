@@ -10,41 +10,47 @@ use wcf\system\WCF;
 
 /**
  * Provides functions to edit tours.
- * 
- * @property	integer	$tourID
- * @property	string	$visibleName
- * @property	integer	$isDisabled
- * @property	integer	$packageID
- * @property	string	$tourTrigger
- * @property	string	$className
- * @property	string	$identifier
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ *
+ * @property integer $tourID
+ * @property string  $visibleName
+ * @property integer $isDisabled
+ * @property integer $packageID
+ * @property string  $tourTrigger
+ * @property string  $className
+ * @property string  $identifier
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 class TourEditor extends DatabaseObjectEditor implements IEditableCachedObject {
 	const TOUR_IMPORTED_NOTICE = 'tourImportedNotice';
-	
+
 	/**
-	 * @see	\wcf\data\DatabaseObjectDecorator::$baseClass
+	 * name of the base class
+	 *
+	 * @var string
 	 */
 	protected static $baseClass = 'wcf\data\tour\Tour';
-	
+
 	/**
-	 * @see	\wcf\data\IEditableObject::deleteAll()
+	 * Deletes all objects with the given ids and returns the number of deleted
+	 * objects.
+	 *
+	 * @param int[] $objectIDs
+	 * @return int
 	 */
 	public static function deleteAll(array $objectIDs = array()) {
 		$count = parent::deleteAll($objectIDs);
-		
+
 		// remove ACL values
 		ACLHandler::getInstance()->removeValues(ACLHandler::getInstance()->getObjectTypeID('com.thurnax.wcf.tour'), $objectIDs);
-		
+
 		return $count;
 	}
-	
+
 	/**
-	 * @see	\wcf\data\IEditableCachedObject::resetCache()
+	 * Resets the cache of this object type.
 	 */
 	public static function resetCache() {
 		TourCacheBuilder::getInstance()->reset();

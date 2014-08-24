@@ -6,15 +6,18 @@ use wcf\system\WCF;
 
 /**
  * Caches all tours using the manual tour trigger
- * 
- * @author	Magnus Kühn
- * @copyright	2013-2014 Thurnax.com
- * @license	GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
- * @package	com.thurnax.wcf.tour
+ *
+ * @author    Magnus Kühn
+ * @copyright 2013-2014 Thurnax.com
+ * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
+ * @package   com.thurnax.wcf.tour
  */
 class TourTriggerCacheBuilder extends AbstractCacheBuilder {
 	/**
-	 * @see	\wcf\system\cache\builder\AbstractCacheBuilder::rebuild()
+	 * Rebuilds cache for current resource.
+	 *
+	 * @param array $parameters
+	 * @return string[]
 	 */
 	public function rebuild(array $parameters) {
 		$sql = "SELECT	tourID, tourTrigger, className, identifier

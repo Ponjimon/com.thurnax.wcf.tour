@@ -6,6 +6,13 @@ use wcf\system\WCF;
 /**
  * Represents a viewable tour.
  *
+ * @property integer $tourID
+ * @property string  $visibleName
+ * @property integer $isDisabled
+ * @property integer $packageID
+ * @property string  $tourTrigger
+ * @property string  $className
+ * @property string  $identifier
  * @author    Magnus Kühn
  * @copyright 2013-2014 Thurnax.com
  * @license   GNU Lesser General Public License <http://opensource.org/licenses/lgpl-license.php>
@@ -13,7 +20,9 @@ use wcf\system\WCF;
  */
 class ViewableTour extends DatabaseObjectDecorator {
 	/**
-	 * @see \wcf\data\DatabaseObjectDecorator::$baseClass
+	 * name of the base class
+	 *
+	 * @var string
 	 */
 	protected static $baseClass = 'wcf\data\tour\Tour';
 
