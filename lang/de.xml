@@ -2,12 +2,14 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/language.xsd" languagecode="de">
 	<category name="wcf.acl.option">
 		<item name="wcf.acl.option.com.thurnax.wcf.tour.canViewTour"><![CDATA[Kann Tour sehen]]></item>
+		<item name="wcf.acl.option.com.thurnax.wcf.tour.canPlayTourAgain"><![CDATA[Kann die Tour erneut starten]]></item>
 	</category>
 	
 	<category name="wcf.acp.group">
 		<item name="wcf.acp.group.option.admin.user.canManageTour"><![CDATA[Kann Touren verwalten]]></item>
 		<item name="wcf.acp.group.option.category.user.tour"><![CDATA[Touren]]></item>
 		<item name="wcf.acp.group.option.user.tour.canViewTour"><![CDATA[Kann Touren sehen]]></item>
+		<item name="wcf.acp.group.option.user.tour.canPlayTourAgain"><![CDATA[Kann Touren erneut starten]]></item>
 	</category>
 	
 	<category name="wcf.acp.menu">
@@ -121,11 +123,21 @@
 		<item name="wcf.clipboard.label.com.thurnax.wcf.tour.step.marked"><![CDATA[{if $count == 1}Ein Tourpunkt{else}{#$count} Tourpunkte{/if} markiert]]></item>
 	</category>
 	
+	<category name="wcf.tour">
+		<item name="wcf.tour.list"><![CDATA[Einführungstouren]]></item>
+		<item name="wcf.tour.list.none"><![CDATA[Es stehen keine Einführungstouren zur Verfügung.]]></item>
+		<item name="wcf.tour.list.notice"><![CDATA[Hier können Sie Einführungstouren erneut anschauen. Klicken Sie dazu auf den <span class="icon icon16 icon-play"></span> Play-Button.]]></item>
+	</category>
+
 	<category name="wcf.tour.step">
 		<item name="wcf.tour.step.locales.closeTooltip"><![CDATA[Schließen]]></item>
 		<item name="wcf.tour.step.locales.doneBtn"><![CDATA[Ende]]></item>
 		<item name="wcf.tour.step.locales.nextBtn"><![CDATA[Weiter]]></item>
 		<item name="wcf.tour.step.locales.prevBtn"><![CDATA[Zurück]]></item>
 		<item name="wcf.tour.step.locales.skipBtn"><![CDATA[Überspringen]]></item>
+	</category>
+
+	<category name="wcf.user.menu">
+		<item name="wcf.user.menu.profile.tours"><![CDATA[Einführungstouren]]></item>
 	</category>
 </language>

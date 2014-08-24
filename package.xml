@@ -37,6 +37,7 @@
 		<instruction type="option">option.xml</instruction>
 		<instruction type="templateListener">templateListener.xml</instruction>
 		<instruction type="userGroupOption">userGroupOption.xml</instruction>
+		<instruction type="userMenu">userMenu.xml</instruction>
 	</instructions>
 
 	<instructions type="update" fromversion="1.0.0">

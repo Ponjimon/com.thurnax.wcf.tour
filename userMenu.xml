@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/maelstrom/userMenu.xsd">
+	<import>
+		<usermenuitem name="wcf.user.menu.profile.tours">
+			<controller><![CDATA[wcf\page\TourListPage]]></controller>
+			<parent>wcf.user.menu.profile</parent>
+			<permissions>user.tour.canPlayTourAgain</permissions>
+		</usermenuitem>
+	</import>
+</data>

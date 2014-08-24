@@ -5,6 +5,9 @@
 			<option name="canViewTour">
 				<objecttype>com.thurnax.wcf.tour</objecttype>
 			</option>
+			<option name="canPlayTourAgain">
+				<objecttype>com.thurnax.wcf.tour</objecttype>
+			</option>
 		</options>
 	</import>
 </data>
